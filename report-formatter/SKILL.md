@@ -47,12 +47,16 @@ files and the target audience:
 /report --mode layered                   # one layered document (default if no audience)
 ```
 
-Recognized `--audience` values: `financeur`, `scientifique`, `clinicien`,
-`institution`, `public`. When `--audience` lists several values, produce one
-self-contained HTML file per audience. When omitted, default to a layered single
-document (see *Output modes* below) — ask only if the choice is genuinely
-ambiguous. See `references/audiences.md` for how each audience shapes depth,
-vocabulary, and emphasis.
+**`--audience` values** (mutually exclusive from `--mode`):
+`financeur`, `scientifique`, `clinicien`, `institution`, `public`.
+When listed (singular or CSV), produce one self-contained HTML file per audience.
+
+**`--mode` values** (mutually exclusive from `--audience`):
+- `layered` (default) — one navigable document: executive summary first, then full detail, then annexes. Use when a single report must serve multiple audiences with different reading depths.
+
+When both are omitted, the skill defaults to `--mode layered`.
+
+See `references/audiences.md` for how each audience shapes depth, vocabulary, and emphasis.
 
 ## Core principle
 
