@@ -11,6 +11,8 @@ description: >-
   pieces", "consolidate the slides + budget + doc into a report", "format this
   for funders/scientists", "mets en forme ce dossier de projet", "consolide ces
   pièces en un rapport lisible".
+triggers:
+  - /report
 ---
 
 # Report Formatter
@@ -28,6 +30,29 @@ default; match the language of the source material if it is clearly otherwise.
    (slide decks, methodology specs, budget dossiers, draft documents,
    bibliography) → one coherent report, or several audience-specific versions.
    This is the main use case. See `references/consolidation.md`.
+
+## Invocation
+
+The skill triggers automatically when a request matches the description above.
+It can also be invoked explicitly with `/report`, optionally passing the source
+files and the target audience:
+
+```
+/report                                  # consolidate the pieces in context
+/report slides.json budget.html doc.md   # name the sources explicitly
+/report --audience financeur             # one funder-targeted version
+/report --audience scientifique          # one scientific/expert version
+/report --audience financeur,scientifique  # several versions at once
+/report --audience institution           # institutions / general public
+/report --mode layered                   # one layered document (default if no audience)
+```
+
+Recognized `--audience` values: `financeur`, `scientifique`, `clinicien`,
+`institution`, `public`. When `--audience` lists several values, produce one
+self-contained HTML file per audience. When omitted, default to a layered single
+document (see *Output modes* below) — ask only if the choice is genuinely
+ambiguous. See `references/audiences.md` for how each audience shapes depth,
+vocabulary, and emphasis.
 
 ## Core principle
 

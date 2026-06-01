@@ -79,12 +79,38 @@ Claude loads it automatically when a request matches its triggers.
 
 ## Usage
 
-Ask Claude to format or consolidate report material, e.g.:
+The skill triggers automatically when your request matches it, e.g.:
 
 - « Mets en forme ce rapport en PDF lisible. »
 - « Consolide ces slides + ce budget + ce document Word en un dossier
   scientifique. »
 - « Génère une version financeur et une version scientifique de ce projet. »
+
+You can also invoke it explicitly with the `/report` command, naming the
+sources and the target audience:
+
+```
+/report                                   # consolidate the pieces in context
+/report slides.json budget.html doc.md    # name the sources explicitly
+/report --audience financeur              # one funder-targeted version
+/report --audience scientifique           # one scientific / expert version
+/report --audience financeur,scientifique # several versions at once
+/report --mode layered                    # one layered document (default)
+```
+
+### `--audience` options
+
+| Value          | Tailored for             | Emphasis                                                           |
+| -------------- | ------------------------ | ------------------------------------------------------------------ |
+| `financeur`    | Funders, decision-makers | Stakes, impact, budget & feasibility first; methodology vulgarized |
+| `scientifique` | Scientists / experts     | Full methodology, formulas, validation, annexes preserved          |
+| `clinicien`    | Clinicians               | Clinical implications and applicability                            |
+| `institution`  | Institutions             | Institutional framing, governance, partnerships                    |
+| `public`       | General public           | Vulgarized, jargon-free, narrative                                 |
+
+Pass several values comma-separated to get one HTML file per audience. Omit
+`--audience` (or use `--mode layered`) to get a single layered document:
+executive summary first, then full detail, then annexes.
 
 ## Printing to PDF
 
