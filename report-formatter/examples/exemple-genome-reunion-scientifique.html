@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Génome Réunion — Document complémentaire (version scientifique)</title>
+  <style>
+    :root{--accent:#1f4e79;--accent-soft:#eaf0f6;--text:#1a1a1a;--muted:#555;--border:#d9d9d9;--callout-bg:#f4f7fb;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
+    *{box-sizing:border-box;}
+    body{font-family:var(--font-body);color:var(--text);line-height:1.6;font-size:16px;margin:0;background:#f0f0f0;}
+    h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.25;}
+    h1{font-size:1.9em;margin:0 0 .2em;}
+    h2{font-size:1.35em;margin:1.8em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;scroll-margin-top:12px;}
+    h3{font-size:1.1em;margin:1.3em 0 .35em;color:var(--text);}
+    .report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.2em;}
+    .report-meta .subtitle{font-size:1.1em;color:var(--text);font-style:italic;}
+    p{margin:0 0 1em;}strong{color:#000;}a{color:var(--accent);}
+    code{background:#f0f3f7;padding:1px 5px;border-radius:3px;font-size:.92em;}
+    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:16px 20px;margin:1.2em 0;border-radius:0 4px 4px 0;}
+    .summary h2{margin-top:0;border:none;}
+    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent);padding:12px 16px;margin:1.2em 0;border-radius:0 4px 4px 0;}
+    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;color:var(--accent);margin-bottom:.3em;}
+    .todo{background:#fff7e6;border:1px dashed #d4a000;color:#8a6d00;padding:2px 7px;border-radius:3px;font-size:.9em;font-style:italic;}
+    ul,ol{margin:0 0 1em;padding-left:1.4em;}li{margin-bottom:.3em;}
+    table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.93em;}
+    th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+    thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f7f9fb;}
+    .caption{font-size:.86em;color:var(--muted);font-style:italic;margin-top:.4em;}
+    .source{font-size:.8em;color:var(--muted);}
+    .references ol{padding-left:1.4em;}.references li{margin-bottom:.5em;font-size:.92em;}
+    .report-footer{margin-top:2.5em;padding-top:1em;border-top:1px solid var(--border);font-size:.85em;color:var(--muted);}
+    .dossier{max-width:1120px;margin:24px auto;display:grid;grid-template-columns:240px 1fr;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.12);}
+    .dossier>.page{padding:44px 52px;}
+    nav.toc-side{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:32px 18px;background:#fafafa;border-right:1px solid var(--border);font-size:.86em;}
+    nav.toc-side h2{font-size:1em;border:none;margin:0 0 .6em;color:var(--accent);}
+    nav.toc-side ol{list-style:none;padding-left:0;margin:0;}
+    nav.toc-side a{color:var(--muted);text-decoration:none;display:block;padding:2px 0;}
+    nav.toc-side a:hover{color:var(--accent);}
+    @media (max-width:860px){.dossier{grid-template-columns:1fr;}nav.toc-side{display:none;}.dossier>.page{padding:28px 22px;}}
+    @page{size:A4;margin:2cm;}
+    @media print{body{background:#fff;font-size:11pt;}.dossier{display:block;max-width:none;margin:0;box-shadow:none;}.dossier>.page{padding:0;}nav.toc-side{display:none!important;}h1,h2,h3{page-break-after:avoid;break-after:avoid;}table,figure,aside.callout,.summary{page-break-inside:avoid;break-inside:avoid;}p{orphans:3;widows:3;}a{color:#000;text-decoration:none;}.todo{border:none;}}
+  </style>
+</head>
+<body>
+  <div class="dossier">
+    <nav class="toc-side">
+      <h2>Sommaire</h2>
+      <ol>
+        <li><a href="#s1">1. Résumé exécutif</a></li>
+        <li><a href="#s2">2. L'angle mort de la médecine de précision</a></li>
+        <li><a href="#s3">3. Singularité génétique de La Réunion</a></li>
+        <li><a href="#s4">4. Objectifs du projet</a></li>
+        <li><a href="#s5">5. Design général</a></li>
+        <li><a href="#s6">6. Méthodologie</a></li>
+        <li><a href="#s7">7. Algorithme de sélection WGS</a></li>
+        <li><a href="#s8">8. Ressources produites</a></li>
+        <li><a href="#s9">9. Organisation opérationnelle</a></li>
+        <li><a href="#s10">10. Budget et ressources</a></li>
+        <li><a href="#s11">11. Impacts attendus</a></li>
+        <li><a href="#s12">12. Risques et limites</a></li>
+        <li><a href="#s13">13. Conclusion</a></li>
+        <li><a href="#annexes">Annexes</a></li>
+      </ol>
+    </nav>
+
+    <article class="page">
+      <header>
+        <h1>Projet Génome Réunion</h1>
+        <div class="report-meta">
+          <div class="subtitle">Document complémentaire — version scientifique (audience experte)</div>
+          <div>Référentiel génomique réunionnais de première génération</div>
+          <div>Version consolidée · juin 2026 · construit à partir de la présentation, de la méthodologie V3.5 et du dossier de faisabilité</div>
+        </div>
+      </header>
+
+      <!-- ============ 1. RÉSUMÉ EXÉCUTIF ============ -->
+      <section id="s1" class="summary">
+        <h2>1. Résumé exécutif</h2>
+        <ul>
+          <li><strong>Constat —</strong> les bases génomiques internationales (gnomAD, 1000 Genomes) sous-représentent fortement les populations non européennes, ce qui dégrade l'interprétation des variants, l'imputation et la pharmacogénétique pour ces populations.</li>
+          <li><strong>Problème —</strong> La Réunion cumule trois caractéristiques rares — admixture récente (africaine, malgache, indienne, européenne, asiatique), structure insulaire et effets fondateurs locaux — qu'aucun référentiel existant ne capture.</li>
+          <li><strong>Réponse —</strong> construire un référentiel local de première génération combinant <strong>2 500 individus génotypés sur puce SNP</strong>, <strong>100 familles nucléaires</strong> pour le phasage, et <strong>350 génomes entiers (WGS)</strong> sélectionnés par un algorithme géo-ancestral, le séquençage WGS étant pris en charge gratuitement par POPgen.</li>
+          <li><strong>Livrables —</strong> base de fréquences locales, panel WGS réunionnais, panel d'imputation et de phasage, données d'admixture et d'effets fondateurs, ressources pharmacogénétiques.</li>
+        </ul>
+      </section>
+
+      <!-- ============ 2. ANGLE MORT ============ -->
+      <section id="s2">
+        <h2>2. L'angle mort de la médecine de précision</h2>
+        <h3>2.1. Sous-représentation des populations dans les bases génomiques</h3>
+        <p>Les grandes bases de référence (gnomAD, 1000 Genomes / IGSR) sont massivement constituées d'individus d'ascendance européenne. Les fréquences alléliques, panels d'imputation et modèles de pathogénicité qui en dérivent sont donc mal calibrés pour les populations admixées ou non européennes.</p>
+        <h3>2.2. Conséquences diagnostiques</h3>
+        <p>Faute de fréquences locales, des variants fréquents dans la population réunionnaise peuvent être classés à tort comme rares (et donc potentiellement pathogènes), augmentant le taux de variants de signification incertaine (VSI) et les diagnostics non concluants.</p>
+        <h3>2.3. Conséquences pharmacogénétiques</h3>
+        <p>Les allèles pharmacogénétiques varient fortement selon l'ascendance. L'absence de référentiel local limite l'adaptation posologique et la prévention des effets indésirables pour les patients réunionnais.</p>
+        <h3>2.4. Risque d'amplification par l'intelligence artificielle</h3>
+        <p>Les modèles d'IA biomédicale entraînés sur des données majoritairement européennes risquent de propager et d'amplifier ce biais. Un référentiel local est une condition de robustesse pour toute aide à la décision algorithmique appliquée à cette population.</p>
+        <aside class="callout"><span class="label">À retenir</span>L'enjeu n'est pas seulement scientifique mais d'équité : sans données locales, la médecine de précision reste moins précise pour les populations sous-représentées.</aside>
+      </section>
+
+      <!-- ============ 3. SINGULARITÉ ============ -->
+      <section id="s3">
+        <h2>3. Singularité génétique de La Réunion</h2>
+        <h3>3.1. Histoire migratoire et métissage</h3>
+        <p>Peuplée à partir du XVII<sup>e</sup> siècle sur un territoire sans population autochtone, La Réunion s'est constituée par vagues migratoires successives : traite et esclavage (≈1663–1848), engagisme après 1848 (notamment indien), puis migrations modernes. Il en résulte un métissage profond entre composantes africaine, malgache, indienne, européenne et asiatique.</p>
+        <h3>3.2. Population fortement admixée</h3>
+        <p>L'admixture est récente et variable d'un individu et d'un secteur à l'autre, ce qui produit une diversité d'ascendances inférées élevée à l'échelle de l'île.</p>
+        <h3>3.3. Effets fondateurs et isolement insulaire</h3>
+        <p>L'insularité et certaines dynamiques locales (zones des Hauts) ont favorisé des effets fondateurs : enrichissement local de variants ou d'haplotypes dans des sous-groupes, détectables via les analyses IBD et de runs d'homozygotie (ROH).</p>
+        <h3>3.4. Double singularité : diversité globale et structuration locale</h3>
+        <p>La Réunion combine donc une <strong>diversité globale</strong> (admixture multi-continentale) et une <strong>structuration locale</strong> (effets fondateurs insulaires) — configuration rare qui justifie une stratégie d'échantillonnage dédiée plutôt qu'un tirage aléatoire.</p>
+      </section>
+
+      <!-- ============ 4. OBJECTIFS ============ -->
+      <section id="s4">
+        <h2>4. Objectifs du projet</h2>
+        <h3>4.1. Objectif principal</h3>
+        <p>Produire un référentiel génomique réunionnais de première génération, <strong>reproductible, auditable et évolutif</strong>, améliorant l'interprétation des variants et l'imputation dans une population admixée.</p>
+        <h3>4.2 à 4.5. Objectifs secondaires, cliniques, scientifiques, territoriaux</h3>
+        <ul>
+          <li><strong>Scientifiques —</strong> caractériser l'admixture (ascendance globale et locale), les effets fondateurs (IBD/ROH) et améliorer le phasage haplotypique réunionnais.</li>
+          <li><strong>Cliniques —</strong> réduire le taux de VSI, mieux interpréter les variants, fournir des ressources pharmacogénétiques locales.</li>
+          <li><strong>Territoriaux —</strong> doter La Réunion d'une infrastructure génomique souveraine et d'une expertise locale. <span class="todo">[À compléter : partenaires territoriaux et objectifs de formation précis]</span></li>
+        </ul>
+      </section>
+
+      <!-- ============ 5. DESIGN ============ -->
+      <section id="s5">
+        <h2>5. Design général du projet</h2>
+        <p>La stratégie repose sur trois couches complémentaires articulées en un référentiel unique.</p>
+        <table>
+          <thead><tr><th>Composante</th><th>Effectif</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td>Cohorte populationnelle SNP</td><td>2 500 individus</td><td>Structure de population, recalibrage des fréquences, support d'imputation</td></tr>
+            <tr><td>Module familial SNP</td><td>100 familles nucléaires (~300 individus, hors cohorte)</td><td>Phasage et reconstruction haplotypique réunionnaise</td></tr>
+            <tr><td>Sélection WGS</td><td>350 individus (parmi les 2 500)</td><td>Découverte de variants, vérité de terrain, panel de référence</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 1 : Architecture en trois couches. Puce Illumina GDA-8 (~1,9 M SNP bruts), ~2 800 génotypages au total. <span class="source">Source : méthodologie V3.5 ; dossier de faisabilité.</span></p>
+        <aside class="callout"><span class="label">Point clé</span>Le séquençage WGS des 350 individus est pris en charge gratuitement par <strong>POPgen (0 €)</strong> ; le coût laboratoire porte sur le génotypage iScan, l'extraction d'ADN et la conservation au CRB.</aside>
+        <p>Le panel de 350 WGS est un <strong>référentiel local de première génération</strong>, complémentaire des ressources internationales — non une ressource exhaustive : les variants ultra-rares et certains effets fondateurs très localisés relèveront de phases d'extension ultérieures.</p>
+      </section>
+
+      <!-- ============ 6. MÉTHODOLOGIE ============ -->
+      <section id="s6">
+        <h2>6. Méthodologie synthétique</h2>
+        <h3>6.1. Recrutement et échantillonnage</h3>
+        <p>Cohorte de 2 500 individus génotypés sur puce, complétée d'un module de 100 familles nucléaires. <span class="todo">[À compléter : critères d'inclusion, consentement, stratification du recrutement]</span></p>
+        <h3>6.2. Extraction ADN et contrôle qualité SNP</h3>
+        <p>Après QC, les marqueurs sont employés différemment selon l'analyse : <strong>SNP prunés en LD</strong> pour la PCA et ADMIXTURE ; <strong>SNP denses filtrés</strong> pour le phasage, l'IBD et les ROH ; <strong>SNP harmonisés avec le WGS</strong> pour l'imputation.</p>
+        <h3>6.3 à 6.5. Génotypage et analyses de structure</h3>
+        <p>Génotypage iScan (GDA-8). Analyses de structure par <strong>PCA</strong> et <strong>ADMIXTURE</strong> projetées sur des pools témoins (socle public 1000 Genomes/IGSR, panels prioritaires EGA pour Madagascar, l'Asie et l'Afrique de l'océan Indien), puis analyses <strong>IBD</strong> et <strong>ROH</strong> (parenté et effets fondateurs).</p>
+        <h3>6.6 à 6.8. Sélection WGS, séquençage et base de variants</h3>
+        <p>Sélection des 350 individus par le score géo-ancestral <code>S_div</code> (section 7), séquençage WGS par POPgen, puis construction de la base de variants et recalibrage des fréquences sur les 2 500. <span class="source">Source : méthodologie V3.5, parties II–IV.</span></p>
+      </section>
+
+      <!-- ============ 7. ALGORITHME ============ -->
+      <section id="s7">
+        <h2>7. Algorithme de sélection WGS</h2>
+        <h3>7.1. Principe général</h3>
+        <p>Le panel WGS n'est <strong>pas un tirage aléatoire</strong>. C'est un panel hybride combinant un <strong>noyau géo-ancestral</strong> (ancrage territorial + représentation de la diversité d'ascendance interne à chaque secteur) et un <strong>bras de découverte contrôlé</strong> (profils sous-capturés : ascendances rares, profils mixtes ou extrêmes, ROH/fondateurs, haplotypes utiles à l'imputation).</p>
+        <h3>7.2. Score de diversité génétique <code>S_div</code></h3>
+        <p>Le score combine quatre composantes, mesurées à partir des données SNP et des pools témoins :</p>
+        <table>
+          <thead><tr><th>Composante</th><th>Mesure</th><th>Capte</th></tr></thead>
+          <tbody>
+            <tr><td>Position</td><td>PCA projetée</td><td>Place de l'individu dans l'espace d'ascendance</td></tr>
+            <tr><td>Composition</td><td>ADMIXTURE avec références</td><td>Profil d'ascendance inférée</td></tr>
+            <tr><td>Parenté</td><td>IBD</td><td>Contrôle de la redondance familiale</td></tr>
+            <tr><td>Effet fondateur</td><td>ROH</td><td>Signatures fondatrices / haplotypes localisés</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 2 : Composantes du score <code>S_div</code>. <span class="source">Source : méthodologie V3.5, partie III. Formulation exacte et pondérations en annexe 3.</span></p>
+        <h3>7.3 à 7.5. Stratification, contrôle de parenté et sélection</h3>
+        <p>Stratification géo-ancestrale croisant <strong>8 secteurs géographiques fixes</strong> et clusters d'ascendance inférée ; contrôle de la parenté pour éviter la redondance ; <strong>sélection greedy stratifiée</strong> du noyau, puis intégration du bras de découverte. <span class="todo">[À compléter : répartition exacte noyau / découverte et pondérations finales — à confirmer depuis l'annexe méthodologique]</span></p>
+        <h3>7.6. Validation de la stratégie</h3>
+        <p>Voir section dédiée ci-dessous (la validation empirique conditionne le gel de la sélection).</p>
+      </section>
+
+      <!-- ============ VALIDATION (rattachée méthodo) ============ -->
+      <section>
+        <h2>7 bis. Validation de la sélection</h2>
+        <p>La stratégie est validée <strong>in silico</strong> avant déploiement, sur des populations synthétiques puis des données réelles externes.</p>
+        <ul>
+          <li><strong>Profils synthétiques —</strong> Profil A (témoin homogène), Profil C (mélange réaliste), Profil D (effets fondateurs), avec paramètres de parenté et de profondeur d'endogamie.</li>
+          <li><strong>Critère primaire —</strong> qualité d'<strong>imputation (R² par classe de MAF)</strong> ; critères diagnostiques secondaires : capture allélique, couverture des fondateurs ; critères algorithmiques : stabilité PCA/ADMIXTURE.</li>
+          <li><strong>Triangulation —</strong> simulation + données externes <strong>1000 Genomes</strong> high-coverage + cohorte réelle <strong>EPIGEN-Brasil</strong>.</li>
+        </ul>
+        <p class="source">Source : METHODOLOGIE_validation_4_profils_population_INSEE.md et …_voilure_reduite_v1.md.</p>
+      </section>
+
+      <!-- ============ 8. RESSOURCES ============ -->
+      <section id="s8">
+        <h2>8. Ressources produites</h2>
+        <ul>
+          <li><strong>8.1. Base de fréquences locales</strong> — fréquences réunionnaises recalibrées sur les 2 500 individus.</li>
+          <li><strong>8.2. Panel WGS réunionnais</strong> — 350 génomes de référence.</li>
+          <li><strong>8.3. Panel d'imputation</strong> — combinant WGS et module familial pour le phasage.</li>
+          <li><strong>8.4. Données d'admixture</strong> — ascendance globale et locale (LAI le cas échéant).</li>
+          <li><strong>8.5. Données sur les effets fondateurs</strong> — signatures IBD/ROH.</li>
+          <li><strong>8.6. Ressources pharmacogénétiques</strong> — allèles PGx locaux.</li>
+        </ul>
+      </section>
+
+      <!-- ============ 9. ORGANISATION ============ -->
+      <section id="s9">
+        <h2>9. Organisation opérationnelle</h2>
+        <p>Plateforme entièrement en stack Python, du génotypage au portail clinique : génotypage iScan/GDA-8 ; analyses PLINK2, KING, SHAPEIT ; pipelines bioinformatiques Nextflow/Snakemake ; base de données PostgreSQL + MongoDB ; portail/API Django ; modules IA PyTorch + TensorFlow.</p>
+        <p><strong>Circuit des échantillons —</strong> extraction ADN et conservation au CRB. <strong>Conformité —</strong> traitement des données en environnement réglementaire. <span class="todo">[À compléter : partenaires, gouvernance détaillée, RGPD/HDS, hébergement — voir annexe 6]</span></p>
+      </section>
+
+      <!-- ============ 10. BUDGET ============ -->
+      <section id="s10">
+        <h2>10. Budget et ressources</h2>
+        <p>Projet sur <strong>36 mois</strong>. Le séquençage WGS est gratuit (POPgen) ; les postes principaux portent sur le génotypage, l'infrastructure IT et les ressources humaines.</p>
+        <table>
+          <thead><tr><th>Poste</th><th>Scénario</th><th>Coût indicatif</th></tr></thead>
+          <tbody>
+            <tr><td>Génotypage</td><td>Sc. 1 — sous-traitance</td><td>≈ 265 k€</td></tr>
+            <tr><td>Génotypage</td><td>Sc. 2 — internalisation iScan</td><td>≈ 479 k€</td></tr>
+            <tr><td>Infrastructure IT</td><td>On-premise</td><td>≈ 334 k€</td></tr>
+            <tr><td>Infrastructure IT</td><td>Cloud hybride (souverain HDS)</td><td>≈ 270 k€</td></tr>
+            <tr><td>Ressources humaines</td><td>Prop. 2 (alternance + CIFRE)</td><td>≈ 524 k€ chargé (−23 % vs base)</td></tr>
+            <tr><td><strong>Total optimal</strong></td><td>Sc. 1 + Prop. 2</td><td><strong>≈ 1,474 M€</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 3 : Postes budgétaires et scénarios. <span class="source">Source : dossier de faisabilité (IT-and-research-cost). Montants à confirmer par devis.</span></p>
+      </section>
+
+      <!-- ============ 11. IMPACTS ============ -->
+      <section id="s11">
+        <h2>11. Impacts attendus</h2>
+        <ul>
+          <li><strong>Clinique / diagnostique —</strong> meilleure interprétation des variants, réduction des VSI.</li>
+          <li><strong>Pharmacogénétique —</strong> adaptation posologique appuyée sur des allèles PGx locaux.</li>
+          <li><strong>Scientifique —</strong> caractérisation de l'admixture et des effets fondateurs réunionnais ; amélioration de l'imputation.</li>
+          <li><strong>Territorial —</strong> infrastructure et expertise génomiques locales.</li>
+          <li><strong>Populations sous-représentées —</strong> contribution à la réduction du biais des bases internationales.</li>
+        </ul>
+      </section>
+
+      <!-- ============ 12. RISQUES ============ -->
+      <section id="s12">
+        <h2>12. Risques et limites</h2>
+        <table>
+          <thead><tr><th>Risque</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Représentativité insuffisante (350 WGS)</td><td>Sélection géo-ancestrale + bras découverte ; recalibrage sur 2 500 ; extensions ultérieures</td></tr>
+            <tr><td>Réglementaire (RGPD / HDS)</td><td>Hébergement souverain, conformité <span class="todo">[À préciser : annexe 6]</span></td></tr>
+            <tr><td>Financier</td><td>Scénarios alternatifs (sous-traitance vs internalisation), WGS gratuit POPgen</td></tr>
+            <tr><td>Informatique</td><td>Stack standardisée, pipelines reproductibles (Nextflow/Snakemake)</td></tr>
+            <tr><td>Sur-promesse IA</td><td>Modules validés empiriquement, référentiel local comme socle de robustesse</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 4 : Risques principaux et mesures de mitigation.</p>
+      </section>
+
+      <!-- ============ 13. CONCLUSION ============ -->
+      <section id="s13">
+        <h2>13. Conclusion</h2>
+        <p><strong>Besoin —</strong> combler l'angle mort des bases génomiques pour une population à la fois fortement admixée et structurée localement. <strong>Apport —</strong> un référentiel réunionnais de première génération, reproductible et auditable, livrant fréquences locales, panels d'imputation et ressources pharmacogénétiques. <strong>Conditions de réussite —</strong> validation empirique de la sélection avant gel, conformité réglementaire, et gratuité du séquençage WGS. <strong>Perspectives —</strong> phases d'extension pour les variants ultra-rares et les modules d'IA biomédicale.</p>
+      </section>
+
+      <!-- ============ ANNEXES ============ -->
+      <section id="annexes">
+        <h2>Annexes</h2>
+        <h3>Annexe 1 — Bibliographie détaillée</h3>
+        <div class="references"><ol>
+          <li><span class="todo">[À compléter : importer la bibliographie depuis le document Word du projet — non fournie dans les pièces consolidées ici]</span></li>
+        </ol></div>
+        <h3>Annexe 2 — Historique migratoire détaillé</h3>
+        <p>Esclavage (≈1663–1848), engagisme post-1848, migrations modernes. <span class="todo">[À développer depuis les notes de présentation, section 2.]</span></p>
+        <h3>Annexe 3 — Méthodologie statistique détaillée</h3>
+        <p>Formulation complète de <code>S_div</code>, pondérations, analyses de sensibilité (LOCO, variations de poids, recalibration). <span class="todo">[À importer depuis METHODOLOGY_selection_V3_5.md, parties III–V.]</span></p>
+        <h3>Annexe 4 — Budget détaillé</h3>
+        <p>Détail des phases 0–6 et chronogramme sur 36 mois. <span class="todo">[À importer depuis le dossier de faisabilité.]</span></p>
+        <h3>Annexe 5 — Plan de validation</h3>
+        <p>Profils A/C/D, design seed 25→100, critères primaire/diagnostiques/algorithmiques.</p>
+        <h3>Annexe 6 — Gouvernance, RGPD et HDS</h3>
+        <p><span class="todo">[À compléter : gouvernance, partenaires, conformité réglementaire et hébergement.]</span></p>
+      </section>
+
+      <footer class="report-footer">
+        Document de travail scientifique — non destiné à une diffusion grand public. Consolidé à partir de trois sources : présentation (genome_reunion), méthodologie V3.5, dossier de faisabilité (IT-and-research-cost). Les zones <span class="todo">[À compléter]</span> signalent les informations absentes des pièces fournies.
+      </footer>
+    </article>
+  </div>
+</body>
+</html>

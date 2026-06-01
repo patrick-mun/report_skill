@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- TITRE DU DOSSIER --></title>
+  <!--
+    Layered scientific dossier (multi-source consolidation, expert audience).
+    Final output: inline assets/report.css into a <style> block here so the file
+    is self-contained. The side TOC is screen-only; it is hidden in print/PDF.
+  -->
+  <link rel="stylesheet" href="../assets/report.css" />
+</head>
+<body>
+  <div class="dossier">
+
+    <!-- ===== Sommaire latéral (écran uniquement) ===== -->
+    <nav class="toc-side">
+      <h2>Sommaire</h2>
+      <ol>
+        <li><a href="#resume">1. Résumé exécutif</a></li>
+        <li><a href="#contexte">2. Contexte et problématique</a></li>
+        <li><a href="#objectifs">3. Objectifs</a></li>
+        <li><a href="#design">4. Design général</a></li>
+        <li><a href="#methodo">5. Méthodologie</a></li>
+        <li><a href="#algorithme">6. Algorithme de sélection</a></li>
+        <li><a href="#validation">7. Validation</a></li>
+        <li><a href="#ressources">8. Ressources produites</a></li>
+        <li><a href="#budget">9. Budget et infrastructure</a></li>
+        <li><a href="#impacts">10. Impacts attendus</a></li>
+        <li><a href="#risques">11. Risques et limites</a></li>
+        <li><a href="#conclusion">12. Conclusion</a></li>
+        <li><a href="#annexes">Annexes</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===== Corps du dossier ===== -->
+    <article class="page">
+      <header>
+        <h1><!-- TITRE DU DOSSIER --></h1>
+        <div class="report-meta">
+          <div class="subtitle"><!-- Sous-titre / objet --></div>
+          <div><!-- Porteur·euse · Affiliation --></div>
+          <div><!-- Date · Version --></div>
+        </div>
+      </header>
+
+      <section id="resume" class="summary">
+        <h2>1. Résumé exécutif</h2>
+        <ul>
+          <li><!-- Constat --></li>
+          <li><!-- Problème --></li>
+          <li><!-- Réponse proposée --></li>
+          <li><!-- Livrables --></li>
+        </ul>
+      </section>
+
+      <section id="contexte"><h2>2. Contexte et problématique</h2><p><!-- source: slides --></p></section>
+      <section id="objectifs"><h2>3. Objectifs</h2><p><!-- --></p></section>
+      <section id="design"><h2>4. Design général</h2><p><!-- source: méthodologie --></p></section>
+      <section id="methodo"><h2>5. Méthodologie</h2><p><!-- source: méthodologie (autorité) --></p></section>
+      <section id="algorithme"><h2>6. Algorithme de sélection</h2><p><!-- source: méthodologie --></p></section>
+      <section id="validation"><h2>7. Validation</h2><p><!-- source: méthodologie validation --></p></section>
+      <section id="ressources"><h2>8. Ressources produites</h2><p><!-- --></p></section>
+      <section id="budget"><h2>9. Budget et infrastructure</h2><p><!-- source: dossier budget (chiffres exacts) --></p></section>
+      <section id="impacts"><h2>10. Impacts attendus</h2><p><!-- --></p></section>
+      <section id="risques"><h2>11. Risques et limites</h2><p><!-- --></p></section>
+      <section id="conclusion"><h2>12. Conclusion</h2><p><!-- --></p></section>
+
+      <section id="annexes">
+        <h2>Annexes</h2>
+        <h3>Bibliographie</h3>
+        <div class="references"><ol><li><!-- --></li></ol></div>
+      </section>
+
+      <footer class="report-footer"><!-- Mentions : confidentialité, contact --></footer>
+    </article>
+  </div>
+</body>
+</html>
