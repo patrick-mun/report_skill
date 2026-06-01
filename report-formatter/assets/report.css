@@ -114,11 +114,9 @@ nav.toc-side a { color: var(--muted); text-decoration: none; display: block; pad
 nav.toc-side a:hover { color: var(--accent); }
 @media (max-width: 820px) { .dossier { grid-template-columns: 1fr; } nav.toc-side { display: none; } }
 
-/* ---------- References & glossary ---------- */
+/* ---------- References ---------- */
 .references ol { padding-left: 1.4em; }
 .references li { margin-bottom: 0.5em; font-size: 0.93em; }
-.glossary dt { font-weight: 700; }
-.glossary dd { margin: 0 0 0.6em; color: var(--muted); }
 
 /* ---------- Footer ---------- */
 .report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); }
@@ -238,7 +236,7 @@ body.paged { background: #e3e6ea; }
 }
 .cover-logo { margin-bottom: auto; padding-bottom: 10mm; }
 .cover-logo svg { height: 58px; width: auto; }
-.cover-divider {
+.cover-accent-band {
   height: 4px;
   background: var(--accent);
   border-radius: 2px;
@@ -310,7 +308,7 @@ li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
 
 @media print {
   /* Cover and TOC: no page-break logic needed (handled by .sheet) */
-  .cover-logo svg, .cover-divider, .cover-center, .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   a.toc-entry { color: var(--text) !important; background: none !important; }
 }
 
