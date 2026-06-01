@@ -1,0 +1,136 @@
+/* report.css — single stylesheet for professional reports.
+   Screen styles for reading + @media print rules for clean A4 PDF output.
+   When producing a final document, inline this file into a <style> block. */
+
+:root {
+  --accent: #1f4e79;          /* sober professional blue */
+  --accent-soft: #eaf0f6;
+  --text: #1a1a1a;
+  --muted: #555;
+  --border: #d9d9d9;
+  --callout-bg: #f4f7fb;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-head: Georgia, "Times New Roman", serif;
+  --max-width: 800px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  background: #f0f0f0;
+}
+
+/* The page wrapper mimics an A4 sheet on screen */
+.page {
+  max-width: var(--max-width);
+  margin: 24px auto;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- Headings ---------- */
+h1, h2, h3 { font-family: var(--font-head); color: var(--accent); line-height: 1.25; }
+h1 { font-size: 2em; margin: 0 0 0.2em; }
+h2 { font-size: 1.4em; margin: 1.8em 0 0.5em; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.2em; }
+h3 { font-size: 1.15em; margin: 1.4em 0 0.4em; color: var(--text); }
+
+/* ---------- Document meta (title block) ---------- */
+.report-meta { color: var(--muted); font-size: 0.95em; margin-bottom: 1.5em; }
+.report-meta .subtitle { font-size: 1.1em; color: var(--text); font-style: italic; }
+
+/* ---------- Paragraphs & text ---------- */
+p { margin: 0 0 1em; }
+strong { color: #000; }
+a { color: var(--accent); }
+
+/* ---------- Executive summary ---------- */
+.summary {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  margin: 1.5em 0;
+  border-radius: 0 4px 4px 0;
+}
+.summary h2 { margin-top: 0; border: none; }
+
+/* ---------- Callouts ("À retenir", "Point clé") ---------- */
+aside.callout {
+  background: var(--callout-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 12px 16px;
+  margin: 1.2em 0;
+  border-radius: 0 4px 4px 0;
+}
+aside.callout .label {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+/* ---------- Lists ---------- */
+ul, ol { margin: 0 0 1em; padding-left: 1.4em; }
+li { margin-bottom: 0.3em; }
+
+/* ---------- Tables ---------- */
+table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+thead th { background: var(--accent); color: #fff; }
+tbody tr:nth-child(even) { background: #f7f9fb; }
+
+/* ---------- Figures & captions ---------- */
+figure { margin: 1.2em 0; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figcaption, .caption {
+  font-size: 0.88em;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.4em;
+}
+
+/* ---------- Table of contents ---------- */
+nav.toc { background: #fafafa; border: 1px solid var(--border); padding: 12px 20px; margin: 1.5em 0; }
+nav.toc h2 { margin-top: 0; font-size: 1.1em; border: none; }
+nav.toc ol { padding-left: 1.2em; }
+
+/* ---------- References & glossary ---------- */
+.references ol { padding-left: 1.4em; }
+.references li { margin-bottom: 0.5em; font-size: 0.93em; }
+.glossary dt { font-weight: 700; }
+.glossary dd { margin: 0 0 0.6em; color: var(--muted); }
+
+/* ---------- Footer ---------- */
+.report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); }
+
+/* ===================================================================
+   PRINT — A4, clean margins, sensible page breaks
+   =================================================================== */
+@page {
+  size: A4;
+  margin: 2cm;
+}
+
+@media print {
+  body { background: #fff; font-size: 11.5pt; }
+  .page { max-width: none; margin: 0; padding: 0; box-shadow: none; }
+
+  /* Avoid breaking inside these blocks */
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+  table, figure, aside.callout, .summary { page-break-inside: avoid; break-inside: avoid; }
+  p { orphans: 3; widows: 3; }
+
+  /* Hide screen-only navigation helpers if any are added */
+  .no-print { display: none !important; }
+
+  a { color: #000; text-decoration: none; }
+}

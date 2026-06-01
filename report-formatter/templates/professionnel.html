@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- TITRE DU RAPPORT --></title>
+  <!--
+    When producing the final document, inline the contents of
+    assets/report.css here inside a <style> tag so the file is self-contained.
+    During editing you may instead link it: <link rel="stylesheet" href="../assets/report.css">
+  -->
+  <link rel="stylesheet" href="../assets/report.css" />
+</head>
+<body>
+  <article class="page">
+
+    <!-- ===== Bloc de titre ===== -->
+    <header>
+      <h1><!-- TITRE DU RAPPORT --></h1>
+      <div class="report-meta">
+        <div class="subtitle"><!-- Sous-titre / objet --></div>
+        <div><!-- Auteur·rice(s) · Organisation --></div>
+        <div><!-- Date (ex. 1ᵉʳ juin 2026) · Version --></div>
+      </div>
+    </header>
+
+    <!-- ===== Synthèse exécutive (toujours en tête) ===== -->
+    <section class="summary">
+      <h2>Synthèse exécutive</h2>
+      <ul>
+        <!-- 3 à 5 points clés : objet, constats, recommandation principale -->
+        <li><!-- Point clé 1 --></li>
+        <li><!-- Point clé 2 --></li>
+        <li><!-- Point clé 3 --></li>
+      </ul>
+    </section>
+
+    <!-- ===== Sommaire (optionnel pour les rapports longs) ===== -->
+    <!--
+    <nav class="toc">
+      <h2>Sommaire</h2>
+      <ol>
+        <li>Contexte et objectifs</li>
+        <li>Analyse</li>
+        <li>Recommandations</li>
+      </ol>
+    </nav>
+    -->
+
+    <!-- ===== Contexte et objectifs ===== -->
+    <section>
+      <h2>Contexte et objectifs</h2>
+      <p><!-- Pourquoi ce rapport, quel problème, quel périmètre --></p>
+    </section>
+
+    <!-- ===== Analyse ===== -->
+    <section>
+      <h2>Analyse</h2>
+      <p><!-- Constats, données, interprétation --></p>
+
+      <aside class="callout">
+        <span class="label">À retenir</span>
+        <!-- Le constat le plus important de cette section -->
+      </aside>
+    </section>
+
+    <!-- ===== Recommandations ===== -->
+    <section>
+      <h2>Recommandations</h2>
+      <ol>
+        <li><!-- Recommandation 1 --></li>
+        <li><!-- Recommandation 2 --></li>
+      </ol>
+    </section>
+
+    <!-- ===== Plan d'action (optionnel) ===== -->
+    <section>
+      <h2>Plan d'action</h2>
+      <table>
+        <thead>
+          <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><!-- --></td><td><!-- --></td><td><!-- --></td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Tableau 1 : Plan d'action.</p>
+    </section>
+
+    <!-- ===== Conclusion ===== -->
+    <section>
+      <h2>Conclusion</h2>
+      <p><!-- Synthèse finale et prochaines étapes --></p>
+    </section>
+
+    <!-- ===== Annexes (optionnel) ===== -->
+    <!--
+    <section>
+      <h2>Annexes</h2>
+    </section>
+    -->
+
+    <footer class="report-footer">
+      <!-- Mentions : confidentialité, contact, pagination si besoin -->
+    </footer>
+
+  </article>
+</body>
+</html>
