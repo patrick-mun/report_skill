@@ -4,119 +4,250 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title><!-- TITRE DU RAPPORT --></title>
-  <!--
-    When producing the final document, inline the contents of
-    assets/report.css here inside a <style> tag so the file is self-contained.
-    During editing you may instead link it: <link rel="stylesheet" href="../assets/report.css">
-  -->
-  <link rel="stylesheet" href="../assets/report.css" />
+  <style>
+:root{--accent:#1f4e79;--accent2:#3a7ca5;--accent-soft:#eaf0f6;--text:#1a1a1a;--muted:#555;--border:#d9d9d9;--callout-bg:#f4f7fb;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
+*{box-sizing:border-box;}
+body{font-family:var(--font-body);color:var(--text);line-height:1.55;font-size:15px;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body.paged{background:#e3e6ea;}
+h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.25;}
+h1{font-size:1.9em;margin:0 0 .2em;}
+h2{font-size:1.32em;margin:1.4em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
+h2:first-child{margin-top:0;}
+h3{font-size:1.1em;margin:1.1em 0 .35em;color:var(--text);}
+.report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.2em;}
+p{margin:0 0 .9em;}strong{color:#000;}
+.summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1.2em 0;border-radius:0 4px 4px 0;}
+.summary h2{margin-top:0;border:none;}
+aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
+aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
+ul,ol{margin:0 0 .9em;padding-left:1.4em;}li{margin-bottom:.3em;}
+table{border-collapse:collapse;width:100%;margin:.9em 0;font-size:.93em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;}
+thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f7f9fb;}
+.caption{font-size:.85em;color:var(--muted);font-style:italic;margin-top:.4em;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.2em 0;}
+.stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:13px 15px;text-align:center;}
+.stat-card .num{font-family:var(--font-head);font-size:1.6em;font-weight:700;color:var(--accent);line-height:1.1;}
+.stat-card .lbl{font-size:.8em;color:var(--muted);margin-top:4px;}
+.hbar{margin:1em 0;}
+.hbar .row{display:grid;grid-template-columns:95px 1fr auto;align-items:center;gap:10px;margin-bottom:8px;font-size:.87em;}
+.hbar .track{background:#eef1f4;border-radius:4px;height:18px;overflow:hidden;}
+.hbar .fill{height:100%;border-radius:4px;background:var(--accent2);}
+.hbar .fill.cible{background:#b9cad9;}
+.hbar .val{font-variant-numeric:tabular-nums;color:var(--muted);}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:.4em 0 1em;font-size:.83em;color:var(--muted);}
+.legend .item{display:flex;align-items:center;gap:6px;}
+.legend .swatch{width:12px;height:12px;border-radius:3px;flex:none;}
+.timeline{display:flex;gap:0;margin:1.1em 0;}
+.timeline .ev{flex:1;position:relative;padding-top:20px;text-align:center;font-size:.83em;}
+.timeline .ev::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--border);}
+.timeline .ev::after{content:"";position:absolute;top:1px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--accent2);}
+.timeline .ev .yr{font-weight:700;color:var(--accent);display:block;}
+.sheet{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12mm;padding:16mm 18mm 12mm;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.18);display:flex;flex-direction:column;position:relative;}
+.sheet__body{flex:1 1 auto;}
+.sheet__footer{flex:none;margin-top:10px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.76em;color:var(--muted);}
+.sheet__footer .pageno{margin-left:auto;font-variant-numeric:tabular-nums;}
+.sheet.is-overflowing{outline:2px dashed #d4351c;}
+.sheet .overflow-flag{display:none;}
+.sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+.sheet--cover .sheet__body{display:flex;flex-direction:column;height:100%;}
+.cover-logo{padding-bottom:8mm;}
+.cover-accent-band{height:4px;background:var(--accent);border-radius:2px;margin-bottom:10mm;}
+.cover-center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8mm 0;}
+.cover-center h1{font-size:2.2em;margin:0 0 .4em;color:var(--accent);}
+.cover-center .cover-subtitle{font-size:1.15em;color:var(--muted);font-style:italic;}
+.cover-meta{margin-top:auto;border-top:1px solid var(--border);padding-top:8mm;}
+.cover-meta table{font-size:.92em;width:100%;}
+.cover-meta td{padding:4px 14px 4px 0;border:none;background:none;vertical-align:top;}
+.cover-meta td:first-child{font-weight:600;color:var(--accent);width:110px;}
+.sheet--toc h2{font-size:1.5em;margin-bottom:8mm;border:none;}
+nav.toc-doc ol{list-style:none;padding:0;margin:0;}
+nav.toc-doc li{margin-bottom:1px;}
+nav.toc-doc li.toc-sub{padding-left:18px;}
+a.toc-entry{display:flex;align-items:baseline;text-decoration:none;color:var(--text);padding:5px 4px;border-radius:3px;transition:background .15s;}
+a.toc-entry:hover{background:var(--accent-soft);}
+a.toc-entry:hover .toc-title{color:var(--accent);}
+.toc-title{flex:none;font-size:.96em;}
+li.toc-sub .toc-title{font-size:.9em;color:var(--muted);}
+.toc-dots{flex:1;border-bottom:1px dotted var(--border);margin:0 8px 4px;min-width:20px;}
+.toc-page-num{flex:none;font-variant-numeric:tabular-nums;font-size:.9em;color:var(--muted);min-width:20px;text-align:right;}
+@page sheet{size:A4;margin:0;}
+@media print{
+  body.paged{background:#fff;}
+  .sheet{page:sheet;width:210mm;min-height:0;height:auto;margin:0;padding:16mm 18mm 12mm;box-shadow:none;page-break-after:always;break-after:page;}
+  .sheet:last-child{page-break-after:auto;break-after:auto;}
+  .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
+  h1,h2,h3{page-break-after:avoid;break-after:avoid;}
+  table,figure,aside.callout,.stat-grid,.hbar,.timeline{page-break-inside:avoid;break-inside:avoid;}
+  a.toc-entry{color:var(--text)!important;background:none!important;}
+  a{color:#000;text-decoration:none;}
+}
+  </style>
 </head>
-<body>
-  <article class="page">
+<body class="paged">
 
-    <!-- ===== Bloc de titre ===== -->
-    <header>
-      <h1><!-- TITRE DU RAPPORT --></h1>
-      <div class="report-meta">
-        <div class="subtitle"><!-- Sous-titre / objet --></div>
-        <div><!-- Auteur·rice(s) · Organisation --></div>
-        <div><!-- Date (ex. 1ᵉʳ juin 2026) · Version --></div>
+  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
+  <section class="sheet sheet--cover">
+    <div class="sheet__body">
+      <div class="cover-logo">
+        <!-- Logo ou monogramme typographique -->
+        <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">LOGO</span>
       </div>
-    </header>
-
-    <!-- ===== Synthèse exécutive (toujours en tête) ===== -->
-    <section class="summary">
-      <h2>Synthèse exécutive</h2>
-      <ul>
-        <!-- 3 à 5 points clés : objet, constats, recommandation principale -->
-        <li><!-- Point clé 1 --></li>
-        <li><!-- Point clé 2 --></li>
-        <li><!-- Point clé 3 --></li>
-      </ul>
-    </section>
-
-    <!-- ===== Chiffres clés (visuel — voir references/visuals.md) ===== -->
-    <div class="stat-grid">
-      <div class="stat-card"><div class="num"><!-- 68 % --></div><div class="lbl"><!-- libellé --></div></div>
-      <div class="stat-card"><div class="num"><!-- --></div><div class="lbl"><!-- --></div></div>
-      <div class="stat-card"><div class="num"><!-- --></div><div class="lbl"><!-- --></div></div>
+      <div class="cover-accent-band"></div>
+      <div class="cover-center">
+        <h1><!-- TITRE DU RAPPORT --></h1>
+        <div class="cover-subtitle"><!-- Sous-titre / objet --></div>
+      </div>
+      <div class="cover-meta">
+        <table>
+          <tr><td>Auteur</td><td><!-- Auteur·rice(s) · Organisation --></td></tr>
+          <tr><td>Relecteur</td><td><!-- Relecteur·rice(s) --></td></tr>
+          <tr><td>Date</td><td><!-- Date (ex. 1ᵉʳ juin 2026) --></td></tr>
+          <tr><td>Version</td><td><!-- Version --></td></tr>
+        </table>
+      </div>
     </div>
+    <footer class="sheet__footer"><span><!-- Organisation · Titre court --></span></footer>
+  </section>
 
-    <!-- ===== Sommaire (optionnel pour les rapports longs) ===== -->
-    <!--
-    <nav class="toc">
+  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
+  <section class="sheet sheet--toc">
+    <div class="sheet__body">
       <h2>Sommaire</h2>
-      <ol>
-        <li>Contexte et objectifs</li>
-        <li>Analyse</li>
-        <li>Recommandations</li>
-      </ol>
-    </nav>
-    -->
+      <nav class="toc-doc">
+        <ol>
+          <li>
+            <a class="toc-entry" href="#section1">
+              <span class="toc-title">Synthèse exécutive</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#section2">
+              <span class="toc-title">Contexte et objectifs</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#section3">
+              <span class="toc-title">Analyse</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#section4">
+              <span class="toc-title">Recommandations</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#section5">
+              <span class="toc-title">Plan d'action</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#section6">
+              <span class="toc-title">Conclusion</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <footer class="sheet__footer"><span><!-- Organisation · Titre court --></span></footer>
+  </section>
 
-    <!-- ===== Contexte et objectifs ===== -->
-    <section>
-      <h2>Contexte et objectifs</h2>
-      <p><!-- Pourquoi ce rapport, quel problème, quel périmètre --></p>
-    </section>
+  <!-- ============ FEUILLE 2 (page 1) — SYNTHÈSE EXÉCUTIVE ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="section1" class="summary">
+        <h2>Synthèse exécutive</h2>
+        <ul>
+          <li><!-- Point clé 1 --></li>
+          <li><!-- Point clé 2 --></li>
+          <li><!-- Point clé 3 --></li>
+        </ul>
+      </section>
 
-    <!-- ===== Analyse ===== -->
-    <section>
-      <h2>Analyse</h2>
-      <p><!-- Constats, données, interprétation --></p>
-
-      <!-- Visuel optionnel : barres de comparaison (cible vs réalisé, etc.) -->
-      <div class="hbar">
-        <div class="row"><div><!-- libellé --></div><div class="track"><div class="fill" style="width:0%"></div></div><div class="val"><!-- valeur --></div></div>
+      <!-- Chiffres clés (optionnel) -->
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num"><!-- 68 % --></div><div class="lbl"><!-- libellé --></div></div>
+        <div class="stat-card"><div class="num"><!-- --></div><div class="lbl"><!-- --></div></div>
+        <div class="stat-card"><div class="num"><!-- --></div><div class="lbl"><!-- --></div></div>
       </div>
-      <p class="caption"><!-- Figure 1 : … --></p>
+    </div>
+    <footer class="sheet__footer"><span><!-- Organisation · Titre court --></span></footer>
+  </section>
 
-      <aside class="callout">
-        <span class="label">À retenir</span>
-        <!-- Le constat le plus important de cette section -->
-      </aside>
-    </section>
+  <!-- ============ FEUILLE 3 (page 2) — CONTEXTE + ANALYSE ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="section2">
+        <h2>Contexte et objectifs</h2>
+        <p><!-- Pourquoi ce rapport, quel problème, quel périmètre --></p>
+      </section>
 
-    <!-- ===== Recommandations ===== -->
-    <section>
-      <h2>Recommandations</h2>
-      <ol>
-        <li><!-- Recommandation 1 --></li>
-        <li><!-- Recommandation 2 --></li>
-      </ol>
-    </section>
+      <section id="section3">
+        <h2>Analyse</h2>
+        <p><!-- Constats, données, interprétation --></p>
 
-    <!-- ===== Plan d'action (optionnel) ===== -->
-    <section>
-      <h2>Plan d'action</h2>
-      <table>
-        <thead>
-          <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><!-- --></td><td><!-- --></td><td><!-- --></td></tr>
-        </tbody>
-      </table>
-      <p class="caption">Tableau 1 : Plan d'action.</p>
-    </section>
+        <!-- Visuel optionnel : barres de comparaison -->
+        <div class="hbar">
+          <div class="row"><div><!-- libellé --></div><div class="track"><div class="fill" style="width:0%"></div></div><div class="val"><!-- valeur --></div></div>
+        </div>
+        <p class="caption"><!-- Figure 1 : … --></p>
 
-    <!-- ===== Conclusion ===== -->
-    <section>
-      <h2>Conclusion</h2>
-      <p><!-- Synthèse finale et prochaines étapes --></p>
-    </section>
+        <aside class="callout">
+          <span class="label">À retenir</span>
+          <!-- Le constat le plus important de cette section -->
+        </aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span><!-- Organisation · Titre court --></span></footer>
+  </section>
 
-    <!-- ===== Annexes (optionnel) ===== -->
-    <!--
-    <section>
-      <h2>Annexes</h2>
-    </section>
-    -->
+  <!-- ============ FEUILLE 4 (page 3) — RECOMMANDATIONS + PLAN + CONCLUSION ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="section4">
+        <h2>Recommandations</h2>
+        <ol>
+          <li><!-- Recommandation 1 --></li>
+          <li><!-- Recommandation 2 --></li>
+        </ol>
+      </section>
 
-    <footer class="report-footer">
-      <!-- Mentions : confidentialité, contact, pagination si besoin -->
-    </footer>
+      <section id="section5">
+        <h2>Plan d'action</h2>
+        <table>
+          <thead>
+            <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><!-- --></td><td><!-- --></td><td><!-- --></td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 1 : Plan d'action.</p>
+      </section>
 
-  </article>
+      <section id="section6">
+        <h2>Conclusion</h2>
+        <p><!-- Synthèse finale et prochaines étapes --></p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span><!-- Organisation · Titre court --></span></footer>
+  </section>
+
+  <script>
+(function(){"use strict";function paginate(){var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc")});sheets.forEach(function(sheet){var flag=sheet.querySelector(".overflow-flag");if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);var footer=sheet.querySelector(".sheet__footer");if(!footer)return;var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}});var tocEntries=document.querySelectorAll("a.toc-entry[href]");tocEntries.forEach(function(link){var href=link.getAttribute("href");if(!href||href.charAt(0)!="#")return;var target=document.getElementById(href.slice(1));if(!target)return;var targetSheet=target.closest?target.closest(".sheet"):function(){var el=target;while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet"))return el;el=el.parentNode;}return null;}();if(!targetSheet)return;var contentIdx=contentSheets.indexOf(targetSheet);var numEl=link.querySelector(".toc-page-num");if(numEl){numEl.textContent=contentIdx>=0?String(contentIdx+1):"—";}});}function bindTocLinks(){document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){link.addEventListener("click",function(e){var id=this.getAttribute("href").slice(1);var target=document.getElementById(id);if(!target)return;e.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});});});}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindTocLinks();});}else{paginate();bindTocLinks();}window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);})();
+  </script>
+
 </body>
 </html>
