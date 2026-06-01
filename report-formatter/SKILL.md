@@ -63,7 +63,12 @@ The user chooses, or you ask:
 4. **Choose the output mode and audience** (layered vs. per-audience).
 5. **Map content onto the structure**, drawing faithfully from the sources.
    Mark gaps with `[À compléter : …]`.
-6. **Apply the editorial rules** in `references/style-guide.md`.
+6. **Apply the editorial rules** in `references/style-guide.md` **and the visual
+   rules** in `references/visuals.md` — reuse graphics, logos and palettes that
+   already exist in the sources, and add 2–4 sober inline-SVG/CSS visuals
+   (stat cards, composition bar, bar chart, flow diagram, gantt, timeline) where
+   they make a comparison, composition, flow or schedule instant. Never leave a
+   long report as an undifferentiated wall of text.
 7. **Fill the matching template** (`templates/`), inlining `assets/report.css`
    into a `<style>` block so the output is a single portable file.
 8. **Tell the user how to get a PDF** and list every placeholder/gap you left.
@@ -78,6 +83,8 @@ matching template, produce a self-contained HTML file.
 
 - `references/consolidation.md` — how to ingest and reconcile multiple sources.
 - `references/audiences.md` — how to adapt a report per audience.
+- `references/visuals.md` — how to reuse and propose visuals (charts, diagrams,
+  timelines) so reports are readable, not monotone.
 - `references/style-guide.md` — editorial rules for fast, clear reading.
 - `references/structure-recherche.md` — section plan for research/funding reports.
 - `references/structure-pro.md` — section plan for professional reports.
