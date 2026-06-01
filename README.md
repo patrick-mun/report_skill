@@ -10,7 +10,7 @@ bibliographies — into clean, audience-tailored reports published as
 - **Multi-source consolidation** — ingests heterogeneous pieces (slide JSON,
   methodology Markdown, budget HTML, Word/Markdown drafts), reconciles overlaps
   using a source-authority order, and never invents content (gaps are flagged
-  `[À compléter : …]`).
+  `[To complete : …]`).
 - **Audience targeting** — produces either one layered document or several
   audience-specific versions (funders, scientists/experts, clinicians,
   institutions/general public).
@@ -27,7 +27,7 @@ bibliographies — into clean, audience-tailored reports published as
   `Page n / total`, bottom-right, numbered automatically (cover and TOC excluded).
 
 Output is a single HTML file with inlined CSS/JS, ready for
-`Ctrl/Cmd + P → Save as PDF`. Reports default to French.
+`Ctrl/Cmd + P → Save as PDF`. Reports are generated in English by default.
 
 ## Structure
 
@@ -40,19 +40,19 @@ report-formatter/
 │   ├── visuals.md              # reuse & propose charts/diagrams (no monotone text)
 │   ├── pagination.md           # A4 sheet model: cover, TOC, footers, page numbers
 │   ├── style-guide.md          # editorial rules for fast, clear reading
-│   ├── structure-recherche.md  # section plan: research / funding report
-│   └── structure-pro.md        # section plan: professional report
+│   ├── structure-research.md   # section plan: research / funding report
+│   └── structure-professional.md # section plan: professional report
 ├── assets/
 │   ├── report.css              # single stylesheet (visuals + A4 sheet model)
 │   └── paginate.js             # page numbering + TOC numbers + overflow flag
 ├── templates/
-│   ├── professionnel.html
-│   ├── recherche.html
-│   └── dossier-scientifique.html
+│   ├── professional.html
+│   ├── research.html
+│   └── scientific-dossier.html
 └── examples/
-    ├── exemple-pro.html                            # professional report
-    ├── exemple-genome-reunion-scientifique.html    # consolidated dossier (scientific audience)
-    └── exemple-genome-reunion-financier.html       # same project, funder audience
+    ├── example-professional.html           # professional report
+    ├── example-genome-meeting-scientific.html # consolidated dossier (scientific audience)
+    └── example-genome-meeting-funder.html  # same project, funder audience
 ```
 
 ## The A4 sheet model
@@ -81,36 +81,45 @@ Claude loads it automatically when a request matches its triggers.
 
 The skill triggers automatically when your request matches it, e.g.:
 
-- « Mets en forme ce rapport en PDF lisible. »
-- « Consolide ces slides + ce budget + ce document Word en un dossier
-  scientifique. »
-- « Génère une version financeur et une version scientifique de ce projet. »
+- "Format this report as a readable PDF."
+- "Consolidate these slides + this budget + this Word document into a
+  scientific dossier."
+- "Generate a funder version and a scientific version of this project."
 
 You can also invoke it explicitly with the `/report` command, naming the
-sources and the target audience:
+sources, target audience, and output language:
 
 ```
 /report                                   # consolidate the pieces in context
 /report slides.json budget.html doc.md    # name the sources explicitly
-/report --audience financeur              # one funder-targeted version
-/report --audience scientifique           # one scientific / expert version
-/report --audience financeur,scientifique # several versions at once
+/report --audience funder                 # one funder-targeted version
+/report --audience scientific             # one scientific / expert version
+/report --audience funder,scientific      # several versions at once
 /report --mode layered                    # one layered document (default)
+/report --language EN                     # English (default)
+/report --language FR                     # French
 ```
 
 ### `--audience` options
 
-| Value          | Tailored for             | Emphasis                                                           |
-| -------------- | ------------------------ | ------------------------------------------------------------------ |
-| `financeur`    | Funders, decision-makers | Stakes, impact, budget & feasibility first; methodology vulgarized |
-| `scientifique` | Scientists / experts     | Full methodology, formulas, validation, annexes preserved          |
-| `clinicien`    | Clinicians               | Clinical implications and applicability                            |
+| Value      | Tailored for             | Emphasis                                                           |
+| ---------- | ------------------------ | ------------------------------------------------------------------ |
+| `funder`   | Funders, decision-makers | Stakes, impact, budget & feasibility first; methodology vulgarized |
+| `scientist` | Scientists / experts     | Full methodology, formulas, validation, annexes preserved          |
+| `clinician`   | Clinicians               | Clinical implications and applicability                            |
 | `institution`  | Institutions             | Institutional framing, governance, partnerships                    |
-| `public`       | General public           | Vulgarized, jargon-free, narrative                                 |
+| `public`   | General public           | Vulgarized, jargon-free, narrative                                 |
 
 Pass several values comma-separated to get one HTML file per audience. Omit
 `--audience` (or use `--mode layered`) to get a single layered document:
 executive summary first, then full detail, then annexes.
+
+### `--language` options
+
+| Value | Description |
+|-------|-------------|
+| `EN`  | English (default) |
+| `FR`  | French |
 
 ## Printing to PDF
 
