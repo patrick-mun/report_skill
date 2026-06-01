@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Génome Réunion — Dossier de financement (version financeurs)</title>
+  <style>
+    :root{--accent:#0F3A56;--accent2:#1E6E8C;--accent-soft:#e6eef3;--text:#1a1a1a;--muted:#555;--border:#d6dde3;--callout-bg:#eef4f8;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
+    *{box-sizing:border-box;}
+    body{font-family:var(--font-body);color:var(--text);line-height:1.55;font-size:15px;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body.paged{background:#e3e6ea;}
+    h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.22;}
+    h1{font-size:1.6em;margin:0 0 .2em;}
+    h2{font-size:1.28em;margin:1.3em 0 .45em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
+    h2:first-child{margin-top:0;}
+    h3{font-size:1.05em;margin:1em 0 .3em;color:var(--text);}
+    .report-meta{color:var(--muted);font-size:.92em;margin-bottom:1em;}
+    p{margin:0 0 .85em;}strong{color:#000;}a{color:var(--accent2);}
+    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1em 0;border-radius:0 4px 4px 0;}
+    .summary h2{margin-top:0;border:none;}
+    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
+    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.76em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
+    .todo{background:#fff7e6;border:1px dashed #d4a000;color:#8a6d00;padding:1px 6px;border-radius:3px;font-size:.9em;font-style:italic;}
+    ul,ol{margin:0 0 .85em;padding-left:1.4em;}li{margin-bottom:.28em;}
+    table{border-collapse:collapse;width:100%;margin:.85em 0;font-size:.92em;}
+    th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+    thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f4f8fa;}
+    .caption{font-size:.83em;color:var(--muted);font-style:italic;margin-top:.35em;}
+    .source{font-size:.8em;color:var(--muted);}
+    /* Visual components */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:11px;margin:1.1em 0;}
+    .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:12px 13px;text-align:center;}
+    .stat-card .num{font-family:var(--font-head);font-size:1.5em;font-weight:700;color:var(--accent);line-height:1.1;}
+    .stat-card .lbl{font-size:.78em;color:var(--muted);margin-top:3px;}
+    .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:1.1em 0;}
+    .flow-step{flex:1 1 0;min-width:105px;background:#fff;border:1.5px solid var(--accent2);border-radius:6px;padding:8px 10px;font-size:.81em;text-align:center;display:flex;align-items:center;justify-content:center;position:relative;}
+    .flow-step.alt{background:var(--accent-soft);}
+    .flow-step:not(:last-child){margin-right:18px;}
+    .flow-step:not(:last-child)::after{content:"\203A";position:absolute;right:-15px;top:50%;transform:translateY(-50%);font-size:1.4em;color:var(--accent2);}
+    .legend{display:flex;flex-wrap:wrap;gap:5px 16px;margin:.4em 0 .9em;font-size:.82em;color:var(--muted);}
+    .legend .item{display:flex;align-items:center;gap:6px;}
+    .legend .swatch{width:11px;height:11px;border-radius:3px;flex:none;}
+    .hbar{margin:.9em 0;}
+    .hbar .row{display:grid;grid-template-columns:200px 1fr auto;align-items:center;gap:10px;margin-bottom:6px;font-size:.85em;}
+    .hbar .track{background:#eef1f4;border-radius:4px;height:18px;overflow:hidden;}
+    .hbar .fill{height:100%;border-radius:4px;background:var(--accent2);}
+    .hbar .fill.alt{background:#9fb8c8;}
+    .hbar .val{font-variant-numeric:tabular-nums;color:var(--muted);}
+    .gantt{margin:1em 0;font-size:.8em;}
+    .gantt .row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;margin-bottom:5px;}
+    .gantt .lane{position:relative;height:18px;background:#eef1f4;border-radius:4px;}
+    .gantt .bar{position:absolute;height:100%;border-radius:4px;background:var(--accent);}
+    .gantt .bar.free{background:#0D9488;}.gantt .bar.ia{background:#7C3AED;}
+    .gantt .scale{display:grid;grid-template-columns:150px 1fr;gap:10px;color:var(--muted);margin-top:2px;font-size:.92em;}
+    .gantt .ticks{display:flex;justify-content:space-between;}
+    /* A4 sheet model */
+    .sheet{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12mm;padding:15mm 17mm 11mm;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.18);display:flex;flex-direction:column;position:relative;}
+    .sheet__body{flex:1 1 auto;}
+    .sheet__footer{flex:none;margin-top:10px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.74em;color:var(--muted);}
+    .sheet__footer .pageno{margin-left:auto;font-variant-numeric:tabular-nums;}
+    .sheet.is-overflowing{outline:2px dashed #d4351c;}
+    .sheet .overflow-flag{display:none;}
+    .sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+    /* Cover */
+    .sheet--cover .sheet__body{display:flex;flex-direction:column;height:100%;}
+    .cover-logo{padding-bottom:10mm;}
+    .cover-logo svg{height:58px;width:auto;}
+    .cover-accent-band{height:4px;background:var(--accent);border-radius:2px;margin-bottom:12mm;}
+    .cover-center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:6mm 0;}
+    .cover-center h1{font-size:2em;margin:0 0 .35em;color:var(--accent);}
+    .cover-center .cover-subtitle{font-size:1.1em;color:var(--muted);font-style:italic;}
+    .cover-meta{margin-top:auto;border-top:1px solid var(--border);padding-top:8mm;}
+    .cover-meta table{font-size:.92em;width:100%;}
+    .cover-meta td{padding:4px 14px 4px 0;border:none;background:none;vertical-align:top;}
+    .cover-meta td:first-child{font-weight:600;color:var(--accent);width:110px;}
+    /* TOC */
+    .sheet--toc h2{font-size:1.5em;margin-bottom:8mm;border:none;}
+    nav.toc-doc ol{list-style:none;padding:0;margin:0;}
+    nav.toc-doc li{margin-bottom:1px;}
+    a.toc-entry{display:flex;align-items:baseline;text-decoration:none;color:var(--text);padding:5px 4px;border-radius:3px;transition:background .15s;}
+    a.toc-entry:hover{background:var(--accent-soft);}
+    a.toc-entry:hover .toc-title{color:var(--accent);}
+    .toc-title{flex:none;font-size:.96em;}
+    .toc-dots{flex:1;border-bottom:1px dotted var(--border);margin:0 8px 4px;min-width:20px;}
+    .toc-page-num{flex:none;font-variant-numeric:tabular-nums;font-size:.9em;color:var(--muted);min-width:20px;text-align:right;}
+    @page sheet{size:A4;margin:0;}
+    @media print{
+      body.paged{background:#fff;}
+      .sheet{page:sheet;width:210mm;min-height:0;height:auto;margin:0;padding:15mm 17mm 11mm;box-shadow:none;page-break-after:always;break-after:page;}
+      .sheet:last-child{page-break-after:auto;break-after:auto;}
+      .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
+      h1,h2,h3{page-break-after:avoid;break-after:avoid;}
+      table,figure,aside.callout,.summary,.stat-grid,.flow,.gantt,.hbar{page-break-inside:avoid;break-inside:avoid;}
+      a.toc-entry{color:var(--text)!important;background:none!important;}
+      a{color:#000;text-decoration:none;}.todo{border:none;}
+    }
+  </style>
+</head>
+<body class="paged">
+
+  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
+  <section class="sheet sheet--cover">
+    <div class="sheet__body">
+      <div class="cover-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 410 64" fill="none" role="img" aria-label="Génome Réunion">
+          <g fill="none" stroke-width="5" stroke-linecap="round" transform="translate(18,28)">
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#0F3A56"></path>
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#1E6E8C" transform="translate(0,16)"></path>
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#E8654A" transform="translate(0,32)"></path>
+            <circle cx="84" cy="8" r="2.6" fill="#0F3A56" stroke="none"></circle>
+            <circle cx="84" cy="24" r="2.6" fill="#1E6E8C" stroke="none"></circle>
+            <circle cx="84" cy="40" r="2.6" fill="#E8654A" stroke="none"></circle>
+          </g>
+          <text x="132" y="56" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="31" letter-spacing="0.2" fill="#0F3A56">Génome <tspan font-weight="500">Réunion</tspan></text>
+          <text x="133" y="76" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="600" font-size="10.5" letter-spacing="3.4" fill="#1E6E8C">RÉFÉRENTIEL GÉNOMIQUE</text>
+        </svg>
+      </div>
+      <div class="cover-accent-band"></div>
+      <div class="cover-center">
+        <h1>Dossier de financement</h1>
+        <div class="cover-subtitle">Premier référentiel génomique de la population réunionnaise — synthèse pour les décideurs et financeurs</div>
+      </div>
+      <div class="cover-meta">
+        <table>
+          <tr><td>Porteur</td><td>Équipe Génome Réunion <span class="todo">[À compléter : structure porteuse]</span></td></tr>
+          <tr><td>Destinataires</td><td>Financeurs institutionnels et partenaires <span class="todo">[À préciser]</span></td></tr>
+          <tr><td>Demande</td><td>≈ 1,474 M€ sur 36 mois</td></tr>
+          <tr><td>Date</td><td>Juin 2026</td></tr>
+          <tr><td>Version</td><td>Financeurs (synthèse non technique)</td></tr>
+        </table>
+      </div>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Dossier de financement</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
+  <section class="sheet sheet--toc">
+    <div class="sheet__body">
+      <h2>Sommaire</h2>
+      <nav class="toc-doc">
+        <ol>
+          <li><a class="toc-entry" href="#f1"><span class="toc-title">1. L'essentiel en une page</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f2"><span class="toc-title">2. Le problème et l'enjeu</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f3"><span class="toc-title">3. La réponse du projet</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f4"><span class="toc-title">4. Calendrier</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f5"><span class="toc-title">5. Budget et plan de financement</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f6"><span class="toc-title">6. Retombées attendues</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f7"><span class="toc-title">7. Risques et garanties</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#f8"><span class="toc-title">8. Conclusion et demande</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+        </ol>
+      </nav>
+      <aside class="callout"><span class="label">Note</span>Cette version est destinée aux financeurs : elle privilégie l'enjeu, l'impact et le budget. Le détail scientifique (méthodologie, algorithme de sélection, validation) figure dans le <em>document complémentaire — version scientifique</em>.</aside>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Dossier de financement</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 2 (page 1) — L'ESSENTIEL ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="f1">
+        <h2>1. L'essentiel en une page</h2>
+        <div class="stat-grid">
+          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff;font-size:1.3em">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">financement demandé</div></div>
+          <div class="stat-card"><div class="num">36</div><div class="lbl">mois de projet</div></div>
+          <div class="stat-card"><div class="num">2 500</div><div class="lbl">Réunionnais analysés</div></div>
+          <div class="stat-card"><div class="num">0 €</div><div class="lbl">coût de séquençage (pris en charge par POPgen)</div></div>
+        </div>
+        <div class="summary">
+          <ul>
+            <li><strong>Le constat —</strong> les grandes bases de données génétiques mondiales représentent surtout des populations européennes. La médecine personnalisée est donc <strong>moins fiable</strong> pour les Réunionnais.</li>
+            <li><strong>Le projet —</strong> créer le <strong>premier référentiel génomique de La Réunion</strong>, en analysant 2 500 habitants et en séquençant 350 génomes complets — séquençage offert par le partenaire POPgen.</li>
+            <li><strong>L'impact —</strong> de meilleurs diagnostics, des traitements mieux adaptés, et une infrastructure de recherche durable sur le territoire.</li>
+            <li><strong>La demande —</strong> <strong>≈ 1,474 M€ sur 36 mois</strong>, le poste séquençage (le plus coûteux habituellement) étant déjà couvert.</li>
+          </ul>
+        </div>
+        <aside class="callout"><span class="label">Pourquoi maintenant</span>Sans données locales, les outils d'aide au diagnostic — y compris les nouveaux modèles d'intelligence artificielle — risquent d'aggraver les inégalités de santé pour la population réunionnaise.</aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Dossier de financement — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 3 (page 2) — PROBLÈME + RÉPONSE ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="f2">
+        <h2>2. Le problème et l'enjeu</h2>
+        <p>La médecine de précision adapte la prévention et les traitements au profil génétique de chaque patient. Mais elle s'appuie sur des bases de référence internationales <strong>très majoritairement européennes</strong>. Pour une population aussi métissée que celle de La Réunion, ces références sont mal adaptées.</p>
+        <p><strong>Conséquences concrètes :</strong></p>
+        <ul>
+          <li>des variantes génétiques fréquentes localement sont mal interprétées, ce qui <strong>allonge ou complique les diagnostics</strong> ;</li>
+          <li>les prescriptions de médicaments sont moins bien ajustées, car la réponse aux traitements dépend en partie de l'origine génétique ;</li>
+          <li>l'écart risque de <strong>s'aggraver avec l'intelligence artificielle</strong>, entraînée sur ces mêmes données déséquilibrées.</li>
+        </ul>
+      </section>
+
+      <section id="f3">
+        <h2>3. La réponse du projet</h2>
+        <p>Le projet construit un référentiel local en trois étapes complémentaires, du prélèvement jusqu'à une base de données exploitable en clinique :</p>
+        <div class="flow">
+          <div class="flow-step alt">Analyser<br>2 500 habitants<br><small>test génétique sur puce</small></div>
+          <div class="flow-step">Sélectionner<br>350 profils<br><small>les plus représentatifs</small></div>
+          <div class="flow-step alt">Séquencer<br>leur génome complet<br><small>offert · POPgen</small></div>
+          <div class="flow-step">Référentiel<br>réunionnais<br><small>diagnostics + traitements</small></div>
+        </div>
+        <p class="caption">Figure 1 : Les grandes étapes du projet (présentation simplifiée).</p>
+        <aside class="callout"><span class="label">Point clé budgétaire</span>Le séquençage des génomes — habituellement le poste le plus cher — est <strong>entièrement pris en charge par le partenaire POPgen</strong>. Le financement demandé porte sur l'analyse, l'infrastructure informatique et les équipes.</aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Dossier de financement — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 4 (page 3) — CALENDRIER + BUDGET ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="f4">
+        <h2>4. Calendrier</h2>
+        <p>Le projet se déroule sur <strong>36 mois</strong>, en phases qui se chevauchent pour optimiser les délais :</p>
+        <div class="gantt">
+          <div class="row"><div>Préparation des données</div><div class="lane"><div class="bar" style="left:0%;width:33%"></div></div></div>
+          <div class="row"><div>Analyse des 2 500</div><div class="lane"><div class="bar" style="left:8%;width:25%"></div></div></div>
+          <div class="row"><div>Séquençage (POPgen)</div><div class="lane"><div class="bar free" style="left:22%;width:39%"></div></div></div>
+          <div class="row"><div>Outils d'IA</div><div class="lane"><div class="bar ia" style="left:47%;width:36%"></div></div></div>
+          <div class="row"><div>Portail clinique</div><div class="lane"><div class="bar" style="left:75%;width:25%"></div></div></div>
+          <div class="scale"><div></div><div class="ticks"><span>Mois 1</span><span>9</span><span>18</span><span>27</span><span>36</span></div></div>
+        </div>
+        <div class="legend"><span class="item"><span class="swatch" style="background:#0F3A56"></span>Étapes financées</span><span class="item"><span class="swatch" style="background:#0D9488"></span>Séquençage offert (POPgen)</span><span class="item"><span class="swatch" style="background:#7C3AED"></span>Intelligence artificielle</span></div>
+      </section>
+
+      <section id="f5">
+        <h2>5. Budget et plan de financement</h2>
+        <p>Trois grands postes, avec pour chacun une option économique retenue. Le projet a déjà identifié les scénarios les moins coûteux (en k€) :</p>
+        <div class="hbar">
+          <div class="row"><div>Analyse génétique (retenu)</div><div class="track"><div class="fill" style="width:51%"></div></div><div class="val">265 k€</div></div>
+          <div class="row"><div>— option internalisée</div><div class="track"><div class="fill alt" style="width:92%"></div></div><div class="val">479 k€</div></div>
+          <div class="row"><div>Informatique (retenu)</div><div class="track"><div class="fill" style="width:52%"></div></div><div class="val">270 k€</div></div>
+          <div class="row"><div>— option sur site</div><div class="track"><div class="fill alt" style="width:64%"></div></div><div class="val">334 k€</div></div>
+          <div class="row"><div>Équipes (optimisé)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">524 k€</div></div>
+        </div>
+        <p class="caption">Figure 2 : Postes principaux et scénarios. <span class="source">Source : dossier de faisabilité ; montants à confirmer par devis.</span></p>
+        <div class="stat-grid">
+          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff;font-size:1.2em">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">total demandé (scénario optimisé)</div></div>
+          <div class="stat-card"><div class="num">−23 %</div><div class="lbl">économie sur les équipes (alternance + CIFRE)</div></div>
+          <div class="stat-card"><div class="num">0 €</div><div class="lbl">séquençage (partenaire)</div></div>
+        </div>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Dossier de financement — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 5 (page 4) — RETOMBÉES + RISQUES + CONCLUSION ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="f6">
+        <h2>6. Retombées attendues</h2>
+        <ul>
+          <li><strong>Pour les patients —</strong> des diagnostics plus rapides et plus sûrs, des traitements mieux adaptés.</li>
+          <li><strong>Pour le système de santé —</strong> moins d'examens non concluants, une prescription médicamenteuse plus efficace.</li>
+          <li><strong>Pour le territoire —</strong> une infrastructure de recherche et une expertise génomique durables à La Réunion.</li>
+          <li><strong>Pour l'équité —</strong> une contribution reconnue à la réduction des inégalités dans les données de santé mondiales.</li>
+        </ul>
+      </section>
+
+      <section id="f7">
+        <h2>7. Risques et garanties</h2>
+        <table>
+          <thead><tr><th>Risque</th><th>Garantie apportée</th></tr></thead>
+          <tbody>
+            <tr><td>Représentativité de l'échantillon</td><td>Méthode de sélection validée scientifiquement avant lancement</td></tr>
+            <tr><td>Protection des données de santé</td><td>Hébergement souverain et certifié <span class="todo">[conformité RGPD / HDS à préciser]</span></td></tr>
+            <tr><td>Maîtrise du budget</td><td>Scénarios économiques retenus ; séquençage offert</td></tr>
+            <tr><td>Promesses excessives sur l'IA</td><td>Outils validés sur données réelles avant tout usage</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 1 : Principaux risques et garanties. <span class="source">RGPD : règlement général sur la protection des données · HDS : hébergeur de données de santé.</span></p>
+      </section>
+
+      <section id="f8">
+        <h2>8. Conclusion et demande</h2>
+        <p>Génome Réunion comble un angle mort de la médecine de précision pour une population unique, à un coût maîtrisé grâce à la prise en charge du séquençage par POPgen. Le projet est prêt, sa méthode est documentée et validée, et ses retombées sont concrètes pour les patients comme pour le territoire.</p>
+        <aside class="callout"><span class="label">Demande</span>Nous sollicitons un financement de <strong>≈ 1,474 M€ sur 36 mois</strong> pour lancer le projet. <span class="todo">[À compléter : répartition par financeur, contreparties, échéancier de versement]</span></aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Version financeurs · contact : <span class="todo">[à compléter]</span></span></footer>
+  </section>
+
+  <script>
+  (function(){"use strict";
+    function paginate(){
+      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc");});
+      sheets.forEach(function(sheet){
+        var flag=sheet.querySelector(".overflow-flag");
+        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
+        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+        var footer=sheet.querySelector(".sheet__footer");if(!footer)return;
+        var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}
+        if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}
+        else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}
+      });
+      document.querySelectorAll("a.toc-entry[href]").forEach(function(link){
+        var href=link.getAttribute("href");if(!href||href.charAt(0)!=="#")return;
+        var target=document.getElementById(href.slice(1));if(!target)return;
+        var el=target;var targetSheet=null;
+        while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet")){targetSheet=el;break;}el=el.parentNode;}
+        if(!targetSheet)return;
+        var idx=contentSheets.indexOf(targetSheet);
+        var numEl=link.querySelector(".toc-page-num");
+        if(numEl)numEl.textContent=idx>=0?String(idx+1):"—";
+      });
+    }
+    function bindToc(){
+      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){
+        link.addEventListener("click",function(e){
+          var target=document.getElementById(this.getAttribute("href").slice(1));
+          if(!target)return;e.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});
+        });
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindToc();});}
+    else{paginate();bindToc();}
+    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+  })();
+  </script>
+</body>
+</html>
