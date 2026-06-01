@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Génome Réunion — Document complémentaire (version scientifique)</title>
+  <style>
+    :root{--accent:#0F3A56;--accent2:#1E6E8C;--accent-soft:#e6eef3;--text:#1a1a1a;--muted:#555;--border:#d6dde3;--callout-bg:#eef4f8;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
+    *{box-sizing:border-box;}
+    body{font-family:var(--font-body);color:var(--text);line-height:1.5;font-size:14.5px;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body.paged{background:#e3e6ea;}
+    h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.22;}
+    h1{font-size:1.6em;margin:0 0 .2em;}
+    h2{font-size:1.22em;margin:1.3em 0 .45em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
+    h2:first-child,h3:first-child{margin-top:0;}
+    h3{font-size:1.02em;margin:1em 0 .3em;color:var(--text);}
+    .report-meta{color:var(--muted);font-size:.92em;margin-bottom:1em;}
+    .report-meta .subtitle{font-size:1.08em;color:var(--text);font-style:italic;}
+    p{margin:0 0 .8em;}strong{color:#000;}a{color:var(--accent2);}
+    code{background:#eef2f5;padding:1px 5px;border-radius:3px;font-size:.92em;}
+    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1em 0;border-radius:0 4px 4px 0;}
+    .summary h2{margin-top:0;border:none;}
+    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
+    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.76em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
+    .todo{background:#fff7e6;border:1px dashed #d4a000;color:#8a6d00;padding:1px 6px;border-radius:3px;font-size:.9em;font-style:italic;}
+    ul,ol{margin:0 0 .8em;padding-left:1.4em;}li{margin-bottom:.25em;}
+    table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.9em;}
+    th,td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top;}
+    thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f4f8fa;}
+    .caption{font-size:.83em;color:var(--muted);font-style:italic;margin-top:.35em;}
+    .source{font-size:.8em;color:var(--muted);}
+    /* visual components */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin:1.1em 0;}
+    .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:11px 12px;text-align:center;}
+    .stat-card .num{font-family:var(--font-head);font-size:1.45em;font-weight:700;color:var(--accent);line-height:1.1;}
+    .stat-card .lbl{font-size:.78em;color:var(--muted);margin-top:3px;}
+    .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:1.1em 0;}
+    .flow-step{flex:1 1 0;min-width:105px;background:#fff;border:1.5px solid var(--accent2);border-radius:6px;padding:8px 10px;font-size:.8em;text-align:center;display:flex;align-items:center;justify-content:center;position:relative;}
+    .flow-step.alt{background:var(--accent-soft);}
+    .flow-step:not(:last-child){margin-right:18px;}
+    .flow-step:not(:last-child)::after{content:"\203A";position:absolute;right:-15px;top:50%;transform:translateY(-50%);font-size:1.4em;color:var(--accent2);}
+    .compo-bar{display:flex;height:28px;border-radius:5px;overflow:hidden;margin:.9em 0 .5em;border:1px solid var(--border);}
+    .compo-bar span{display:block;height:100%;}
+    .legend{display:flex;flex-wrap:wrap;gap:5px 16px;margin:.4em 0 .9em;font-size:.82em;color:var(--muted);}
+    .legend .item{display:flex;align-items:center;gap:6px;}
+    .legend .swatch{width:11px;height:11px;border-radius:3px;flex:none;}
+    .hbar{margin:.9em 0;}
+    .hbar .row{display:grid;grid-template-columns:190px 1fr auto;align-items:center;gap:10px;margin-bottom:6px;font-size:.85em;}
+    .hbar .track{background:#eef1f4;border-radius:4px;height:17px;overflow:hidden;}
+    .hbar .fill{height:100%;border-radius:4px;background:var(--accent2);}
+    .hbar .val{font-variant-numeric:tabular-nums;color:var(--muted);}
+    .gantt{margin:1em 0;font-size:.8em;}
+    .gantt .row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;margin-bottom:5px;}
+    .gantt .lane{position:relative;height:18px;background:#eef1f4;border-radius:4px;}
+    .gantt .bar{position:absolute;height:100%;border-radius:4px;background:var(--accent);}
+    .gantt .bar.free{background:#0D9488;}.gantt .bar.ia{background:#7C3AED;}
+    .gantt .scale{display:grid;grid-template-columns:150px 1fr;gap:10px;color:var(--muted);margin-top:2px;font-size:.92em;}
+    .gantt .ticks{display:flex;justify-content:space-between;}
+    .timeline{display:flex;gap:0;margin:1em 0;}
+    .timeline .ev{flex:1;position:relative;padding-top:19px;text-align:center;font-size:.82em;}
+    .timeline .ev::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--border);}
+    .timeline .ev::after{content:"";position:absolute;top:1px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--accent2);}
+    .timeline .ev .yr{font-weight:700;color:var(--accent);display:block;}
+    /* A4 sheet model */
+    .sheet{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12mm;padding:15mm 17mm 11mm;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.18);display:flex;flex-direction:column;position:relative;}
+    .sheet__body{flex:1 1 auto;}
+    .sheet__footer{flex:none;margin-top:10px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.74em;color:var(--muted);}
+    .sheet__footer .pageno{margin-left:auto;font-variant-numeric:tabular-nums;}
+    .sheet.is-overflowing{outline:2px dashed #d4351c;}
+    .sheet .overflow-flag{display:none;}
+    .sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+    .brand{display:flex;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:12px;}
+    .brand svg{height:50px;width:auto;}
+    @page sheet{size:A4;margin:0;}
+    @media print{
+      body.paged{background:#fff;}
+      .sheet{page:sheet;width:210mm;min-height:0;height:auto;margin:0;padding:15mm 17mm 11mm;box-shadow:none;page-break-after:always;break-after:page;}
+      .sheet:last-child{page-break-after:auto;break-after:auto;}
+      .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
+      h1,h2,h3{page-break-after:avoid;break-after:avoid;}
+      table,figure,aside.callout,.summary,.stat-grid,.flow,.gantt,.hbar,.compo-bar,.timeline{page-break-inside:avoid;break-inside:avoid;}
+      a{color:#000;text-decoration:none;}.todo{border:none;}
+    }
+  </style>
+</head>
+<body class="paged">
+
+  <!-- ============ FEUILLE 1 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <header>
+        <div class="brand">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 410 64" fill="none" role="img" aria-label="Génome Réunion">
+            <g fill="none" stroke-width="5" stroke-linecap="round" transform="translate(18,28)">
+              <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#0F3A56"></path>
+              <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#1E6E8C" transform="translate(0,16)"></path>
+              <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#E8654A" transform="translate(0,32)"></path>
+              <circle cx="84" cy="8" r="2.6" fill="#0F3A56" stroke="none"></circle>
+              <circle cx="84" cy="24" r="2.6" fill="#1E6E8C" stroke="none"></circle>
+              <circle cx="84" cy="40" r="2.6" fill="#E8654A" stroke="none"></circle>
+            </g>
+            <text x="132" y="56" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="31" letter-spacing="0.2" fill="#0F3A56">Génome <tspan font-weight="500">Réunion</tspan></text>
+            <text x="133" y="76" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="600" font-size="10.5" letter-spacing="3.4" fill="#1E6E8C">RÉFÉRENTIEL GÉNOMIQUE</text>
+          </svg>
+        </div>
+        <h1>Document complémentaire — version scientifique</h1>
+        <div class="report-meta">
+          <div class="subtitle">Référentiel génomique réunionnais de première génération</div>
+          <div>Audience experte · version consolidée · juin 2026</div>
+          <div class="source">Construit à partir de trois sources : présentation, méthodologie V3.5, dossier de faisabilité.</div>
+        </div>
+      </header>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">2 500</div><div class="lbl">individus génotypés SNP</div></div>
+        <div class="stat-card"><div class="num">100</div><div class="lbl">familles nucléaires (phasage)</div></div>
+        <div class="stat-card"><div class="num">350</div><div class="lbl">génomes entiers (WGS)</div></div>
+        <div class="stat-card"><div class="num">0 €</div><div class="lbl">séquençage WGS (POPgen)</div></div>
+      </div>
+
+      <section class="summary">
+        <h2>1. Résumé exécutif</h2>
+        <ul>
+          <li><strong>Constat —</strong> les bases internationales (gnomAD, 1000 Genomes) sous-représentent fortement les populations non européennes, dégradant l'interprétation des variants, l'imputation et la pharmacogénétique.</li>
+          <li><strong>Problème —</strong> La Réunion cumule trois traits rares : admixture récente, structure insulaire et effets fondateurs locaux.</li>
+          <li><strong>Réponse —</strong> un référentiel local combinant 2 500 SNP, 100 familles et 350 WGS sélectionnés par un algorithme géo-ancestral, le WGS étant gratuit (POPgen).</li>
+          <li><strong>Livrables —</strong> fréquences locales, panel WGS, panel d'imputation/phasage, données d'admixture et d'effets fondateurs, ressources pharmacogénétiques.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. L'angle mort de la médecine de précision</h2>
+        <p><strong>Sous-représentation —</strong> gnomAD et 1000 Genomes sont massivement d'ascendance européenne ; fréquences, panels d'imputation et modèles de pathogénicité sont donc mal calibrés pour les populations admixées.</p>
+        <p><strong>Conséquences —</strong> des variants fréquents localement sont classés à tort comme rares (hausse des variants de signification incertaine), et la pharmacogénétique est inadaptée car les allèles PGx varient selon l'ascendance.</p>
+        <aside class="callout"><span class="label">À retenir</span>Sans données locales, la médecine de précision reste moins précise pour les populations sous-représentées — et les modèles d'IA, entraînés sur des données européennes, risquent d'amplifier ce biais.</aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 2 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>3. Singularité génétique de La Réunion</h2>
+        <h3>3.1. Histoire migratoire et métissage</h3>
+        <p>Peuplée à partir du XVII<sup>e</sup> siècle sur un territoire sans population autochtone, l'île s'est construite par vagues successives, produisant un métissage profond entre composantes africaine, malgache, indienne, européenne et asiatique.</p>
+        <div class="timeline">
+          <div class="ev"><span class="yr">1663–1848</span>Traite et esclavage — apports africain et malgache</div>
+          <div class="ev"><span class="yr">après 1848</span>Engagisme — apports indien et asiatique</div>
+          <div class="ev"><span class="yr">XX<sup>e</sup>–XXI<sup>e</sup></span>Migrations modernes</div>
+        </div>
+        <h3>3.2. Population fortement admixée</h3>
+        <p>L'ascendance inférée moyenne illustre la diversité multi-continentale de la population (composition indicative issue de la présentation) :</p>
+        <div class="compo-bar" role="img" aria-label="Composition d'ascendance moyenne">
+          <span style="width:45%;background:#0D9488"></span>
+          <span style="width:25%;background:#E05A4B"></span>
+          <span style="width:15%;background:#0B1F3A"></span>
+          <span style="width:8%;background:#D97706"></span>
+          <span style="width:7%;background:#7C3AED"></span>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="swatch" style="background:#0D9488"></span>Afrique / Malgache ≈ 45 %</span>
+          <span class="item"><span class="swatch" style="background:#E05A4B"></span>Inde du Sud ≈ 25 %</span>
+          <span class="item"><span class="swatch" style="background:#0B1F3A"></span>Européen ≈ 15 %</span>
+          <span class="item"><span class="swatch" style="background:#D97706"></span>Zarabe / Gujarati ≈ 8 %</span>
+          <span class="item"><span class="swatch" style="background:#7C3AED"></span>Chinois ≈ 7 %</span>
+        </div>
+        <p class="caption">Figure 1 : Composition d'ascendance moyenne (indicative). <span class="source">Source : présentation, data/admixture.js.</span></p>
+        <h3>3.3. Effets fondateurs et double singularité</h3>
+        <p>L'insularité et certaines dynamiques locales (Hauts) ont favorisé des <strong>effets fondateurs</strong> détectables via IBD/ROH. La Réunion combine ainsi <strong>diversité globale</strong> et <strong>structuration locale</strong> — d'où une stratégie d'échantillonnage dédiée plutôt qu'un tirage aléatoire.</p>
+      </section>
+
+      <section>
+        <h2>4. Objectifs du projet</h2>
+        <p><strong>Principal —</strong> produire un référentiel réunionnais de première génération, reproductible et auditable, améliorant l'interprétation des variants et l'imputation.</p>
+        <ul>
+          <li><strong>Scientifiques —</strong> caractériser admixture et effets fondateurs (IBD/ROH), améliorer le phasage haplotypique.</li>
+          <li><strong>Cliniques —</strong> réduire les variants de signification incertaine, fournir des ressources PGx locales.</li>
+          <li><strong>Territoriaux —</strong> infrastructure et expertise génomiques locales. <span class="todo">[À compléter : partenaires et formation]</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 3 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>5. Design général du projet</h2>
+        <p>Trois couches complémentaires articulées en un pipeline unique, du génotypage au référentiel :</p>
+        <div class="flow">
+          <div class="flow-step alt">2 500 SNP<br>+ 100 familles<br><small>puce GDA-8</small></div>
+          <div class="flow-step">PCA · ADMIXTURE<br>IBD · ROH</div>
+          <div class="flow-step">Score <code>S_div</code><br>→ 350 WGS</div>
+          <div class="flow-step alt">Séquençage<br>POPgen (0 €)</div>
+          <div class="flow-step">Référentiel<br><small>fréquences · imputation · phasage</small></div>
+        </div>
+        <p class="caption">Figure 2 : Architecture en trois couches. <span class="source">Source : méthodologie V3.5 ; dossier de faisabilité.</span></p>
+        <aside class="callout"><span class="label">Point clé</span>Le séquençage WGS est pris en charge gratuitement par <strong>POPgen (0 €)</strong> ; le coût laboratoire porte sur le génotypage iScan, l'extraction d'ADN et la conservation au CRB.</aside>
+        <p>Le panel de 350 WGS est un référentiel de <strong>première génération</strong>, complémentaire des ressources internationales — les variants ultra-rares relèveront de phases ultérieures.</p>
+      </section>
+
+      <section>
+        <h2>6. Méthodologie synthétique</h2>
+        <p>Après QC, les marqueurs (≈ 1,9 M SNP bruts) sont employés différemment selon l'analyse :</p>
+        <table>
+          <thead><tr><th>Usage</th><th>Filtrage SNP</th></tr></thead>
+          <tbody>
+            <tr><td>PCA, ADMIXTURE</td><td>SNP prunés en LD</td></tr>
+            <tr><td>Phasage, IBD, ROH</td><td>SNP denses filtrés</td></tr>
+            <tr><td>Imputation</td><td>SNP harmonisés avec le WGS</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 1 : Usage différencié des marqueurs SNP. <span class="source">Source : méthodologie V3.5.</span></p>
+        <p>Analyses de structure (PCA, ADMIXTURE) projetées sur des pools témoins (1000 Genomes/IGSR ; EGA pour Madagascar, l'Asie et l'Afrique de l'océan Indien), puis IBD/ROH, sélection WGS par <code>S_div</code>, séquençage POPgen, construction de la base de variants et recalibrage des fréquences sur les 2 500.</p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 4 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>7. Algorithme de sélection WGS</h2>
+        <p>Le panel n'est <strong>pas un tirage aléatoire</strong> : il combine un <strong>noyau géo-ancestral</strong> (ancrage territorial + diversité interne à chaque secteur) et un <strong>bras de découverte contrôlé</strong> (profils sous-capturés). Le score <code>S_div</code> agrège quatre composantes :</p>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Position</div><div class="lbl">PCA projetée — place dans l'espace d'ascendance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Composition</div><div class="lbl">ADMIXTURE — profil d'ascendance inférée</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Parenté</div><div class="lbl">IBD — contrôle de la redondance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Fondateur</div><div class="lbl">ROH — signatures fondatrices</div></div>
+        </div>
+        <p class="caption">Figure 3 : Composantes du score <code>S_div</code>. <span class="source">Méthodologie V3.5, partie III ; formulation exacte en annexe 3.</span></p>
+        <p>Stratification croisant <strong>8 secteurs géographiques fixes</strong> et clusters d'ascendance, contrôle de parenté, puis <strong>sélection greedy stratifiée</strong> du noyau et intégration du bras de découverte. <span class="todo">[À compléter : répartition noyau/découverte et pondérations finales]</span></p>
+        <h3>Validation de la sélection</h3>
+        <p>Validation <strong>in silico</strong> sur profils synthétiques (A témoin, C mélange réaliste, D effets fondateurs), critère primaire = <strong>imputation R² par classe de MAF</strong>, puis triangulation sur données externes <strong>1000 Genomes</strong> et <strong>EPIGEN-Brasil</strong>. <span class="source">Source : docs de validation (4 profils / voilure réduite).</span></p>
+      </section>
+
+      <section>
+        <h2>8. Ressources produites</h2>
+        <ul>
+          <li><strong>Base de fréquences locales</strong> (recalibrées sur 2 500) · <strong>Panel WGS</strong> (350 génomes) · <strong>Panel d'imputation/phasage</strong>.</li>
+          <li><strong>Données d'admixture</strong> (ascendance globale et locale) · <strong>Effets fondateurs</strong> (IBD/ROH) · <strong>Ressources pharmacogénétiques</strong>.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 5 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>9. Organisation opérationnelle</h2>
+        <p>Plateforme entièrement en stack Python : génotypage iScan/GDA-8 ; PLINK2, KING, SHAPEIT ; pipelines Nextflow/Snakemake ; base PostgreSQL + MongoDB ; portail/API Django ; modules IA PyTorch + TensorFlow. Le projet se déploie sur 36 mois en sept phases qui se chevauchent :</p>
+        <div class="gantt">
+          <div class="row"><div>P0 · Panels témoins</div><div class="lane"><div class="bar" style="left:0%;width:33%"></div></div></div>
+          <div class="row"><div>P1 · Validation externe</div><div class="lane"><div class="bar" style="left:0%;width:28%"></div></div></div>
+          <div class="row"><div>P2 · Cohorte SNP</div><div class="lane"><div class="bar" style="left:8%;width:25%"></div></div></div>
+          <div class="row"><div>P3 · Module familial</div><div class="lane"><div class="bar" style="left:8%;width:25%"></div></div></div>
+          <div class="row"><div>P4 · WGS POPgen</div><div class="lane"><div class="bar free" style="left:22%;width:39%"></div></div></div>
+          <div class="row"><div>P5 · Modules IA</div><div class="lane"><div class="bar ia" style="left:47%;width:36%"></div></div></div>
+          <div class="row"><div>P6 · Portail clinique</div><div class="lane"><div class="bar" style="left:75%;width:25%"></div></div></div>
+          <div class="scale"><div></div><div class="ticks"><span>M1</span><span>M9</span><span>M18</span><span>M27</span><span>M36</span></div></div>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="swatch" style="background:#0F3A56"></span>Phases projet</span>
+          <span class="item"><span class="swatch" style="background:#0D9488"></span>WGS gratuit (POPgen)</span>
+          <span class="item"><span class="swatch" style="background:#7C3AED"></span>Modules IA</span>
+        </div>
+        <p class="caption">Figure 4 : Chronogramme indicatif sur 36 mois. <span class="source">Source : dossier de faisabilité. <span class="todo">[Semaines exactes à confirmer]</span></span></p>
+        <p><span class="todo">[À compléter : gouvernance, partenaires, RGPD/HDS, hébergement — annexe 6]</span></p>
+      </section>
+
+      <section>
+        <h2>10. Budget et ressources</h2>
+        <p>Projet sur 36 mois, WGS gratuit (POPgen). Postes principaux et scénarios (en k€) :</p>
+        <div class="hbar">
+          <div class="row"><div>Génotypage — sous-traitance</div><div class="track"><div class="fill" style="width:51%"></div></div><div class="val">265 k€</div></div>
+          <div class="row"><div>Génotypage — iScan interne</div><div class="track"><div class="fill" style="width:92%"></div></div><div class="val">479 k€</div></div>
+          <div class="row"><div>IT — cloud hybride (HDS)</div><div class="track"><div class="fill" style="width:52%"></div></div><div class="val">270 k€</div></div>
+          <div class="row"><div>IT — on-premise</div><div class="track"><div class="fill" style="width:64%"></div></div><div class="val">334 k€</div></div>
+          <div class="row"><div>RH — Prop. 2 (alternance + CIFRE)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">524 k€</div></div>
+        </div>
+        <p class="caption">Figure 5 : Postes budgétaires par scénario (échelle relative au poste le plus élevé). <span class="source">Source : dossier de faisabilité ; montants à confirmer par devis.</span></p>
+        <div class="stat-grid">
+          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff;font-size:1.3em">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">total optimal (Sc. 1 + Prop. 2)</div></div>
+          <div class="stat-card"><div class="num">36</div><div class="lbl">mois</div></div>
+          <div class="stat-card"><div class="num">−23 %</div><div class="lbl">RH vs scénario de base</div></div>
+        </div>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 6 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>11. Impacts attendus</h2>
+        <ul>
+          <li><strong>Clinique / diagnostique —</strong> meilleure interprétation des variants, moins de variants de signification incertaine.</li>
+          <li><strong>Pharmacogénétique —</strong> adaptation posologique sur des allèles PGx locaux.</li>
+          <li><strong>Scientifique —</strong> caractérisation de l'admixture et des effets fondateurs ; meilleure imputation.</li>
+          <li><strong>Territorial & équité —</strong> infrastructure locale ; réduction du biais des bases internationales.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>12. Risques et limites</h2>
+        <table>
+          <thead><tr><th>Risque</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Représentativité (350 WGS)</td><td>Sélection géo-ancestrale + découverte ; recalibrage sur 2 500 ; extensions</td></tr>
+            <tr><td>Réglementaire (RGPD/HDS)</td><td>Hébergement souverain <span class="todo">[annexe 6]</span></td></tr>
+            <tr><td>Financier</td><td>Scénarios alternatifs ; WGS gratuit POPgen</td></tr>
+            <tr><td>Informatique</td><td>Pipelines reproductibles (Nextflow/Snakemake)</td></tr>
+            <tr><td>Sur-promesse IA</td><td>Modules validés empiriquement ; référentiel local comme socle</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 2 : Risques et mitigations.</p>
+      </section>
+
+      <section>
+        <h2>13. Conclusion</h2>
+        <p><strong>Besoin —</strong> combler l'angle mort des bases génomiques pour une population admixée et structurée localement. <strong>Apport —</strong> un référentiel réunionnais reproductible et auditable. <strong>Conditions —</strong> validation empirique avant gel de la sélection, conformité réglementaire, WGS gratuit. <strong>Perspectives —</strong> extensions (variants ultra-rares) et modules d'IA biomédicale.</p>
+      </section>
+
+      <section>
+        <h2>Annexes</h2>
+        <p><strong>A1. Bibliographie —</strong> <span class="todo">[À importer depuis le document Word du projet]</span></p>
+        <p><strong>A2.</strong> Historique migratoire détaillé · <strong>A3.</strong> Méthodologie statistique (formulation complète de <code>S_div</code>, sensibilité LOCO) · <strong>A4.</strong> Budget détaillé · <strong>A5.</strong> Plan de validation (profils A/C/D, seed 25→100) · <strong>A6.</strong> Gouvernance, RGPD et HDS. <span class="todo">[Annexes A2–A4, A6 à importer depuis les sources complètes]</span></p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Consolidé : présentation + méthodologie V3.5 + dossier de faisabilité</span></footer>
+  </section>
+
+  <script>
+  (function(){"use strict";
+    function paginate(){
+      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var total=sheets.length;
+      sheets.forEach(function(sheet,i){
+        var footer=sheet.querySelector(".sheet__footer");
+        if(footer){var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}no.textContent="Page "+(i+1)+" / "+total;}
+        var flag=sheet.querySelector(".overflow-flag");
+        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
+        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",paginate);}else{paginate();}
+    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+  })();
+  </script>
+</body>
+</html>

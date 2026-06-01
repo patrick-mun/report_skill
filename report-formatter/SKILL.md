@@ -1,69 +1,103 @@
 ---
 name: report-formatter
 description: >-
-  Format and polish reports for professional publication as a styled,
-  print-to-PDF HTML document. Use when the user wants to lay out, format,
-  clean up, structure, or publish a research report, professional report,
-  briefing note, or memo so it is easy to read and quick to understand.
-  Triggers on requests like "format this report", "make this report
-  presentable", "turn this into a clean PDF-ready document", "mets en forme
-  ce rapport", "formate ce compte-rendu".
+  Consolidate the heterogeneous pieces of a project (slides, methodology
+  documents, budget/financing dossier, draft Word/Markdown, bibliography) into
+  clean, audience-tailored reports published as self-contained, print-to-PDF
+  HTML. Use when the user wants to assemble, consolidate, format, structure, or
+  publish a project dossier, a research/funding application, a professional
+  report, or a briefing so it is readable for a given audience and quick to
+  understand. Triggers on requests like "make a readable dossier from these
+  pieces", "consolidate the slides + budget + doc into a report", "format this
+  for funders/scientists", "mets en forme ce dossier de projet", "consolide ces
+  pièces en un rapport lisible".
 ---
 
 # Report Formatter
 
-Turn raw text into a clean, professional, **self-contained HTML document**
-optimized for fast reading and ready to print to PDF (`Ctrl/Cmd + P → Save as
-PDF`). Reports are written **in French** by default; match the language of the
-source text if it is clearly something else.
+Turn the scattered pieces of a project into clean, professional,
+**self-contained HTML documents** optimized for fast reading and ready to print
+to PDF (`Ctrl/Cmd + P → Save as PDF`). Reports are written **in French** by
+default; match the language of the source material if it is clearly otherwise.
 
-## When to use
+## Two jobs this skill handles
 
-The user provides report content (research findings, a professional briefing,
-meeting notes, an analysis) and wants it formatted for publication or sharing
-in a professional context.
+1. **Single-source formatting** — one text (a report, a memo, notes) → one
+   clean formatted document. Use the procedure in *Simple formatting* below.
+2. **Multi-source consolidation** — several heterogeneous pieces of one project
+   (slide decks, methodology specs, budget dossiers, draft documents,
+   bibliography) → one coherent report, or several audience-specific versions.
+   This is the main use case. See `references/consolidation.md`.
 
 ## Core principle
 
-**Reformat and restructure — do not invent content.** Reorganize, clarify
-headings, tighten paragraphs, and apply consistent styling. If an expected
-section is missing (e.g. no executive summary, no conclusion), insert a clearly
-marked placeholder such as `[À compléter : synthèse exécutive]` rather than
-fabricating substance, and tell the user what is missing.
+**Reformat, restructure, and consolidate — do not invent content.** Reorganize,
+clarify headings, tighten paragraphs, reconcile pieces, and apply consistent
+styling. Every technical claim, figure, or number must trace back to a source.
+If an expected section is missing or a source is silent, insert a clearly marked
+placeholder such as `[À compléter : …]` rather than fabricating substance, and
+tell the user what is missing.
 
-## Procedure
+## Output modes (multi-source)
 
-1. **Identify the report type.** Choose the right structure:
-   - Research / academic report → `references/structure-recherche.md`
-   - Professional / business report, briefing, memo → `references/structure-pro.md`
-   If unsure, ask the user briefly, or default to professional.
+The user chooses, or you ask:
 
-2. **Structure the content** by mapping the source text onto the chosen
-   plan-type. Reorder sections as needed. Flag missing sections with
-   placeholders.
+- **Layered single document** — one navigable report: executive summary first
+  (for funders / busy readers), then full scientific and budget detail, then
+  annexes. Easiest to maintain.
+- **Audience-specific versions** — same substance, re-framed per audience
+  (funders, scientists/experts, clinicians, institutions/general public). See
+  `references/audiences.md` for how to adapt depth, vocabulary, and emphasis.
 
-3. **Apply the editorial rules** in `references/style-guide.md` (executive
-   summary first, short paragraphs, clear heading hierarchy, key-point
-   callouts, captioned figures/tables, sparing emphasis).
+## Procedure — multi-source consolidation
 
-4. **Fill the matching template** in `templates/` (`professionnel.html` or
-   `recherche.html`), replacing the `<!-- … -->` placeholder comments with the
-   structured content.
+1. **Inventory the sources.** List every piece and what it holds (see
+   `references/consolidation.md` for handling slide JSON, methodology Markdown,
+   budget HTML, Word/Markdown drafts).
+2. **Establish source authority.** When the same fact appears in several places,
+   trust the most authoritative source (e.g. a methodology spec over a slide
+   note). Flag genuine conflicts to the user — do not silently pick one.
+3. **Choose the target structure.** Use a plan supplied by the user if any
+   (their outline is the contract); otherwise use
+   `references/structure-recherche.md` or `references/structure-pro.md`.
+4. **Choose the output mode and audience** (layered vs. per-audience).
+5. **Map content onto the structure**, drawing faithfully from the sources.
+   Mark gaps with `[À compléter : …]`.
+6. **Apply the editorial rules** in `references/style-guide.md` **and the visual
+   rules** in `references/visuals.md` — reuse graphics, logos and palettes that
+   already exist in the sources, and add 2–4 sober inline-SVG/CSS visuals
+   (stat cards, composition bar, bar chart, flow diagram, gantt, timeline) where
+   they make a comparison, composition, flow or schedule instant. Never leave a
+   long report as an undifferentiated wall of text.
+7. **Lay it out on A4 sheets** following `references/pagination.md`: split the
+   content into explicit `.sheet` pages (210 × 297 mm), give each a footer, and
+   inline `assets/paginate.js` for automatic page numbers (bottom-right) and
+   overflow flagging. Required whenever the report is meant to be printed or
+   exported to PDF — it prevents lonely tables and large empty gaps.
+8. **Fill the matching template** (`templates/`), inlining `assets/report.css`
+   into a `<style>` block so the output is a single portable file.
+9. **Tell the user how to get a PDF** and list every placeholder/gap you left.
 
-5. **Produce a self-contained HTML file.** Inline the contents of
-   `assets/report.css` into a `<style>` block in the `<head>` so the output is
-   a single portable file. Save it with a descriptive name
-   (e.g. `rapport-<sujet>.html`).
+## Procedure — simple formatting
 
-6. **Tell the user how to get a PDF:** open the HTML in a browser and use
-   `Ctrl/Cmd + P → Save as PDF`. The CSS already handles A4 page size, margins,
-   and clean page breaks via `@media print`.
+Identify the report type, map the text onto `references/structure-pro.md` or
+`references/structure-recherche.md`, apply `references/style-guide.md`, fill the
+matching template, produce a self-contained HTML file.
 
 ## Reference files
 
+- `references/consolidation.md` — how to ingest and reconcile multiple sources.
+- `references/audiences.md` — how to adapt a report per audience.
+- `references/visuals.md` — how to reuse and propose visuals (charts, diagrams,
+  timelines) so reports are readable, not monotone.
+- `references/pagination.md` — the A4 sheet model: print-perfect pages, footers
+  and page numbers (avoids lonely blocks and empty gaps).
 - `references/style-guide.md` — editorial rules for fast, clear reading.
-- `references/structure-recherche.md` — section plan for research reports.
+- `references/structure-recherche.md` — section plan for research/funding reports.
 - `references/structure-pro.md` — section plan for professional reports.
-- `assets/report.css` — the single stylesheet (screen + `@media print` A4).
-- `templates/professionnel.html`, `templates/recherche.html` — HTML skeletons.
-- `examples/` — rendered reference outputs.
+- `assets/report.css` — the single stylesheet (screen + `@media print` A4, sheet model).
+- `assets/paginate.js` — page numbering + overflow flagging for the sheet model.
+- `templates/` — HTML skeletons (`professionnel.html`, `recherche.html`,
+  `dossier-scientifique.html`).
+- `examples/` — rendered reference outputs, including a real consolidated
+  dossier (Génome Réunion).

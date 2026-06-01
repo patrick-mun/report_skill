@@ -5,130 +5,194 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Déploiement du télétravail — Bilan et recommandations</title>
   <style>
-    :root{--accent:#1f4e79;--accent-soft:#eaf0f6;--text:#1a1a1a;--muted:#555;--border:#d9d9d9;--callout-bg:#f4f7fb;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;--max-width:800px;}
+    :root{--accent:#1f4e79;--accent2:#3a7ca5;--accent-soft:#eaf0f6;--text:#1a1a1a;--muted:#555;--border:#d9d9d9;--callout-bg:#f4f7fb;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
     *{box-sizing:border-box;}
-    body{font-family:var(--font-body);color:var(--text);line-height:1.6;font-size:16px;margin:0;background:#f0f0f0;}
-    .page{max-width:var(--max-width);margin:24px auto;background:#fff;padding:48px 56px;box-shadow:0 1px 8px rgba(0,0,0,.12);}
+    body{font-family:var(--font-body);color:var(--text);line-height:1.55;font-size:15px;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body.paged{background:#e3e6ea;}
     h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.25;}
-    h1{font-size:2em;margin:0 0 .2em;}
-    h2{font-size:1.4em;margin:1.8em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
-    h3{font-size:1.15em;margin:1.4em 0 .4em;color:var(--text);}
-    .report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.5em;}
+    h1{font-size:1.9em;margin:0 0 .2em;}
+    h2{font-size:1.32em;margin:1.4em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
+    h2:first-child,h3:first-child{margin-top:0;}
+    h3{font-size:1.1em;margin:1.1em 0 .35em;color:var(--text);}
+    .report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.2em;}
     .report-meta .subtitle{font-size:1.1em;color:var(--text);font-style:italic;}
-    p{margin:0 0 1em;}strong{color:#000;}a{color:var(--accent);}
-    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:16px 20px;margin:1.5em 0;border-radius:0 4px 4px 0;}
+    p{margin:0 0 .9em;}strong{color:#000;}a{color:var(--accent);}
+    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1.2em 0;border-radius:0 4px 4px 0;}
     .summary h2{margin-top:0;border:none;}
-    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent);padding:12px 16px;margin:1.2em 0;border-radius:0 4px 4px 0;}
-    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;color:var(--accent);margin-bottom:.3em;}
-    ul,ol{margin:0 0 1em;padding-left:1.4em;}li{margin-bottom:.3em;}
-    table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.95em;}
-    th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
+    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
+    ul,ol{margin:0 0 .9em;padding-left:1.4em;}li{margin-bottom:.3em;}
+    table{border-collapse:collapse;width:100%;margin:.9em 0;font-size:.93em;}
+    th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;}
     thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f7f9fb;}
-    .caption{font-size:.88em;color:var(--muted);font-style:italic;margin-top:.4em;}
-    nav.toc{background:#fafafa;border:1px solid var(--border);padding:12px 20px;margin:1.5em 0;}
-    nav.toc h2{margin-top:0;font-size:1.1em;border:none;}nav.toc ol{padding-left:1.2em;}
-    .report-footer{margin-top:2.5em;padding-top:1em;border-top:1px solid var(--border);font-size:.85em;color:var(--muted);}
-    @page{size:A4;margin:2cm;}
-    @media print{body{background:#fff;font-size:11.5pt;}.page{max-width:none;margin:0;padding:0;box-shadow:none;}h1,h2,h3{page-break-after:avoid;break-after:avoid;}table,figure,aside.callout,.summary{page-break-inside:avoid;break-inside:avoid;}p{orphans:3;widows:3;}.no-print{display:none!important;}a{color:#000;text-decoration:none;}}
+    .caption{font-size:.85em;color:var(--muted);font-style:italic;margin-top:.4em;}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.2em 0;}
+    .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:13px 15px;text-align:center;}
+    .stat-card .num{font-family:var(--font-head);font-size:1.6em;font-weight:700;color:var(--accent);line-height:1.1;}
+    .stat-card .lbl{font-size:.8em;color:var(--muted);margin-top:4px;}
+    .hbar{margin:1em 0;}
+    .hbar .row{display:grid;grid-template-columns:95px 1fr auto;align-items:center;gap:10px;margin-bottom:8px;font-size:.87em;}
+    .hbar .track{background:#eef1f4;border-radius:4px;height:18px;overflow:hidden;}
+    .hbar .fill{height:100%;border-radius:4px;background:var(--accent2);}
+    .hbar .fill.cible{background:#b9cad9;}
+    .hbar .val{font-variant-numeric:tabular-nums;color:var(--muted);}
+    .legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:.4em 0 1em;font-size:.83em;color:var(--muted);}
+    .legend .item{display:flex;align-items:center;gap:6px;}
+    .legend .swatch{width:12px;height:12px;border-radius:3px;flex:none;}
+    .timeline{display:flex;gap:0;margin:1.1em 0;}
+    .timeline .ev{flex:1;position:relative;padding-top:20px;text-align:center;font-size:.83em;}
+    .timeline .ev::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--border);}
+    .timeline .ev::after{content:"";position:absolute;top:1px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--accent2);}
+    .timeline .ev .yr{font-weight:700;color:var(--accent);display:block;}
+    /* A4 sheet model */
+    .sheet{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12mm;padding:16mm 18mm 12mm;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.18);display:flex;flex-direction:column;position:relative;}
+    .sheet__body{flex:1 1 auto;}
+    .sheet__footer{flex:none;margin-top:10px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.76em;color:var(--muted);}
+    .sheet__footer .pageno{margin-left:auto;font-variant-numeric:tabular-nums;}
+    .sheet.is-overflowing{outline:2px dashed #d4351c;}
+    .sheet .overflow-flag{display:none;}
+    .sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+    @page sheet{size:A4;margin:0;}
+    @media print{
+      body.paged{background:#fff;}
+      .sheet{page:sheet;width:210mm;min-height:0;height:auto;margin:0;padding:16mm 18mm 12mm;box-shadow:none;page-break-after:always;break-after:page;}
+      .sheet:last-child{page-break-after:auto;break-after:auto;}
+      .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
+      h1,h2,h3{page-break-after:avoid;break-after:avoid;}
+      table,figure,aside.callout,.stat-grid,.hbar,.timeline{page-break-inside:avoid;break-inside:avoid;}
+      a{color:#000;text-decoration:none;}
+    }
   </style>
 </head>
-<body>
-  <article class="page">
+<body class="paged">
 
-    <header>
-      <h1>Déploiement du télétravail</h1>
-      <div class="report-meta">
-        <div class="subtitle">Bilan de la première année et recommandations</div>
-        <div>Direction des ressources humaines · Société Exemple</div>
-        <div>1ᵉʳ juin 2026 · Version 1.0</div>
+  <!-- ============ FEUILLE 1 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <header>
+        <h1>Déploiement du télétravail</h1>
+        <div class="report-meta">
+          <div class="subtitle">Bilan de la première année et recommandations</div>
+          <div>Direction des ressources humaines · Société Exemple</div>
+          <div>1ᵉʳ juin 2026 · Version 1.0</div>
+        </div>
+      </header>
+
+      <section class="summary">
+        <h2>Synthèse exécutive</h2>
+        <ul>
+          <li>Le télétravail a été adopté par <strong>68 %</strong> des collaborateurs éligibles sur les douze derniers mois.</li>
+          <li>La satisfaction est élevée (note moyenne de <strong>4,2/5</strong>), portée par l'équilibre vie professionnelle / vie personnelle.</li>
+          <li>Deux points de vigilance : la cohésion d'équipe et l'ergonomie des postes à domicile.</li>
+          <li><strong>Recommandation principale :</strong> pérenniser un modèle hybride de 2 à 3 jours et financer l'équipement à domicile.</li>
+        </ul>
+      </section>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">68 %</div><div class="lbl">taux d'adoption</div></div>
+        <div class="stat-card"><div class="num">4,2/5</div><div class="lbl">satisfaction moyenne</div></div>
+        <div class="stat-card"><div class="num">420</div><div class="lbl">collaborateurs concernés</div></div>
+        <div class="stat-card"><div class="num">2 j</div><div class="lbl">fréquence médiane / semaine</div></div>
       </div>
-    </header>
 
-    <section class="summary">
-      <h2>Synthèse exécutive</h2>
-      <ul>
-        <li>Le télétravail a été adopté par <strong>68 %</strong> des collaborateurs éligibles sur les douze derniers mois.</li>
-        <li>La satisfaction est élevée (note moyenne de <strong>4,2/5</strong>), portée par l'équilibre vie professionnelle / vie personnelle.</li>
-        <li>Deux points de vigilance ressortent : la cohésion d'équipe et l'ergonomie des postes à domicile.</li>
-        <li><strong>Recommandation principale :</strong> pérenniser un modèle hybride de 2 à 3 jours et financer l'équipement à domicile.</li>
-      </ul>
-    </section>
+      <section>
+        <h2>Contexte et objectifs</h2>
+        <p>À la suite de la généralisation du travail à distance, la direction des ressources humaines (RH) a engagé un dispositif de télétravail encadré. Ce rapport dresse le bilan de la première année et formule des recommandations pour pérenniser le dispositif.</p>
+        <p>Le périmètre couvre les <strong>420 collaborateurs</strong> des fonctions éligibles, sur la période de juin 2025 à mai 2026.</p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
+  </section>
 
-    <nav class="toc">
-      <h2>Sommaire</h2>
-      <ol>
-        <li>Contexte et objectifs</li>
-        <li>Analyse</li>
-        <li>Recommandations</li>
-        <li>Plan d'action</li>
-      </ol>
-    </nav>
+  <!-- ============ FEUILLE 2 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>Analyse</h2>
+        <h3>Adoption et usages</h3>
+        <p>Le taux d'adoption a progressé régulièrement pour atteindre 68 % des collaborateurs éligibles. La fréquence médiane observée est de deux jours de télétravail par semaine. Les indicateurs clés dépassent leurs cibles :</p>
 
-    <section>
-      <h2>Contexte et objectifs</h2>
-      <p>À la suite de la généralisation du travail à distance, la direction des ressources humaines (RH) a engagé un dispositif de télétravail encadré. Ce rapport dresse le bilan de la première année et formule des recommandations pour pérenniser le dispositif.</p>
-      <p>Le périmètre couvre les <strong>420 collaborateurs</strong> des fonctions éligibles, sur la période de juin 2025 à mai 2026.</p>
-    </section>
+        <div class="hbar">
+          <div class="row"><div>Adoption</div><div class="track"><div class="fill cible" style="width:60%"></div></div><div class="val">cible 60 %</div></div>
+          <div class="row"><div></div><div class="track"><div class="fill" style="width:68%"></div></div><div class="val">réalisé 68 %</div></div>
+          <div class="row"><div>Satisfaction</div><div class="track"><div class="fill cible" style="width:70%"></div></div><div class="val">cible 3,5/5</div></div>
+          <div class="row"><div></div><div class="track"><div class="fill" style="width:84%"></div></div><div class="val">réalisé 4,2/5</div></div>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="swatch" style="background:#b9cad9"></span>Cible</span>
+          <span class="item"><span class="swatch" style="background:#3a7ca5"></span>Réalisé</span>
+        </div>
+        <p class="caption">Figure 1 : Indicateurs clés — cible vs réalisé (mai 2026).</p>
 
-    <section>
-      <h2>Analyse</h2>
-      <h3>Adoption et usages</h3>
-      <p>Le taux d'adoption a progressé régulièrement pour atteindre 68 % des collaborateurs éligibles. La fréquence médiane observée est de deux jours de télétravail par semaine.</p>
+        <aside class="callout">
+          <span class="label">À retenir</span>
+          Les objectifs d'adoption et de satisfaction sont dépassés, mais la cohésion d'équipe demande un suivi rapproché.
+        </aside>
 
-      <table>
-        <thead>
-          <tr><th>Indicateur</th><th>Cible</th><th>Réalisé</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Taux d'adoption</td><td>60 %</td><td>68 %</td></tr>
-          <tr><td>Satisfaction (sur 5)</td><td>3,5</td><td>4,2</td></tr>
-          <tr><td>Incidents techniques / mois</td><td>&lt; 20</td><td>14</td></tr>
-        </tbody>
-      </table>
-      <p class="caption">Tableau 1 : Indicateurs clés du dispositif (mai 2026).</p>
+        <h3>Points de vigilance</h3>
+        <p>Deux risques émergent des entretiens : un sentiment d'isolement chez les nouveaux arrivants et des postes de travail à domicile insuffisamment ergonomiques pour 31 % des répondants.</p>
+      </section>
 
-      <aside class="callout">
-        <span class="label">À retenir</span>
-        Les objectifs d'adoption et de satisfaction sont dépassés, mais la cohésion d'équipe demande un suivi rapproché.
-      </aside>
+      <section>
+        <h2>Recommandations</h2>
+        <ol>
+          <li>Adopter un cadre hybride officiel de 2 à 3 jours de télétravail par semaine.</li>
+          <li>Allouer un budget d'équipement à domicile de 300 € par collaborateur.</li>
+          <li>Instaurer une journée de présence collective hebdomadaire par équipe pour préserver la cohésion.</li>
+        </ol>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
+  </section>
 
-      <h3>Points de vigilance</h3>
-      <p>Deux risques émergent des entretiens : un sentiment d'isolement chez les nouveaux arrivants et des postes de travail à domicile insuffisamment ergonomiques pour 31 % des répondants.</p>
-    </section>
+  <!-- ============ FEUILLE 3 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
+        <h2>Plan d'action</h2>
+        <table>
+          <thead>
+            <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Publier la charte de télétravail hybride</td><td>Direction RH</td><td>Sept. 2026</td></tr>
+            <tr><td>Lancer le programme d'équipement</td><td>Services généraux</td><td>Oct. 2026</td></tr>
+            <tr><td>Mettre en place les journées d'équipe</td><td>Managers</td><td>Sept. 2026</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Tableau 1 : Plan d'action et responsabilités.</p>
 
-    <section>
-      <h2>Recommandations</h2>
-      <ol>
-        <li>Adopter un cadre hybride officiel de 2 à 3 jours de télétravail par semaine.</li>
-        <li>Allouer un budget d'équipement à domicile de 300 € par collaborateur.</li>
-        <li>Instaurer une journée de présence collective hebdomadaire par équipe pour préserver la cohésion.</li>
-      </ol>
-    </section>
+        <div class="timeline">
+          <div class="ev"><span class="yr">Sept. 2026</span>Charte hybride + journées d'équipe</div>
+          <div class="ev"><span class="yr">Oct. 2026</span>Programme d'équipement</div>
+          <div class="ev"><span class="yr">Déc. 2026</span>Premier point de suivi</div>
+        </div>
+      </section>
 
-    <section>
-      <h2>Plan d'action</h2>
-      <table>
-        <thead>
-          <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Publier la charte de télétravail hybride</td><td>Direction RH</td><td>Sept. 2026</td></tr>
-          <tr><td>Lancer le programme d'équipement</td><td>Services généraux</td><td>Oct. 2026</td></tr>
-          <tr><td>Mettre en place les journées d'équipe</td><td>Managers</td><td>Sept. 2026</td></tr>
-        </tbody>
-      </table>
-      <p class="caption">Tableau 2 : Plan d'action et responsabilités.</p>
-    </section>
+      <section>
+        <h2>Conclusion</h2>
+        <p>La première année confirme la pertinence du télétravail encadré. La pérennisation passe par un cadre hybride clair et un investissement ciblé dans l'équipement et la cohésion des équipes.</p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Déploiement du télétravail · Contact : rh@exemple.fr</span></footer>
+  </section>
 
-    <section>
-      <h2>Conclusion</h2>
-      <p>La première année confirme la pertinence du télétravail encadré. La pérennisation passe par un cadre hybride clair et un investissement ciblé dans l'équipement et la cohésion des équipes.</p>
-    </section>
-
-    <footer class="report-footer">
-      Document interne · Diffusion restreinte · Contact : rh@exemple.fr
-    </footer>
-
-  </article>
+  <script>
+  (function(){"use strict";
+    function paginate(){
+      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var total=sheets.length;
+      sheets.forEach(function(sheet,i){
+        var footer=sheet.querySelector(".sheet__footer");
+        if(footer){var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}no.textContent="Page "+(i+1)+" / "+total;}
+        var flag=sheet.querySelector(".overflow-flag");
+        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
+        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",paginate);}else{paginate();}
+    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+  })();
+  </script>
 </body>
 </html>
