@@ -7,98 +7,87 @@
   <style>
     :root{--accent:#0F3A56;--accent2:#1E6E8C;--accent-soft:#e6eef3;--text:#1a1a1a;--muted:#555;--border:#d6dde3;--callout-bg:#eef4f8;--font-body:"Segoe UI","Helvetica Neue",Arial,system-ui,sans-serif;--font-head:Georgia,"Times New Roman",serif;}
     *{box-sizing:border-box;}
-    body{font-family:var(--font-body);color:var(--text);line-height:1.6;font-size:16px;margin:0;background:#f0f0f0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.25;}
-    h1{font-size:1.8em;margin:0 0 .2em;}
-    h2{font-size:1.32em;margin:1.8em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;scroll-margin-top:12px;}
-    h3{font-size:1.08em;margin:1.3em 0 .35em;color:var(--text);}
-    .report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.2em;}
-    .report-meta .subtitle{font-size:1.1em;color:var(--text);font-style:italic;}
-    p{margin:0 0 1em;}strong{color:#000;}a{color:var(--accent2);}
+    body{font-family:var(--font-body);color:var(--text);line-height:1.5;font-size:14.5px;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    body.paged{background:#e3e6ea;}
+    h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.22;}
+    h1{font-size:1.6em;margin:0 0 .2em;}
+    h2{font-size:1.22em;margin:1.3em 0 .45em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
+    h2:first-child,h3:first-child{margin-top:0;}
+    h3{font-size:1.02em;margin:1em 0 .3em;color:var(--text);}
+    .report-meta{color:var(--muted);font-size:.92em;margin-bottom:1em;}
+    .report-meta .subtitle{font-size:1.08em;color:var(--text);font-style:italic;}
+    p{margin:0 0 .8em;}strong{color:#000;}a{color:var(--accent2);}
     code{background:#eef2f5;padding:1px 5px;border-radius:3px;font-size:.92em;}
-    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:16px 20px;margin:1.2em 0;border-radius:0 4px 4px 0;}
+    .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1em 0;border-radius:0 4px 4px 0;}
     .summary h2{margin-top:0;border:none;}
-    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:12px 16px;margin:1.2em 0;border-radius:0 4px 4px 0;}
-    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.78em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
+    aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
+    aside.callout .label{display:block;font-weight:700;text-transform:uppercase;font-size:.76em;letter-spacing:.04em;color:var(--accent2);margin-bottom:.3em;}
     .todo{background:#fff7e6;border:1px dashed #d4a000;color:#8a6d00;padding:1px 6px;border-radius:3px;font-size:.9em;font-style:italic;}
-    ul,ol{margin:0 0 1em;padding-left:1.4em;}li{margin-bottom:.3em;}
-    table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.92em;}
-    th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+    ul,ol{margin:0 0 .8em;padding-left:1.4em;}li{margin-bottom:.25em;}
+    table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.9em;}
+    th,td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top;}
     thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f4f8fa;}
-    .caption{font-size:.85em;color:var(--muted);font-style:italic;margin-top:.4em;}
+    .caption{font-size:.83em;color:var(--muted);font-style:italic;margin-top:.35em;}
     .source{font-size:.8em;color:var(--muted);}
-    .references ol{padding-left:1.4em;}.references li{margin-bottom:.5em;font-size:.92em;}
-    .report-footer{margin-top:2.5em;padding-top:1em;border-top:1px solid var(--border);font-size:.85em;color:var(--muted);}
-    /* layout */
-    .dossier{max-width:1120px;margin:24px auto;display:grid;grid-template-columns:240px 1fr;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.12);}
-    .dossier>.page{padding:40px 50px;}
-    .brand{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:14px;}
-    .brand svg{height:54px;width:auto;}
-    nav.toc-side{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:30px 16px;background:#fafafa;border-right:1px solid var(--border);font-size:.85em;}
-    nav.toc-side h2{font-size:1em;border:none;margin:0 0 .6em;color:var(--accent);}
-    nav.toc-side ol{list-style:none;padding-left:0;margin:0;}
-    nav.toc-side a{color:var(--muted);text-decoration:none;display:block;padding:2px 0;}
-    nav.toc-side a:hover{color:var(--accent2);}
     /* visual components */
-    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.4em 0;}
-    .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:13px 14px;text-align:center;}
-    .stat-card .num{font-family:var(--font-head);font-size:1.6em;font-weight:700;color:var(--accent);line-height:1.1;}
-    .stat-card .lbl{font-size:.8em;color:var(--muted);margin-top:4px;}
-    .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:1.4em 0;}
-    .flow-step{flex:1 1 0;min-width:115px;background:#fff;border:1.5px solid var(--accent2);border-radius:6px;padding:9px 11px;font-size:.83em;text-align:center;display:flex;align-items:center;justify-content:center;position:relative;}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;margin:1.1em 0;}
+    .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:11px 12px;text-align:center;}
+    .stat-card .num{font-family:var(--font-head);font-size:1.45em;font-weight:700;color:var(--accent);line-height:1.1;}
+    .stat-card .lbl{font-size:.78em;color:var(--muted);margin-top:3px;}
+    .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:1.1em 0;}
+    .flow-step{flex:1 1 0;min-width:105px;background:#fff;border:1.5px solid var(--accent2);border-radius:6px;padding:8px 10px;font-size:.8em;text-align:center;display:flex;align-items:center;justify-content:center;position:relative;}
     .flow-step.alt{background:var(--accent-soft);}
-    .flow-step:not(:last-child){margin-right:20px;}
-    .flow-step:not(:last-child)::after{content:"\203A";position:absolute;right:-16px;top:50%;transform:translateY(-50%);font-size:1.5em;color:var(--accent2);}
-    .compo-bar{display:flex;height:30px;border-radius:5px;overflow:hidden;margin:1em 0 .6em;border:1px solid var(--border);}
+    .flow-step:not(:last-child){margin-right:18px;}
+    .flow-step:not(:last-child)::after{content:"\203A";position:absolute;right:-15px;top:50%;transform:translateY(-50%);font-size:1.4em;color:var(--accent2);}
+    .compo-bar{display:flex;height:28px;border-radius:5px;overflow:hidden;margin:.9em 0 .5em;border:1px solid var(--border);}
     .compo-bar span{display:block;height:100%;}
-    .legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:.4em 0 1em;font-size:.84em;color:var(--muted);}
+    .legend{display:flex;flex-wrap:wrap;gap:5px 16px;margin:.4em 0 .9em;font-size:.82em;color:var(--muted);}
     .legend .item{display:flex;align-items:center;gap:6px;}
-    .legend .swatch{width:12px;height:12px;border-radius:3px;flex:none;}
-    .hbar{margin:1em 0;}
-    .hbar .row{display:grid;grid-template-columns:200px 1fr auto;align-items:center;gap:10px;margin-bottom:7px;font-size:.86em;}
-    .hbar .track{background:#eef1f4;border-radius:4px;height:18px;overflow:hidden;}
+    .legend .swatch{width:11px;height:11px;border-radius:3px;flex:none;}
+    .hbar{margin:.9em 0;}
+    .hbar .row{display:grid;grid-template-columns:190px 1fr auto;align-items:center;gap:10px;margin-bottom:6px;font-size:.85em;}
+    .hbar .track{background:#eef1f4;border-radius:4px;height:17px;overflow:hidden;}
     .hbar .fill{height:100%;border-radius:4px;background:var(--accent2);}
     .hbar .val{font-variant-numeric:tabular-nums;color:var(--muted);}
-    .gantt{margin:1.2em 0;font-size:.82em;}
-    .gantt .row{display:grid;grid-template-columns:160px 1fr;align-items:center;gap:10px;margin-bottom:6px;}
-    .gantt .lane{position:relative;height:19px;background:#eef1f4;border-radius:4px;}
+    .gantt{margin:1em 0;font-size:.8em;}
+    .gantt .row{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:10px;margin-bottom:5px;}
+    .gantt .lane{position:relative;height:18px;background:#eef1f4;border-radius:4px;}
     .gantt .bar{position:absolute;height:100%;border-radius:4px;background:var(--accent);}
     .gantt .bar.free{background:#0D9488;}.gantt .bar.ia{background:#7C3AED;}
-    .gantt .scale{display:grid;grid-template-columns:160px 1fr;gap:10px;color:var(--muted);margin-top:2px;font-size:.92em;}
+    .gantt .scale{display:grid;grid-template-columns:150px 1fr;gap:10px;color:var(--muted);margin-top:2px;font-size:.92em;}
     .gantt .ticks{display:flex;justify-content:space-between;}
-    .timeline{display:flex;gap:0;margin:1.2em 0;}
-    .timeline .ev{flex:1;position:relative;padding-top:20px;text-align:center;font-size:.83em;}
+    .timeline{display:flex;gap:0;margin:1em 0;}
+    .timeline .ev{flex:1;position:relative;padding-top:19px;text-align:center;font-size:.82em;}
     .timeline .ev::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:var(--border);}
     .timeline .ev::after{content:"";position:absolute;top:1px;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--accent2);}
     .timeline .ev .yr{font-weight:700;color:var(--accent);display:block;}
-    @media (max-width:860px){.dossier{grid-template-columns:1fr;}nav.toc-side{display:none;}.dossier>.page{padding:26px 20px;}.hbar .row,.gantt .row{grid-template-columns:120px 1fr;}.hbar .val{display:none;}}
-    @page{size:A4;margin:1.8cm;}
-    @media print{body{background:#fff;font-size:10.5pt;}.dossier{display:block;max-width:none;margin:0;box-shadow:none;}.dossier>.page{padding:0;}nav.toc-side{display:none!important;}h1,h2,h3{page-break-after:avoid;break-after:avoid;}table,figure,aside.callout,.summary,.stat-grid,.flow,.gantt,.hbar,.compo-bar,.timeline{break-inside:avoid;page-break-inside:avoid;}p{orphans:3;widows:3;}a{color:#000;text-decoration:none;}.todo{border:none;}}
+    /* A4 sheet model */
+    .sheet{width:210mm;min-height:297mm;box-sizing:border-box;margin:0 auto 12mm;padding:15mm 17mm 11mm;background:#fff;box-shadow:0 1px 8px rgba(0,0,0,.18);display:flex;flex-direction:column;position:relative;}
+    .sheet__body{flex:1 1 auto;}
+    .sheet__footer{flex:none;margin-top:10px;padding-top:6px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.74em;color:var(--muted);}
+    .sheet__footer .pageno{margin-left:auto;font-variant-numeric:tabular-nums;}
+    .sheet.is-overflowing{outline:2px dashed #d4351c;}
+    .sheet .overflow-flag{display:none;}
+    .sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+    .brand{display:flex;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:12px;}
+    .brand svg{height:50px;width:auto;}
+    @page sheet{size:A4;margin:0;}
+    @media print{
+      body.paged{background:#fff;}
+      .sheet{page:sheet;width:210mm;min-height:0;height:auto;margin:0;padding:15mm 17mm 11mm;box-shadow:none;page-break-after:always;break-after:page;}
+      .sheet:last-child{page-break-after:auto;break-after:auto;}
+      .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
+      h1,h2,h3{page-break-after:avoid;break-after:avoid;}
+      table,figure,aside.callout,.summary,.stat-grid,.flow,.gantt,.hbar,.compo-bar,.timeline{page-break-inside:avoid;break-inside:avoid;}
+      a{color:#000;text-decoration:none;}.todo{border:none;}
+    }
   </style>
 </head>
-<body>
-  <div class="dossier">
-    <nav class="toc-side">
-      <h2>Sommaire</h2>
-      <ol>
-        <li><a href="#s1">1. Résumé exécutif</a></li>
-        <li><a href="#s2">2. L'angle mort de la médecine de précision</a></li>
-        <li><a href="#s3">3. Singularité génétique de La Réunion</a></li>
-        <li><a href="#s4">4. Objectifs du projet</a></li>
-        <li><a href="#s5">5. Design général</a></li>
-        <li><a href="#s6">6. Méthodologie</a></li>
-        <li><a href="#s7">7. Algorithme de sélection WGS</a></li>
-        <li><a href="#s8">8. Ressources produites</a></li>
-        <li><a href="#s9">9. Organisation opérationnelle</a></li>
-        <li><a href="#s10">10. Budget et ressources</a></li>
-        <li><a href="#s11">11. Impacts attendus</a></li>
-        <li><a href="#s12">12. Risques et limites</a></li>
-        <li><a href="#s13">13. Conclusion</a></li>
-        <li><a href="#annexes">Annexes</a></li>
-      </ol>
-    </nav>
+<body class="paged">
 
-    <article class="page">
+  <!-- ============ FEUILLE 1 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
       <header>
         <div class="brand">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 410 64" fill="none" role="img" aria-label="Génome Réunion">
@@ -122,7 +111,6 @@
         </div>
       </header>
 
-      <!-- Chiffres clés -->
       <div class="stat-grid">
         <div class="stat-card"><div class="num">2 500</div><div class="lbl">individus génotypés SNP</div></div>
         <div class="stat-card"><div class="num">100</div><div class="lbl">familles nucléaires (phasage)</div></div>
@@ -130,8 +118,7 @@
         <div class="stat-card"><div class="num">0 €</div><div class="lbl">séquençage WGS (POPgen)</div></div>
       </div>
 
-      <!-- ============ 1. RÉSUMÉ ============ -->
-      <section id="s1" class="summary">
+      <section class="summary">
         <h2>1. Résumé exécutif</h2>
         <ul>
           <li><strong>Constat —</strong> les bases internationales (gnomAD, 1000 Genomes) sous-représentent fortement les populations non européennes, dégradant l'interprétation des variants, l'imputation et la pharmacogénétique.</li>
@@ -141,16 +128,20 @@
         </ul>
       </section>
 
-      <!-- ============ 2. ANGLE MORT ============ -->
-      <section id="s2">
+      <section>
         <h2>2. L'angle mort de la médecine de précision</h2>
         <p><strong>Sous-représentation —</strong> gnomAD et 1000 Genomes sont massivement d'ascendance européenne ; fréquences, panels d'imputation et modèles de pathogénicité sont donc mal calibrés pour les populations admixées.</p>
-        <p><strong>Conséquences —</strong> variants fréquents localement classés à tort comme rares (hausse des variants de signification incertaine), et pharmacogénétique inadaptée car les allèles PGx varient selon l'ascendance.</p>
+        <p><strong>Conséquences —</strong> des variants fréquents localement sont classés à tort comme rares (hausse des variants de signification incertaine), et la pharmacogénétique est inadaptée car les allèles PGx varient selon l'ascendance.</p>
         <aside class="callout"><span class="label">À retenir</span>Sans données locales, la médecine de précision reste moins précise pour les populations sous-représentées — et les modèles d'IA, entraînés sur des données européennes, risquent d'amplifier ce biais.</aside>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
 
-      <!-- ============ 3. SINGULARITÉ ============ -->
-      <section id="s3">
+  <!-- ============ FEUILLE 2 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
         <h2>3. Singularité génétique de La Réunion</h2>
         <h3>3.1. Histoire migratoire et métissage</h3>
         <p>Peuplée à partir du XVII<sup>e</sup> siècle sur un territoire sans population autochtone, l'île s'est construite par vagues successives, produisant un métissage profond entre composantes africaine, malgache, indienne, européenne et asiatique.</p>
@@ -180,8 +171,7 @@
         <p>L'insularité et certaines dynamiques locales (Hauts) ont favorisé des <strong>effets fondateurs</strong> détectables via IBD/ROH. La Réunion combine ainsi <strong>diversité globale</strong> et <strong>structuration locale</strong> — d'où une stratégie d'échantillonnage dédiée plutôt qu'un tirage aléatoire.</p>
       </section>
 
-      <!-- ============ 4. OBJECTIFS ============ -->
-      <section id="s4">
+      <section>
         <h2>4. Objectifs du projet</h2>
         <p><strong>Principal —</strong> produire un référentiel réunionnais de première génération, reproductible et auditable, améliorant l'interprétation des variants et l'imputation.</p>
         <ul>
@@ -190,9 +180,14 @@
           <li><strong>Territoriaux —</strong> infrastructure et expertise génomiques locales. <span class="todo">[À compléter : partenaires et formation]</span></li>
         </ul>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
 
-      <!-- ============ 5. DESIGN ============ -->
-      <section id="s5">
+  <!-- ============ FEUILLE 3 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
         <h2>5. Design général du projet</h2>
         <p>Trois couches complémentaires articulées en un pipeline unique, du génotypage au référentiel :</p>
         <div class="flow">
@@ -207,8 +202,7 @@
         <p>Le panel de 350 WGS est un référentiel de <strong>première génération</strong>, complémentaire des ressources internationales — les variants ultra-rares relèveront de phases ultérieures.</p>
       </section>
 
-      <!-- ============ 6. MÉTHODOLOGIE ============ -->
-      <section id="s6">
+      <section>
         <h2>6. Méthodologie synthétique</h2>
         <p>Après QC, les marqueurs (≈ 1,9 M SNP bruts) sont employés différemment selon l'analyse :</p>
         <table>
@@ -222,16 +216,21 @@
         <p class="caption">Tableau 1 : Usage différencié des marqueurs SNP. <span class="source">Source : méthodologie V3.5.</span></p>
         <p>Analyses de structure (PCA, ADMIXTURE) projetées sur des pools témoins (1000 Genomes/IGSR ; EGA pour Madagascar, l'Asie et l'Afrique de l'océan Indien), puis IBD/ROH, sélection WGS par <code>S_div</code>, séquençage POPgen, construction de la base de variants et recalibrage des fréquences sur les 2 500.</p>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
 
-      <!-- ============ 7. ALGORITHME ============ -->
-      <section id="s7">
+  <!-- ============ FEUILLE 4 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
         <h2>7. Algorithme de sélection WGS</h2>
         <p>Le panel n'est <strong>pas un tirage aléatoire</strong> : il combine un <strong>noyau géo-ancestral</strong> (ancrage territorial + diversité interne à chaque secteur) et un <strong>bras de découverte contrôlé</strong> (profils sous-capturés). Le score <code>S_div</code> agrège quatre composantes :</p>
         <div class="stat-grid">
-          <div class="stat-card"><div class="num" style="font-size:1.15em">Position</div><div class="lbl">PCA projetée — place dans l'espace d'ascendance</div></div>
-          <div class="stat-card"><div class="num" style="font-size:1.15em">Composition</div><div class="lbl">ADMIXTURE — profil d'ascendance inférée</div></div>
-          <div class="stat-card"><div class="num" style="font-size:1.15em">Parenté</div><div class="lbl">IBD — contrôle de la redondance</div></div>
-          <div class="stat-card"><div class="num" style="font-size:1.15em">Fondateur</div><div class="lbl">ROH — signatures fondatrices</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Position</div><div class="lbl">PCA projetée — place dans l'espace d'ascendance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Composition</div><div class="lbl">ADMIXTURE — profil d'ascendance inférée</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Parenté</div><div class="lbl">IBD — contrôle de la redondance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Fondateur</div><div class="lbl">ROH — signatures fondatrices</div></div>
         </div>
         <p class="caption">Figure 3 : Composantes du score <code>S_div</code>. <span class="source">Méthodologie V3.5, partie III ; formulation exacte en annexe 3.</span></p>
         <p>Stratification croisant <strong>8 secteurs géographiques fixes</strong> et clusters d'ascendance, contrôle de parenté, puis <strong>sélection greedy stratifiée</strong> du noyau et intégration du bras de découverte. <span class="todo">[À compléter : répartition noyau/découverte et pondérations finales]</span></p>
@@ -239,17 +238,21 @@
         <p>Validation <strong>in silico</strong> sur profils synthétiques (A témoin, C mélange réaliste, D effets fondateurs), critère primaire = <strong>imputation R² par classe de MAF</strong>, puis triangulation sur données externes <strong>1000 Genomes</strong> et <strong>EPIGEN-Brasil</strong>. <span class="source">Source : docs de validation (4 profils / voilure réduite).</span></p>
       </section>
 
-      <!-- ============ 8. RESSOURCES ============ -->
-      <section id="s8">
+      <section>
         <h2>8. Ressources produites</h2>
         <ul>
           <li><strong>Base de fréquences locales</strong> (recalibrées sur 2 500) · <strong>Panel WGS</strong> (350 génomes) · <strong>Panel d'imputation/phasage</strong>.</li>
           <li><strong>Données d'admixture</strong> (ascendance globale et locale) · <strong>Effets fondateurs</strong> (IBD/ROH) · <strong>Ressources pharmacogénétiques</strong>.</li>
         </ul>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
 
-      <!-- ============ 9. ORGANISATION ============ -->
-      <section id="s9">
+  <!-- ============ FEUILLE 5 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
         <h2>9. Organisation opérationnelle</h2>
         <p>Plateforme entièrement en stack Python : génotypage iScan/GDA-8 ; PLINK2, KING, SHAPEIT ; pipelines Nextflow/Snakemake ; base PostgreSQL + MongoDB ; portail/API Django ; modules IA PyTorch + TensorFlow. Le projet se déploie sur 36 mois en sept phases qui se chevauchent :</p>
         <div class="gantt">
@@ -271,8 +274,7 @@
         <p><span class="todo">[À compléter : gouvernance, partenaires, RGPD/HDS, hébergement — annexe 6]</span></p>
       </section>
 
-      <!-- ============ 10. BUDGET ============ -->
-      <section id="s10">
+      <section>
         <h2>10. Budget et ressources</h2>
         <p>Projet sur 36 mois, WGS gratuit (POPgen). Postes principaux et scénarios (en k€) :</p>
         <div class="hbar">
@@ -284,14 +286,19 @@
         </div>
         <p class="caption">Figure 5 : Postes budgétaires par scénario (échelle relative au poste le plus élevé). <span class="source">Source : dossier de faisabilité ; montants à confirmer par devis.</span></p>
         <div class="stat-grid">
-          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">total optimal (Sc. 1 + Prop. 2)</div></div>
+          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff;font-size:1.3em">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">total optimal (Sc. 1 + Prop. 2)</div></div>
           <div class="stat-card"><div class="num">36</div><div class="lbl">mois</div></div>
           <div class="stat-card"><div class="num">−23 %</div><div class="lbl">RH vs scénario de base</div></div>
         </div>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
 
-      <!-- ============ 11. IMPACTS ============ -->
-      <section id="s11">
+  <!-- ============ FEUILLE 6 ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section>
         <h2>11. Impacts attendus</h2>
         <ul>
           <li><strong>Clinique / diagnostique —</strong> meilleure interprétation des variants, moins de variants de signification incertaine.</li>
@@ -301,8 +308,7 @@
         </ul>
       </section>
 
-      <!-- ============ 12. RISQUES ============ -->
-      <section id="s12">
+      <section>
         <h2>12. Risques et limites</h2>
         <table>
           <thead><tr><th>Risque</th><th>Mitigation</th></tr></thead>
@@ -317,23 +323,36 @@
         <p class="caption">Tableau 2 : Risques et mitigations.</p>
       </section>
 
-      <!-- ============ 13. CONCLUSION ============ -->
-      <section id="s13">
+      <section>
         <h2>13. Conclusion</h2>
         <p><strong>Besoin —</strong> combler l'angle mort des bases génomiques pour une population admixée et structurée localement. <strong>Apport —</strong> un référentiel réunionnais reproductible et auditable. <strong>Conditions —</strong> validation empirique avant gel de la sélection, conformité réglementaire, WGS gratuit. <strong>Perspectives —</strong> extensions (variants ultra-rares) et modules d'IA biomédicale.</p>
       </section>
 
-      <!-- ============ ANNEXES ============ -->
-      <section id="annexes">
+      <section>
         <h2>Annexes</h2>
         <p><strong>A1. Bibliographie —</strong> <span class="todo">[À importer depuis le document Word du projet]</span></p>
-        <p><strong>A2. Historique migratoire détaillé</strong> · <strong>A3. Méthodologie statistique</strong> (formulation complète de <code>S_div</code>, sensibilité LOCO) · <strong>A4. Budget détaillé</strong> · <strong>A5. Plan de validation</strong> (profils A/C/D, seed 25→100) · <strong>A6. Gouvernance, RGPD et HDS</strong>. <span class="todo">[Annexes A2–A4, A6 à importer depuis les sources complètes]</span></p>
+        <p><strong>A2.</strong> Historique migratoire détaillé · <strong>A3.</strong> Méthodologie statistique (formulation complète de <code>S_div</code>, sensibilité LOCO) · <strong>A4.</strong> Budget détaillé · <strong>A5.</strong> Plan de validation (profils A/C/D, seed 25→100) · <strong>A6.</strong> Gouvernance, RGPD et HDS. <span class="todo">[Annexes A2–A4, A6 à importer depuis les sources complètes]</span></p>
       </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Consolidé : présentation + méthodologie V3.5 + dossier de faisabilité</span></footer>
+  </section>
 
-      <footer class="report-footer">
-        Document de travail scientifique — non destiné à une diffusion grand public. Consolidé à partir de trois sources (présentation, méthodologie V3.5, dossier de faisabilité). Les visuels reprennent les données et la palette du projet ; les zones <span class="todo">[À compléter]</span> signalent les informations absentes des pièces fournies.
-      </footer>
-    </article>
-  </div>
+  <script>
+  (function(){"use strict";
+    function paginate(){
+      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var total=sheets.length;
+      sheets.forEach(function(sheet,i){
+        var footer=sheet.querySelector(".sheet__footer");
+        if(footer){var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}no.textContent="Page "+(i+1)+" / "+total;}
+        var flag=sheet.querySelector(".overflow-flag");
+        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
+        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",paginate);}else{paginate();}
+    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+  })();
+  </script>
 </body>
 </html>

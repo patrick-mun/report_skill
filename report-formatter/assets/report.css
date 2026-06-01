@@ -180,6 +180,69 @@ nav.toc-side a:hover { color: var(--accent); }
 }
 
 /* ===================================================================
+   A4 SHEET MODEL (paged layout) — see references/pagination.md
+   The document is split into explicit .sheet elements of exactly
+   210x297mm. On screen they look like stacked sheets of paper (the grey
+   gap marks the boundary to the next page); in print each .sheet is one
+   physical A4 page. Each sheet carries a footer with a page number.
+   Use this INSTEAD of the .page wrapper when print fidelity matters.
+   =================================================================== */
+
+body.paged { background: #e3e6ea; }
+
+.sheet {
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  margin: 0 auto 12mm;          /* the bottom gap marks the next page */
+  padding: 16mm 18mm 12mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.sheet__body { flex: 1 1 auto; }
+.sheet__footer {
+  flex: none;
+  margin-top: 10px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.78em;
+  color: var(--muted);
+}
+.sheet__footer .pageno { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+/* Screen-only overflow warning: flagged by paginate.js when content
+   exceeds one A4 sheet, so the author knows to split the page. */
+.sheet.is-overflowing { outline: 2px dashed #d4351c; }
+.sheet .overflow-flag { display: none; }
+.sheet.is-overflowing .overflow-flag {
+  display: block; position: absolute; top: 4mm; right: 4mm;
+  background: #d4351c; color: #fff; font-size: 0.7em; padding: 2px 7px;
+  border-radius: 3px; font-family: var(--font-body);
+}
+
+@page sheet { size: A4; margin: 0; }   /* sheet supplies its own margins via padding */
+
+@media print {
+  body.paged { background: #fff; }
+  .sheet {
+    page: sheet;
+    width: 210mm; min-height: 0; height: auto;
+    margin: 0; padding: 16mm 18mm 12mm; box-shadow: none;
+    page-break-after: always; break-after: page;
+  }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+  .sheet.is-overflowing { outline: none; }
+  .sheet .overflow-flag { display: none !important; }
+}
+
+/* ===================================================================
    PRINT — A4, clean margins, sensible page breaks
    =================================================================== */
 @page {

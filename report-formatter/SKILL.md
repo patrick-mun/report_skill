@@ -69,9 +69,14 @@ The user chooses, or you ask:
    (stat cards, composition bar, bar chart, flow diagram, gantt, timeline) where
    they make a comparison, composition, flow or schedule instant. Never leave a
    long report as an undifferentiated wall of text.
-7. **Fill the matching template** (`templates/`), inlining `assets/report.css`
+7. **Lay it out on A4 sheets** following `references/pagination.md`: split the
+   content into explicit `.sheet` pages (210 × 297 mm), give each a footer, and
+   inline `assets/paginate.js` for automatic page numbers (bottom-right) and
+   overflow flagging. Required whenever the report is meant to be printed or
+   exported to PDF — it prevents lonely tables and large empty gaps.
+8. **Fill the matching template** (`templates/`), inlining `assets/report.css`
    into a `<style>` block so the output is a single portable file.
-8. **Tell the user how to get a PDF** and list every placeholder/gap you left.
+9. **Tell the user how to get a PDF** and list every placeholder/gap you left.
 
 ## Procedure — simple formatting
 
@@ -85,10 +90,13 @@ matching template, produce a self-contained HTML file.
 - `references/audiences.md` — how to adapt a report per audience.
 - `references/visuals.md` — how to reuse and propose visuals (charts, diagrams,
   timelines) so reports are readable, not monotone.
+- `references/pagination.md` — the A4 sheet model: print-perfect pages, footers
+  and page numbers (avoids lonely blocks and empty gaps).
 - `references/style-guide.md` — editorial rules for fast, clear reading.
 - `references/structure-recherche.md` — section plan for research/funding reports.
 - `references/structure-pro.md` — section plan for professional reports.
-- `assets/report.css` — the single stylesheet (screen + `@media print` A4).
+- `assets/report.css` — the single stylesheet (screen + `@media print` A4, sheet model).
+- `assets/paginate.js` — page numbering + overflow flagging for the sheet model.
 - `templates/` — HTML skeletons (`professionnel.html`, `recherche.html`,
   `dossier-scientifique.html`).
 - `examples/` — rendered reference outputs, including a real consolidated
