@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Génome Réunion — Document complémentaire (version scientifique)</title>
+  <style>
+/* report.css — single stylesheet for professional reports. Screen styles for reading + @media print rules for clean A4 PDF output. When producing a final document, inline this file into a <style> block. */ :root { --accent: #1f4e79; /* sober professional blue */ --accent-soft: #eaf0f6; --text: #1a1a1a; --muted: #555; --border: #d9d9d9; --callout-bg: #f4f7fb; --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif; --font-head: Georgia, "Times New Roman", serif; --max-width: 800px; } * { box-sizing: border-box; } body { font-family: var(--font-body); color: var(--text); line-height: 1.6; font-size: 16px; margin: 0; background: #f0f0f0; } /* The page wrapper mimics an A4 sheet on screen */ .page { max-width: var(--max-width); margin: 24px auto; background: #fff; padding: 48px 56px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12); } /* ---------- Headings ---------- */ h1, h2, h3 { font-family: var(--font-head); color: var(--accent); line-height: 1.25; } h1 { font-size: 2em; margin: 0 0 0.2em; } h2 { font-size: 1.4em; margin: 1.8em 0 0.5em; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.2em; } h3 { font-size: 1.15em; margin: 1.4em 0 0.4em; color: var(--text); } /* ---------- Document meta (title block) ---------- */ .report-meta { color: var(--muted); font-size: 0.95em; margin-bottom: 1.5em; } .report-meta .subtitle { font-size: 1.1em; color: var(--text); font-style: italic; } /* ---------- Paragraphs & text ---------- */ p { margin: 0 0 1em; } strong { color: #000; } a { color: var(--accent); } /* ---------- Executive summary ---------- */ .summary { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 1.5em 0; border-radius: 0 4px 4px 0; } .summary h2 { margin-top: 0; border: none; } /* ---------- Callouts ("Key Takeaway", "Key point") ---------- */ aside.callout { background: var(--callout-bg); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 1.2em 0; border-radius: 0 4px 4px 0; } aside.callout .label { display: block; font-weight: 700; text-transform: uppercase; font-size: 0.78em; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 0.3em; } /* ---------- Lists ---------- */ ul, ol { margin: 0 0 1em; padding-left: 1.4em; } li { margin-bottom: 0.3em; } /* ---------- Tables ---------- */ table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; } th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; } thead th { background: var(--accent); color: #fff; } tbody tr:nth-child(even) { background: #f7f9fb; } /* ---------- Figures & captions ---------- */ figure { margin: 1.2em 0; text-align: center; } figure img { max-width: 100%; height: auto; } figcaption, .caption { font-size: 0.88em; color: var(--muted); font-style: italic; margin-top: 0.4em; } /* ---------- Table of contents (inline) ---------- */ nav.toc { background: #fafafa; border: 1px solid var(--border); padding: 12px 20px; margin: 1.5em 0; } nav.toc h2 { margin-top: 0; font-size: 1.1em; border: none; } nav.toc ol { padding-left: 1.2em; } /* ---------- Side table of contents (long dossiers, screen only) ---------- */ .dossier { max-width: 1100px; margin: 24px auto; display: grid; grid-template-columns: 230px 1fr; gap: 0; background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.12); } .dossier > .page { max-width: none; margin: 0; box-shadow: none; } nav.toc-side { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 32px 20px; background: #fafafa; border-right: 1px solid var(--border); font-size: 0.88em; } nav.toc-side h2 { font-size: 1em; border: none; margin: 0 0 0.6em; } nav.toc-side ol { list-style: none; padding-left: 0; margin: 0; } nav.toc-side ol ol { padding-left: 0.9em; } nav.toc-side a { color: var(--muted); text-decoration: none; display: block; padding: 2px 0; } nav.toc-side a:hover { color: var(--accent); } @media (max-width: 820px) { .dossier { grid-template-columns: 1fr; } nav.toc-side { display: none; } } /* ---------- References ---------- */ .references ol { padding-left: 1.4em; } .references li { margin-bottom: 0.5em; font-size: 0.93em; } /* ---------- Footer ---------- */ .report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); } /* =================================================================== VISUAL COMPONENTS (see references/visuals.md) Inline SVG / pure CSS — self-contained and print-safe. =================================================================== */ /* Stat cards — headline figures */ .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 1.4em 0; } .stat-card { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; } .stat-card .num { font-family: var(--font-head); font-size: 1.7em; font-weight: 700; color: var(--accent); line-height: 1.1; } .stat-card .lbl { font-size: 0.82em; color: var(--muted); margin-top: 4px; } /* Flow diagram — process / architecture */ .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 1.4em 0; } .flow-step { flex: 1 1 0; min-width: 120px; background: #fff; border: 1.5px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 0.86em; text-align: center; display: flex; align-items: center; justify-content: center; position: relative; } .flow-step.alt { background: var(--accent-soft); } .flow-step:not(:last-child) { margin-right: 22px; } .flow-step:not(:last-child)::after { content: "A"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); font-size: 1.6em; color: var(--accent); } /* Composition bar — 100% stacked share (e.g. admixture) */ .compo-bar { display: flex; height: 30px; border-radius: 5px; overflow: hidden; margin: 1em 0 0.6em; border: 1px solid var(--border); } .compo-bar span { display: block; height: 100%; } /* Legend (shared by compo-bar, charts) */ .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0.4em 0 1em; font-size: 0.85em; color: var(--muted); } .legend .item { display: flex; align-items: center; gap: 6px; } .legend .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; } /* Horizontal bar chart rows (CSS, label + bar + value) */ .hbar { margin: 1em 0; } .hbar .row { display: grid; grid-template-columns: 180px 1fr auto; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.88em; } .hbar .track { background: #eef1f4; border-radius: 4px; height: 18px; overflow: hidden; } .hbar .fill { height: 100%; background: var(--accent); border-radius: 4px; } .hbar .val { font-variant-numeric: tabular-nums; color: var(--muted); } /* Gantt — phases over a timeline */ .gantt { margin: 1.2em 0; font-size: 0.84em; } .gantt .row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; } .gantt .lane { position: relative; height: 20px; background: #eef1f4; border-radius: 4px; } .gantt .bar { position: absolute; height: 100%; border-radius: 4px; background: var(--accent); } .gantt .bar.free { background: #0D9488; } .gantt .bar.ia { background: #7C3AED; } .gantt .scale { display: grid; grid-template-columns: 170px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; } .gantt .ticks { display: flex; justify-content: space-between; } /* Timeline — historical / sequential markers */ .timeline { display: flex; gap: 0; margin: 1.2em 0; } .timeline .ev { flex: 1; position: relative; padding-top: 18px; text-align: center; font-size: 0.84em; } .timeline .ev::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 2px; background: var(--border); } .timeline .ev::after { content: ""; position: absolute; top: 1px; left: 50%; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); } .timeline .ev .yr { font-weight: 700; color: var(--accent); display: block; } @media print { .flow-step, .stat-card, .gantt .lane, .hbar .track { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .stat-grid, .flow, .gantt, .hbar, .compo-bar, .timeline { break-inside: avoid; page-break-inside: avoid; } } /* =================================================================== A4 SHEET MODEL (paged layout) — see references/pagination.md The document is split into explicit .sheet elements of exactly 210x297mm. On screen they look like stacked sheets of paper (the grey gap marks the boundary to the next page); in print each .sheet is one physical A4 page. Each sheet carries a footer with a page number. Use this INSTEAD of the .page wrapper when print fidelity matters. =================================================================== */ body.paged { background: #e3e6ea; } .sheet { width: 210mm; min-height: 297mm; box-sizing: border-box; margin: 0 auto 12mm; /* the bottom gap marks the next page */ padding: 16mm 18mm 12mm; background: #fff; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; position: relative; } .sheet__body { flex: 1 1 auto; } .sheet__footer { flex: none; margin-top: 10px; padding-top: 6px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.78em; color: var(--muted); } .sheet__footer .pageno { margin-left: auto; font-variant-numeric: tabular-nums; } /* Screen-only overflow warning: flagged by paginate.js when content exceeds one A4 sheet, so the author knows to split the page. */ .sheet.is-overflowing { outline: 2px dashed #d4351c; } .sheet .overflow-flag { display: none; } .sheet.is-overflowing .overflow-flag { display: block; position: absolute; top: 4mm; right: 4mm; background: #d4351c; color: #fff; font-size: 0.7em; padding: 2px 7px; border-radius: 3px; font-family: var(--font-body); } /* =================================================================== COVER PAGE (.sheet--cover) Full-page title sheet. Not included in page numbering. =================================================================== */ .sheet--cover .sheet__body { display: flex; flex-direction: column; height: 100%; } .cover-logo { margin-bottom: auto; padding-bottom: 10mm; } .cover-logo svg { height: 58px; width: auto; } .cover-accent-band { height: 4px; background: var(--accent); border-radius: 2px; margin-bottom: 10mm; } .cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; } .cover-center h1 { font-family: var(--font-head); font-size: 2.1em; color: var(--accent); margin: 0 0 0.3em; line-height: 1.2; } .cover-center .cover-subtitle { font-size: 1.15em; color: var(--muted); font-style: italic; margin-bottom: 2mm; } .cover-meta { margin-top: auto; border-top: 1px solid var(--border); padding-top: 8mm; } .cover-meta table { font-size: 0.93em; width: 100%; } .cover-meta td { padding: 4px 14px 4px 0; border: none; background: none; vertical-align: top; } .cover-meta td:first-child { font-weight: 600; color: var(--accent); width: 110px; } /* =================================================================== TABLE OF CONTENTS PAGE (.sheet--toc) Clickable entries with dotted leaders and auto page numbers. paginate.js fills in .toc-page-num spans automatically. =================================================================== */ .sheet--toc h2 { font-size: 1.5em; margin-bottom: 8mm; border: none; } nav.toc-doc { margin-top: 4mm; } nav.toc-doc ol { list-style: none; padding: 0; margin: 0; } nav.toc-doc li { margin-bottom: 1px; } nav.toc-doc li.toc-sub { padding-left: 16px; } /* The clickable row: title … dots … page number */ a.toc-entry { display: flex; align-items: baseline; text-decoration: none; color: var(--text); padding: 4px 2px; border-radius: 3px; gap: 0; } a.toc-entry:hover { background: var(--accent-soft); } a.toc-entry:hover .toc-title { color: var(--accent); } .toc-title { flex: none; font-size: 0.96em; } li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); } .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px 4px; min-width: 20px; } .toc-page-num { flex: none; font-variant-numeric: tabular-nums; font-size: 0.9em; color: var(--muted); min-width: 20px; text-align: right; } @media print { /* Cover and TOC: no page-break logic needed (handled by .sheet) */ .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; } a.toc-entry { color: var(--text) !important; background: none !important; } } @page sheet { size: A4; margin: 0; } /* sheet supplies its own margins via padding */ @media print { body.paged { background: #fff; } .sheet { page: sheet; width: 210mm; min-height: 0; height: auto; margin: 0; padding: 16mm 18mm 12mm; box-shadow: none; page-break-after: always; break-after: page; } .sheet:last-child { page-break-after: auto; break-after: auto; } .sheet.is-overflowing { outline: none; } .sheet .overflow-flag { display: none !important; } } /* =================================================================== PRINT — A4, clean margins, sensible page breaks =================================================================== */ @page { size: A4; margin: 2cm; } @media print { body { background: #fff; font-size: 11.5pt; } .page { max-width: none; margin: 0; padding: 0; box-shadow: none; } .dossier { display: block; max-width: none; margin: 0; box-shadow: none; } nav.toc-side { display: none !important; } /* Avoid breaking inside these blocks */ h1, h2, h3 { page-break-after: avoid; break-after: avoid; } table, figure, aside.callout, .summary { page-break-inside: avoid; break-inside: avoid; } p { orphans: 3; widows: 3; } /* Hide screen-only navigation helpers if any are added */ .no-print { display: none !important; } a { color: #000; text-decoration: none; } } 
+</style>
+</head>
+<body class="paged" lang="en">
+
+  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
+  <section class="sheet sheet--cover">
+    <div class="sheet__body">
+      <div class="cover-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 22 410 64" fill="none" role="img" aria-label="Génome Réunion">
+          <g fill="none" stroke-width="5" stroke-linecap="round" transform="translate(18,28)">
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#0F3A56"></path>
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#1E6E8C" transform="translate(0,16)"></path>
+            <path d="M0,11 C11,1 22,1 32,11 C42,21 53,21 63,11 C71,3 79,3 84,8" stroke="#E8654A" transform="translate(0,32)"></path>
+            <circle cx="84" cy="8" r="2.6" fill="#0F3A56" stroke="none"></circle>
+            <circle cx="84" cy="24" r="2.6" fill="#1E6E8C" stroke="none"></circle>
+            <circle cx="84" cy="40" r="2.6" fill="#E8654A" stroke="none"></circle>
+          </g>
+          <text x="132" y="56" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="31" letter-spacing="0.2" fill="#0F3A56">Génome <tspan font-weight="500">Réunion</tspan></text>
+          <text x="133" y="76" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="600" font-size="10.5" letter-spacing="3.4" fill="#1E6E8C">RÉFÉRENTIEL GÉNOMIQUE</text>
+        </svg>
+      </div>
+      <div class="cover-accent-band"></div>
+      <div class="cover-center">
+        <h1>Document complémentaire</h1>
+        <div class="cover-subtitle">Référentiel génomique réunionnais de première génération — version scientifique</div>
+      </div>
+      <div class="cover-meta">
+        <table>
+          <tr><td>Author</td><td>Équipe Génome Réunion <span class="todo">[À compléter : nom, affiliation]</span></td></tr>
+          <tr><td>Reviewer</td><td><span class="todo">[À compléter : relecteurs scientifiques]</span></td></tr>
+          <tr><td>Date</td><td>Juin 2026</td></tr>
+          <tr><td>Version</td><td>Consolidée (présentation + méthodo V3.5 + dossier de faisabilité)</td></tr>
+          <tr><td>Diffusion</td><td>Document de travail scientifique — non destiné à une diffusion grand public</td></tr>
+        </table>
+      </div>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Référentiel génomique — document de travail</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
+  <section class="sheet sheet--toc">
+    <div class="sheet__body">
+      <h2>Table of Contents</h2>
+      <nav class="toc-doc">
+        <ol>
+          <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Executive Summary</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s2"><span class="toc-title">2. L'angle mort de la médecine de précision</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s2"><span class="toc-title">2.1. Sous-représentation des populations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s2-consq"><span class="toc-title">2.2–2.4. Conséquences diagnostiques, pharmacogénétiques et IA</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Singularité génétique de La Réunion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s3"><span class="toc-title">3.1. Histoire migratoire et métissage</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s3-fondateur"><span class="toc-title">3.2–3.4. Population admixée, effets fondateurs, double singularité</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Objectives du projet</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s5"><span class="toc-title">5. General Design du projet</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s6"><span class="toc-title">6. Methodology synthétique</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s7"><span class="toc-title">7. Algorithme de sélection WGS</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s7"><span class="toc-title">7.1–7.5. Score S_div, stratification, sélection greedy</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li class="toc-sub"><a class="toc-entry" href="#s7-valid"><span class="toc-title">7.6. Validation de la sélection</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s8"><span class="toc-title">8. Resources Produced</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s9"><span class="toc-title">9. Organisation opérationnelle</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s10"><span class="toc-title">10. Budget et ressources</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s11"><span class="toc-title">11. Expected Impact</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s12"><span class="toc-title">12. Risks and Limitations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#s13"><span class="toc-title">13. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+          <li><a class="toc-entry" href="#annexes"><span class="toc-title">Annexes (A1–A6)</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+        </ol>
+      </nav>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 2 (page 1) — RÉSUMÉ + ANGLE MORT ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">2 500</div><div class="lbl">individus génotypés SNP</div></div>
+        <div class="stat-card"><div class="num">100</div><div class="lbl">familles nucléaires (phasage)</div></div>
+        <div class="stat-card"><div class="num">350</div><div class="lbl">génomes entiers (WGS)</div></div>
+        <div class="stat-card"><div class="num">0 €</div><div class="lbl">séquençage WGS (POPgen)</div></div>
+      </div>
+
+      <section id="s1" class="summary">
+        <h2>1. Executive Summary</h2>
+        <ul>
+          <li><strong>Constat —</strong> les bases internationales (gnomAD, 1000 Genomes) sous-représentent fortement les populations non européennes, dégradant l'interprétation des variants, l'imputation et la pharmacogénétique.</li>
+          <li><strong>Problème —</strong> La Réunion cumule trois traits rares : admixture récente, structure insulaire et effets fondateurs locaux.</li>
+          <li><strong>Réponse —</strong> un référentiel local combinant 2 500 SNP, 100 familles et 350 WGS sélectionnés par un algorithme géo-ancestral, le WGS étant gratuit (POPgen).</li>
+          <li><strong>Livrables —</strong> fréquences locales, panel WGS, panel d'imputation/phasage, données d'admixture et d'effets fondateurs, ressources pharmacogénétiques.</li>
+        </ul>
+      </section>
+
+      <section id="s2">
+        <h2>2. L'angle mort de la médecine de précision</h2>
+        <p><strong>Sous-représentation —</strong> gnomAD et 1000 Genomes sont massivement d'ascendance européenne ; fréquences, panels d'imputation et modèles de pathogénicité sont donc mal calibrés pour les populations admixées.</p>
+        <p id="s2-consq"><strong>Conséquences —</strong> des variants fréquents localement sont classés à tort comme rares (hausse des variants de signification incertaine), et la pharmacogénétique est inadaptée car les allèles PGx varient selon l'ascendance. Les modèles d'IA entraînés sur des données européennes risquent d'amplifier ce biais.</p>
+        <aside class="callout"><span class="label">Key Takeaway</span>Sans données locales, la médecine de précision reste moins précise pour les populations sous-représentées.</aside>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 3 (page 2) — SINGULARITÉ + OBJECTIFS ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="s3">
+        <h2>3. Singularité génétique de La Réunion</h2>
+        <h3>3.1. Histoire migratoire et métissage</h3>
+        <p>Peuplée à partir du XVII<sup>e</sup> siècle sur un territoire sans population autochtone, l'île s'est construite par vagues successives, produisant un métissage profond entre composantes africaine, malgache, indienne, européenne et asiatique.</p>
+        <div class="timeline">
+          <div class="ev"><span class="yr">1663–1848</span>Traite et esclavage — apports africain et malgache</div>
+          <div class="ev"><span class="yr">après 1848</span>Engagisme — apports indien et asiatique</div>
+          <div class="ev"><span class="yr">XX<sup>e</sup>–XXI<sup>e</sup></span>Migrations modernes</div>
+        </div>
+        <h3>3.2. Population fortement admixée</h3>
+        <div class="compo-bar" role="img" aria-label="Composition d'ascendance moyenne">
+          <span style="width:45%;background:#0D9488"></span><span style="width:25%;background:#E05A4B"></span><span style="width:15%;background:#0B1F3A"></span><span style="width:8%;background:#D97706"></span><span style="width:7%;background:#7C3AED"></span>
+        </div>
+        <div class="legend">
+          <span class="item"><span class="swatch" style="background:#0D9488"></span>Afrique / Malgache ≈ 45 %</span>
+          <span class="item"><span class="swatch" style="background:#E05A4B"></span>Inde du Sud ≈ 25 %</span>
+          <span class="item"><span class="swatch" style="background:#0B1F3A"></span>Européen ≈ 15 %</span>
+          <span class="item"><span class="swatch" style="background:#D97706"></span>Zarabe / Gujarati ≈ 8 %</span>
+          <span class="item"><span class="swatch" style="background:#7C3AED"></span>Chinois ≈ 7 %</span>
+        </div>
+        <p class="caption">Figure 1 : Composition d'ascendance moyenne (indicative). <span class="source">Source : présentation, data/admixture.js.</span></p>
+        <h3 id="s3-fondateur">3.3–3.4. Effets fondateurs et double singularité</h3>
+        <p>L'insularité et les dynamiques locales (Hauts) ont favorisé des <strong>effets fondateurs</strong> détectables via IBD/ROH. La Réunion combine <strong>diversité globale</strong> et <strong>structuration locale</strong> — d'où une stratégie d'échantillonnage dédiée.</p>
+      </section>
+
+      <section id="s4">
+        <h2>4. Objectives du projet</h2>
+        <p><strong>Principal —</strong> produire un référentiel réunionnais de première génération, reproductible et auditable, améliorant l'interprétation des variants et l'imputation.</p>
+        <ul>
+          <li><strong>Scientifiques —</strong> caractériser admixture et effets fondateurs (IBD/ROH), améliorer le phasage haplotypique.</li>
+          <li><strong>Cliniques —</strong> réduire les variants de signification incertaine, fournir des ressources PGx locales.</li>
+          <li><strong>Territoriaux —</strong> infrastructure et expertise génomiques locales. <span class="todo">[À compléter]</span></li>
+        </ul>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 4 (page 3) — DESIGN + MÉTHODOLOGIE ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="s5">
+        <h2>5. General Design du projet</h2>
+        <div class="flow">
+          <div class="flow-step alt">2 500 SNP<br>+ 100 familles<br><small>puce GDA-8</small></div>
+          <div class="flow-step">PCA · ADMIXTURE<br>IBD · ROH</div>
+          <div class="flow-step">Score <code>S_div</code><br>→ 350 WGS</div>
+          <div class="flow-step alt">Séquençage<br>POPgen (0 €)</div>
+          <div class="flow-step">Référentiel<br><small>fréquences · imputation · phasage</small></div>
+        </div>
+        <p class="caption">Figure 2 : Architecture en trois couches. <span class="source">Source : méthodologie V3.5 ; dossier de faisabilité.</span></p>
+        <aside class="callout"><span class="label">Key point</span>Le séquençage WGS est pris en charge gratuitement par <strong>POPgen (0 €)</strong> ; le coût porte sur le génotypage iScan, l'extraction d'ADN et la conservation au CRB.</aside>
+      </section>
+
+      <section id="s6">
+        <h2>6. Methodology synthétique</h2>
+        <p>Après QC (≈ 1,9 M SNP bruts puce GDA-8), les marqueurs sont employés différemment selon l'analyse :</p>
+        <table>
+          <thead><tr><th>Usage</th><th>Filtrage SNP</th></tr></thead>
+          <tbody>
+            <tr><td>PCA, ADMIXTURE</td><td>SNP prunés en LD</td></tr>
+            <tr><td>Phasage, IBD, ROH</td><td>SNP denses filtrés</td></tr>
+            <tr><td>Imputation</td><td>SNP harmonisés avec le WGS</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Table 1 : Usage différencié des marqueurs SNP. <span class="source">Source : méthodologie V3.5.</span></p>
+        <p>Analysiss de structure projetées sur des pools témoins (1000 Genomes/IGSR ; EGA pour Madagascar, l'Asie et l'Afrique de l'océan Indien), puis IBD/ROH, sélection WGS, séquençage POPgen, construction de la base de variants et recalibrage des fréquences sur les 2 500.</p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 5 (page 4) — ALGORITHME + RESSOURCES ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="s7">
+        <h2>7. Algorithme de sélection WGS</h2>
+        <p>Le panel n'est <strong>pas un tirage aléatoire</strong> : il combine un <strong>noyau géo-ancestral</strong> (ancrage territorial + diversité interne à chaque secteur) et un <strong>bras de découverte contrôlé</strong>. Le score <code>S_div</code> agrège quatre composantes :</p>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Position</div><div class="lbl">PCA projetée — place dans l'espace d'ascendance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Composition</div><div class="lbl">ADMIXTURE — profil d'ascendance inférée</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Parenté</div><div class="lbl">IBD — contrôle de la redondance</div></div>
+          <div class="stat-card"><div class="num" style="font-size:1.05em">Fondateur</div><div class="lbl">ROH — signatures fondatrices</div></div>
+        </div>
+        <p class="caption">Figure 3 : Composantes du score <code>S_div</code>. <span class="source">Methodology V3.5, partie III ; formulation exacte en annexe 3.</span></p>
+        <p>Stratification sur <strong>8 secteurs géographiques fixes</strong> × clusters d'ascendance, contrôle de parenté, puis <strong>sélection greedy stratifiée</strong> du noyau + bras de découverte. <span class="todo">[À compléter : pondérations finales]</span></p>
+        <h3 id="s7-valid">7.6. Validation de la sélection</h3>
+        <p>Validation <strong>in silico</strong> sur profils synthétiques (A témoin, C mélange réaliste, D effets fondateurs), critère primaire = <strong>imputation R² par classe de MAF</strong>, triangulation sur <strong>1000 Genomes</strong> et <strong>EPIGEN-Brasil</strong>. <span class="source">Source : docs de validation.</span></p>
+      </section>
+
+      <section id="s8">
+        <h2>8. Resources Produced</h2>
+        <ul>
+          <li><strong>Base de fréquences locales</strong> (recalibrées sur 2 500) · <strong>Panel WGS</strong> (350 génomes) · <strong>Panel d'imputation/phasage</strong>.</li>
+          <li><strong>Données d'admixture</strong> (ascendance globale et locale) · <strong>Effets fondateurs</strong> (IBD/ROH) · <strong>Ressources pharmacogénétiques</strong>.</li>
+        </ul>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 6 (page 5) — ORGANISATION + BUDGET ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="s9">
+        <h2>9. Organisation opérationnelle</h2>
+        <p>Stack Python complète : iScan/GDA-8 ; PLINK2, KING, SHAPEIT ; Nextflow/Snakemake ; PostgreSQL + MongoDB ; portail/API Django ; modules IA PyTorch + TensorFlow. Déploiement sur 36 mois :</p>
+        <div class="gantt">
+          <div class="row"><div>P0 · Panels témoins</div><div class="lane"><div class="bar" style="left:0%;width:33%"></div></div></div>
+          <div class="row"><div>P1 · Validation externe</div><div class="lane"><div class="bar" style="left:0%;width:28%"></div></div></div>
+          <div class="row"><div>P2 · Cohorte SNP</div><div class="lane"><div class="bar" style="left:8%;width:25%"></div></div></div>
+          <div class="row"><div>P3 · Module familial</div><div class="lane"><div class="bar" style="left:8%;width:25%"></div></div></div>
+          <div class="row"><div>P4 · WGS POPgen</div><div class="lane"><div class="bar free" style="left:22%;width:39%"></div></div></div>
+          <div class="row"><div>P5 · Modules IA</div><div class="lane"><div class="bar ia" style="left:47%;width:36%"></div></div></div>
+          <div class="row"><div>P6 · Portail clinique</div><div class="lane"><div class="bar" style="left:75%;width:25%"></div></div></div>
+          <div class="scale"><div></div><div class="ticks"><span>M1</span><span>M9</span><span>M18</span><span>M27</span><span>M36</span></div></div>
+        </div>
+        <div class="legend"><span class="item"><span class="swatch" style="background:#0F3A56"></span>Phases projet</span><span class="item"><span class="swatch" style="background:#0D9488"></span>WGS gratuit (POPgen)</span><span class="item"><span class="swatch" style="background:#7C3AED"></span>Modules IA</span></div>
+        <p class="caption">Figure 4 : Chronogramme indicatif sur 36 mois.</p>
+      </section>
+
+      <section id="s10">
+        <h2>10. Budget et ressources</h2>
+        <div class="hbar">
+          <div class="row"><div>Génotypage — sous-traitance</div><div class="track"><div class="fill" style="width:51%"></div></div><div class="val">265 k€</div></div>
+          <div class="row"><div>Génotypage — iScan interne</div><div class="track"><div class="fill" style="width:92%"></div></div><div class="val">479 k€</div></div>
+          <div class="row"><div>IT — cloud hybride (HDS)</div><div class="track"><div class="fill" style="width:52%"></div></div><div class="val">270 k€</div></div>
+          <div class="row"><div>IT — on-premise</div><div class="track"><div class="fill" style="width:64%"></div></div><div class="val">334 k€</div></div>
+          <div class="row"><div>RH — Prop. 2 (alternance + CIFRE)</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">524 k€</div></div>
+        </div>
+        <p class="caption">Figure 5 : Postes budgétaires par scénario. <span class="source">Source : dossier de faisabilité ; montants à confirmer par devis.</span></p>
+        <div class="stat-grid">
+          <div class="stat-card" style="background:var(--accent);"><div class="num" style="color:#fff;font-size:1.25em">≈ 1,474 M€</div><div class="lbl" style="color:#cfe0ea">total optimal (Sc. 1 + Prop. 2)</div></div>
+          <div class="stat-card"><div class="num">36</div><div class="lbl">mois</div></div>
+          <div class="stat-card"><div class="num">−23 %</div><div class="lbl">RH vs scénario de base</div></div>
+        </div>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Document de travail scientifique — diffusion restreinte</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 7 (page 6) — IMPACTS + RISQUES + CONCLUSION + ANNEXES ============ -->
+  <section class="sheet">
+    <div class="sheet__body">
+      <section id="s11">
+        <h2>11. Expected Impact</h2>
+        <ul>
+          <li><strong>Clinique / diagnostique —</strong> meilleure interprétation des variants, moins de variants de signification incertaine.</li>
+          <li><strong>Pharmacogénétique —</strong> adaptation posologique sur des allèles PGx locaux.</li>
+          <li><strong>Scientifique —</strong> caractérisation de l'admixture et des effets fondateurs ; meilleure imputation.</li>
+          <li><strong>Territorial & équité —</strong> infrastructure locale ; réduction du biais des bases internationales.</li>
+        </ul>
+      </section>
+
+      <section id="s12">
+        <h2>12. Risks and Limitations</h2>
+        <table>
+          <thead><tr><th>Risque</th><th>Mitigation</th></tr></thead>
+          <tbody>
+            <tr><td>Représentativité (350 WGS)</td><td>Sélection géo-ancestrale + découverte ; recalibrage sur 2 500</td></tr>
+            <tr><td>Réglementaire (RGPD/HDS)</td><td>Hébergement souverain <span class="todo">[annexe 6]</span></td></tr>
+            <tr><td>Financier</td><td>Scénarios alternatifs ; WGS gratuit POPgen</td></tr>
+            <tr><td>Informatique</td><td>Pipelines reproductibles (Nextflow/Snakemake)</td></tr>
+            <tr><td>Sur-promesse IA</td><td>Modules validés empiriquement ; référentiel local comme socle</td></tr>
+          </tbody>
+        </table>
+        <p class="caption">Table 2 : Risques et mitigations.</p>
+      </section>
+
+      <section id="s13">
+        <h2>13. Conclusion</h2>
+        <p><strong>Besoin —</strong> combler l'angle mort des bases génomiques pour une population admixée et structurée localement. <strong>Apport —</strong> un référentiel réunionnais reproductible et auditable. <strong>Conditions —</strong> validation empirique avant gel de la sélection, conformité réglementaire, WGS gratuit. <strong>Perspectives —</strong> extensions (variants ultra-rares) et modules d'IA biomédicale.</p>
+      </section>
+
+      <section id="annexes">
+        <h2>Annexes</h2>
+        <p><strong>A1. Bibliography —</strong> <span class="todo">[À importer depuis le document Word du projet]</span></p>
+        <p><strong>A2.</strong> Historique migratoire · <strong>A3.</strong> Methodology statistique (formulation complète de <code>S_div</code>, sensibilité LOCO) · <strong>A4.</strong> Budget détaillé · <strong>A5.</strong> Plan de validation (profils A/C/D) · <strong>A6.</strong> Gouvernance, RGPD et HDS. <span class="todo">[Annexes A2–A4, A6 à importer depuis les sources complètes]</span></p>
+      </section>
+    </div>
+    <footer class="sheet__footer"><span>Génome Réunion · Consolidé : présentation + méthodologie V3.5 + dossier de faisabilité</span></footer>
+  </section>
+
+  <script>
+  (function(){"use strict";
+    function paginate(){
+      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
+      var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc");});
+      sheets.forEach(function(sheet){
+        var flag=sheet.querySelector(".overflow-flag");
+        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
+        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+        var footer=sheet.querySelector(".sheet__footer");if(!footer)return;
+        var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}
+        if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}
+        else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}
+      });
+      document.querySelectorAll("a.toc-entry[href]").forEach(function(link){
+        var href=link.getAttribute("href");if(!href||href.charAt(0)!=="#")return;
+        var target=document.getElementById(href.slice(1));if(!target)return;
+        var el=target;var targetSheet=null;
+        while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet")){targetSheet=el;break;}el=el.parentNode;}
+        if(!targetSheet)return;
+        var idx=contentSheets.indexOf(targetSheet);
+        var numEl=link.querySelector(".toc-page-num");
+        if(numEl)numEl.textContent=idx>=0?String(idx+1):"—";
+      });
+    }
+    function bindToc(){
+      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){
+        link.addEventListener("click",function(e){
+          var target=document.getElementById(this.getAttribute("href").slice(1));
+          if(!target)return;e.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});
+        });
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindToc();});}
+    else{paginate();bindToc();}
+    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+  })();
+  </script>
+</body>
+</html>

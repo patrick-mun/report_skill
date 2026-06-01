@@ -31,12 +31,12 @@ The `build-inline-css.sh` script (in progress) will automate this. For now, manu
 | File | Sheet Padding | Body Font |
 |------|---|---|
 | `report.css` | `16mm 18mm 12mm` | `15px` |
-| `exemple-pro.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `exemple-genome-reunion-scientifique.html` | `15mm 17mm 11mm` | `14.5px` |
-| `exemple-genome-reunion-financier.html` | `15mm 17mm 11mm` | `15px` |
-| `templates/professionnel.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `templates/recherche.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `templates/dossier-scientifique.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
+| `example-professional.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
+| `example-genome-meeting-scientific.html` | `15mm 17mm 11mm` | `14.5px` |
+| `example-genome-meeting-funder.html` | `15mm 17mm 11mm` | `15px` |
+| `templates/professional.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
+| `templates/research.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
+| `templates/scientific-dossier.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
 
 **After this fix:** All examples and templates will use `16mm 18mm 12mm` and `15px` (matching `report.css`).
 
