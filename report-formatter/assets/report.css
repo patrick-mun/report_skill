@@ -227,6 +227,93 @@ body.paged { background: #e3e6ea; }
   border-radius: 3px; font-family: var(--font-body);
 }
 
+/* ===================================================================
+   COVER PAGE (.sheet--cover)
+   Full-page title sheet. Not included in page numbering.
+   =================================================================== */
+.sheet--cover .sheet__body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.cover-logo { margin-bottom: auto; padding-bottom: 10mm; }
+.cover-logo svg { height: 58px; width: auto; }
+.cover-divider {
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 10mm;
+}
+.cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cover-center h1 {
+  font-family: var(--font-head);
+  font-size: 2.1em;
+  color: var(--accent);
+  margin: 0 0 0.3em;
+  line-height: 1.2;
+}
+.cover-center .cover-subtitle {
+  font-size: 1.15em;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 2mm;
+}
+.cover-meta {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 8mm;
+}
+.cover-meta table { font-size: 0.93em; width: 100%; }
+.cover-meta td { padding: 4px 14px 4px 0; border: none; background: none; vertical-align: top; }
+.cover-meta td:first-child { font-weight: 600; color: var(--accent); width: 110px; }
+
+/* ===================================================================
+   TABLE OF CONTENTS PAGE (.sheet--toc)
+   Clickable entries with dotted leaders and auto page numbers.
+   paginate.js fills in .toc-page-num spans automatically.
+   =================================================================== */
+.sheet--toc h2 { font-size: 1.5em; margin-bottom: 8mm; border: none; }
+
+nav.toc-doc { margin-top: 4mm; }
+nav.toc-doc ol { list-style: none; padding: 0; margin: 0; }
+nav.toc-doc li { margin-bottom: 1px; }
+nav.toc-doc li.toc-sub { padding-left: 16px; }
+
+/* The clickable row: title … dots … page number */
+a.toc-entry {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--text);
+  padding: 4px 2px;
+  border-radius: 3px;
+  gap: 0;
+}
+a.toc-entry:hover { background: var(--accent-soft); }
+a.toc-entry:hover .toc-title { color: var(--accent); }
+.toc-title { flex: none; font-size: 0.96em; }
+li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
+.toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+  margin: 0 8px 4px;
+  min-width: 20px;
+}
+.toc-page-num {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9em;
+  color: var(--muted);
+  min-width: 20px;
+  text-align: right;
+}
+
+@media print {
+  /* Cover and TOC: no page-break logic needed (handled by .sheet) */
+  .cover-logo svg, .cover-divider, .cover-center, .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a.toc-entry { color: var(--text) !important; background: none !important; }
+}
+
 @page sheet { size: A4; margin: 0; }   /* sheet supplies its own margins via padding */
 
 @media print {

@@ -12,11 +12,10 @@
     h1,h2,h3{font-family:var(--font-head);color:var(--accent);line-height:1.25;}
     h1{font-size:1.9em;margin:0 0 .2em;}
     h2{font-size:1.32em;margin:1.4em 0 .5em;border-bottom:2px solid var(--accent-soft);padding-bottom:.2em;}
-    h2:first-child,h3:first-child{margin-top:0;}
+    h2:first-child{margin-top:0;}
     h3{font-size:1.1em;margin:1.1em 0 .35em;color:var(--text);}
     .report-meta{color:var(--muted);font-size:.95em;margin-bottom:1.2em;}
-    .report-meta .subtitle{font-size:1.1em;color:var(--text);font-style:italic;}
-    p{margin:0 0 .9em;}strong{color:#000;}a{color:var(--accent);}
+    p{margin:0 0 .9em;}strong{color:#000;}
     .summary{background:var(--accent-soft);border-left:4px solid var(--accent);padding:14px 18px;margin:1.2em 0;border-radius:0 4px 4px 0;}
     .summary h2{margin-top:0;border:none;}
     aside.callout{background:var(--callout-bg);border:1px solid var(--border);border-left:4px solid var(--accent2);padding:11px 15px;margin:1em 0;border-radius:0 4px 4px 0;}
@@ -26,6 +25,7 @@
     th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;}
     thead th{background:var(--accent);color:#fff;}tbody tr:nth-child(even){background:#f7f9fb;}
     .caption{font-size:.85em;color:var(--muted);font-style:italic;margin-top:.4em;}
+    /* Visual components */
     .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:1.2em 0;}
     .stat-card{background:var(--accent-soft);border:1px solid var(--border);border-radius:6px;padding:13px 15px;text-align:center;}
     .stat-card .num{font-family:var(--font-head);font-size:1.6em;font-weight:700;color:var(--accent);line-height:1.1;}
@@ -52,6 +52,29 @@
     .sheet.is-overflowing{outline:2px dashed #d4351c;}
     .sheet .overflow-flag{display:none;}
     .sheet.is-overflowing .overflow-flag{display:block;position:absolute;top:4mm;right:4mm;background:#d4351c;color:#fff;font-size:.7em;padding:2px 7px;border-radius:3px;}
+    /* Cover page */
+    .sheet--cover .sheet__body{display:flex;flex-direction:column;height:100%;}
+    .cover-logo{padding-bottom:8mm;}
+    .cover-accent-band{height:4px;background:var(--accent);border-radius:2px;margin-bottom:10mm;}
+    .cover-center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8mm 0;}
+    .cover-center h1{font-size:2.2em;margin:0 0 .4em;color:var(--accent);}
+    .cover-center .cover-subtitle{font-size:1.15em;color:var(--muted);font-style:italic;}
+    .cover-meta{margin-top:auto;border-top:1px solid var(--border);padding-top:8mm;}
+    .cover-meta table{font-size:.92em;width:100%;}
+    .cover-meta td{padding:4px 14px 4px 0;border:none;background:none;vertical-align:top;}
+    .cover-meta td:first-child{font-weight:600;color:var(--accent);width:110px;}
+    /* TOC page */
+    .sheet--toc h2{font-size:1.5em;margin-bottom:8mm;border:none;}
+    nav.toc-doc ol{list-style:none;padding:0;margin:0;}
+    nav.toc-doc li{margin-bottom:1px;}
+    nav.toc-doc li.toc-sub{padding-left:18px;}
+    a.toc-entry{display:flex;align-items:baseline;text-decoration:none;color:var(--text);padding:5px 4px;border-radius:3px;transition:background .15s;}
+    a.toc-entry:hover{background:var(--accent-soft);}
+    a.toc-entry:hover .toc-title{color:var(--accent);}
+    .toc-title{flex:none;font-size:.96em;}
+    li.toc-sub .toc-title{font-size:.9em;color:var(--muted);}
+    .toc-dots{flex:1;border-bottom:1px dotted var(--border);margin:0 8px 4px;min-width:20px;}
+    .toc-page-num{flex:none;font-variant-numeric:tabular-nums;font-size:.9em;color:var(--muted);min-width:20px;text-align:right;}
     @page sheet{size:A4;margin:0;}
     @media print{
       body.paged{background:#fff;}
@@ -60,30 +83,110 @@
       .sheet.is-overflowing{outline:none;}.sheet .overflow-flag{display:none!important;}
       h1,h2,h3{page-break-after:avoid;break-after:avoid;}
       table,figure,aside.callout,.stat-grid,.hbar,.timeline{page-break-inside:avoid;break-inside:avoid;}
+      a.toc-entry{color:var(--text)!important;background:none!important;}
       a{color:#000;text-decoration:none;}
     }
   </style>
 </head>
 <body class="paged">
 
-  <!-- ============ FEUILLE 1 ============ -->
+  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
+  <section class="sheet sheet--cover">
+    <div class="sheet__body">
+      <div class="cover-logo">
+        <!-- Monogramme typographique en l'absence de logo -->
+        <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">DRH</span>
+        <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Société Exemple</span>
+      </div>
+      <div class="cover-accent-band"></div>
+      <div class="cover-center">
+        <h1>Déploiement du télétravail</h1>
+        <div class="cover-subtitle">Bilan de la première année et recommandations</div>
+      </div>
+      <div class="cover-meta">
+        <table>
+          <tr><td>Auteur</td><td>Direction des ressources humaines</td></tr>
+          <tr><td>Relecteur</td><td>Direction générale · Direction informatique</td></tr>
+          <tr><td>Date</td><td>1ᵉʳ juin 2026</td></tr>
+          <tr><td>Version</td><td>1.0</td></tr>
+          <tr><td>Diffusion</td><td>Interne restreinte</td></tr>
+          <tr><td>Contact</td><td>rh@exemple.fr</td></tr>
+        </table>
+      </div>
+    </div>
+    <footer class="sheet__footer"><span>Déploiement du télétravail · Société Exemple</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
+  <section class="sheet sheet--toc">
+    <div class="sheet__body">
+      <h2>Sommaire</h2>
+      <nav class="toc-doc">
+        <ol>
+          <li>
+            <a class="toc-entry" href="#contexte">
+              <span class="toc-title">1. Contexte et objectifs</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#analyse">
+              <span class="toc-title">2. Analyse</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li class="toc-sub">
+            <a class="toc-entry" href="#analyse">
+              <span class="toc-title">2.1. Adoption et usages</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li class="toc-sub">
+            <a class="toc-entry" href="#vigilance">
+              <span class="toc-title">2.2. Points de vigilance</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#recommandations">
+              <span class="toc-title">3. Recommandations</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#plan-action">
+              <span class="toc-title">4. Plan d'action</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+          <li>
+            <a class="toc-entry" href="#conclusion">
+              <span class="toc-title">5. Conclusion</span>
+              <span class="toc-dots"></span>
+              <span class="toc-page-num">—</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <footer class="sheet__footer"><span>Déploiement du télétravail · Société Exemple</span></footer>
+  </section>
+
+  <!-- ============ FEUILLE 2 (page 1) — SYNTHÈSE + CONTEXTE ============ -->
   <section class="sheet">
     <div class="sheet__body">
-      <header>
-        <h1>Déploiement du télétravail</h1>
-        <div class="report-meta">
-          <div class="subtitle">Bilan de la première année et recommandations</div>
-          <div>Direction des ressources humaines · Société Exemple</div>
-          <div>1ᵉʳ juin 2026 · Version 1.0</div>
-        </div>
-      </header>
-
       <section class="summary">
         <h2>Synthèse exécutive</h2>
         <ul>
           <li>Le télétravail a été adopté par <strong>68 %</strong> des collaborateurs éligibles sur les douze derniers mois.</li>
           <li>La satisfaction est élevée (note moyenne de <strong>4,2/5</strong>), portée par l'équilibre vie professionnelle / vie personnelle.</li>
-          <li>Deux points de vigilance : la cohésion d'équipe et l'ergonomie des postes à domicile.</li>
+          <li>Deux points de vigilance : cohésion d'équipe et ergonomie des postes à domicile.</li>
           <li><strong>Recommandation principale :</strong> pérenniser un modèle hybride de 2 à 3 jours et financer l'équipement à domicile.</li>
         </ul>
       </section>
@@ -95,22 +198,22 @@
         <div class="stat-card"><div class="num">2 j</div><div class="lbl">fréquence médiane / semaine</div></div>
       </div>
 
-      <section>
-        <h2>Contexte et objectifs</h2>
-        <p>À la suite de la généralisation du travail à distance, la direction des ressources humaines (RH) a engagé un dispositif de télétravail encadré. Ce rapport dresse le bilan de la première année et formule des recommandations pour pérenniser le dispositif.</p>
+      <section id="contexte">
+        <h2>1. Contexte et objectifs</h2>
+        <p>À la suite de la généralisation du travail à distance, la direction des ressources humaines a engagé un dispositif de télétravail encadré. Ce rapport dresse le bilan de la première année et formule des recommandations pour pérenniser le dispositif.</p>
         <p>Le périmètre couvre les <strong>420 collaborateurs</strong> des fonctions éligibles, sur la période de juin 2025 à mai 2026.</p>
       </section>
     </div>
     <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
   </section>
 
-  <!-- ============ FEUILLE 2 ============ -->
+  <!-- ============ FEUILLE 3 (page 2) — ANALYSE ============ -->
   <section class="sheet">
     <div class="sheet__body">
-      <section>
-        <h2>Analyse</h2>
-        <h3>Adoption et usages</h3>
-        <p>Le taux d'adoption a progressé régulièrement pour atteindre 68 % des collaborateurs éligibles. La fréquence médiane observée est de deux jours de télétravail par semaine. Les indicateurs clés dépassent leurs cibles :</p>
+      <section id="analyse">
+        <h2>2. Analyse</h2>
+        <h3>2.1. Adoption et usages</h3>
+        <p>Le taux d'adoption a progressé régulièrement pour atteindre 68 % des collaborateurs éligibles. La fréquence médiane est de deux jours par semaine. Les indicateurs dépassent leurs cibles :</p>
 
         <div class="hbar">
           <div class="row"><div>Adoption</div><div class="track"><div class="fill cible" style="width:60%"></div></div><div class="val">cible 60 %</div></div>
@@ -129,27 +232,27 @@
           Les objectifs d'adoption et de satisfaction sont dépassés, mais la cohésion d'équipe demande un suivi rapproché.
         </aside>
 
-        <h3>Points de vigilance</h3>
+        <h3 id="vigilance">2.2. Points de vigilance</h3>
         <p>Deux risques émergent des entretiens : un sentiment d'isolement chez les nouveaux arrivants et des postes de travail à domicile insuffisamment ergonomiques pour 31 % des répondants.</p>
       </section>
 
-      <section>
-        <h2>Recommandations</h2>
+      <section id="recommandations">
+        <h2>3. Recommandations</h2>
         <ol>
           <li>Adopter un cadre hybride officiel de 2 à 3 jours de télétravail par semaine.</li>
           <li>Allouer un budget d'équipement à domicile de 300 € par collaborateur.</li>
-          <li>Instaurer une journée de présence collective hebdomadaire par équipe pour préserver la cohésion.</li>
+          <li>Instaurer une journée de présence collective hebdomadaire par équipe.</li>
         </ol>
       </section>
     </div>
     <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
   </section>
 
-  <!-- ============ FEUILLE 3 ============ -->
+  <!-- ============ FEUILLE 4 (page 3) — PLAN D'ACTION + CONCLUSION ============ -->
   <section class="sheet">
     <div class="sheet__body">
-      <section>
-        <h2>Plan d'action</h2>
+      <section id="plan-action">
+        <h2>4. Plan d'action</h2>
         <table>
           <thead>
             <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
@@ -169,8 +272,8 @@
         </div>
       </section>
 
-      <section>
-        <h2>Conclusion</h2>
+      <section id="conclusion">
+        <h2>5. Conclusion</h2>
         <p>La première année confirme la pertinence du télétravail encadré. La pérennisation passe par un cadre hybride clair et un investissement ciblé dans l'équipement et la cohésion des équipes.</p>
       </section>
     </div>
@@ -181,16 +284,38 @@
   (function(){"use strict";
     function paginate(){
       var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
-      var total=sheets.length;
-      sheets.forEach(function(sheet,i){
-        var footer=sheet.querySelector(".sheet__footer");
-        if(footer){var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}no.textContent="Page "+(i+1)+" / "+total;}
+      var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc");});
+      sheets.forEach(function(sheet){
         var flag=sheet.querySelector(".overflow-flag");
         if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
         sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
+        var footer=sheet.querySelector(".sheet__footer");if(!footer)return;
+        var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}
+        if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}
+        else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}
+      });
+      document.querySelectorAll("a.toc-entry[href]").forEach(function(link){
+        var href=link.getAttribute("href");if(!href||href.charAt(0)!=="#")return;
+        var target=document.getElementById(href.slice(1));if(!target)return;
+        var el=target;var targetSheet=null;
+        while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet")){targetSheet=el;break;}el=el.parentNode;}
+        if(!targetSheet)return;
+        var idx=contentSheets.indexOf(targetSheet);
+        var numEl=link.querySelector(".toc-page-num");
+        if(numEl)numEl.textContent=idx>=0?String(idx+1):"—";
       });
     }
-    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",paginate);}else{paginate();}
+    function bindToc(){
+      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){
+        link.addEventListener("click",function(e){
+          var target=document.getElementById(this.getAttribute("href").slice(1));
+          if(!target)return;e.preventDefault();
+          target.scrollIntoView({behavior:"smooth",block:"start"});
+        });
+      });
+    }
+    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindToc();});}
+    else{paginate();bindToc();}
     window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
   })();
   </script>
