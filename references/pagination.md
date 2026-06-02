@@ -55,7 +55,27 @@ No dependency, no network — the file stays self-contained.
 - Browsers (Chrome/Firefox) ignore `@page { @bottom-right { content: counter(page) } }` margin boxes when printing, so CSS-only page numbers don't appear in browser-to-PDF. Stamping the number into the DOM (paginate.js) prints reliably.
 - Auto-flow engines (e.g. Paged.js) can fragment content automatically and are an option for very long, frequently-edited documents, but they add a heavy JS dependency and reduce control. The explicit sheet model is lighter, fully self-contained, and gives precise control — preferred here.
 
-## Print checklist
+## Print checklist (before PDF export)
 
-- Open the file, `Ctrl/Cmd + P`, choose A4, margins **None** (the sheet supplies its margins), enable "Background graphics" so colours print.
-- Verify: one sheet per page, footers with page numbers bottom-right, no lonely blocks, no overflow flags.
+1. **Open the HTML file in Chrome or Firefox.**
+2. **On-screen overflow detection (critical):**
+   - Look for **red dashed outline + "Contenu trop long" badge** on any `.sheet`.
+   - If found, you **must split that sheet** into two sheets in the HTML source and retest before proceeding.
+   - An overflowing page will print with content cut off or spilled onto the next page, breaking the layout.
+3. **Verify margins and spacing** (print preview, `Ctrl/Cmd + P`):
+   - Set **margins to None** (the `.sheet` CSS already provides 13 mm padding).
+   - Enable **"Background graphics"** so colours and callout boxes print correctly.
+4. **Check page numbering:**
+   - Verify footers show "Page n / total" at bottom-right on all content sheets.
+   - Cover and TOC should have blank page numbers.
+5. **Visual check:**
+   - No orphaned headings (a section heading alone at the bottom of a page).
+   - No single-line paragraphs stranded at the top of a page.
+   - Tables and figures sit whole on their sheet, not split across pages.
+6. **Export to PDF:**
+   - Use the browser's "Save as PDF" option (preferable to a separate PDF printer).
+   - Verify the PDF displays correctly and all pages are present.
+
+### Why overflow detection is critical
+
+If `paginate.js` detects a sheet whose `scrollHeight` exceeds `clientHeight + 2px`, it marks it as overflowing. This is a **sign to split the content**, not a minor warning. A sheet that overflows on screen will be cut off or misaligned when printed, depending on the browser and printer settings.

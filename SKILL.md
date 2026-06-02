@@ -123,6 +123,19 @@ The user chooses, or you ask:
 4. Lay out on A4 sheets (one page at a time, no orphans).
 5. Inline CSS and JS, deliver as single HTML file.
 
+## Quality Assurance — before delivery
+
+**Always run the QA checklist in `references/qc-checklist.md`** before sending the report to the user. This includes:
+
+- **Content completeness**: all promised sections present, no `[To complete: …]` in body.
+- **Numbering consistency**: figures numbered 1–N continuously, tables similarly, all cross-references valid.
+- **Typography**: French accents correct, no orphaned hyphens, entity encoding consistent.
+- **Layout**: no overflow flags (red boxes), no orphaned headings or lonely lines.
+- **Footers & metadata**: all sheets have footers with page numbers, document title in `<title>`.
+- **Print readiness**: test in Chrome/Firefox print preview, ensure "Background graphics" and "No margins" give clean output.
+
+If any check fails, fix it before delivering. If you discover a source conflict or missing section, **ask the user** rather than guessing.
+
 ## References
 
 All guidance is in the `references/` directory:
@@ -131,6 +144,7 @@ All guidance is in the `references/` directory:
 - `audiences.md` — how to adapt a report per audience
 - `visuals.md` — reuse & propose charts/diagrams (no monotone text)
 - `pagination.md` — A4 sheet model: cover, TOC, footers, page numbers
-- `style-guide.md` — 11 editorial rules for fast, clear reading
+- `style-guide.md` — 11 editorial rules for fast, clear reading (now with numbering consistency rules)
+- `qc-checklist.md` — **pre-delivery QA checklist** (typography, numbering, layout, print readiness)
 - `structure-research.md` — section plan: research / funding report
 - `structure-professional.md` — section plan: professional report

@@ -61,3 +61,25 @@ These rules apply to every report the skill produces. The goal is **rapid readin
 
 - Neutral, precise, professional. No marketing language, no hype.
 - Stay faithful to the source meaning — reformat, don't reinterpret.
+
+## 12. Figure and table numbering — consistency across the document
+
+- **Number continuously** across the entire document: Figure 1, 2, 3… (not 1, 2, 4 — gaps signal missing/moved content).
+- **Reference by number** in text ("See Figure 3" or "Table 2 shows…") — never "the figure above" or "below".
+- Use consistent phrasing: "Figure N: [descriptive title]" and "Table N: [descriptive title]".
+- If a figure or section is removed during consolidation, renumber all subsequent figures/tables to avoid gaps.
+- For appendices (Annexes A, B, C…), use separate numbering: "Figure A1:", "Table B3:".
+
+## 13. Final quality checks (before delivery)
+
+Before declaring the report ready for print:
+
+1. **Run the print preview** (`Ctrl/Cmd + P`): verify no overflow flags (red dashed boxes) on any sheet.
+2. **Check figure/table continuity**: open the Table of Contents and count: do all figures up to Figure N appear? Are numbers consecutive? (Check especially after major edits or multi-source consolidation.)
+3. **Scan for common typos** in figures/tables (especially captions): accents (`Équipe` not `Equipe`), en-dashes (–), and entity encoding issues.
+4. **Verify cross-references**: every "See Figure X" must have a corresponding Figure X in the document.
+5. **Check headers and footers**: every sheet should have a footer with document title and page number.
+6. **Orphaned blocks**: no heading should end a sheet without its body appearing on the same or immediately following sheet. No single-line paragraph at the top of a page.
+7. **Source attribution**: every figure, table, statistic must have a caption with source. If no source found during consolidation, mark as `[source: …]` and flag to the user.
+
+If any check fails, correct and regenerate before sending.
