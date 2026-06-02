@@ -431,7 +431,14 @@ li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
 /* ===================================================================
    PRINT — A4, clean margins, sensible page breaks
    =================================================================== */
-/* Note: @page margins handled by .sheet padding above (16mm 18mm 12mm) */
+/* Default page box for the .page (non-paginated) reading model.
+   The .sheet (paginated) model uses its own @page sheet { margin: 0 }
+   above and supplies margins via padding, so this 2cm only applies to
+   .page documents. */
+@page {
+  size: A4;
+  margin: 2cm;
+}
 
 @media print {
   body { background: #fff; font-size: 11.5pt; }

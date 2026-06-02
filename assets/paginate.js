@@ -9,10 +9,27 @@
 (function () {
   "use strict";
 
+  /* Height of one A4 page in CSS px, measured live so it stays correct
+     across zoom levels and DPI. A .sheet that fits one page renders at
+     this height (it has min-height:297mm); an over-filled sheet exceeds
+     it. We must compare against THIS fixed reference, not the sheet's own
+     clientHeight — because min-height lets an over-long sheet grow so that
+     clientHeight always equals scrollHeight, hiding the overflow. */
+  function onePageHeightPx() {
+    var probe = document.createElement("div");
+    probe.style.cssText =
+      "position:absolute;left:-9999px;top:0;width:1px;height:297mm;";
+    document.body.appendChild(probe);
+    var h = probe.getBoundingClientRect().height;
+    document.body.removeChild(probe);
+    return h;
+  }
+
   function paginate() {
     var sheets = Array.prototype.slice.call(
       document.querySelectorAll(".sheet")
     );
+    var pageHeightPx = onePageHeightPx();
 
     /* Split: cover + toc sheets vs content sheets */
     var contentSheets = sheets.filter(function (s) {
@@ -34,7 +51,7 @@
       }
       sheet.classList.toggle(
         "is-overflowing",
-        sheet.scrollHeight > sheet.clientHeight + 2
+        sheet.scrollHeight > pageHeightPx + 2
       );
 
       /* Footer page label */
