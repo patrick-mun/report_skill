@@ -1,0 +1,44 @@
+{
+  "id": "report-formatter",
+  "name": "Report Formatter",
+  "description": "Consolidate multi-source scientific documents into clean, print-to-PDF HTML reports",
+  "version": "1.0.0",
+  "triggers": ["/report"],
+  "path": "./",
+  "commands": {
+    "report": {
+      "description": "Consolidate and format project documents into professional reports",
+      "usage": "/report [files...] [--audience AUDIENCE] [--mode MODE] [--language LANG]",
+      "arguments": [
+        {
+          "name": "files",
+          "type": "string[]",
+          "optional": true,
+          "description": "Source files (slides.json, budget.html, doc.md, etc.)"
+        }
+      ],
+      "options": [
+        {
+          "name": "--audience",
+          "type": "string",
+          "values": ["funder", "scientist", "clinician", "institution", "public"],
+          "description": "Generate one version per audience (comma-separated for multiple)"
+        },
+        {
+          "name": "--mode",
+          "type": "string",
+          "values": ["layered"],
+          "default": "layered",
+          "description": "Single navigable document with executive summary → detail → annexes"
+        },
+        {
+          "name": "--language",
+          "type": "string",
+          "values": ["EN", "FR"],
+          "default": "EN",
+          "description": "Output language"
+        }
+      ]
+    }
+  }
+}
