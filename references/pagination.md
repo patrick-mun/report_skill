@@ -78,4 +78,6 @@ No dependency, no network — the file stays self-contained.
 
 ### Why overflow detection is critical
 
-If `paginate.js` detects a sheet whose `scrollHeight` exceeds `clientHeight + 2px`, it marks it as overflowing. This is a **sign to split the content**, not a minor warning. A sheet that overflows on screen will be cut off or misaligned when printed, depending on the browser and printer settings.
+`paginate.js` flags a sheet when its `scrollHeight` exceeds **one A4 page height** (297 mm, measured live so it is zoom/DPI-safe). This is a **sign to split the content**, not a minor warning.
+
+The comparison is against a fixed one-page reference on purpose. Because `.sheet` uses `min-height: 297mm`, an over-filled sheet simply **grows taller** on screen instead of clipping — so it can look perfectly fine while scrolling, yet `clientHeight` grows to equal `scrollHeight`. Any check of `scrollHeight > clientHeight` would therefore never fire. In print the hard A4 boundary then splits the over-tall sheet across two physical pages: content is cut mid-section, footers land on every other page, and the whole document appears shifted. Trust the red flag, not the on-screen scroll.
