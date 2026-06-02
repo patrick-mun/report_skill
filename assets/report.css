@@ -176,7 +176,7 @@ nav.toc-side a:hover { color: var(--accent); }
 /* Stat cards — headline figures */
 .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 1.4em 0; }
 .stat-card { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; }
-.stat-card .num { font-family: var(--font-head); font-size: 1.7em; font-weight: 700; color: var(--accent); line-height: 1.1; }
+.stat-card .num { font-family: var(--font-head); font-size: clamp(1.1em, 3.5vw, 1.7em); font-weight: 700; color: var(--accent); line-height: 1.1; }
 .stat-card .label { font-size: 0.82em; color: var(--muted); margin-top: 4px; }
 
 /* Flow diagram — process / architecture */
@@ -185,6 +185,8 @@ nav.toc-side a:hover { color: var(--accent); }
 .flow-step.alt { background: var(--accent-soft); }
 .flow-step:not(:last-child) { margin-right: 22px; }
 .flow-step:not(:last-child)::after { content: "\203A"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); font-size: 1.6em; color: var(--accent); }
+/* Dense flow modifier — use for 5-6 steps or multi-line text per box */
+.flow--small .flow-step { min-width: 60px; font-size: 0.78em; padding: 7px 8px; }
 
 /* Composition bar — 100% stacked share (e.g. admixture) */
 .compo-bar { display: flex; height: 30px; border-radius: 5px; overflow: hidden; margin: 1em 0 0.6em; border: 1px solid var(--border); }
@@ -444,7 +446,7 @@ li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
   h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
   table, figure, aside.callout, .summary { page-break-inside: avoid; break-inside: avoid; }
   p { orphans: 3; widows: 3; }
-  pre { white-space: pre-wrap; overflow-x: visible; }
+  pre { white-space: pre-wrap; overflow-x: visible; overflow-wrap: break-word; word-break: break-all; }
 
   /* Hide screen-only navigation helpers if any are added */
   .no-print { display: none !important; }
