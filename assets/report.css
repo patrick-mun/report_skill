@@ -431,10 +431,7 @@ li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
 /* ===================================================================
    PRINT — A4, clean margins, sensible page breaks
    =================================================================== */
-@page {
-  size: A4;
-  margin: 2cm;
-}
+/* Note: @page margins handled by .sheet padding above (16mm 18mm 12mm) */
 
 @media print {
   body { background: #fff; font-size: 11.5pt; }
