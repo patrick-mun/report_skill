@@ -5,10 +5,14 @@
 :root {
   --accent: #1f4e79;          /* sober professional blue */
   --accent-soft: #eaf0f6;
+  --accent2: #2e5c94;         /* darker blue for variants */
+  --accent3: #e85d38;         /* warm orange */
   --text: #1a1a1a;
   --muted: #555;
   --border: #d9d9d9;
   --callout-bg: #f4f7fb;
+  --green: #10b981;           /* emerald green */
+  --purple: #8b5cf6;          /* violet */
   --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-head: Georgia, "Times New Roman", serif;
   --max-width: 800px;
@@ -49,6 +53,28 @@ p { margin: 0 0 1em; }
 strong { color: #000; }
 a { color: var(--accent); }
 
+/* Code & preformatted text */
+pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  background: #f4f4f4;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 13px;
+  margin: 0.8em 0;
+  overflow-x: auto;
+  white-space: pre;
+  word-break: normal;
+}
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.88em;
+  background: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
 /* ---------- Executive summary ---------- */
 .summary {
   background: var(--accent-soft);
@@ -84,7 +110,7 @@ li { margin-bottom: 0.3em; }
 
 /* ---------- Tables ---------- */
 table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; }
-th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; word-break: break-word; overflow-wrap: break-word; }
 thead th { background: var(--accent); color: #fff; }
 tbody tr:nth-child(even) { background: #f7f9fb; }
 
@@ -117,6 +143,15 @@ nav.toc-side a:hover { color: var(--accent); }
 /* ---------- References ---------- */
 .references ol { padding-left: 1.4em; }
 .references li { margin-bottom: 0.5em; font-size: 0.93em; }
+.refs-list {
+  font-size: 0.82em;
+  line-height: 1.5;
+  color: var(--muted);
+  padding-left: 1.4em;
+}
+.refs-list li {
+  margin-bottom: 0.45em;
+}
 
 /* ---------- Footer ---------- */
 .report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); }
@@ -134,7 +169,7 @@ nav.toc-side a:hover { color: var(--accent); }
 
 /* Flow diagram — process / architecture */
 .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 1.4em 0; }
-.flow-step { flex: 1 1 0; min-width: 120px; background: #fff; border: 1.5px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 0.86em; text-align: center; display: flex; align-items: center; justify-content: center; position: relative; }
+.flow-step { flex: 1 1 0; min-width: 80px; background: #fff; border: 1.5px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 0.86em; text-align: center; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; word-break: break-word; hyphens: auto; }
 .flow-step.alt { background: var(--accent-soft); }
 .flow-step:not(:last-child) { margin-right: 22px; }
 .flow-step:not(:last-child)::after { content: "\203A"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); font-size: 1.6em; color: var(--accent); }
@@ -150,19 +185,21 @@ nav.toc-side a:hover { color: var(--accent); }
 
 /* Horizontal bar chart rows (CSS, label + bar + value) */
 .hbar { margin: 1em 0; }
-.hbar .row { display: grid; grid-template-columns: 180px 1fr auto; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.88em; }
+.hbar .row { display: grid; grid-template-columns: 225px 1fr auto; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.82em; }
 .hbar .track { background: #eef1f4; border-radius: 4px; height: 18px; overflow: hidden; }
 .hbar .fill { height: 100%; background: var(--accent); border-radius: 4px; }
+.hbar .fill.g { background: var(--green); }
+.hbar .fill.o { background: var(--accent3); }
 .hbar .val { font-variant-numeric: tabular-nums; color: var(--muted); }
 
 /* Gantt — phases over a timeline */
 .gantt { margin: 1.2em 0; font-size: 0.84em; }
-.gantt .row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; }
+.gantt .row { display: grid; grid-template-columns: 195px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; }
 .gantt .lane { position: relative; height: 20px; background: #eef1f4; border-radius: 4px; }
 .gantt .bar { position: absolute; height: 100%; border-radius: 4px; background: var(--accent); }
 .gantt .bar.free { background: #0D9488; }
 .gantt .bar.ia { background: #7C3AED; }
-.gantt .scale { display: grid; grid-template-columns: 170px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; }
+.gantt .scale { display: grid; grid-template-columns: 195px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; }
 .gantt .ticks { display: flex; justify-content: space-between; }
 
 /* Timeline — historical / sequential markers */
