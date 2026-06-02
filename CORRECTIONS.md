@@ -101,6 +101,62 @@ bash build-inline-css.sh
 
 ---
 
+## Phase 2 — HTML & CSS Utility Classes (2 June 2026)
+
+### Context
+Audit of the skill's templates/examples for Phase 2 corrections. Goal: add CSS utility classes to support future document generation without inline styles.
+
+### Status: Step 1 of 2 (Skill Improvements) ✅
+
+#### Audit Findings
+- ✅ **V10**: No duplicate width/height on SVG logos
+- ✅ **V11**: All existing SVG examples have `role="img"` + `aria-label` 
+- ✅ **V12**: No grids with inline display:grid found in templates
+- ⚠️ **V13**: 16–44 hardcoded hex colors per file (inline styles) — refactoring deferred
+- ✅ **V14**: No `<pre>` blocks in skill examples (only in complex generated documents)
+
+#### Changes Applied — Phase 2a (Skill Infrastructure)
+
+**New CSS Utility Classes Added** to `assets/report.css`:
+
+```css
+/* Pillar/conclusion grid — supports V12 correction */
+.pillar-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 9px; 
+  margin-top: 0.4em; 
+  font-size: 0.86em; 
+}
+.pillar-grid .item { 
+  background: #fff; 
+  border: 1px solid #a7f3d0; 
+  border-radius: 4px; 
+  padding: 7px 9px; 
+}
+
+/* Color classes for composition bars — supports V13 correction */
+.compo-afr { background: var(--green); }       /* African/Malagasy */
+.compo-ind { background: var(--accent3); }     /* South Asian */
+.compo-eur { background: var(--accent); }      /* European */
+.compo-zar { background: #D97706; }            /* Zarabe/Gujarati */
+.compo-chin { background: var(--purple); }    /* Chinese/Asian */
+
+/* Legend swatch colors */
+.legend-afr { background: var(--green); }
+.legend-ind { background: var(--accent3); }
+.legend-eur { background: var(--accent); }
+.legend-zar { background: #D97706; }
+.legend-chin { background: var(--purple); }
+```
+
+**Files Synchronized**: 6 examples + 6 templates via `build-inline-css.sh` ✅
+
+#### Next Step: Phase 2b (Document Example Testing)
+Apply V10-V14 corrections to the real-world example document (`genome_reunion_synthese_scientifique_2.html`) to demonstrate practical implementation and verify CSS classes work as expected.
+
+---
+
 ## Healthy Points (no action required)
 
 - Skill architecture complies with Claude Code conventions (SKILL.md / references / assets / templates / examples).
