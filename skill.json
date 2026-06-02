@@ -3,6 +3,13 @@
   "name": "Report Formatter",
   "description": "Consolidate multi-source scientific documents into clean, print-to-PDF HTML reports",
   "version": "1.0.0",
+  "author": "Patrick Munier",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrick-mun/report_skill"
+  },
+  "homepage": "https://github.com/patrick-mun/report_skill",
   "triggers": ["/report"],
   "path": "./",
   "commands": {
