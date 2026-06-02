@@ -71,6 +71,14 @@ Inline `assets/report.css` (in `<style>`) and `assets/paginate.js` (in a
 `<script>` at the end of `<body>`) so the output stays a single portable file.
 See `references/pagination.md`.
 
+## Visual components
+
+The skill provides a library of reusable, print-safe visual components for charts,
+diagrams, and data display: stat cards, bar charts, flow diagrams, Gantt timelines,
+composition bars, and more. See `references/visuals.md` for component selection,
+usage patterns, and responsive modifiers (e.g., `.flow--small` for dense flows,
+automatic font scaling in stat cards).
+
 ## Installation
 
 Copy the `report-formatter/` directory into your skills folder

@@ -122,3 +122,51 @@ score(i) =
 ```
 
 Règles de coupure : couper avant un argument `--flag` ou un opérateur (`+`, `|`). Ne jamais couper au milieu d'un chemin, d'un nom de fichier ou d'une valeur.
+
+## Usage patterns et modifieurs adaptatifs
+
+The skill's components are built to degrade gracefully even when stretched beyond their nominal limits. But knowing when and how to use **modifiers** and **adaptive patterns** ensures better results.
+
+### `.flow` and `.flow--small`
+
+**Default** (`.flow`): use for **≤ 4 steps** with short text (single line per box).
+- `min-width: 80px`, `font-size: 0.86em`
+- On A4 at normal zoom, 4 boxes fit comfortably on one line.
+
+**Modifier** (`.flow--small`): use for **5–6 steps** or when boxes contain `<br>` or `<small>` elements.
+- `min-width: 60px`, `font-size: 0.78em`
+- Example: `<div class="flow flow--small">...</div>`
+- Trades density for readability: all 6 boxes fit horizontally on A4.
+
+**When in doubt**: if you have 5+ steps, use `.flow--small` or **replace with SVG inline** (see "Règle de bascule" above).
+
+### `.stat-card` and adaptive font sizing
+
+`.stat-card .num` now uses `font-size: clamp(1.1em, 3.5vw, 1.7em)`:
+- On wide screens / 4-card grids: displays at 1.7em (crisp, large numbers)
+- On narrow cards or long values: shrinks automatically down to 1.1em
+- Example: `~1 403 000 €` (12 chars) will fit without truncation, scaling down only as needed
+
+**No modifier required** — this is automatic. But if you have many long values (budgets, metrics), consider `.hbar` instead (horizontal bar chart), which is designed for comparative numerical data.
+
+### `<pre>` blocks and overflow handling
+
+Print-safe rules are now automatic:
+- Lines ≤ 72 chars: display as-is
+- Lines > 72 chars (rare if authors follow convention): wrapped in print using `overflow-wrap: break-word` + `word-break: break-all`
+- Long tokens without spaces (URLs, paths, formulas) are broken at the page margin rather than clipped
+
+**Best practice**: still reformats long lines with `\` continuation (72-char convention) — it improves screen readability and ensures clean breaks. But if a long line slips through, the CSS will handle it gracefully in print.
+
+### Component selection flowchart
+
+| You want to show... | Use... | Rationale |
+|---|---|---|
+| One or two key figures | `.stat-card` | Big, prominent, minimal text. Font scales automatically for long values. |
+| Many metrics to compare | `.hbar` | Bars show relative magnitude; labels fit longer text. |
+| Process / sequence (≤ 4 steps, short text) | `.flow` CSS | Minimal, clean arrows and boxes. |
+| Process / sequence (5+ steps, or multi-line text) | `.flow--small` or SVG inline | `.flow--small` stays on one line; SVG gives full control over layout. |
+| Composition / shares (e.g. admixture) | `.compo-bar` + `.legend` | 100% stacked; easy to read proportions. |
+| Timeline / schedule | `.gantt` or `.timeline` | Gantt for durations & overlaps; Timeline for isolated events. |
+| Code / formulas / commands | `<pre>` | Respects whitespace; print-safe word-breaking. Use 72-char continuation for readability. |
+
