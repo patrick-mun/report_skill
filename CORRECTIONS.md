@@ -203,6 +203,19 @@ Issues identified during real-world use of the skill on a complex scientific rep
 
 ---
 
+## Skill Robustness Corrections — Phase 4 (2 June 2026)
+
+Issues identified by observing rendering failures on a real-world document. Goal: make the skill degrade gracefully even if the document author doesn't follow every recommendation perfectly.
+
+| # | Severity | Area | Issue Found | Proposed Fix | Status |
+|---|----------|------|-------------|--------------|--------|
+| 20 | 🔴 Critical | `assets/report.css` | `.flow-step` `min-width: 80px` causes 6-step flows to wrap onto 2 lines on A4 — the component has no `max-steps` guard in CSS. | Reduce `.flow-step` `min-width` to `60px` and add `font-size: 0.82em` so 5–6 boxes stay on one line. Also add a `.flow--small` modifier for dense flows. | ⬜ À faire |
+| 21 | 🟠 High | `assets/report.css` | `.stat-card .num` fixed at `font-size: 1.7em` clips values longer than ~11 chars (e.g. `~1 403 000 €`) on 4-card grids. No adaptive sizing. | Replace with `font-size: clamp(1.1em, 3.5vw, 1.7em)` so the value scales down automatically on narrow cards. | ⬜ À faire |
+| 22 | 🟠 High | `assets/report.css` | `@media print { pre { white-space: pre-wrap } }` is present but missing `overflow-wrap: break-word` — very long tokens (paths, URLs, formulas) without spaces are still cut at the page margin. | Add `overflow-wrap: break-word; word-break: break-all` to the print `pre` rule as a last-resort fallback. | ⬜ À faire |
+| 23 | 🟡 Medium | `assets/report.css` | No `.flow--small` CSS modifier exists: authors have no supported way to signal that a flow should render at reduced size without inline styles. | Add `.flow--small .flow-step { min-width: 60px; font-size: 0.78em; padding: 7px 8px; }` to the CSS. | ⬜ À faire |
+
+---
+
 ## Healthy Points (no action required)
 
 - Skill architecture complies with Claude Code conventions (SKILL.md / references / assets / templates / examples).
