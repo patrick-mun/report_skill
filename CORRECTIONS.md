@@ -97,7 +97,7 @@ bash build-inline-css.sh
 | **V12** | 🟡 Low | HTML | ✅ **DONE** | Replace `.pillar-grid` inline styles with CSS class | Maintainability: easier to update colors across the skill |
 | **V13** | 🟡 Low | HTML+CSS | ✅ **DONE** | Replace ~40 hardcoded hex colors with CSS variables + utility classes across 6 examples | Palette consistency — projects override `--accent` etc. once on `<body>` and all visuals follow |
 | **V14** | 🟡 Low | HTML | ✅ Audited | Wrap all `<pre>` content with `<code>` tags semantically | Compliance: proper semantic HTML5 for preformatted code |
-| **V15** | 🟢 Minimal | Note | ⏳ Deferred | Inconsistent class naming (`.lbl` in stat-cards vs `.label` in callouts) | Document for future unification — no functional issue |
+| **V15** | 🟢 Minimal | CSS+HTML | ✅ **DONE** | Rename `.lbl` → `.label` for naming consistency across all components | One convention throughout — contributors no longer have to guess |
 
 ---
 
