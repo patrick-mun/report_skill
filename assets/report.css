@@ -170,7 +170,7 @@ nav.toc-side a:hover { color: var(--accent); }
 .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 1.4em 0; }
 .stat-card { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; }
 .stat-card .num { font-family: var(--font-head); font-size: 1.7em; font-weight: 700; color: var(--accent); line-height: 1.1; }
-.stat-card .lbl { font-size: 0.82em; color: var(--muted); margin-top: 4px; }
+.stat-card .label { font-size: 0.82em; color: var(--muted); margin-top: 4px; }
 
 /* Flow diagram — process / architecture */
 .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 1.4em 0; }
@@ -262,7 +262,7 @@ nav.toc-side a:hover { color: var(--accent); }
 /* Stat-card modifier: dark background with white text (use on top-line totals) */
 .stat-card.on-accent { background: var(--accent); }
 .stat-card.on-accent .num { color: var(--on-dark); }
-.stat-card.on-accent .lbl { color: var(--on-dark-muted); }
+.stat-card.on-accent .label { color: var(--on-dark-muted); }
 
 @media print {
   .flow-step, .stat-card, .gantt .lane, .hbar .track { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
