@@ -13,6 +13,11 @@
   --callout-bg: #f4f7fb;
   --green: #10b981;           /* emerald green */
   --purple: #8b5cf6;          /* violet */
+  --zar: #D97706;             /* amber, for composition variants */
+  --on-dark: #ffffff;         /* text on dark backgrounds */
+  --on-dark-muted: #cfe0ea;   /* muted text on dark backgrounds */
+  --shade-light: #b9cad9;     /* very light accent shade (e.g. gantt target) */
+  --shade-mid: #3a7ca5;       /* mid accent shade (e.g. gantt actual) */
   --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
   --font-head: Georgia, "Times New Roman", serif;
   --max-width: 800px;
@@ -197,8 +202,8 @@ nav.toc-side a:hover { color: var(--accent); }
 .gantt .row { display: grid; grid-template-columns: 195px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; }
 .gantt .lane { position: relative; height: 20px; background: #eef1f4; border-radius: 4px; }
 .gantt .bar { position: absolute; height: 100%; border-radius: 4px; background: var(--accent); }
-.gantt .bar.free { background: #0D9488; }
-.gantt .bar.ia { background: #7C3AED; }
+.gantt .bar.free { background: var(--green); }
+.gantt .bar.ia { background: var(--purple); }
 .gantt .scale { display: grid; grid-template-columns: 195px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; }
 .gantt .ticks { display: flex; justify-content: space-between; }
 
@@ -234,15 +239,30 @@ nav.toc-side a:hover { color: var(--accent); }
 .compo-afr { background: var(--green); }           /* African/Malagasy */
 .compo-ind { background: var(--accent3); }         /* South Asian */
 .compo-eur { background: var(--accent); }          /* European */
-.compo-zar { background: #D97706; }                /* Zarabe/Gujarati */
+.compo-zar { background: var(--zar); }             /* Zarabe/Gujarati */
 .compo-chin { background: var(--purple); }        /* Chinese/Asian */
 
 /* Legend swatch colors */
 .legend-afr { background: var(--green); }
 .legend-ind { background: var(--accent3); }
 .legend-eur { background: var(--accent); }
-.legend-zar { background: #D97706; }
+.legend-zar { background: var(--zar); }
 .legend-chin { background: var(--purple); }
+
+/* Generic background utility classes (use for swatches, bars, or any colored block) */
+.bg-accent { background: var(--accent); }
+.bg-accent2 { background: var(--accent2); }
+.bg-accent3 { background: var(--accent3); }
+.bg-green { background: var(--green); }
+.bg-purple { background: var(--purple); }
+.bg-zar { background: var(--zar); }
+.bg-shade-light { background: var(--shade-light); }
+.bg-shade-mid { background: var(--shade-mid); }
+
+/* Stat-card modifier: dark background with white text (use on top-line totals) */
+.stat-card.on-accent { background: var(--accent); }
+.stat-card.on-accent .num { color: var(--on-dark); }
+.stat-card.on-accent .lbl { color: var(--on-dark-muted); }
 
 @media print {
   .flow-step, .stat-card, .gantt .lane, .hbar .track { -webkit-print-color-adjust: exact; print-color-adjust: exact; }

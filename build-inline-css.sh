@@ -11,9 +11,15 @@ TARGETS=(
   "examples/exemple-pro.html"
   "examples/exemple-genome-reunion-scientifique.html"
   "examples/exemple-genome-reunion-financier.html"
+  "examples/example-professional.html"
+  "examples/example-genome-meeting-scientific.html"
+  "examples/example-genome-meeting-funder.html"
   "templates/professionnel.html"
   "templates/recherche.html"
   "templates/dossier-scientifique.html"
+  "templates/professional.html"
+  "templates/research.html"
+  "templates/scientific-dossier.html"
 )
 
 echo "=== CSS Synchronization ==="

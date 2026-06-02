@@ -90,14 +90,14 @@ bash build-inline-css.sh
 
 ### Planned Corrections — Phase 2 (Non-critical, HTML examples only)
 
-| # | Severity | Type | Correction | Impact |
-|---|---|---|---|---|
-| **V10** | 🟡 Low | HTML | Remove duplicate `width`/`height` attributes from logo `<svg>` | No CSS conflict with rule `.cover-logo svg { height: 58px; width: auto }` |
-| **V11** | 🟡 Low | HTML | Add `role="img"` and `aria-label` to 4 SVG elements | Accessibility: screen readers will announce figure titles |
-| **V12** | 🟡 Low | HTML | Replace `.pillar-grid` inline styles with CSS class | Maintainability: easier to update colors across the skill |
-| **V13** | 🟡 Low | HTML | Replace 20 hardcoded hex colors with CSS variables (partial) | Palette consistency — SVG colors remain hardcoded (unavoidable) |
-| **V14** | 🟡 Low | HTML | Wrap all `<pre>` content with `<code>` tags semantically | Compliance: proper semantic HTML5 for preformatted code |
-| **V15** | 🟢 Minimal | Note | Inconsistent class naming (`.lbl` in stat-cards vs `.label` in callouts) | Document for future unification — no functional issue |
+| # | Severity | Type | Status | Correction | Impact |
+|---|---|---|---|---|---|
+| **V10** | 🟡 Low | HTML | ✅ Audited | Remove duplicate `width`/`height` attributes from logo `<svg>` | No CSS conflict with rule `.cover-logo svg { height: 58px; width: auto }` |
+| **V11** | 🟡 Low | HTML | ✅ Audited | Add `role="img"` and `aria-label` to 4 SVG elements | Accessibility: screen readers will announce figure titles |
+| **V12** | 🟡 Low | HTML | ✅ **DONE** | Replace `.pillar-grid` inline styles with CSS class | Maintainability: easier to update colors across the skill |
+| **V13** | 🟡 Low | HTML+CSS | ✅ **DONE** | Replace ~40 hardcoded hex colors with CSS variables + utility classes across 6 examples | Palette consistency — projects override `--accent` etc. once on `<body>` and all visuals follow |
+| **V14** | 🟡 Low | HTML | ✅ Audited | Wrap all `<pre>` content with `<code>` tags semantically | Compliance: proper semantic HTML5 for preformatted code |
+| **V15** | 🟢 Minimal | Note | ⏳ Deferred | Inconsistent class naming (`.lbl` in stat-cards vs `.label` in callouts) | Document for future unification — no functional issue |
 
 ---
 
@@ -154,6 +154,38 @@ Audit of the skill's templates/examples for Phase 2 corrections. Goal: add CSS u
 
 #### Next Step: Phase 2b (Document Example Testing)
 Apply V10-V14 corrections to the real-world example document (`genome_reunion_synthese_scientifique_2.html`) to demonstrate practical implementation and verify CSS classes work as expected.
+
+---
+
+## Phase 2c — V13 Refactor: hex → CSS variables (2 June 2026)
+
+### Context
+The Phase 2a audit deferred V13 ("refactoring of inline hex colors") because the use case was unclear. After explicit user request ("je n'aime pas les choses non maintenables"), V13 was completed end-to-end across the skill.
+
+### Problem solved
+Before V13, the skill claimed to support project palette overrides, but the examples contained 40+ inline `style="background:#XXXXXX"` attributes that bypassed the CSS variable system entirely. A project could override `--accent` in `:root`, but those changes did not propagate to inline-styled elements — defeating the override mechanism.
+
+### Changes to `assets/report.css`
+- Added 5 new CSS variables: `--zar`, `--on-dark`, `--on-dark-muted`, `--shade-light`, `--shade-mid`.
+- Replaced 2 hardcoded hex values in existing rules: `.compo-zar` and `.legend-zar` now use `var(--zar)`.
+- Replaced 2 hardcoded hex values in `.gantt .bar.free` (`var(--green)`) and `.gantt .bar.ia` (`var(--purple)`).
+- Added 8 generic background utility classes: `.bg-accent`, `.bg-accent2`, `.bg-accent3`, `.bg-green`, `.bg-purple`, `.bg-zar`, `.bg-shade-light`, `.bg-shade-mid`.
+- Added a stat-card modifier: `.stat-card.on-accent` (dark background with white text and muted secondary).
+
+### Changes to examples (6 files)
+- **Génome examples (4 files)**: defined project palette as **inline CSS variable overrides on `<body>`** (e.g., `style="--accent:#0B1F3A;--green:#0D9488;…"`) — palette in one place per file, survives `build-inline-css.sh` sync.
+- Replaced 14 ancestry composition + legend hex with semantic classes (`.compo-afr`, `.legend-afr`, etc., which already existed but were unused).
+- Replaced 6 phase-legend hex with `.bg-accent2` + `.legend-afr` + `.legend-chin`.
+- Replaced 6 stat-card inline white/muted text with `class="stat-card on-accent"`.
+- **Pro examples (2 files)**: replaced 4 gantt swatch hex with `.bg-shade-light` and `.bg-shade-mid`.
+
+### Result
+- **Inline hex eliminated**: ~40 → 0 (in Génome examples, only the single body palette override remains, which IS the source of truth).
+- **Templates**: 0 inline hex (already clean — confirmed by audit).
+- **Palette override works end-to-end**: changing `--accent` on `<body>` now propagates to every visual element.
+
+### Tooling
+Extended `build-inline-css.sh` to sync all 12 files (was 6) — the EN versions were never being synced before.
 
 ---
 
