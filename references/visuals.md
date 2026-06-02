@@ -13,6 +13,21 @@ A wall of text — even well structured — slows reading. The whole point of HT
 
 Output must stay a **single self-contained file that prints cleanly to PDF**. JS chart libraries (Chart.js, D3) need a runtime and often render blank in print. Build visuals as **inline SVG** or **pure CSS** instead — portable, crisp at any zoom, and print-safe.
 
+### Marges internes des SVG inline
+
+Toujours laisser une marge de **8px minimum** entre le bord du `viewBox` et le premier élément visuel (titre ou axe). En pratique :
+- Premier `<text>` de titre : `y` ≥ `18`
+- Premier élément graphique (barre, axe) : `y` ≥ `30`
+
+Exemple :
+```svg
+<svg viewBox="0 0 480 140">
+  <text x="8" y="18" font-size="11" font-weight="600">Titre du graphique</text>
+  <!-- graphique à partir de y=30 -->
+  <line x1="50" y1="30" x2="50" y2="120" />
+</svg>
+```
+
 ## A small, high-value vocabulary of visuals
 
 | Need | Visual | Build with |
@@ -20,11 +35,27 @@ Output must stay a **single self-contained file that prints cleanly to PDF**. JS
 | Headline figures | **Stat cards** (big number + label) | CSS grid (`.stat-grid`) |
 | Composition / shares (e.g. admixture) | **Stacked 100% bar** or donut | inline SVG / CSS + legend |
 | Compare quantities (e.g. budget scenarios) | **Horizontal bar chart** | inline SVG |
-| Process / architecture | **Flow diagram** (boxes + arrows) | CSS flex (`.flow`) |
+| Process / architecture (≤ 4 steps, short text per box) | **Flow diagram** | CSS flex (`.flow`) |
+| Process / architecture (≥ 5 steps, or multi-line text per box) | **SVG inline** | inline SVG `<rect>` + `<text>` + `<path>` |
 | Schedule / phases | **Gantt / timeline** | CSS grid bars positioned by % |
 | History / steps in time | **Timeline** | CSS flex with markers |
 | A few qualitative components | **Labeled cards** (e.g. S_div) | CSS grid |
 | One key takeaway | **Callout box** | `.callout` |
+
+## Règle de bascule : `.flow` CSS vs SVG inline
+
+Utiliser **`.flow` CSS** si et seulement si toutes ces conditions sont vraies :
+- Le diagramme a **4 étapes au maximum**
+- Chaque boîte contient **une seule ligne de texte** (pas de `<br>`, pas de `<small>`)
+- Aucun élément inline (`<code>`, `<strong>`) dans les boîtes
+
+Utiliser **SVG inline** dès qu'une de ces conditions est vraie :
+- 5 étapes ou plus
+- Contenu multi-lignes dans au moins une boîte
+- Disposition non-linéaire (2 rangées intentionnelles, bifurcation, boucle)
+- Nécessité de dimensionner précisément pour A4 (ex. intégration dans une figure numérotée)
+
+Pour construire le SVG inline : `viewBox="0 0 680 90"` pour 6 boîtes, réduire proportionnellement pour moins. Boîtes en `<rect>`, texte en `<text>` + `<tspan>`, flèches en `<polyline>`. Envelopper dans `<figure role="img">` avec `<figcaption>`.
 
 ## Rules
 
@@ -38,3 +69,56 @@ Output must stay a **single self-contained file that prints cleanly to PDF**. JS
 ## Reusable components
 
 `assets/report.css` ships ready-made classes: `.stat-grid`/`.stat-card`, `.flow`/`.flow-step`, `.gantt`, `.hbar`, `.legend`, `.compo-bar`, `.timeline`. Use them so visuals stay consistent across reports.
+
+### Stat cards — limites de contenu
+
+`.stat-card .num` est rendu à `font-size: 1.7em`. À cette taille, la valeur affichable sans débordement sur une grille de 4 cartes est de **12 caractères maximum** (ex. `~1 474 000 €` = 12 chars ✓).
+
+Si la grille contient des valeurs plus longues ou si les cartes sont nombreuses, utiliser la classe modificatrice `.stat-grid--compact` et définir dans les overrides document :
+
+```css
+.stat-grid--compact .stat-card .num { font-size: 1.25em; }
+.stat-grid--compact .stat-card .label { font-size: 0.78em; }
+```
+
+Alternativement, remplacer les stat-cards par une `.hbar` comparative lorsque les valeurs représentent des montants à comparer — la `.hbar` est plus lisible pour ce type de donnée.
+
+## Blocs de code `<pre>`
+
+Les blocs `<pre>` sont réservés aux commandes, formules et extraits techniques reproductibles. Ils ne constituent pas un « visuel » au sens des graphiques, mais ils obéissent aux mêmes contraintes print-safe.
+
+### Seuil de largeur acceptable
+
+Seuil : **72 caractères par ligne** (convention bash/shell standard).
+Au-delà, la ligne déborde sur A4 à `font-size: 0.8em` (la valeur prescrite dans `assets/report.css`) et est coupée à l'impression.
+
+### Règle de détection
+
+Avant d'insérer un bloc `<pre>`, mesurer la ligne la plus longue :
+- ≤ 72 chars → insérer tel quel
+- > 72 chars → **reformater avec continuation shell `\`**
+
+### Convention de reformatage — continuation shell
+
+Couper les longues commandes shell avec `\` + indentation de 2 espaces :
+
+```bash
+# Avant
+plink2 --pfile data --geno 0.05 --mind 0.05 --maf 0.01 --make-pgen --out out
+
+# Après
+plink2 --pfile data \
+  --geno 0.05 --mind 0.05 --maf 0.01 \
+  --make-pgen --out out
+```
+
+Pour les formules mathématiques sur plusieurs termes, aligner les opérateurs :
+
+```
+score(i) =
+    w1 × composante1(i)
+  + w2 × composante2(i)
+  + w3 × composante3(i)
+```
+
+Règles de coupure : couper avant un argument `--flag` ou un opérateur (`+`, `|`). Ne jamais couper au milieu d'un chemin, d'un nom de fichier ou d'une valeur.

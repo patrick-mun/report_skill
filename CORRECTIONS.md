@@ -189,6 +189,20 @@ Extended `build-inline-css.sh` to sync all 12 files (was 6) — the EN versions 
 
 ---
 
+## Visual Quality Audit — CSS & Reference Corrections Phase 3 (2 June 2026)
+
+Issues identified during real-world use of the skill on a complex scientific report (`genome_reunion_synthese_scientifique.html`).
+
+| # | Severity | Area | Issue Found | Action Taken |
+|---|----------|------|-------------|--------------|
+| 15 | 🔴 Critical | `references/visuals.md` | No switch rule for `.flow` → SVG inline: the CSS component was recommended without a step-count limit, causing overflow at 5+ boxes on A4. | ✅ Added switch rule: ≤ 4 steps + simple text → `.flow` CSS; ≥ 5 steps or multi-line content → SVG inline. Added SVG construction guide (`viewBox`, `<rect>`, `<polyline>`, `<figure>`). |
+| 16 | 🔴 Critical | `assets/report.css` | Missing `pre code` reset rule and `@media print { white-space: pre-wrap }`: code blocks inside `<pre>` inherited double styling; lines were cut at print rather than wrapping. | ✅ Added `pre code` reset; added `pre { white-space: pre-wrap; overflow-x: visible }` to print media query. |
+| 17 | 🟠 High | `references/visuals.md` | No guidance on `<pre>` line length: lines > 72 chars overflow on A4 at `font-size: 0.8em`, with no prescribed continuation convention. | ✅ Added "Blocs de code `<pre>`" section: 72-char threshold, shell continuation `\` convention, operator-alignment rule for formulas. |
+| 18 | 🟠 High | `references/visuals.md` | No content limit for `.stat-card .num`: long values like `~1 403 000 €` overflowed or were clipped at `font-size: 1.7em` on 4-card grids. | ✅ Documented 12-char max, `.stat-grid--compact` modifier pattern with CSS override. |
+| 19 | 🟡 Medium | `references/visuals.md` | No internal margin rule for inline SVG: titles at `<text y="14">` touched the top edge of the viewBox, visually cramped especially inside `.sheet`. | ✅ Added margin rule: first `<text>` title at `y ≥ 18`, first graphical element at `y ≥ 30`. |
+
+---
+
 ## Healthy Points (no action required)
 
 - Skill architecture complies with Claude Code conventions (SKILL.md / references / assets / templates / examples).
