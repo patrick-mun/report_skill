@@ -209,6 +209,41 @@ nav.toc-side a:hover { color: var(--accent); }
 .timeline .ev::after { content: ""; position: absolute; top: 1px; left: 50%; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); }
 .timeline .ev .yr { font-weight: 700; color: var(--accent); display: block; }
 
+/* ===================================================================
+   UTILITY CLASSES FOR PHASE 2 REFACTORING
+   These classes support extracting inline styles to CSS.
+   Use instead of style="..." for better maintainability.
+   =================================================================== */
+
+/* Pillar/conclusion grid — replaces inline style="display:grid;grid-template-columns:..." */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 0.4em;
+  font-size: 0.86em;
+}
+.pillar-grid .item {
+  background: #fff;
+  border: 1px solid #a7f3d0;
+  border-radius: 4px;
+  padding: 7px 9px;
+}
+
+/* Color classes for composition bars and legends (replaces inline style="background:#...") */
+.compo-afr { background: var(--green); }           /* African/Malagasy */
+.compo-ind { background: var(--accent3); }         /* South Asian */
+.compo-eur { background: var(--accent); }          /* European */
+.compo-zar { background: #D97706; }                /* Zarabe/Gujarati */
+.compo-chin { background: var(--purple); }        /* Chinese/Asian */
+
+/* Legend swatch colors */
+.legend-afr { background: var(--green); }
+.legend-ind { background: var(--accent3); }
+.legend-eur { background: var(--accent); }
+.legend-zar { background: #D97706; }
+.legend-chin { background: var(--purple); }
+
 @media print {
   .flow-step, .stat-card, .gantt .lane, .hbar .track { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .stat-grid, .flow, .gantt, .hbar, .compo-bar, .timeline { break-inside: avoid; page-break-inside: avoid; }
