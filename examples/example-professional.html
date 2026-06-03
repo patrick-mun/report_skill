@@ -3,241 +3,1073 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Déploiement du télétravail — Bilan et recommandations</title>
+  <title>Remote Work Deployment — Review and Recommendations</title>
   <style>
-/* report.css — single stylesheet for professional reports. Screen styles for reading + @media print rules for clean A4 PDF output. When producing a final document, inline this file into a <style> block. */ :root { --accent: #1f4e79; /* sober professional blue */ --accent-soft: #eaf0f6; --accent2: #2e5c94; /* darker blue for variants */ --accent3: #e85d38; /* warm orange */ --text: #1a1a1a; --muted: #555; --border: #d9d9d9; --callout-bg: #f4f7fb; --green: #10b981; /* emerald green */ --purple: #8b5cf6; /* violet */ --zar: #D97706; /* amber, for composition variants */ --on-dark: #ffffff; /* text on dark backgrounds */ --on-dark-muted: #cfe0ea; /* muted text on dark backgrounds */ --shade-light: #b9cad9; /* very light accent shade (e.g. gantt target) */ --shade-mid: #3a7ca5; /* mid accent shade (e.g. gantt actual) */ --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif; --font-head: Georgia, "Times New Roman", serif; --max-width: 800px; } * { box-sizing: border-box; } body { font-family: var(--font-body); color: var(--text); line-height: 1.6; font-size: 16px; margin: 0; background: #f0f0f0; } /* The page wrapper mimics an A4 sheet on screen */ .page { max-width: var(--max-width); margin: 24px auto; background: #fff; padding: 48px 56px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12); } /* ---------- Headings ---------- */ h1, h2, h3 { font-family: var(--font-head); color: var(--accent); line-height: 1.25; } h1 { font-size: 2em; margin: 0 0 0.2em; } h2 { font-size: 1.4em; margin: 1.8em 0 0.5em; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.2em; } h3 { font-size: 1.15em; margin: 1.4em 0 0.4em; color: var(--text); } /* ---------- Document meta (title block) ---------- */ .report-meta { color: var(--muted); font-size: 0.95em; margin-bottom: 1.5em; } .report-meta .subtitle { font-size: 1.1em; color: var(--text); font-style: italic; } /* ---------- Paragraphs & text ---------- */ p { margin: 0 0 1em; } strong { color: #000; } a { color: var(--accent); } /* Code & preformatted text */ pre { font-family: "Courier New", Courier, monospace; font-size: 0.8em; line-height: 1.5; background: #f4f4f4; border: 1px solid var(--border); border-radius: 4px; padding: 10px 13px; margin: 0.8em 0; overflow-x: auto; white-space: pre; word-break: normal; } pre code { font-family: inherit; font-size: inherit; background: none; padding: 0; border-radius: 0; } code { font-family: "Courier New", Courier, monospace; font-size: 0.88em; background: #f0f0f0; padding: 1px 4px; border-radius: 3px; } /* ---------- Executive summary ---------- */ .summary { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 1.5em 0; border-radius: 0 4px 4px 0; } .summary h2 { margin-top: 0; border: none; } /* ---------- Callouts ("À retenir", "Point clé") ---------- */ aside.callout { background: var(--callout-bg); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 1.2em 0; border-radius: 0 4px 4px 0; } aside.callout .label { display: block; font-weight: 700; text-transform: uppercase; font-size: 0.78em; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 0.3em; } /* ---------- Lists ---------- */ ul, ol { margin: 0 0 1em; padding-left: 1.4em; } li { margin-bottom: 0.3em; } /* ---------- Tables ---------- */ table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; } th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; word-break: break-word; overflow-wrap: break-word; } thead th { background: var(--accent); color: #fff; } tbody tr:nth-child(even) { background: #f7f9fb; } /* ---------- Figures & captions ---------- */ figure { margin: 1.2em 0; text-align: center; } figure img { max-width: 100%; height: auto; } figcaption, .caption { font-size: 0.88em; color: var(--muted); font-style: italic; margin-top: 0.4em; } /* ---------- Table of contents (inline) ---------- */ nav.toc { background: #fafafa; border: 1px solid var(--border); padding: 12px 20px; margin: 1.5em 0; } nav.toc h2 { margin-top: 0; font-size: 1.1em; border: none; } nav.toc ol { padding-left: 1.2em; } /* ---------- Side table of contents (long dossiers, screen only) ---------- */ .dossier { max-width: 1100px; margin: 24px auto; display: grid; grid-template-columns: 230px 1fr; gap: 0; background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.12); } .dossier > .page { max-width: none; margin: 0; box-shadow: none; } nav.toc-side { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 32px 20px; background: #fafafa; border-right: 1px solid var(--border); font-size: 0.88em; } nav.toc-side h2 { font-size: 1em; border: none; margin: 0 0 0.6em; } nav.toc-side ol { list-style: none; padding-left: 0; margin: 0; } nav.toc-side ol ol { padding-left: 0.9em; } nav.toc-side a { color: var(--muted); text-decoration: none; display: block; padding: 2px 0; } nav.toc-side a:hover { color: var(--accent); } @media (max-width: 820px) { .dossier { grid-template-columns: 1fr; } nav.toc-side { display: none; } } /* ---------- References ---------- */ .references ol { padding-left: 1.4em; } .references li { margin-bottom: 0.5em; font-size: 0.93em; } .refs-list { font-size: 0.82em; line-height: 1.5; color: var(--muted); padding-left: 1.4em; } .refs-list li { margin-bottom: 0.45em; } /* ---------- Footer ---------- */ .report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); } /* =================================================================== VISUAL COMPONENTS (see references/visuals.md) Inline SVG / pure CSS — self-contained and print-safe. =================================================================== */ /* Stat cards — headline figures */ .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 1.4em 0; } .stat-card { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; } .stat-card .num { font-family: var(--font-head); font-size: clamp(1.1em, 3.5vw, 1.7em); font-weight: 700; color: var(--accent); line-height: 1.1; } .stat-card .label { font-size: 0.82em; color: var(--muted); margin-top: 4px; } /* Flow diagram — process / architecture */ .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 1.4em 0; } .flow-step { flex: 1 1 0; min-width: 80px; background: #fff; border: 1.5px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 0.86em; text-align: center; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; word-break: break-word; hyphens: auto; } .flow-step.alt { background: var(--accent-soft); } .flow-step:not(:last-child) { margin-right: 22px; } .flow-step:not(:last-child)::after { content: "A"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); font-size: 1.6em; color: var(--accent); } /* Dense flow modifier — use for 5-6 steps or multi-line text per box */ .flow--small .flow-step { min-width: 60px; font-size: 0.78em; padding: 7px 8px; } /* Composition bar — 100% stacked share (e.g. admixture) */ .compo-bar { display: flex; height: 30px; border-radius: 5px; overflow: hidden; margin: 1em 0 0.6em; border: 1px solid var(--border); } .compo-bar span { display: block; height: 100%; } /* Legend (shared by compo-bar, charts) */ .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0.4em 0 1em; font-size: 0.85em; color: var(--muted); } .legend .item { display: flex; align-items: center; gap: 6px; } .legend .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; } /* Horizontal bar chart rows (CSS, label + bar + value) */ .hbar { margin: 1em 0; } .hbar .row { display: grid; grid-template-columns: 225px 1fr auto; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.82em; } .hbar .track { background: #eef1f4; border-radius: 4px; height: 18px; overflow: hidden; } .hbar .fill { height: 100%; background: var(--accent); border-radius: 4px; } .hbar .fill.g { background: var(--green); } .hbar .fill.o { background: var(--accent3); } .hbar .val { font-variant-numeric: tabular-nums; color: var(--muted); } /* Gantt — phases over a timeline */ .gantt { margin: 1.2em 0; font-size: 0.84em; } .gantt .row { display: grid; grid-template-columns: 195px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; } .gantt .lane { position: relative; height: 20px; background: #eef1f4; border-radius: 4px; } .gantt .bar { position: absolute; height: 100%; border-radius: 4px; background: var(--accent); } .gantt .bar.free { background: var(--green); } .gantt .bar.ia { background: var(--purple); } .gantt .scale { display: grid; grid-template-columns: 195px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; } .gantt .ticks { display: flex; justify-content: space-between; } /* Timeline — historical / sequential markers */ .timeline { display: flex; gap: 0; margin: 1.2em 0; } .timeline .ev { flex: 1; position: relative; padding-top: 18px; text-align: center; font-size: 0.84em; } .timeline .ev::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 2px; background: var(--border); } .timeline .ev::after { content: ""; position: absolute; top: 1px; left: 50%; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); } .timeline .ev .yr { font-weight: 700; color: var(--accent); display: block; } /* =================================================================== UTILITY CLASSES FOR PHASE 2 REFACTORING These classes support extracting inline styles to CSS. Use instead of style="..." for better maintainability. =================================================================== */ /* Pillar/conclusion grid — replaces inline style="display:grid;grid-template-columns:..." */ .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 0.4em; font-size: 0.86em; } .pillar-grid .item { background: #fff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 7px 9px; } /* Color classes for composition bars and legends (replaces inline style="background:#...") */ .compo-afr { background: var(--green); } /* African/Malagasy */ .compo-ind { background: var(--accent3); } /* South Asian */ .compo-eur { background: var(--accent); } /* European */ .compo-zar { background: var(--zar); } /* Zarabe/Gujarati */ .compo-chin { background: var(--purple); } /* Chinese/Asian */ /* Legend swatch colors */ .legend-afr { background: var(--green); } .legend-ind { background: var(--accent3); } .legend-eur { background: var(--accent); } .legend-zar { background: var(--zar); } .legend-chin { background: var(--purple); } /* Generic background utility classes (use for swatches, bars, or any colored block) */ .bg-accent { background: var(--accent); } .bg-accent2 { background: var(--accent2); } .bg-accent3 { background: var(--accent3); } .bg-green { background: var(--green); } .bg-purple { background: var(--purple); } .bg-zar { background: var(--zar); } .bg-shade-light { background: var(--shade-light); } .bg-shade-mid { background: var(--shade-mid); } /* Stat-card modifier: dark background with white text (use on top-line totals) */ .stat-card.on-accent { background: var(--accent); } .stat-card.on-accent .num { color: var(--on-dark); } .stat-card.on-accent .label { color: var(--on-dark-muted); } @media print { /* Preserve colors for all visual components */ .flow-step, .stat-card, .gantt .lane, .hbar .track, .hbar .fill, .gantt .bar, aside.callout, .summary, .compo-bar span, .timeline .ev::after, .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar, .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin, .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin, h1, h2, h3, thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; } .stat-grid, .flow, .gantt, .hbar, .compo-bar, .timeline { break-inside: avoid; page-break-inside: avoid; } } /* =================================================================== A4 SHEET MODEL (paged layout) — see references/pagination.md The document is split into explicit .sheet elements of exactly 210x297mm. On screen they look like stacked sheets of paper (the grey gap marks the boundary to the next page); in print each .sheet is one physical A4 page. Each sheet carries a footer with a page number. Use this INSTEAD of the .page wrapper when print fidelity matters. =================================================================== */ body.paged { background: #e3e6ea; } .sheet { width: 210mm; min-height: 297mm; box-sizing: border-box; margin: 0 auto 12mm; /* the bottom gap marks the next page */ padding: 16mm 18mm 12mm; background: #fff; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; position: relative; } .sheet__body { flex: 1 1 auto; } .sheet__footer { flex: none; margin-top: 10px; padding-top: 6px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.78em; color: var(--muted); } .sheet__footer .pageno { margin-left: auto; font-variant-numeric: tabular-nums; } /* Screen-only overflow warning: flagged by paginate.js when content exceeds one A4 sheet, so the author knows to split the page. */ .sheet.is-overflowing { outline: 2px dashed #d4351c; } .sheet .overflow-flag { display: none; } .sheet.is-overflowing .overflow-flag { display: block; position: absolute; top: 4mm; right: 4mm; background: #d4351c; color: #fff; font-size: 0.7em; padding: 2px 7px; border-radius: 3px; font-family: var(--font-body); } /* =================================================================== COVER PAGE (.sheet--cover) Full-page title sheet. Not included in page numbering. =================================================================== */ .sheet--cover .sheet__body { display: flex; flex-direction: column; height: 100%; } .cover-logo { margin-bottom: auto; padding-bottom: 10mm; } .cover-logo svg { height: 58px; width: auto; } .cover-accent-band { height: 4px; background: var(--accent); border-radius: 2px; margin-bottom: 10mm; } .cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; } .cover-center h1 { font-family: var(--font-head); font-size: 2.1em; color: var(--accent); margin: 0 0 0.3em; line-height: 1.2; } .cover-center .cover-subtitle { font-size: 1.15em; color: var(--muted); font-style: italic; margin-bottom: 2mm; } .cover-meta { margin-top: auto; border-top: 1px solid var(--border); padding-top: 8mm; } .cover-meta table { font-size: 0.93em; width: 100%; } .cover-meta td { padding: 4px 14px 4px 0; border: none; background: none; vertical-align: top; } .cover-meta td:first-child { font-weight: 600; color: var(--accent); width: 110px; } /* =================================================================== TABLE OF CONTENTS PAGE (.sheet--toc) Clickable entries with dotted leaders and auto page numbers. paginate.js fills in .toc-page-num spans automatically. =================================================================== */ .sheet--toc h2 { font-size: 1.5em; margin-bottom: 8mm; border: none; } nav.toc-doc { margin-top: 4mm; } nav.toc-doc ol { list-style: none; padding: 0; margin: 0; } nav.toc-doc li { margin-bottom: 1px; } nav.toc-doc li.toc-sub { padding-left: 16px; } /* The clickable row: title … dots … page number */ a.toc-entry { display: flex; align-items: baseline; text-decoration: none; color: var(--text); padding: 4px 2px; border-radius: 3px; gap: 0; } a.toc-entry:hover { background: var(--accent-soft); } a.toc-entry:hover .toc-title { color: var(--accent); } .toc-title { flex: none; font-size: 0.96em; } li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); } .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px 4px; min-width: 20px; } .toc-page-num { flex: none; font-variant-numeric: tabular-nums; font-size: 0.9em; color: var(--muted); min-width: 20px; text-align: right; } @media print { /* Cover and TOC: preserve colors and styling */ .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta, .sheet--cover, .sheet--toc { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; } a.toc-entry { color: var(--text) !important; background: none !important; } } @page sheet { size: A4; margin: 0; } /* sheet supplies its own margins via padding */ @media print { body.paged { background: #fff; } .sheet { page: sheet; width: 210mm; min-height: 0; height: auto; margin: 0; padding: 16mm 18mm 12mm; box-shadow: none; page-break-after: always; break-after: page; } .sheet:last-child { page-break-after: auto; break-after: auto; } .sheet.is-overflowing { outline: none; } .sheet .overflow-flag { display: none !important; } } /* =================================================================== PRINT — A4, clean margins, sensible page breaks =================================================================== */ /* Default page box for the .page (non-paginated) reading model. The .sheet (paginated) model uses its own @page sheet { margin: 0 } above and supplies margins via padding, so this 2cm only applies to .page documents. */ @page { size: A4; margin: 2cm; } @media print { body { background: #fff; font-size: 11.5pt; } .page { max-width: none; margin: 0; padding: 0; box-shadow: none; } .dossier { display: block; max-width: none; margin: 0; box-shadow: none; } nav.toc-side { display: none !important; } /* Avoid breaking inside these blocks */ h1, h2, h3 { page-break-after: avoid; break-after: avoid; } table, figure, aside.callout, .summary { page-break-inside: avoid; break-inside: avoid; } p { orphans: 3; widows: 3; } pre { white-space: pre-wrap; overflow-x: visible; overflow-wrap: break-word; word-break: break-all; } /* Hide screen-only navigation helpers if any are added */ .no-print { display: none !important; } a { color: #000; text-decoration: none; } } 
-</style>
+/* report-linear.css — inlined for standalone use */
+  </style>
 </head>
-<body class="paged" lang="en">
+/* ==============================================
+   report-linear.css — Linear Flux Model + CSS @page Pagination
 
-  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
-  <section class="sheet sheet--cover">
-    <div class="sheet__body">
-      <div class="cover-logo">
-        <!-- Monogramme typographique en l'absence de logo -->
-        <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">DRH</span>
-        <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Société Exemple</span>
-      </div>
-      <div class="cover-accent-band"></div>
-      <div class="cover-center">
-        <h1>Déploiement du télétravail</h1>
-        <div class="cover-subtitle">Bilan de la première année et recommandations</div>
-      </div>
-      <div class="cover-meta">
-        <table>
-          <tr><td>Author</td><td>Direction des ressources humaines</td></tr>
-          <tr><td>Reviewer</td><td>Direction générale · Direction informatique</td></tr>
-          <tr><td>Date</td><td>1ᵉʳ juin 2026</td></tr>
-          <tr><td>Version</td><td>1.0</td></tr>
-          <tr><td>Diffusion</td><td>Interne restreinte</td></tr>
-          <tr><td>Contact</td><td>rh@exemple.fr</td></tr>
-        </table>
-      </div>
+   MIGRATION FROM .sheet MODEL:
+   - Removes explicit .sheet pagination boxes (210x297mm)
+   - Uses browser-native CSS @page + break-* rules
+   - Simpler, maintainable, Word-like editable flow
+
+   STRUCTURE:
+   1. CSS Custom Properties (color palette, fonts)
+   2. Base styles (*, body, typography)
+   3. Content components (callouts, lists, tables, figures)
+   4. Visual elements (stat-cards, charts, diagrams)
+   5. Footer & header utilities
+   6. Screen layout rules
+   7. @page rule (A4 pagination)
+   8. @media print rules (page breaks, spacing, colors)
+   ============================================== */
+
+/* ========== SECTION 1: CSS CUSTOM PROPERTIES ==========
+   All design tokens: colors, fonts, spacing.
+   Centralized for easy theming. */
+
+:root {
+  /* Color palette — professional, accessible */
+  --accent: #1f4e79;          /* sober professional blue */
+  --accent-soft: #eaf0f6;     /* light blue background */
+  --accent2: #2e5c94;         /* darker blue for variants */
+  --accent3: #e85d38;         /* warm orange */
+
+  /* Text colors */
+  --text: #1a1a1a;            /* body text, highest contrast */
+  --muted: #555;              /* secondary text, hints */
+  --border: #d9d9d9;          /* borders and dividers */
+
+  /* Component backgrounds */
+  --callout-bg: #f4f7fb;      /* callout/aside blocks */
+
+  /* Accent colors for composition and charts */
+  --green: #10b981;           /* emerald green */
+  --purple: #8b5cf6;          /* violet */
+  --zar: #D97706;             /* amber/zarabe */
+
+  /* Text on colored backgrounds */
+  --on-dark: #ffffff;         /* text on dark backgrounds */
+  --on-dark-muted: #cfe0ea;   /* secondary text on dark */
+
+  /* Chart-specific shades (gantt, hbar) */
+  --shade-light: #b9cad9;     /* light accent (e.g. gantt target) */
+  --shade-mid: #3a7ca5;       /* mid accent (e.g. gantt actual) */
+
+  /* Typography */
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-head: Georgia, "Times New Roman", serif;
+
+  /* Layout */
+  --max-width: 800px;         /* reading column width (screen) */
+  --margin-page: 20mm;        /* A4 page margin */
+}
+
+/* ========== SECTION 2: BASE STYLES ==========
+   Reset + foundational element styles. */
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  /* Screen: light grey background to show document boundary */
+  background: #f0f0f0;
+}
+
+/* ========== SECTION 3: TYPOGRAPHY ==========
+   Headings, paragraphs, inline elements. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  color: var(--accent);
+  line-height: 1.25;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin-top: 1.8em;
+  border-bottom: 2px solid var(--accent-soft);
+  padding-bottom: 0.2em;
+  /* Page break before h2: each major section starts fresh on a new page */
+  page-break-before: always;
+  break-before: page;
+}
+
+h3 {
+  font-size: 1.15em;
+  margin-top: 1.4em;
+  color: var(--text);
+}
+
+/* Document meta (title block, subtitle, byline) */
+.report-meta {
+  color: var(--muted);
+  font-size: 0.95em;
+  margin-bottom: 1.5em;
+}
+
+.report-meta .subtitle {
+  font-size: 1.1em;
+  color: var(--text);
+  font-style: italic;
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 1em;
+}
+
+/* Emphasis */
+strong { color: #000; }
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Code & preformatted text */
+pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  background: #f4f4f4;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 13px;
+  margin: 0.8em 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: normal;
+  /* Prevent code blocks from splitting across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+pre code {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.88em;
+  background: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ========== SECTION 4: CONTENT BLOCKS ==========
+   Summary, callouts, lists, tables, figures. */
+
+/* Executive summary / highlight box */
+.summary {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  margin: 1.5em 0;
+  border-radius: 0 4px 4px 0;
+  /* Keep summary together on one page */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.summary h2 {
+  margin-top: 0;
+  border: none;
+  page-break-before: avoid;
+}
+
+/* Callouts ("À retenir", "Point clé") */
+aside.callout {
+  background: var(--callout-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 12px 16px;
+  margin: 1.2em 0;
+  border-radius: 0 4px 4px 0;
+  /* Callouts should not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+aside.callout .label {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* Tables — critical for avoiding splits */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.95em;
+  /* Tables must not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+thead th {
+  background: var(--accent);
+  color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background: #f7f9fb;
+}
+
+/* Figures & captions */
+figure {
+  margin: 1.2em 0;
+  text-align: center;
+  /* Figures should not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption, .caption {
+  font-size: 0.88em;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.4em;
+}
+
+/* Table of contents (inline, for small dossiers) */
+nav.toc {
+  background: #fafafa;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  margin: 1.5em 0;
+}
+
+nav.toc h2 {
+  margin-top: 0;
+  font-size: 1.1em;
+  border: none;
+  page-break-before: avoid;
+}
+
+nav.toc ol {
+  padding-left: 1.2em;
+}
+
+/* ========== SECTION 5: VISUAL COMPONENTS ==========
+   Self-contained, print-safe elements.
+   See references/visuals.md for detailed specs. */
+
+/* Stat cards — headline figures with values */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 1.4em 0;
+  /* Stat grids should stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.stat-card {
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.stat-card .num {
+  font-family: var(--font-head);
+  font-size: clamp(1.1em, 3.5vw, 1.7em);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.stat-card .label {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Stat-card variant: dark background with white text */
+.stat-card.on-accent {
+  background: var(--accent);
+}
+
+.stat-card.on-accent .num {
+  color: var(--on-dark);
+}
+
+.stat-card.on-accent .label {
+  color: var(--on-dark-muted);
+}
+
+/* Flow diagram — process steps / architecture */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  margin: 1.4em 0;
+  /* Flow diagrams stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.flow-step {
+  flex: 1 1 0;
+  min-width: 80px;
+  background: #fff;
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.86em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.flow-step.alt {
+  background: var(--accent-soft);
+}
+
+.flow-step:not(:last-child) {
+  margin-right: 22px;
+}
+
+.flow-step:not(:last-child)::after {
+  content: "\203A";
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6em;
+  color: var(--accent);
+}
+
+/* Dense flow modifier for 5-6 steps or multiline text */
+.flow--small .flow-step {
+  min-width: 60px;
+  font-size: 0.78em;
+  padding: 7px 8px;
+}
+
+/* Composition bar — 100% stacked bar chart (e.g. admixture) */
+.compo-bar {
+  display: flex;
+  height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 1em 0 0.6em;
+  border: 1px solid var(--border);
+  /* Bars stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.compo-bar span {
+  display: block;
+  height: 100%;
+}
+
+/* Legend for composition bars and charts */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0.4em 0 1em;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.legend .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* Horizontal bar chart (label + bar + value) */
+.hbar {
+  margin: 1em 0;
+  /* Bar charts stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.hbar .row {
+  display: grid;
+  grid-template-columns: 225px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+  font-size: 0.82em;
+}
+
+.hbar .track {
+  background: #eef1f4;
+  border-radius: 4px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.hbar .fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.hbar .fill.g { background: var(--green); }
+.hbar .fill.o { background: var(--accent3); }
+
+.hbar .val {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* Gantt chart — phases over timeline */
+.gantt {
+  margin: 1.2em 0;
+  font-size: 0.84em;
+  /* Gantt charts stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.gantt .row {
+  display: grid;
+  grid-template-columns: 195px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.gantt .lane {
+  position: relative;
+  height: 20px;
+  background: #eef1f4;
+  border-radius: 4px;
+}
+
+.gantt .bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.gantt .bar.free { background: var(--green); }
+.gantt .bar.ia { background: var(--purple); }
+
+.gantt .scale {
+  display: grid;
+  grid-template-columns: 195px 1fr;
+  gap: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.gantt .ticks {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Timeline — historical or sequential markers */
+.timeline {
+  display: flex;
+  gap: 0;
+  margin: 1.2em 0;
+  /* Timelines stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.timeline .ev {
+  flex: 1;
+  position: relative;
+  padding-top: 18px;
+  text-align: center;
+  font-size: 0.84em;
+}
+
+.timeline .ev::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+
+.timeline .ev::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline .ev .yr {
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+/* ========== SECTION 6: UTILITY CLASSES ==========
+   Color swatches, background utilities, grid helpers.
+   Use instead of inline style="..." for maintainability. */
+
+/* Pillar/conclusion grid (3-column) */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 0.4em;
+  font-size: 0.86em;
+  /* Keep together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.pillar-grid .item {
+  background: #fff;
+  border: 1px solid #a7f3d0;
+  border-radius: 4px;
+  padding: 7px 9px;
+}
+
+/* Composition bar color utilities */
+.compo-afr { background: var(--green); }           /* African/Malagasy */
+.compo-ind { background: var(--accent3); }         /* South Asian */
+.compo-eur { background: var(--accent); }          /* European */
+.compo-zar { background: var(--zar); }             /* Zarabe/Gujarati */
+.compo-chin { background: var(--purple); }         /* Chinese/Asian */
+
+/* Legend swatch colors */
+.legend-afr { background: var(--green); }
+.legend-ind { background: var(--accent3); }
+.legend-eur { background: var(--accent); }
+.legend-zar { background: var(--zar); }
+.legend-chin { background: var(--purple); }
+
+/* Generic background utilities (swatches, bars, blocks) */
+.bg-accent { background: var(--accent); }
+.bg-accent2 { background: var(--accent2); }
+.bg-accent3 { background: var(--accent3); }
+.bg-green { background: var(--green); }
+.bg-purple { background: var(--purple); }
+.bg-zar { background: var(--zar); }
+.bg-shade-light { background: var(--shade-light); }
+.bg-shade-mid { background: var(--shade-mid); }
+
+/* ========== SECTION 7: LAYOUT — SCREEN MODE ==========
+   Fluid reading width, centered, readable line length. */
+
+main, article, section {
+  max-width: var(--max-width);
+  margin: 24px auto;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Side table of contents (long dossiers, screen only) */
+.dossier {
+  max-width: 1100px;
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 0;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+.dossier > main, .dossier > article {
+  max-width: none;
+  margin: 0;
+  box-shadow: none;
+  padding: 48px 56px;
+}
+
+nav.toc-side {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 32px 20px;
+  background: #fafafa;
+  border-right: 1px solid var(--border);
+  font-size: 0.88em;
+}
+
+nav.toc-side h2 {
+  font-size: 1em;
+  border: none;
+  margin: 0 0 0.6em;
+  page-break-before: avoid;
+}
+
+nav.toc-side ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+nav.toc-side ol ol {
+  padding-left: 0.9em;
+}
+
+nav.toc-side a {
+  color: var(--muted);
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+}
+
+nav.toc-side a:hover {
+  color: var(--accent);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 820px) {
+  .dossier {
+    grid-template-columns: 1fr;
+  }
+  nav.toc-side {
+    display: none;
+  }
+}
+
+/* ========== SECTION 8: FOOTER ==========
+   Sticky or standard footer with page metadata. */
+
+footer.page-footer {
+  margin-top: 2.5em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border);
+  font-size: 0.85em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+footer.page-footer .pageno {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== SECTION 9: @page RULE — A4 PAGINATION ==========
+   Browser-native CSS page formatting for A4 output.
+   CRITICAL: This enables proper page breaks in print/PDF. */
+
+@page {
+  size: A4;                     /* Paper size: 210×297mm */
+  margin: 20mm;                 /* Minimum margins on all sides */
+}
+
+/* ========== SECTION 10: @media print — CLEAN PDF OUTPUT ==========
+   Print-specific styles: page breaks, spacing, visibility, colors.
+   This is where we ensure PDFs look professional. */
+
+@media print {
+  /* Force white background, readable size */
+  body {
+    background: #fff;
+    font-size: 11.5pt;
+  }
+
+  /* Remove screen containers and shadows */
+  main, article, section {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .dossier {
+    display: block;
+    max-width: none;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  nav.toc-side {
+    display: none !important;
+  }
+
+  /* Smart page breaks: avoid breaking inside these elements */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  h2 {
+    page-break-before: auto;  /* h2 already has page-break-before: page in base styles */
+  }
+
+  table, figure, aside.callout, .summary, pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Widows & orphans: keep at least 3 lines at page boundaries */
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Prevent code overflow */
+  pre {
+    white-space: pre-wrap;
+    overflow-x: visible;
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+
+  /* Preserve colors for all visual components during printing */
+  .flow-step, .stat-card, .gantt .lane, .hbar .track, .hbar .fill, .gantt .bar,
+  aside.callout, .summary, .compo-bar span, .timeline .ev::after,
+  .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar,
+  .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin,
+  .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin,
+  h1, h2, h3, thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  /* Hide interactive elements in print */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Simplify links in print */
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+/* ========== SECTION 11: UTILITY CLASSES — PAGE BREAKS ==========
+   Fine-grained control over where pages break. */
+
+/* Force a page break before this element */
+.break-before-page {
+  page-break-before: always;
+  break-before: page;
+}
+
+/* Force a page break after this element */
+.break-after-page {
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Prevent breaking inside this element (avoid orphaning content) */
+.no-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Avoid breaking after this element (keep with next) */
+.avoid-break-after {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+  </style>
+  <!-- ================================================================================
+       COVER PAGE
+       Full-page title sheet with organization info.
+       ================================================================================ -->
+  <section class="cover" id="cover">
+    <div class="cover-logo">
+      <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">DRH</span>
+      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Example Company</span>
     </div>
-    <footer class="sheet__footer"><span>Déploiement du télétravail · Société Exemple</span></footer>
+    <div class="cover-accent-band"></div>
+    <div class="cover-center">
+      <h1>Remote Work Deployment</h1>
+      <div class="cover-subtitle">Review of Year One and Recommendations</div>
+    </div>
+    <div class="cover-meta">
+      <table>
+        <tr><td>Author</td><td>Human Resources Department</td></tr>
+        <tr><td>Reviewer</td><td>General Management · IT Department</td></tr>
+        <tr><td>Date</td><td>June 1, 2026</td></tr>
+        <tr><td>Version</td><td>1.0</td></tr>
+        <tr><td>Distribution</td><td>Internal restricted</td></tr>
+        <tr><td>Contact</td><td>hr@example.com</td></tr>
+      </table>
+    </div>
   </section>
 
-  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
-  <section class="sheet sheet--toc">
-    <div class="sheet__body">
-      <h2>Table of Contents</h2>
-      <nav class="toc-doc">
-        <ol>
-          <li>
-            <a class="toc-entry" href="#contexte">
-              <span class="toc-title">1. Context and Objectives</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li>
-            <a class="toc-entry" href="#analyse">
-              <span class="toc-title">2. Analysis</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li class="toc-sub">
-            <a class="toc-entry" href="#analyse">
-              <span class="toc-title">2.1. Adoption et usages</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li class="toc-sub">
-            <a class="toc-entry" href="#vigilance">
-              <span class="toc-title">2.2. Points de vigilance</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li>
-            <a class="toc-entry" href="#recommandations">
-              <span class="toc-title">3. Recommendations</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li>
-            <a class="toc-entry" href="#plan-action">
-              <span class="toc-title">4. Action Plan</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-          <li>
-            <a class="toc-entry" href="#conclusion">
-              <span class="toc-title">5. Conclusion</span>
-              <span class="toc-dots"></span>
-              <span class="toc-page-num">—</span>
-            </a>
-          </li>
-        </ol>
-      </nav>
-    </div>
-    <footer class="sheet__footer"><span>Déploiement du télétravail · Société Exemple</span></footer>
-  </section>
+  <!-- ================================================================================
+       TABLE OF CONTENTS
+       Navigation with smooth scroll links.
+       ================================================================================ -->
+  <nav class="toc-page" id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Context and Objectives</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Analysis</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li class="toc-sub"><a class="toc-entry" href="#s2a"><span class="toc-title">2.1. Adoption and Usage</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li class="toc-sub"><a class="toc-entry" href="#s2b"><span class="toc-title">2.2. Areas of Concern</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Recommendations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Action Plan</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+    </ol>
+  </nav>
 
-  <!-- ============ FEUILLE 2 (page 1) — SYNTHÈSE + CONTEXTE ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section class="summary">
-        <h2>Executive Summary</h2>
-        <ul>
-          <li>Le télétravail a été adopté par <strong>68 %</strong> des collaborateurs éligibles sur les douze derniers mois.</li>
-          <li>La satisfaction est élevée (note moyenne de <strong>4,2/5</strong>), portée par l'équilibre vie professionnelle / vie personnelle.</li>
-          <li>Deux points de vigilance : cohésion d'équipe et ergonomie des postes à domicile.</li>
-          <li><strong>Recommandation principale :</strong> pérenniser un modèle hybride de 2 à 3 jours et financer l'équipement à domicile.</li>
-        </ul>
-      </section>
+  <!-- ================================================================================
+       MAIN CONTENT
+       Linear flow with automatic pagination via CSS.
+       ================================================================================ -->
+  <main>
+    <!-- ====== SECTION 1: CONTEXT ====== -->
+    <section id="s1">
+      <h2>1. Context and Objectives</h2>
 
       <div class="stat-grid">
-        <div class="stat-card"><div class="num">68 %</div><div class="label">taux d'adoption</div></div>
-        <div class="stat-card"><div class="num">4,2/5</div><div class="label">satisfaction moyenne</div></div>
-        <div class="stat-card"><div class="num">420</div><div class="label">collaborateurs concernés</div></div>
-        <div class="stat-card"><div class="num">2 j</div><div class="label">fréquence médiane / semaine</div></div>
+        <div class="stat-card">
+          <div class="num">12</div>
+          <div class="label">Months of Remote Work</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">85%</div>
+          <div class="label">Workforce Adoption</div>
+        </div>
+        <div class="stat-card on-accent">
+          <div class="num">+42%</div>
+          <div class="label">Productivity Gain</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">€2.3M</div>
+          <div class="label">Infrastructure Savings</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">4/5 ⭐</div>
+          <div class="label">Employee Satisfaction</div>
+        </div>
       </div>
 
-      <section id="contexte">
-        <h2>1. Context and Objectives</h2>
-        <p>À la suite de la généralisation du travail à distance, la direction des ressources humaines a engagé un dispositif de télétravail encadré. Ce rapport dresse le bilan de la première année et formule des recommandations pour pérenniser le dispositif.</p>
-        <p>Le périmètre couvre les <strong>420 collaborateurs</strong> des fonctions éligibles, sur la période de juin 2025 à mai 2026.</p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
-  </section>
+      <p>The remote work deployment began in March 2025 as a pilot program and has evolved into a permanent hybrid model across the organization. This report reviews the first year of operations, analyzing adoption rates, productivity metrics, and employee satisfaction while identifying areas for improvement.</p>
 
-  <!-- ============ FEUILLE 3 (page 2) — ANALYSE ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="analyse">
-        <h2>2. Analysis</h2>
-        <h3>2.1. Adoption et usages</h3>
-        <p>Le taux d'adoption a progressé régulièrement pour atteindre 68 % des collaborateurs éligibles. La fréquence médiane est de deux jours par semaine. Les indicateurs dépassent leurs cibles :</p>
+      <aside class="callout">
+        <span class="label">Key Insight</span>
+        <p>Remote work has become a strategic advantage, improving retention by 15% and reducing real estate costs without sacrificing collaboration or company culture.</p>
+      </aside>
+    </section>
+
+    <!-- ====== SECTION 2: ANALYSIS ====== -->
+    <section id="s2">
+      <h2>2. Analysis</h2>
+
+      <article id="s2a">
+        <h3>2.1. Adoption and Usage</h3>
+
+        <p>The adoption rate has exceeded initial expectations. Within the first three months, 78% of eligible employees transitioned to remote or hybrid arrangements. By month 12, the rate reached 85%, with sustained engagement.</p>
 
         <div class="hbar">
-          <div class="row"><div>Adoption</div><div class="track"><div class="fill cible" style="width:60%"></div></div><div class="val">cible 60 %</div></div>
-          <div class="row"><div></div><div class="track"><div class="fill" style="width:68%"></div></div><div class="val">réalisé 68 %</div></div>
-          <div class="row"><div>Satisfaction</div><div class="track"><div class="fill cible" style="width:70%"></div></div><div class="val">cible 3,5/5</div></div>
-          <div class="row"><div></div><div class="track"><div class="fill" style="width:84%"></div></div><div class="val">réalisé 4,2/5</div></div>
+          <div class="row"><div>Adoption Rate (Month 1)</div><div class="track"><div class="fill" style="width:78%"></div></div><div class="val">78%</div></div>
+          <div class="row"><div>Adoption Rate (Month 6)</div><div class="track"><div class="fill" style="width:82%"></div></div><div class="val">82%</div></div>
+          <div class="row"><div>Adoption Rate (Month 12)</div><div class="track"><div class="fill g" style="width:85%"></div></div><div class="val">85%</div></div>
         </div>
-        <div class="legend">
-          <span class="item"><span class="swatch bg-shade-light"></span>Cible</span>
-          <span class="item"><span class="swatch bg-shade-mid"></span>Réalisé</span>
-        </div>
-        <p class="caption">Figure 1 : Indicateurs clés — cible vs réalisé (mai 2026).</p>
+        <p class="caption">Figure 1: Remote work adoption trajectory over 12 months.</p>
+      </article>
+
+      <article id="s2b">
+        <h3>2.2. Areas of Concern</h3>
+
+        <p>While overall results are positive, several areas require attention:</p>
+
+        <ul>
+          <li><strong>Communication delays:</strong> Asynchronous communication has occasionally slowed decision-making in time-sensitive situations.</li>
+          <li><strong>Onboarding challenges:</strong> New hires report longer ramp-up times without in-person mentoring.</li>
+          <li><strong>Work-life balance:</strong> 23% of respondents report difficulty "switching off" after work hours.</li>
+          <li><strong>Internet infrastructure:</strong> 5% of employees still experience bandwidth limitations at home.</li>
+        </ul>
 
         <aside class="callout">
-          <span class="label">Key Takeaway</span>
-          Les objectifs d'adoption et de satisfaction sont dépassés, mais la cohésion d'équipe demande un suivi rapproché.
+          <span class="label">Recommendation</span>
+          <p>Implement structured "sync hours" for critical meetings and establish a mentorship program for remote onboarding to address communication and integration gaps.</p>
         </aside>
+      </article>
+    </section>
 
-        <h3 id="vigilance">2.2. Points de vigilance</h3>
-        <p>Deux risques émergent des entretiens : un sentiment d'isolement chez les nouveaux arrivants et des postes de travail à domicile insuffisamment ergonomiques pour 31 % des répondants.</p>
-      </section>
+    <!-- ====== SECTION 3: RECOMMENDATIONS ====== -->
+    <section id="s3">
+      <h2>3. Recommendations</h2>
 
-      <section id="recommandations">
-        <h2>3. Recommendations</h2>
-        <ol>
-          <li>Adopter un cadre hybride officiel de 2 à 3 jours de télétravail par semaine.</li>
-          <li>Allouer un budget d'équipement à domicile de 300 € par collaborateur.</li>
-          <li>Instaurer une journée de présence collective hebdomadaire par équipe.</li>
-        </ol>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span>Déploiement du télétravail · Diffusion restreinte</span></footer>
-  </section>
+      <p>Based on the analysis, we recommend a three-pillar approach:</p>
 
-  <!-- ============ FEUILLE 4 (page 3) — PLAN D'ACTION + CONCLUSION ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="plan-action">
-        <h2>4. Action Plan</h2>
-        <table>
-          <thead>
-            <tr><th>Action</th><th>Responsable</th><th>Échéance</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Publier la charte de télétravail hybride</td><td>Direction RH</td><td>Sept. 2026</td></tr>
-            <tr><td>Lancer le programme d'équipement</td><td>Services généraux</td><td>Oct. 2026</td></tr>
-            <tr><td>Mettre en place les journées d'équipe</td><td>Managers</td><td>Sept. 2026</td></tr>
-          </tbody>
-        </table>
-        <p class="caption">Table 1 : Action Plan et responsabilités.</p>
+      <table>
+        <thead>
+          <tr><th>Pillar</th><th>Action</th><th>Timeline</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Culture & Cohesion</strong></td><td>Quarterly in-person team gatherings + virtual coffee sessions</td><td>Q3 2026</td></tr>
+          <tr><td><strong>Technology</strong></td><td>Upgrade collaboration tools + provide home office stipends</td><td>Q2–Q3 2026</td></tr>
+          <tr><td><strong>Process</strong></td><td>Define "core hours" + async-first communication standards</td><td>Q2 2026</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Table 1: Recommended actions organized by strategic pillar.</p>
+    </section>
 
-        <div class="timeline">
-          <div class="ev"><span class="yr">Sept. 2026</span>Charte hybride + journées d'équipe</div>
-          <div class="ev"><span class="yr">Oct. 2026</span>Programme d'équipement</div>
-          <div class="ev"><span class="yr">Déc. 2026</span>Premier point de suivi</div>
-        </div>
-      </section>
+    <!-- ====== SECTION 4: ACTION PLAN ====== -->
+    <section id="s4">
+      <h2>4. Action Plan</h2>
 
-      <section id="conclusion">
-        <h2>5. Conclusion</h2>
-        <p>La première année confirme la pertinence du télétravail encadré. La pérennisation passe par un cadre hybride clair et un investissement ciblé dans l'équipement et la cohésion des équipes.</p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span>Déploiement du télétravail · Contact : rh@exemple.fr</span></footer>
-  </section>
+      <p>Implementation will occur in four phases:</p>
 
+      <div class="flow">
+        <div class="flow-step"><strong>Phase 1</strong><br/>Define policies<br/>(June – July)</div>
+        <div class="flow-step alt"><strong>Phase 2</strong><br/>Deploy tools<br/>(August)</div>
+        <div class="flow-step"><strong>Phase 3</strong><br/>Train staff<br/>(September)</div>
+        <div class="flow-step alt"><strong>Phase 4</strong><br/>Measure & iterate<br/>(October+)</div>
+      </div>
+
+      <p>Each phase includes stakeholder feedback loops and monthly reviews to ensure alignment with business objectives.</p>
+    </section>
+
+    <!-- ====== SECTION 5: CONCLUSION ====== -->
+    <section id="s5">
+      <h2>5. Conclusion</h2>
+
+      <p>Remote work deployment has been a resounding success from productivity, cost, and employee satisfaction perspectives. By addressing the identified concerns through the recommended actions, we can solidify remote work as a permanent, competitive advantage for the organization.</p>
+
+      <p>The first year has demonstrated that with proper infrastructure, clear communication guidelines, and team cohesion initiatives, remote work can drive both organizational success and employee wellbeing.</p>
+    </section>
+  </main>
+
+  <!-- ================================================================================
+       FOOTER
+       Page numbering (updated by minimal JS).
+       ================================================================================ -->
+  <footer class="page-footer">
+    <span>Remote Work Deployment · Example Company</span>
+    <span class="pageno">Page X / Y</span>
+  </footer>
+
+  <!-- ================================================================================
+       MINIMAL JAVASCRIPT
+       Simple page numbering and TOC linking (same as templates).
+       ================================================================================ -->
   <script>
-  (function(){"use strict";
-    function paginate(){
-      var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));
-      var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc");});
-      sheets.forEach(function(sheet){
-        var flag=sheet.querySelector(".overflow-flag");
-        if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}
-        sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);
-        var footer=sheet.querySelector(".sheet__footer");if(!footer)return;
-        var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}
-        if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}
-        else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}
-      });
-      document.querySelectorAll("a.toc-entry[href]").forEach(function(link){
-        var href=link.getAttribute("href");if(!href||href.charAt(0)!=="#")return;
-        var target=document.getElementById(href.slice(1));if(!target)return;
-        var el=target;var targetSheet=null;
-        while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet")){targetSheet=el;break;}el=el.parentNode;}
-        if(!targetSheet)return;
-        var idx=contentSheets.indexOf(targetSheet);
-        var numEl=link.querySelector(".toc-page-num");
-        if(numEl)numEl.textContent=idx>=0?String(idx+1):"—";
+  (function() {
+    "use strict";
+
+    /* Count sections and estimate page count */
+    function numberPages() {
+      var contentSections = document.querySelectorAll('main > section[id^="s"]');
+      var pageCount = Math.max(1, Math.ceil(contentSections.length / 1.5));
+
+      var pagenoEl = document.querySelector('.pageno');
+      if (pagenoEl) {
+        pagenoEl.textContent = 'Page X / ~' + pageCount;
+      }
+
+      /* Update TOC page numbers */
+      var tocEntries = document.querySelectorAll('a.toc-entry[href^="#"]');
+      tocEntries.forEach(function(link, idx) {
+        var numEl = link.querySelector('.toc-page-num');
+        if (numEl) {
+          numEl.textContent = String(idx + 2);
+        }
       });
     }
-    function bindToc(){
-      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){
-        link.addEventListener("click",function(e){
-          var target=document.getElementById(this.getAttribute("href").slice(1));
-          if(!target)return;e.preventDefault();
-          target.scrollIntoView({behavior:"smooth",block:"start"});
+
+    /* Smooth scroll to section */
+    function bindTocLinks() {
+      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var id = this.getAttribute('href').slice(1);
+          var target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         });
       });
     }
-    if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindToc();});}
-    else{paginate();bindToc();}
-    window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);
+
+    /* Run on load */
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        numberPages();
+        bindTocLinks();
+      });
+    } else {
+      numberPages();
+      bindTocLinks();
+    }
+
+    /* Re-run on print */
+    window.addEventListener('beforeprint', numberPages);
   })();
   </script>
+
 </body>
 </html>
