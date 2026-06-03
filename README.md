@@ -17,14 +17,14 @@ bibliographies — into clean, audience-tailored reports published as
 - **Visuals, not walls of text** — reuses graphics/logos/palettes already in the
   sources and adds sober inline-SVG/CSS visuals (stat cards, composition bars,
   bar charts, flow diagrams, gantts, timelines).
-- **Print-perfect A4** — the document is split into explicit A4 sheets
-  (210 × 297 mm): real pages on screen, one sheet per page in print, no lonely
-  tables or empty gaps.
-- **Cover page + clickable TOC** — title sheet (subject, author, reviewer) and a
-  table of contents whose entries are clickable and auto-numbered to the page
-  they point to.
-- **Footers + page numbers** — every content sheet carries a footer with
-  `Page n / total`, bottom-right, numbered automatically (cover and TOC excluded).
+- **Print-perfect A4** — content flows naturally on screen, and CSS `@page`
+  rules paginate it into A4 pages in print: major sections start on a new page,
+  tables and figures are never split.
+- **Cover page + clickable TOC** — a title section (subject, author, reviewer)
+  and a table of contents whose entries are clickable and auto-numbered to the
+  page they point to.
+- **Footers + page numbers** — a footer with `Page n / total` is stamped
+  automatically, bottom-right (cover and TOC excluded).
 
 Output is a single HTML file with inlined CSS/JS, ready for
 `Ctrl/Cmd + P → Save as PDF`. Reports are generated in English by default.
@@ -38,13 +38,14 @@ report-formatter/
 │   ├── consolidation.md        # how to ingest & reconcile multiple sources
 │   ├── audiences.md            # how to adapt a report per audience
 │   ├── visuals.md              # reuse & propose charts/diagrams (no monotone text)
-│   ├── pagination.md           # A4 sheet model: cover, TOC, footers, page numbers
+│   ├── pagination.md           # A4 pagination with CSS @page: cover, TOC, footers, page numbers
 │   ├── style-guide.md          # editorial rules for fast, clear reading
 │   ├── structure-research.md   # section plan: research / funding report
 │   └── structure-professional.md # section plan: professional report
 ├── assets/
-│   ├── report.css              # single stylesheet (visuals + A4 sheet model)
-│   └── paginate.js             # page numbering + TOC numbers + overflow flag
+│   ├── report-linear.css       # single stylesheet (visuals + Linear Flux Model)
+│   ├── paginate.js             # page numbering + TOC numbers
+│   └── legacy/                 # archived .sheet-model assets (report.css, paginate-sheet.js)
 ├── templates/
 │   ├── professional.html
 │   ├── research.html
@@ -55,19 +56,21 @@ report-formatter/
     └── example-genome-meeting-funder.html  # same project, funder audience
 ```
 
-## The A4 sheet model
+## The linear flux model
 
-Each page is an explicit `.sheet` of 210 × 297 mm:
+Content flows naturally in the browser, and **CSS `@page` rules handle A4
+pagination automatically** (no rigid page boxes to manage):
 
-- `body.paged` enables the paged background; the grey gap between sheets marks
-  the boundary to the next page.
-- `.sheet--cover` — title page (subject, author, reviewer, date, version).
-- `.sheet--toc` — clickable table of contents; `paginate.js` fills in each
-  entry's page number from the section it links to.
-- Each content `.sheet` ends with a `.sheet__footer`; `paginate.js` stamps
-  `Page n / total` bottom-right and flags any sheet that overflows one A4 page.
+- `@page { size: A4; margin: 20mm; }` tells the browser each page is A4-sized.
+- `h2 { break-before: page; }` starts each major section on a new page.
+- `table, figure, aside { break-inside: avoid; }` keeps blocks whole.
+- `<section class="cover">` — title page (subject, author, reviewer, date, version).
+- `<nav class="toc-page">` — clickable table of contents; `paginate.js` fills in
+  each entry's page number from the section it links to.
+- `<footer class="page-footer">` — `paginate.js` stamps `Page n / total`
+  bottom-right (cover and TOC excluded).
 
-Inline `assets/report.css` (in `<style>`) and `assets/paginate.js` (in a
+Inline `assets/report-linear.css` (in `<style>`) and `assets/paginate.js` (in a
 `<script>` at the end of `<body>`) so the output stays a single portable file.
 See `references/pagination.md`.
 
@@ -131,6 +134,6 @@ executive summary first, then full detail, then annexes.
 
 ## Printing to PDF
 
-Open the HTML, `Ctrl/Cmd + P`, choose **A4**, set margins to **None** (the sheet
-supplies its own margins) and enable **Background graphics** so colours print.
-One sheet renders as one A4 page.
+Open the HTML, `Ctrl/Cmd + P`, choose **A4**, set margins to **Default** (the
+`@page` rule supplies the 20 mm margin) and enable **Background graphics** so
+colours print. Each major section starts on its own A4 page.
