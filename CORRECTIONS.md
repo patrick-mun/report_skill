@@ -216,10 +216,109 @@ Issues identified by observing rendering failures on a real-world document. Goal
 
 ---
 
-## Healthy Points (no action required)
+---
 
-- Skill architecture complies with Claude Code conventions (SKILL.md / references / assets / templates / examples).
-- `paginate.js` and `report.css` perfectly coherent: all classes referenced by the JS exist in the CSS.
-- The 3 examples are clean and self-contained (inlined CSS + JS, cover + TOC + footers).
-- Complete references with no fundamental contradictions; MIT `LICENSE` present; consistent English throughout.
-- The skill's core strength is demonstrated in multi-source consolidation: consistent styling, source attribution, proper A4 pagination, and support for any scientific/research document (not limited to genetics projects).
+## Critical Issues Blocking Real-World Use — Printing & Editability (June 3, 2026)
+
+### Context
+Real-world testing on multi-page scientific reports revealed that the skill's **output is not truly WYSIWYG** (What You See Is What You Get) and **color printing is broken**. The skill claims to produce "rapports imprimables comme Word", but it falls short on editability, pagination fidelity, and color preservation.
+
+### Issues Identified
+
+#### **PRINTING COLORS ARE LOST**
+| # | Severity | Issue | Root Cause | Impact |
+|---|---|---|---|---|
+| 24 | 🔴 **Critical** | Colors in PDF are muted, washed out, or entirely missing (backgrounds, bars, callouts). Users see vivid colors on-screen but pale/grey on paper. | CSS lacks `color-adjust: exact` / `-webkit-print-color-adjust: exact` on colored elements. Browsers default to optimized-for-paper which strips vibrant colors. | **Kills the entire visual identity** — rapports look "profoundly sad" (user comment). Defeats the design. |
+| 25 | 🟠 **High** | Some colors print but not consistently — depends on browser (Chrome vs Firefox) and PDF viewer. | No explicit `@media print` color directives; missing `print-color-adjust: exact` on `.stat-card`, `.callout`, `.compo-bar`, `.hbar .fill` etc. | Unpredictable output — same HTML, different PDF depending on tool. |
+| 26 | 🟠 **High** | Black text + white background callouts print as black on white (correct) but colored bars/cards become grey. | `.compo-bar span`, `.hbar .fill`, `.stat-card` have colors but no `print-color-adjust: exact`. | Charts and metric cards (the visual anchor of reports) are invisible on paper. |
+
+**Proposed Fix**: Add `print-color-adjust: exact; -webkit-print-color-adjust: exact` to all colored components in `@media print` rule. Audit which elements MUST stay colored (not all — some can be greyscale for cost). Document the override.
+
+---
+
+#### **WYSIWYG PAGINATION BREAKS DOWN BETWEEN SCREEN AND PRINT**
+| # | Severity | Issue | Root Cause | Impact |
+|---|---|---|---|---|
+| 27 | 🔴 **Critical** | A document that looks perfectly laid out on screen (all `.sheet` fit, no red overflow flags) prints with content **shifted** — pages split mid-table, footers land on wrong pages, content wraps differently. | The `.sheet` model uses `min-height: 297mm` + CSS box model, but the **real browser page break happens at 297mm - margins**, which is different. There is no true alignment between screen preview and actual printed page. | Authors cannot reliably predict what the PDF will look like. Not WYSIWYG. |
+| 28 | 🟠 **High** | Tables/figures declared with `break-inside: avoid` still get split across pages in print. | `break-inside: avoid` is ignored when applied to grid children or floated elements. The CSS rule exists but is ineffective on complex layouts. | Critical visuals (tables, charts) appear broken in PDF. |
+| 29 | 🟠 **High** | Overflow detection (red flag "à scinder") triggers on **some sheets** in on-screen preview, but not all that actually overflow in print. Detection is heuristic; doesn't match browser's real print algorithm. | `paginate.js` compares `scrollHeight` vs fixed `297mm` reference, but this doesn't account for browser rendering differences, zoom level variations, or print settings (margins, scaling). | False negatives: sheets that look fine on-screen break silently in PDF. False positives: sheets flagged but don't break in print. |
+
+**Proposed Fix**: Move away from heuristic overflow detection. Use actual CSS `@page` + `break-*` rules that the browser respects, OR implement a real print preview engine (Playwright/Puppeteer to render each `.sheet` and measure actual break points).
+
+---
+
+#### **RIGID SHEET MODEL BLOCKS NATURAL EDITING**
+| # | Severity | Issue | Root Cause | Impact |
+|---|---|---|---|---|
+| 30 | 🟠 **High** | Editing a document requires **manually managing page breaks**. If you add 2 paragraphs to `.sheet 3`, it overflows, and you must split it into `.sheet 3a` + `.sheet 3b`, then renumber all subsequent sheets (and the table of contents). | The model forces authors to think in "pages" (explicit `.sheet` blocks) rather than "content flow". There's no automatic pagination like Word or Google Docs. | Authors spend 30% of editing time shuffling content between sheets, not writing. The skill is **not editor-friendly**. |
+| 31 | 🟡 **Medium** | No template for authors to **add sheets easily**. Copy-pasting requires remembering the full `.sheet` structure (`.sheet` > `.sheet__body` > `.sheet__footer` > `<span>Document Title</span>` + empty `.pageno`). | Documentation is sparse on "how to add a new page". Contributors resort to inline styles to avoid the structure. | Skill is hard to use — non-technical authors cannot reliably add sheets. |
+| 32 | 🟡 **Medium** | Concatenating reports from multiple sources (the skill's stated use case) requires **manual page renumbering**. If you have Report A (pages 1–10) + Report B (pages 1–15), you must edit all of Report B's `.sheet` IDs and footer spans. | The tool has no "merge" operation; no automation for numbering. | Multi-source consolidation (mentioned as a strength) is actually tedious and error-prone. |
+
+**Proposed Fix**: Provide **HTML snippets/macros** for adding new sheets. Consider a lightweight build step (`build-sheets.sh`) that auto-numbers `pageXXX` IDs and footer labels. Or migrate to a linear model (no explicit sheets; pagination automatic).
+
+---
+
+#### **PAGINATE.JS IS OVERCOMPLICATED & FRAGILE**
+| # | Severity | Issue | Root Cause | Impact |
+|---|---|---|---|---|
+| 33 | 🔴 **Critical** | The overflow detection fix (June 2) is a **band-aid on a broken architecture**. Comparing `scrollHeight > 297mm` doesn't match what the browser actually prints because `min-height` lets the sheet grow invisibly. The real issue: **the `.sheet` model contradicts how browsers print**. | The skill tries to simulate pagination in CSS/JS instead of using the browser's built-in `@page` + `break-*` mechanism. | Future bugs inevitable. The fix is fragile: works for simple content, fails for complex grids/floats/absolute positioning. |
+| 34 | 🟡 **Medium** | `paginate.js` does 4 jobs (numbering, overflow detection, TOC linking, smooth scroll) in 120 lines of non-standard JS. If overflow detection breaks again, all 4 features stop working. | Monolithic design. No separation of concerns. | Maintenance nightmare. A single bug in the overflow test breaks the entire tool. |
+| 35 | 🟡 **Medium** | Authors must understand that `overflow detection is unreliable` and requires manual inspection before print. Not obvious from UI. | No warning in SKILL.md or MAINTENANCE.md that "this is not a guaranteed preview". | Users ship broken PDFs thinking they checked. |
+
+**Proposed Fix**: Either (a) rewrite overflow detection to use Playwright/Puppeteer for true print preview, or (b) **abandon the `.sheet` model entirely** and use CSS `@page` + `break-*`, which is browser-native and guaranteed.
+
+---
+
+#### **ARCHITECTURAL CHOICE: `.SHEET` MODEL VS. LINEAR FLUX**
+| # | Severity | Analysis | Trade-off |
+|---|---|---|---|
+| **`.sheet` (current)** | Explicit pagination control, WYSIWYG-ish on-screen preview. | Requires JS, complex CSS, manual editing, breaks silently in print, colors lost. **Not maintainable.** |
+| **Linear flux + `@page`** | Automatic pagination, true WYSIWYG (browser handles it), editable like Word, standard CSS. | Less visual control on-screen; less "WYSIWYG preview" (but print preview is accurate). **Maintainable, scalable.** |
+
+The skill's goal is **"rapports imprimables comme Word"** — this points to the linear model, not `.sheet`.
+
+---
+
+### Summary: Amplitude of Work Required
+
+#### **Phase 5: Quick Wins (1–2 days)**
+- [ ] **24–26**: Add `color-adjust: exact` to all colored elements in `@media print`.
+  - `assets/report.css`: add print media rule block with `color-adjust` on `.stat-card`, `.callout`, `.compo-bar`, `.hbar .fill`, `.gantt .bar`, timeline elements.
+  - Update `references/style-guide.md`: explain which elements stay colored vs. greyscale.
+  - Test real PDF: verify colors print correctly.
+
+#### **Phase 5b: Medium Effort (1 week)**
+- [ ] **30–31**: Add author-friendly sheet templates.
+  - `templates/sheet-blank.html`: a minimal `.sheet` skeleton for copy-paste.
+  - `SKILL.md`: add "Adding a new page" section with clear step-by-step.
+  - Test with non-technical user; iterate.
+
+- [ ] **32**: Build a simple sheet renumbering script.
+  - `build-renumber.sh`: reads `<section id="page-XXX" class="sheet">` and auto-increments IDs + footer `.pageno` spans.
+  - Document in `SKILL.md`.
+
+#### **Phase 6: Architectural Refactor (2–3 weeks) — DO THIS OR LIVE WITH THE PROBLEMS**
+- [ ] **27–29, 33–35**: Migrate to linear model + CSS `@page`.
+  - **Not a quick fix.** This is a fundamental redesign.
+  - Remove `.sheet`, `.sheet__body`, `.sheet__footer`, `min-height: 297mm`.
+  - Switch to `@page { size: A4; margin: 20mm }` + `break-before: page` on section headers.
+  - Remove `paginate.js` entirely (or reduce to just TOC numbering).
+  - Simplify `report.css` by ~200 lines.
+  - Update all templates + examples.
+  - Full re-test against real reports.
+  - **Gain**: true WYSIWYG, editable like Word, portable (works offline, no JS), maintainable.
+  - **Loss**: less visual control on-screen (but print preview is accurate).
+
+---
+
+### Recommendation
+
+**Do Phase 5 (colors) immediately** — it's a 30-minute fix and restores the visual identity. The skill is currently **unprintable** (colors lost).
+
+**Do Phase 5b (editing UX) next** — makes the tool usable for authors.
+
+**Phase 6 is optional but recommended** — only if you want the skill to truly compete with Word-like tools. If the current `.sheet` model is "good enough" after colors are fixed, leave it. But accept that **pagination will always be fragile** and **editing will always be manual**.
+
+---
+
+
