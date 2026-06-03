@@ -1,31 +1,55 @@
 #!/bin/bash
-# build-inline-css.sh — Sync the canonical CSS into every standalone HTML file.
+# build-inline-css.sh — Make every template/example a self-contained, paginated HTML file.
 #
-# Reads assets/report-linear.css (the Linear Flux Model stylesheet) and inlines
-# it into the <style> block of every template and example, guaranteeing a single
-# source of truth. It also REPAIRS structure: CSS always ends up inside
-# <style>…</style>, the <head> closes once, and a <body> wraps the content.
+# For each target it:
+#   1. Inlines the canonical CSS from assets/report-linear.css into <style>…</style>.
+#   2. Inlines the Paged.js polyfill (assets/vendor/paged.polyfill.min.js) plus a small
+#      PagedConfig hook, so the file paginates to A4 with a repeating footer and
+#      "Page n / total" numbering — on screen AND in print — with no external files.
+#   3. Repairs structure: one <style>, one </head>, one <body>.
+#   4. Normalizes the footer: removes any legacy <span class="pageno">…</span>
+#      (the page number now comes from the CSS @page counter) and strips the old
+#      end-of-body pagination <script> (Paged.js replaces it).
 #
 # Usage: cd report_skill && bash build-inline-css.sh
 
 set -e
 
 CSS_SOURCE="assets/report-linear.css"
+PAGED_SOURCE="assets/vendor/paged.polyfill.min.js"
+CONFIG_SOURCE="assets/paginate.js"
 
-if [ ! -f "$CSS_SOURCE" ]; then
-  echo "❌ Error: $CSS_SOURCE not found. Run from the report_skill/ directory."
-  exit 1
-fi
+for src in "$CSS_SOURCE" "$PAGED_SOURCE" "$CONFIG_SOURCE"; do
+  if [ ! -f "$src" ]; then
+    echo "❌ Error: $src not found. Run from the report_skill/ directory."
+    exit 1
+  fi
+done
 
-echo "=== CSS Synchronization (Linear Flux Model) ==="
-echo "Source: $CSS_SOURCE ($(wc -l < "$CSS_SOURCE") lines)"
+echo "=== Build self-contained paginated HTML (Linear Flux + Paged.js) ==="
+echo "CSS:      $CSS_SOURCE ($(wc -l < "$CSS_SOURCE") lines)"
+echo "Paged.js: $PAGED_SOURCE ($(( $(wc -c < "$PAGED_SOURCE") / 1024 )) KB)"
 
-python3 - "$CSS_SOURCE" <<'PYTHON_SCRIPT'
+python3 - "$CSS_SOURCE" "$PAGED_SOURCE" "$CONFIG_SOURCE" <<'PYTHON_SCRIPT'
 import sys, glob, re
 
-css_source = sys.argv[1]
+css_source, paged_source, config_source = sys.argv[1], sys.argv[2], sys.argv[3]
 with open(css_source, "r", encoding="utf-8") as f:
     css = f.read().strip()
+with open(paged_source, "r", encoding="utf-8") as f:
+    paged = f.read().strip()
+with open(config_source, "r", encoding="utf-8") as f:
+    config = f.read().strip()
+
+# PagedConfig + TOC helper (single source of truth: assets/paginate.js).
+# Must come BEFORE the polyfill, which reads window.PagedConfig at startup.
+paged_config = "<script>\n" + config + "\n</script>"
+
+paged_script = ("<script>/* Paged.js v0.4.3 — inlined polyfill: A4 pagination, "
+                "running footer, page numbers. Source: assets/vendor/paged.polyfill.min.js */\n"
+                + paged + "\n</script>")
+
+head_injection = paged_config + "\n" + paged_script
 
 # Files with bespoke CSS or the deprecated .sheet model are NOT synced here.
 EXCLUDE = {
@@ -53,7 +77,6 @@ for path in targets:
         body_tag = content[m_body.start(): m_body.end()]   # keep <body> attributes
         body_inner = content[m_body.end():]
     else:
-        # Broken file: no <body>. Body content starts at the cover section.
         m_cover = re.search(r'<section class="cover"', content)
         if not m_cover:
             print(f"  ⚠ Skipping {path} (no <body> and no cover section)")
@@ -63,10 +86,18 @@ for path in targets:
         body_tag = f'<body lang="{lang}">' if lang else "<body>"
         body_inner = content[m_cover.start():]
 
+    # 3) Normalize the footer: drop legacy page-number span (counter handles it now).
+    body_inner = re.sub(r'\s*<span class="pageno">.*?</span>', "", body_inner, flags=re.DOTALL)
+
+    # 4) Strip the old end-of-body pagination script (Paged.js replaces it).
+    body_inner = re.sub(r'\s*<script>(?:(?!</script>).)*?numberPages(?:(?!</script>).)*?</script>',
+                        "", body_inner, flags=re.DOTALL)
+
     rebuilt = (
         prefix + "\n"
         + css + "\n"
         + "  </style>\n"
+        + head_injection + "\n"
         + "</head>\n"
         + body_tag + "\n"
         + body_inner.lstrip("\n")
@@ -78,10 +109,12 @@ for path in targets:
     so = rebuilt.count("<style")
     sc = rebuilt.count("</style>")
     bo = len(re.findall(r"<body", rebuilt))
-    flag = "OK" if (so == 1 and sc == 1 and bo == 1) else "FAIL"
-    print(f"  [{flag}] {path}  (<style>={so} </style>={sc} <body>={bo})")
+    pg = rebuilt.count("window.PagedConfig =")
+    no_pageno = rebuilt.count('class="pageno"')
+    flag = "OK" if (so == 1 and sc == 1 and bo == 1 and pg == 1 and no_pageno == 0) else "FAIL"
+    print(f"  [{flag}] {path}  (style={so}/{sc} body={bo} paged={pg} pageno={no_pageno})")
 
 print("Done.")
 PYTHON_SCRIPT
 
-echo "=== Synchronization complete ==="
+echo "=== Build complete ==="
