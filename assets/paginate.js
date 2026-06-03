@@ -35,6 +35,24 @@
     });
   }
 
+  /* On-screen page chrome: grey backdrop, centered white A4 sheets with a shadow
+     and a gap between them, so the browser view matches the printed pagination.
+     Injected AFTER Paged.js finishes because Paged.js strips @media screen rules
+     from the author CSS. Scoped to @media screen, so print is never affected. */
+  function injectPreviewChrome() {
+    if (document.getElementById("pagedjs-preview-chrome")) return;
+    var s = document.createElement("style");
+    s.id = "pagedjs-preview-chrome";
+    s.textContent =
+      "@media screen{" +
+        "html{background:#e9ecef}" +
+        ".pagedjs_pages{padding:8mm 0}" +
+        ".pagedjs_page{margin:0 auto 8mm;" +
+          "box-shadow:0 0 0 1px #dcdfe3,0 6px 18px rgba(0,0,0,.14)}" +
+      "}";
+    document.head.appendChild(s);
+  }
+
   /* Make TOC entries smooth-scroll to their section. */
   function bindTocLinks() {
     document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function (link) {
@@ -52,6 +70,7 @@
   window.PagedConfig = {
     auto: true,
     after: function () {
+      injectPreviewChrome();
       fillTocNumbers();
       bindTocLinks();
     }

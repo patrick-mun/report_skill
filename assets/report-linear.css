@@ -978,3 +978,8 @@ nav.toc-page { page: tocpage; }
   page-break-after: avoid;
   break-after: avoid;
 }
+
+/* NOTE — On-screen page chrome (grey backdrop, centered white A4 sheets with a
+   shadow and gaps) is NOT defined here on purpose. Paged.js strips @media screen
+   rules when it processes the author CSS, so that styling is injected after
+   pagination by assets/paginate.js (see its injectPreviewChrome()). */
