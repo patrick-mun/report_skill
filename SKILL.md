@@ -123,6 +123,41 @@ The user chooses, or you ask:
 4. Lay out on A4 sheets (one page at a time, no orphans).
 5. Inline CSS and JS, deliver as single HTML file.
 
+## Adding a new page to an existing document
+
+When editing a document with the `.sheet` model, use this procedure to add or remove pages:
+
+1. **Create a new blank sheet** by copying `templates/sheet-blank.html` into your HTML
+   between two existing `<section class="sheet">` blocks. Replace the placeholder text with your content.
+
+2. **Name your section:** Update the `id="sX"` to match your section number, e.g., `id="s4"` for section 4.
+
+3. **Update page IDs:** Each sheet has an `id="pageXXX"` attribute. If you're inserting a sheet in the middle,
+   all subsequent sheets need renumbering. **Use the automatic renumbering script:**
+
+   ```bash
+   bash build-renumber.sh your-document.html
+   ```
+
+   This script will:
+   - Renumber all `id="pageXXX"` attributes sequentially (skips cover and TOC)
+   - Update all `<span class="pageno">` footer page numbers automatically
+   - Preserve special sheets (cover, TOC) unchanged
+
+4. **Update the Table of Contents** (if your document has a `.sheet--toc`):
+   - Add a new `<li>` entry for your section in the TOC
+   - Use `<span class="toc-page-num">—</span>` for the page number (the `paginate.js` script fills it in automatically on load)
+   - Link to your section ID: `href="#sX"`
+
+5. **Check for overflow:** On screen, watch for a red dashed box outline labeled "à scinder" (needs splitting).
+   If a sheet is flagged as overflowing, split it by creating a second sheet and moving content.
+
+6. **Test before printing:** Open in Chrome/Firefox, print preview (`Ctrl/Cmd + P`), and verify:
+   - Page numbers are correct
+   - Footers appear on every page
+   - Tables and figures don't split awkwardly
+   - Colors print correctly (enable "Background graphics")
+
 ## Quality Assurance — before delivery
 
 **Always run the QA checklist in `references/qc-checklist.md`** before sending the report to the user. This includes:
