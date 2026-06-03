@@ -1,47 +1,46 @@
 # Maintenance Guide
 
-## CSS Synchronization (Point #3: High Severity)
+## CSS Synchronization
 
-**Problem:** The CSS is duplicated across every example/template (inline in `<style>` tags) and has already diverged (padding, font sizes, colors differ).
+**Source of truth:** `assets/report-linear.css` — the Linear Flux Model stylesheet (CSS @page, semantic HTML).
 
-**Source of Truth:** `assets/report.css` is the canonical CSS source.
+**✅ COMPLETED** (June 2026): All templates and examples use the same inlined CSS sourced from `assets/report-linear.css`. The old divergences between `.sheet`-era files are resolved.
 
-### When to Re-sync CSS
+### When to re-sync CSS
 
 Re-sync whenever you:
-- Fix a bug in `assets/report.css`
+- Fix a bug in `assets/report-linear.css`
 - Update colors, fonts, or spacing
 - Add new visual components (`.stat-grid`, `.flow`, etc.)
 
-### How to Re-sync
+### How to re-sync (automated)
 
-#### Manual (small changes)
-1. Edit `assets/report.css` as needed.
-2. For each file that needs updating:
-   - Open `assets/report.css`, select all CSS (excluding `@import` if any)
-   - Minify: remove newlines, collapse spaces, keep semantic formatting
-   - Copy the minified CSS
-   - In the target `.html` file, replace the entire contents of the `<style>` tag (keeping the outer `<style>` tags and closing `</style>`)
+```bash
+cd report_skill
+bash build-inline-css.sh
+git add templates/ examples/
+git commit -m "Sync CSS from report-linear.css"
+```
 
-#### Automated (coming soon)
-The `build-inline-css.sh` script (in progress) will automate this. For now, manual is reliable.
+`build-inline-css.sh` reads `assets/report-linear.css`, inlines it into all templates and examples (excluding `assets/legacy/` files and the demo file), and repairs HTML structure if needed.
 
-### Known Divergences (Before Sync)
+### Legacy files
 
-| File | Sheet Padding | Body Font |
-|------|---|---|
-| `report.css` | `16mm 18mm 12mm` | `15px` |
-| `example-professional.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `example-genome-meeting-scientific.html` | `15mm 17mm 11mm` | `14.5px` |
-| `example-genome-meeting-funder.html` | `15mm 17mm 11mm` | `15px` |
-| `templates/professional.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `templates/research.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
-| `templates/scientific-dossier.html` | `16mm 18mm 12mm` ✓ | `15px` ✓ |
+The old `.sheet` model files are archived in `assets/legacy/` and are **no longer maintained**:
 
-**After this fix:** All examples and templates will use `16mm 18mm 12mm` and `15px` (matching `report.css`).
+| File | Status |
+|------|--------|
+| `assets/legacy/report.css` | Archived — old `.sheet` model |
+| `assets/legacy/paginate-sheet.js` | Archived — old `.sheet` model |
+| `assets/legacy/paginate-linear.js` | Archived — duplicate of `paginate.js` |
 
-## Other High-Severity Issues
+Do not use these for new documents. See `references/pagination.md` for current guidance.
 
-- ✅ **#4 (.cover-divider)**: Renamed to `.cover-accent-band` in `report.css`; no longer orphaned.
-- ✅ **#5 (.glossary)**: Removed from `report.css` (never used).
-- ✅ **#6 (--mode)**: Documented `--mode layered|audience` in `SKILL.md` with clear mutual exclusion rules.
+## Other resolved issues
+
+- ✅ **CSS duplication** (June 2026): All files now source `report-linear.css` via `build-inline-css.sh`
+- ✅ **HTML structure** (June 2026): All templates and examples have valid `<style>`, `</head>`, `<body>` ordering
+- ✅ **Cover/TOC styling** (June 2026): `report-linear.css` now includes full `.cover*` and `.toc-page` classes
+- ✅ **`.cover-divider` → `.cover-accent-band`**: Renamed in CSS; all templates updated
+- ✅ **`.glossary`**: Removed (never used)
+- ✅ **`--mode` flag**: Documented in `SKILL.md` with mutual exclusion rules

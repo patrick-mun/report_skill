@@ -12,3 +12,5 @@ Default section plan for a professional report, briefing, or memo. If the user s
 8. **Annexes** — detailed data, sources, methodology.
 
 Keep the heading hierarchy to three levels (see `style-guide.md`). Use callouts for the one or two takeaways that matter most per section.
+
+> **French variant:** see `structure-pro.md`
