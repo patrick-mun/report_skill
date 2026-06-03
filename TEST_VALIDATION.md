@@ -434,3 +434,85 @@ Status: ✅ PASS
 2. Confirm colors print correctly
 3. Mark as complete
 
+
+---
+
+## 🔍 Real-World Test Results — PDF Print Validation
+
+**Date**: June 3, 2026  
+**Test Document**: Déploiement du télétravail (3 pages, with stat cards, bars, composition bars)
+**Tester**: User
+
+### ✅ **Phase 5 Result: Colors PRESERVED**
+
+**Status**: ✅ **PASS**
+
+Colors are correctly preserved in PDF:
+- Stat cards: colored backgrounds (blue, light accent) ✓
+- Composition bars: multi-colored segments ✓
+- Callouts: colored left borders ✓
+- Headers and text: correct colors ✓
+- Overall visual identity: maintained ✓
+
+**Conclusion**: Phase 5 color-adjust rules are **working correctly**. Colors do NOT appear greyscale or washed out.
+
+---
+
+### ⚠️ **Footer Positioning Issue: IDENTIFIED**
+
+**Status**: ⚠️ **KNOWN ISSUE** (Issue #27-29 in CORRECTIONS.md)
+
+**Problem**: Footer position **fluctuates** between pages in printed PDF
+- Footer should be at bottom of each A4 page (consistently)
+- Actual: Footer position varies from page to page
+- On-screen preview: Footers appear aligned (false WYSIWYG)
+- In PDF: Footers are misaligned
+
+**Root Cause**: `.sheet` model with `min-height: 297mm`
+- Browser measures 297mm on screen but print engine breaks at different boundary
+- No true alignment between screen preview and actual PDF pages
+- This is the fundamental architectural issue mentioned in CORRECTIONS.md #27
+
+**Expected Behavior (after Phase 6)**:
+- Using CSS `@page { size: A4; margin: 20mm }` + `break-*` rules
+- Browser-native pagination (true WYSIWYG)
+- Footers align consistently on actual page boundaries
+
+**Current Workaround**: None (design issue, not a bug to patch)
+
+---
+
+## 📋 Updated Test Summary
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| **Phase 5: Color Preservation** | ✅ **PASS** | Colors print correctly; no greyscale fallback |
+| **Phase 5b: Renumbering Script** | ✅ **PASS** | Script functional; auto-numbers pages correctly |
+| **Phase 5b: Documentation** | ✅ **PASS** | SKILL.md guide complete and clear |
+| **Footer Alignment (Issue #27)** | ⚠️ **KNOWN ISSUE** | Fluctuates in PDF; requires Phase 6 architectural redesign |
+
+---
+
+## 🎯 Next Steps
+
+### Immediate (No work needed)
+- Phase 5 ✅ delivers on color preservation — **COMPLETE**
+- Phase 5b ✅ improves sheet UX — **COMPLETE**
+
+### Future (Optional)
+- **Phase 6**: Migrate from `.sheet` model to linear flux + CSS `@page`
+  - Would fix footer alignment (true WYSIWYG)
+  - Would fix pagination reliability (#27-29)
+  - Estimate: 2-3 weeks work
+  - Benefit: Professional-grade print output
+
+---
+
+## 📸 Validation Evidence
+
+**PDF Generated**: Déploiement du télétravail (1ère année et recommandations)  
+**Color Test**: ✅ PASS — All visual components preserved  
+**Footer Test**: ⚠️ KNOWN ISSUE — Documented in Phase 6 scope  
+
+**Recommendation**: Phase 5 & 5b are ready for production. Footer alignment issue is architectural (Phase 6 scope). Update documentation to note that footer positioning may vary slightly in PDF output.
+
