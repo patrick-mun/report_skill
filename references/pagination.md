@@ -2,7 +2,7 @@
 
 Modern A4 pagination uses **CSS @page rules** and browser-native pagination instead of rigid explicit page boxes. This approach is cleaner, more maintainable, more editable (like Word), and leverages standard web standards.
 
-## The linear flux model (Phase 6)
+## The linear flux model
 
 Content flows naturally in the browser (like any web page), and **CSS handles pagination automatically**:
 - `@page { size: A4; margin: 20mm; }` — tells the browser each page is A4-sized
