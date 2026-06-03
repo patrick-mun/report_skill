@@ -103,60 +103,66 @@ The user chooses, or you ask:
    already exist in the sources, and add 2–4 sober inline-SVG/CSS visuals
    (stat cards, composition bar, bar chart, flow diagram, gantt, timeline) where
    they clarify, not decorate.
-7. **Lay out on A4 sheets.** Use the `.sheet` model in `assets/report.css`:
-   each page is an explicit 210×297 mm box with padding and footer. No orphaned
-   tables or empty gaps. See `references/pagination.md`.
-8. **Fill the template.** Start from a template in `templates/`, populate it with
-   the mapped content, and inline `assets/report.css` and `assets/paginate.js`
-   (in `<style>` and `<script>` tags at the end of `<body>`) so the output is a
-   single portable HTML file.
-9. **Generate the final HTML.** Test in browser (check overflow flags, TOC
-   numbering, footer page numbers), then deliver for print-to-PDF. See
-   `references/pagination.md` for the print checklist.
+7. **Structure for A4 pagination.** Use the linear flux model in `assets/report-linear.css`:
+   content flows naturally, and CSS `@page` rules handle pagination automatically.
+   Structure: `<section class="cover">` (title) → `<nav class="toc-page">` (TOC) →
+   `<main>` with numbered sections (`<section id="s1">`, `<section id="s2">`, etc.) →
+   single `<footer class="page-footer">` at the end. See `references/pagination.md`.
+8. **Fill the template.** Start from a template in `templates/` (e.g.,
+   `templates/scientific-dossier.html` or `templates/professional.html`), populate it with
+   the mapped content, and inline `assets/report-linear.css` (in `<style>` tag in `<head>`)
+   and optionally `assets/paginate.js` (in `<script>` tag at end of `<body>` for TOC linking
+   and page numbering) so the output is a single portable HTML file.
+9. **Generate the final HTML.** Test in browser (verify heading hierarchy, TOC links,
+   footer appearance), then deliver for print-to-PDF. Use print preview (`Ctrl+P`) to
+   check page breaks. See `references/pagination.md` for the print checklist.
 
 ## Procedure — simple formatting
 
 1. Read the user's text (report, memo, notes).
 2. Restructure to match the outline in `references/style-guide.md`: executive
    summary, max 3 heading levels, short paragraphs, lists, figures with captions.
-3. Apply consistent typography and spacing from `assets/report.css`.
-4. Lay out on A4 sheets (one page at a time, no orphans).
-5. Inline CSS and JS, deliver as single HTML file.
+3. Apply consistent typography and spacing from `assets/report-linear.css`.
+4. Structure as semantic HTML: `<section class="cover">` for title, `<main>` with
+   `<section id="s1">`, `<section id="s2">`, etc. for content, single `<footer class="page-footer">`
+   at the end. CSS `@page` rules handle A4 pagination automatically (no manual page breaks needed).
+5. Inline `assets/report-linear.css` in `<style>` tag and optionally `assets/paginate.js`
+   in `<script>` tag. Deliver as single self-contained HTML file.
 
-## Adding a new page to an existing document
+## Adding a new section to an existing document
 
-When editing a document with the `.sheet` model, use this procedure to add or remove pages:
+When editing a document with the linear flux model, use this procedure to add or remove sections:
 
-1. **Create a new blank sheet** by copying `templates/sheet-blank.html` into your HTML
-   between two existing `<section class="sheet">` blocks. Replace the placeholder text with your content.
+1. **Create a new section** by adding a `<section id="sX">` block inside the `<main>` element.
+   Start with an `<h2>` heading (which triggers a page break automatically).
 
-2. **Name your section:** Update the `id="sX"` to match your section number, e.g., `id="s4"` for section 4.
-
-3. **Update page IDs:** Each sheet has an `id="pageXXX"` attribute. If you're inserting a sheet in the middle,
-   all subsequent sheets need renumbering. **Use the automatic renumbering script:**
-
-   ```bash
-   bash build-renumber.sh your-document.html
+   ```html
+   <section id="s5">
+     <h2>Section 5: Your Title Here</h2>
+     <p>Your content goes here.</p>
+   </section>
    ```
 
-   This script will:
-   - Renumber all `id="pageXXX"` attributes sequentially (skips cover and TOC)
-   - Update all `<span class="pageno">` footer page numbers automatically
-   - Preserve special sheets (cover, TOC) unchanged
+2. **Name your section:** Use a sequential ID like `id="s5"`, `id="s6"`, etc. Numbering doesn't need to
+   be perfectly sequential (the CSS doesn't enforce it), but it helps readability.
 
-4. **Update the Table of Contents** (if your document has a `.sheet--toc`):
-   - Add a new `<li>` entry for your section in the TOC
-   - Use `<span class="toc-page-num">—</span>` for the page number (the `paginate.js` script fills it in automatically on load)
-   - Link to your section ID: `href="#sX"`
+3. **Update the Table of Contents** (in `<nav class="toc-page">`):
+   - Add a new `<li>` entry for your section
+   - Link to your section ID: `<a href="#s5">Section 5: Your Title</a>`
+   - The page number will be estimated automatically by `paginate.js` on load
 
-5. **Check for overflow:** On screen, watch for a red dashed box outline labeled "à scinder" (needs splitting).
-   If a sheet is flagged as overflowing, split it by creating a second sheet and moving content.
+4. **Page breaks are automatic:** The CSS `@page` rule and `break-before: page` on `h2` headings
+   handle pagination automatically. No manual page-break divs needed.
+
+5. **Avoid splitting block elements:** If a table, figure, or callout spans multiple pages,
+   the CSS `break-inside: avoid` rule will keep it together. If content is still too long for one page,
+   split it manually into separate sections or reduce the content.
 
 6. **Test before printing:** Open in Chrome/Firefox, print preview (`Ctrl/Cmd + P`), and verify:
-   - Page numbers are correct
-   - Footers appear on every page
-   - Tables and figures don't split awkwardly
-   - Colors print correctly (enable "Background graphics")
+   - Page breaks occur at h2 headings (not in the middle of tables/figures)
+   - Footers appear on every page with correct page numbers
+   - Colors print correctly (enable "Background graphics" if not automatic)
+   - No awkward orphaned text or headings at page boundaries
 
 ## Quality Assurance — before delivery
 
@@ -165,8 +171,8 @@ When editing a document with the `.sheet` model, use this procedure to add or re
 - **Content completeness**: all promised sections present, no `[To complete: …]` in body.
 - **Numbering consistency**: figures numbered 1–N continuously, tables similarly, all cross-references valid.
 - **Typography**: French accents correct, no orphaned hyphens, entity encoding consistent.
-- **Layout**: no overflow flags (red boxes), no orphaned headings or lonely lines.
-- **Footers & metadata**: all sheets have footers with page numbers, document title in `<title>`.
+- **Layout**: no orphaned headings at page boundaries, no awkward table/figure splits (CSS prevents them).
+- **Footers & metadata**: footer appears on every page with correct page numbers, document title in `<title>`.
 - **Print readiness**: test in Chrome/Firefox print preview, ensure "Background graphics" and "No margins" give clean output.
 
 If any check fails, fix it before delivering. If you discover a source conflict or missing section, **ask the user** rather than guessing.
@@ -178,7 +184,7 @@ All guidance is in the `references/` directory:
 - `consolidation.md` — how to ingest & reconcile multiple sources
 - `audiences.md` — how to adapt a report per audience
 - `visuals.md` — reuse & propose charts/diagrams (no monotone text)
-- `pagination.md` — A4 sheet model: cover, TOC, footers, page numbers
+- `pagination.md` — A4 pagination with CSS @page: linear flux model, cover, TOC, footers, page numbers
 - `style-guide.md` — 11 editorial rules for fast, clear reading (now with numbering consistency rules)
 - `qc-checklist.md` — **pre-delivery QA checklist** (typography, numbering, layout, print readiness)
 - `structure-research.md` — section plan: research / funding report
