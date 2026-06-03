@@ -1,13 +1,10 @@
 #!/bin/bash
 # build-renumber.sh — Auto-renumber sheet IDs and page footers
-# Usage: bash build-renumber.sh <html-file>
-# Sequential renumbering: id="pageXXX" and footer <span class="pageno">
 
 set -e
 
 if [ $# -ne 1 ]; then
   echo "Usage: bash build-renumber.sh <html-file>"
-  echo "Example: bash build-renumber.sh examples/exemple-pro.html"
   exit 1
 fi
 
@@ -29,53 +26,65 @@ file_path = sys.argv[1]
 with open(file_path, 'r', encoding='utf-8') as f:
     content = f.read()
 
-# Find all sheet sections
-sections = []
-for m in re.finditer(r'<section[^>]*?class="[^"]*sheet[^"]*?"[^>]*?>', content):
-    text = m.group(0)
-    is_special = '--cover' in text or '--toc' in text
-    sections.append({'pos': m.start(), 'text': text, 'is_special': is_special})
+# Find all sections with class="sheet"
+sections = list(re.finditer(r'<section[^>]*?class="[^"]*sheet[^"]*?"[^>]*?>', content))
+
+# Identify which sections are "regular" (not cover/toc)
+regular_indices = []
+for i, match in enumerate(sections):
+    tag = match.group(0)
+    if '--cover' not in tag and '--toc' not in tag:
+        regular_indices.append(i)
+
+total_pages = len(regular_indices)
 
 # Build ID mapping for regular sheets
-regular_sheets = [s for s in sections if not s['is_special']]
 id_map = {}
-for i, sheet in enumerate(regular_sheets, 1):
-    m = re.search(r'id="page(\d+)"', sheet['text'])
-    if m:
-        id_map[m.group(1)] = str(i)
+for page_num, section_idx in enumerate(regular_indices, 1):
+    match = sections[section_idx]
+    tag = match.group(0)
+    id_match = re.search(r'id="page(\d+)"', tag)
+    if id_match:
+        old_id = id_match.group(1)
+        id_map[old_id] = str(page_num)
 
-total = len(regular_sheets)
+# Step 1: Replace page IDs
+for old_id, new_id in id_map.items():
+    content = re.sub(rf'id="page{re.escape(old_id)}"', f'id="page{new_id}"', content)
 
-# Replace page IDs
-for old, new in id_map.items():
-    content = re.sub(rf'id="page{re.escape(old)}"', f'id="page{new}"', content)
-
-# Update pageno spans
+# Step 2: For each regular sheet, find and replace its page number
+# Parse the content again to get fresh positions
 sections = list(re.finditer(r'<section[^>]*?class="[^"]*sheet[^"]*?"[^>]*?>', content))
-page_num = 1
-for i, m in enumerate(sections):
-    text = m.group(0)
-    if '--cover' in text or '--toc' in text:
-        continue
 
-    sheet_start = m.start()
-    sheet_end = sections[i+1].start() if i+1 < len(sections) else len(content)
-    region = content[sheet_start:sheet_end]
+for page_num, section_idx in enumerate(regular_indices, 1):
+    match = sections[section_idx]
+    sheet_start = match.start()
 
-    pageno = re.search(r'<span class="pageno">.*?</span>', region)
-    if pageno:
-        pos_start = sheet_start + pageno.start()
-        pos_end = sheet_start + pageno.end()
-        new_text = f'<span class="pageno">Page <span class="num">{page_num}</span>/{total}</span>'
-        content = content[:pos_start] + new_text + content[pos_end:]
+    # Find end of this sheet (start of next section or end of file)
+    if section_idx + 1 < len(sections):
+        sheet_end = sections[section_idx + 1].start()
+    else:
+        sheet_end = len(content)
 
-    page_num += 1
+    # Extract sheet region and replace page number
+    sheet_html = content[sheet_start:sheet_end]
+
+    # Pattern: <span class="pageno">Page <span class="num">OLD</span>/OLD</span>
+    old_pageno_pattern = r'<span class="pageno">Page <span class="num">\d+</span>/\d+</span>'
+    new_pageno = f'<span class="pageno">Page <span class="num">{page_num}</span>/{total_pages}</span>'
+
+    sheet_html_updated = re.sub(old_pageno_pattern, new_pageno, sheet_html)
+
+    # Replace in main content
+    content = content[:sheet_start] + sheet_html_updated + content[sheet_end:]
+
+    # Recalculate section positions after modification
+    # because string lengths may have changed
+    sections = list(re.finditer(r'<section[^>]*?class="[^"]*sheet[^"]*?"[^>]*?>', content))
 
 with open(file_path, 'w', encoding='utf-8') as f:
     f.write(content)
 
-print(f'✓ Renumbered {total} numbered pages (cover and TOC skipped)')
+print(f'✓ Renumbered {total_pages} numbered pages (cover and TOC skipped)')
 
 EOF
-
-echo "Done."
