@@ -1067,169 +1067,200 @@ nav.toc-page { page: tocpage; }
 <section class="cover" id="cover">
     <div class="cover-logo">
       <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">GENOME</span>
-      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Genome Project</span>
+      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Génome Réunion</span>
     </div>
     <div class="cover-accent-band"></div>
     <div class="cover-center">
-      <h1>Genome Reunion Meeting — Scientific Committee Report</h1>
-      <div class="cover-subtitle">2026 Synthesis and Findings</div>
+      <h1>Génome Réunion — Scientific Committee Report</h1>
+      <div class="cover-subtitle">Building a first-generation genomic reference for an admixed, founder population</div>
     </div>
     <div class="cover-meta">
       <table>
-        <tr><td>Author</td><td>Research Coordination Office</td></tr>
-        <tr><td>Reviewer</td><td>Project Director · Scientific Board</td></tr>
+        <tr><td>Author</td><td>CHU de La Réunion — Molecular & Medical Genetics</td></tr>
+        <tr><td>Reviewer</td><td>Scientific Committee</td></tr>
         <tr><td>Date</td><td>June 1, 2026</td></tr>
         <tr><td>Version</td><td>1.0</td></tr>
-        <tr><td>Distribution</td><td>Internal restricted</td></tr>
-        <tr><td>Contact</td><td>hr@example.com</td></tr>
+        <tr><td>Audience</td><td>Scientists / experts</td></tr>
+        <tr><td>Master source</td><td>METHODOLOGY_selection_V3.5</td></tr>
       </table>
     </div>
   </section>
 
-  <!-- ================================================================================
-       TABLE OF CONTENTS
-       Navigation with smooth scroll links.
-       ================================================================================ -->
   <nav class="toc-page" id="toc">
     <h2>Table of Contents</h2>
     <ol>
-      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Context and Objectives</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Analysis</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2a"><span class="toc-title">2.1. Adoption and Usage</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2b"><span class="toc-title">2.2. Areas of Concern</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Recommendations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Action Plan</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Abstract</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Context and Research Question</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Objectives and Project Design</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Methodology: Cohort, Control Pools, Stratification</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Selection Algorithm — the S_div Score</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s6"><span class="toc-title">6. Validation and Sensitivity Analysis</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s7"><span class="toc-title">7. Resources, Impacts and Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
     </ol>
   </nav>
 
-  <!-- ================================================================================
-       MAIN CONTENT
-       Linear flow with automatic pagination via CSS.
-       ================================================================================ -->
   <main>
-    <!-- ====== SECTION 1: CONTEXT ====== -->
     <section id="s1">
-      <h2>1. Context and Objectives</h2>
+      <h2>1. Abstract</h2>
 
       <div class="stat-grid">
-        <div class="stat-card">
-          <div class="num">12</div>
-          <div class="label">Months of Remote Work</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">85%</div>
-          <div class="label">Workforce Adoption</div>
-        </div>
-        <div class="stat-card on-accent">
-          <div class="num">+42%</div>
-          <div class="label">Productivity Gain</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">€2.3M</div>
-          <div class="label">Infrastructure Savings</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">4/5 ⭐</div>
-          <div class="label">Employee Satisfaction</div>
-        </div>
+        <div class="stat-card on-accent"><div class="num">2 500</div><div class="label">SNP-genotyped individuals (~1.9 M SNP)</div></div>
+        <div class="stat-card"><div class="num">350</div><div class="label">Optimized WGS (≈700 haplotypes)</div></div>
+        <div class="stat-card"><div class="num">100</div><div class="label">Nuclear families (phasing)</div></div>
+        <div class="stat-card"><div class="num">MAF ≥ 1 %</div><div class="label">First-generation interpretable threshold</div></div>
       </div>
 
-      <p>The remote work deployment began in March 2025 as a pilot program and has evolved into a permanent hybrid model across the organization. This report reviews the first year of operations, analyzing adoption rates, productivity metrics, and employee satisfaction while identifying areas for improvement.</p>
+      <p><strong>Finding.</strong> Reference genomes are dominated by European ancestry; the strongly admixed, founder-marked Reunion population is nearly absent, so standard tools yield false positives, an excess of variants of uncertain significance (VUS), and unsafe drug dosing. <strong>Response.</strong> A first-generation Reunionese reference built on three layers — 2,500 SNP-genotyped individuals, 350 optimally selected whole genomes, and 100 nuclear families for phasing. <strong>Method.</strong> A hybrid geo-ancestral selection (geographic sector × inferred ancestry profiles), driven by a composite <code>S_div</code> score and a controlled discovery arm, anchored on 1000G/EGA control pools and validated empirically before any freeze.</p>
 
       <aside class="callout">
-        <span class="label">Key Insight</span>
-        <p>Remote work has become a strategic advantage, improving retention by 15% and reducing real estate costs without sacrificing collaboration or company culture.</p>
+        <span class="label">Key point</span>
+        <p>Reunion's complexity does not invalidate the tools themselves, but their standardized use in the absence of a local reference. The aim is to recalibrate filtering thresholds, pathogenicity scores, and interpretation criteria on local frequencies.</p>
       </aside>
     </section>
 
-    <!-- ====== SECTION 2: ANALYSIS ====== -->
     <section id="s2">
-      <h2>2. Analysis</h2>
+      <h2>2. Context and Research Question</h2>
 
-      <article id="s2a">
-        <h3>2.1. Adoption and Usage</h3>
+      <p>In 2009, about <strong>96 %</strong> of available genomic sequences came from individuals of European ancestry; the share of African ancestry in GWAS fell to <strong>1.1 % in 2022</strong>, even though Africa holds the greatest human genetic diversity. Diversification efforts (1000 Genomes, H3Africa, gnomAD, GenomeAsia) enriched the described variability, but no resource includes an ancestral combination comparable to Reunion's.</p>
 
-        <p>The adoption rate has exceeded initial expectations. Within the first three months, 78% of eligible employees transitioned to remote or hybrid arrangements. By month 12, the rate reached 85%, with sustained engagement.</p>
-
-        <div class="hbar">
-          <div class="row"><div>Adoption Rate (Month 1)</div><div class="track"><div class="fill" style="width:78%"></div></div><div class="val">78%</div></div>
-          <div class="row"><div>Adoption Rate (Month 6)</div><div class="track"><div class="fill" style="width:82%"></div></div><div class="val">82%</div></div>
-          <div class="row"><div>Adoption Rate (Month 12)</div><div class="track"><div class="fill g" style="width:85%"></div></div><div class="val">85%</div></div>
+      <figure>
+        <div class="compo-bar" role="img" aria-label="Indicative average ancestral composition of the Reunion population">
+          <span class="compo-afr" style="width:45%"></span>
+          <span class="compo-ind" style="width:25%"></span>
+          <span class="compo-eur" style="width:15%"></span>
+          <span class="compo-zar" style="width:8%"></span>
+          <span class="compo-chin" style="width:7%"></span>
         </div>
-        <p class="caption">Figure 1: Remote work adoption trajectory over 12 months.</p>
-      </article>
+        <div class="legend">
+          <span class="item"><span class="swatch legend-afr"></span>African / Malagasy ≈ 45%</span>
+          <span class="item"><span class="swatch legend-ind"></span>South Indian ≈ 25%</span>
+          <span class="item"><span class="swatch legend-eur"></span>European ≈ 15%</span>
+          <span class="item"><span class="swatch legend-zar"></span>Zarabe / Gujarati ≈ 8%</span>
+          <span class="item"><span class="swatch legend-chin"></span>Chinese ≈ 7%</span>
+        </div>
+        <figcaption class="caption">Figure 1: Indicative average ancestral composition (illustrative values, not cohort measurements). Source: project synthesis §2.3.</figcaption>
+      </figure>
 
-      <article id="s2b">
-        <h3>2.2. Areas of Concern</h3>
-
-        <p>While overall results are positive, several areas require attention:</p>
-
-        <ul>
-          <li><strong>Communication delays:</strong> Asynchronous communication has occasionally slowed decision-making in time-sensitive situations.</li>
-          <li><strong>Onboarding challenges:</strong> New hires report longer ramp-up times without in-person mentoring.</li>
-          <li><strong>Work-life balance:</strong> 23% of respondents report difficulty "switching off" after work hours.</li>
-          <li><strong>Internet infrastructure:</strong> 5% of employees still experience bandwidth limitations at home.</li>
-        </ul>
-
-        <aside class="callout">
-          <span class="label">Recommendation</span>
-          <p>Implement structured "sync hours" for critical meetings and establish a mentorship program for remote onboarding to address communication and integration gaps.</p>
-        </aside>
-      </article>
+      <p>Settled exclusively by migration since the 17th century, Reunion combines African, Malagasy, Indian, European, Chinese and Comorian ancestries with regional founder effects: extended runs of homozygosity (ROH), high linkage disequilibrium, and recessive mutations at disproportionate frequency (e.g. Larsen-Bourbon, <em>B4GALT7</em>; Ravine syndrome). <strong>Research question:</strong> how to select a few hundred genomes that best capture this admixed, founder structure so that local frequencies become interpretable?</p>
     </section>
 
-    <!-- ====== SECTION 3: RECOMMENDATIONS ====== -->
     <section id="s3">
-      <h2>3. Recommendations</h2>
+      <h2>3. Objectives and Project Design</h2>
 
-      <p>Based on the analysis, we recommend a three-pillar approach:</p>
+      <p><strong>Primary objective:</strong> constitute a database of Reunion-specific genetic variants and local allele frequencies by whole-genome sequencing of several hundred residents chosen to represent the island's genetic components, integrable with international resources (TOPMed, gnomAD).</p>
+      <ul>
+        <li><strong>Admixture study</strong> — characterize ancestral components and their geographic distribution.</li>
+        <li><strong>Pharmacogenetics × admixture</strong> — link ancestry profiles and drug metabolism (CYP2C19, CYP2D6, CYP3A4/5, SLCO1B1).</li>
+        <li><strong>Regional anchoring</strong> — position Reunion as a genomic reference for the south-west Indian Ocean.</li>
+      </ul>
 
       <table>
-        <thead>
-          <tr><th>Pillar</th><th>Action</th><th>Timeline</th></tr>
-        </thead>
+        <thead><tr><th>Resource</th><th>Size</th><th>Main role</th></tr></thead>
         <tbody>
-          <tr><td><strong>Culture & Cohesion</strong></td><td>Quarterly in-person team gatherings + virtual coffee sessions</td><td>Q3 2026</td></tr>
-          <tr><td><strong>Technology</strong></td><td>Upgrade collaboration tools + provide home office stipends</td><td>Q2–Q3 2026</td></tr>
-          <tr><td><strong>Process</strong></td><td>Define "core hours" + async-first communication standards</td><td>Q2 2026</td></tr>
+          <tr><td><strong>SNP population cohort</strong></td><td>2,500 individuals</td><td>Genetic structure, WGS selection, frequency recalibration</td></tr>
+          <tr><td><strong>Optimized WGS panel</strong></td><td>350 (from the 2,500)</td><td>Variant discovery, imputation panel, local reference</td></tr>
+          <tr><td><strong>Nuclear families</strong></td><td>100 families (~300 individuals)</td><td>Phasing by transmission, Reunionese haplotypes</td></tr>
         </tbody>
       </table>
-      <p class="caption">Table 1: Recommended actions organized by strategic pillar.</p>
+      <p class="caption">Table 1: The three layers of the reference. The 100 families are not counted in the 2,500. Source: METHODOLOGY_selection_V3.5 §2.1.</p>
     </section>
 
-    <!-- ====== SECTION 4: ACTION PLAN ====== -->
     <section id="s4">
-      <h2>4. Action Plan</h2>
+      <h2>4. Methodology: Cohort, Control Pools, Stratification</h2>
 
-      <p>Implementation will occur in four phases:</p>
+      <p>Purely geographic stratification is insufficient: a sector may contain several ancestry profiles, and one profile may exist across sectors. The method therefore crosses <code>geographic sector × distribution of inferred ancestry profiles</code> to define <em>geo-ancestral cells</em>, then assigns WGS quotas. External <strong>control pools</strong> anchor the PCA axes and stabilize ADMIXTURE labels — but never assign identity nor derive Reunionese frequencies (always recalibrated on the local cohort).</p>
 
-      <div class="flow">
-        <div class="flow-step"><strong>Phase 1</strong><br/>Define policies<br/>(June – July)</div>
-        <div class="flow-step alt"><strong>Phase 2</strong><br/>Deploy tools<br/>(August)</div>
-        <div class="flow-step"><strong>Phase 3</strong><br/>Train staff<br/>(September)</div>
-        <div class="flow-step alt"><strong>Phase 4</strong><br/>Measure & iterate<br/>(October+)</div>
-      </div>
+      <table>
+        <thead><tr><th>Level</th><th>Control panels</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0 — Public base</strong></td><td>1000 Genomes / IGSR (26 populations)</td><td>Immediate multi-ancestral base (PCA, ADMIXTURE, phasing, imputation)</td></tr>
+          <tr><td><strong>1 — Priority (EGA)</strong></td><td>Malagasy WGS, GenomeAsia 100K, Angola/Mozambique WGS</td><td>Malagasy (critical), South/East-Asian and Bantu anchoring</td></tr>
+          <tr><td><strong>2 — Complementary</strong></td><td>AGVP, H3Africa WGS, Pacific WGS</td><td>Broad African diversity, Austronesian axis (cautious)</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Table 2: Operational hierarchy of control pools. Source: METHODOLOGY_selection_V3.5 §6.2–6.3.</p>
 
-      <p>Each phase includes stakeholder feedback loops and monthly reviews to ensure alignment with business objectives.</p>
+      <p>350 diploid WGS ≈ 700 haplotypes. For a variant of allele frequency <code>f</code>, the probability of observing it at least once is <code>P = 1 − (1 − f)<sup>700</sup></code> (an order of magnitude, assuming homogeneity).</p>
+
+      <figure>
+        <div class="hbar">
+          <div class="row"><div>MAF 5% (≈35 copies)</div><div class="track"><div class="fill g" style="width:99.9%"></div></div><div class="val">&gt;99.9%</div></div>
+          <div class="row"><div>MAF 1% (≈7 copies)</div><div class="track"><div class="fill g" style="width:99.9%"></div></div><div class="val">&gt;99.9%</div></div>
+          <div class="row"><div>MAF 0.5% (≈3.5 copies)</div><div class="track"><div class="fill o" style="width:97%"></div></div><div class="val">≈97%</div></div>
+          <div class="row"><div>MAF 0.1% (≈0.7 copy)</div><div class="track"><div class="fill o" style="width:50%"></div></div><div class="val">≈50%</div></div>
+        </div>
+        <figcaption class="caption">Figure 2: Detection probability by MAF with 700 haplotypes. First-generation operational threshold: interpretable ≥ 1%; fragile 0.5–1%; unreliable &lt; 0.5%. Source: METHODOLOGY_selection_V3.5 §4.</figcaption>
+      </figure>
     </section>
 
-    <!-- ====== SECTION 5: CONCLUSION ====== -->
     <section id="s5">
-      <h2>5. Conclusion</h2>
+      <h2>5. Selection Algorithm — the S_div Score</h2>
 
-      <p>Remote work deployment has been a resounding success from productivity, cost, and employee satisfaction perspectives. By addressing the identified concerns through the recommended actions, we can solidify remote work as a permanent, competitive advantage for the organization.</p>
+      <p>The <code>S_div_geoancestry</code> score ranks individuals <em>within each cell</em>. It is a weighted combination of four components; its absolute values are not comparable across cells without normalization.</p>
 
-      <p>The first year has demonstrated that with proper infrastructure, clear communication guidelines, and team cohesion initiatives, remote work can drive both organizational success and employee wellbeing.</p>
+<pre>S_div_geoancestry(i) =
+    w1 × PCA_score_geoancestry(i)
+  + w2 × ADMIX_score_geoancestry(i)
+  + w3 × IBD_score_geoancestry(i)
+  + w4 × ROH_score_diversity(i)</pre>
+
+      <table>
+        <thead><tr><th>Component</th><th>Weight</th><th>Captures</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PCA</strong></td><td>0.30</td><td>Distance to the centroid in a reference-anchored space (genetic marginality)</td></tr>
+          <tr><td><strong>ADMIX</strong></td><td>0.30</td><td>Shannon entropy of the <code>q</code> proportions, local rarity, distance to references</td></tr>
+          <tr><td><strong>IBD</strong></td><td>0.25</td><td>Non-redundancy; robust KING kinship, <code>IBD = 1 − max relatedness</code></td></tr>
+          <tr><td><strong>ROH</strong></td><td>0.15</td><td>Limits excessive autozygosity; <code>max(0, 1 − ROH_total/100 Mb)</code></td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Table 3: Working components and weights of S_div (pre-validation). Weights to be tested by sensitivity analyses. Source: METHODOLOGY_selection_V3.5 §7.1.</p>
+
+      <p>A robust KING kinship coefficient is used (<code>kinship_KING ≥ 0.0625</code> exclusion threshold). Because <code>S_div</code> is locally normalized, the discovery arm (5–10%) uses a distinct global score in island-wide percentiles, stratified into sub-arms (global extremes, rare/dominant ancestry, ROH/founder, haplotype utility) so no single logic dominates.</p>
+    </section>
+
+    <section id="s6">
+      <h2>6. Validation and Sensitivity Analysis</h2>
+
+      <p>Validation demonstrates empirically that the hybrid geo-ancestral selection outperforms simple alternatives, without depending on a single admixture structure. It is conducted in layers: (A) public 1000G; (B) 1000G + priority EGA (Madagascar, Asia, Indian-Ocean Africa); (C) complementary EGA; (D) a 4–6 component Reunion simulation. Ten strategies are compared, including random, PCA-only, maximin IBD, and the central <strong>geo-ancestral distributional + S_div + discovery-arm</strong> strategy.</p>
+
+      <table>
+        <thead><tr><th>Metric family</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Allelic coverage</td><td>Variants captured; rare variants (MAF &lt; 5%, then &lt; 1%)</td></tr>
+          <tr><td>Representativeness</td><td>Geo-ancestral coverage, PCA/ADMIX divergence, KS of the S_div distribution</td></tr>
+          <tr><td>Haplotype quality</td><td>Segment coverage, imputation performance (R² / concordance by MAF)</td></tr>
+          <tr><td>Robustness</td><td>Multi-seed / multi-order stability, sensitivity to discovery-arm size</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Table 4: Selection evaluation metrics. Source: METHODOLOGY_selection_V3.5 §13.5.</p>
+
+      <aside class="callout">
+        <span class="label">Points to validate before freeze</span>
+        <p>(1) panel status: strict 350 or hybrid 322+28; (2) kinship metric: KING with documented threshold; (3) family module availability (activation of <code>Haplotype_utility</code>); (4) ROH threshold: 100 Mb or empirical normalization.</p>
+      </aside>
+    </section>
+
+    <section id="s7">
+      <h2>7. Resources, Impacts and Conclusion</h2>
+
+      <p>The pipeline produces QC reports, control-pool inventories, global PCA/ADMIXTURE, ROH and geo-ancestral IBD reports, phasing reports, the <code>selection_consensus</code> lists, the frequency recalibration and imputation/LAI reports, and a clinical-AI layer: variant pathogenicity (GNN), pharmacogenetics × admixture, admixture analysis, and locally recalibrated polygenic scores.</p>
+
+      <table>
+        <thead><tr><th>Domain</th><th>Expected benefit</th></tr></thead>
+        <tbody>
+          <tr><td>Genetic diagnosis</td><td>Better local variant interpretation, fewer false positives, VUS reclassification</td></tr>
+          <tr><td>Personalized medicine</td><td>Adjusted dosing (warfarin/CYP2C9, clopidogrel/CYP2C19)</td></tr>
+          <tr><td>Research</td><td>Unique admixture/founder reference; enrichment of TOPMed, gnomAD</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Table 5: Expected impacts by domain (summary). Source: project synthesis.</p>
+
+      <p>Its methodological contribution is to replace strictly geographic stratification with a <strong>geo-ancestral distributional</strong> logic, driven by an explicit <code>S_div</code> score and a controlled discovery arm, anchored on 1000G/EGA pools and validated before any freeze — a reproducible, auditable, and evolving founding brick for equitable genomic health.</p>
     </section>
   </main>
 
-  <!-- ================================================================================
-       FOOTER
-       Page numbering (updated by minimal JS).
-       ================================================================================ -->
   <footer class="page-footer">
-    <span>Genome Reunion Meeting — Scientific Committee Report · Genome Project</span>
+    <span>Génome Réunion — Scientific Committee Report · CHU de La Réunion</span>
   </footer>
 
   <!-- ================================================================================

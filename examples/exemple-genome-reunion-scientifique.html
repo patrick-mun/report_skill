@@ -1067,169 +1067,200 @@ nav.toc-page { page: tocpage; }
 <section class="cover" id="cover">
     <div class="cover-logo">
       <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">GENOME</span>
-      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Example Company</span>
+      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Génome Réunion</span>
     </div>
     <div class="cover-accent-band"></div>
     <div class="cover-center">
-      <h1>Réunion Génome — Rapport du comité scientifique</h1>
-      <div class="cover-subtitle">Synthèse 2026 et constats</div>
+      <h1>Génome Réunion — Rapport du comité scientifique</h1>
+      <div class="cover-subtitle">Construire un référentiel génomique de première génération pour une population admixée et fondatrice</div>
     </div>
     <div class="cover-meta">
       <table>
-        <tr><td>Author</td><td>Human Resources Department</td></tr>
-        <tr><td>Reviewer</td><td>General Management · IT Department</td></tr>
-        <tr><td>Date</td><td>June 1, 2026</td></tr>
+        <tr><td>Auteur</td><td>CHU de La Réunion — Génétique moléculaire et médicale</td></tr>
+        <tr><td>Relecteur</td><td>Comité scientifique</td></tr>
+        <tr><td>Date</td><td>1er juin 2026</td></tr>
         <tr><td>Version</td><td>1.0</td></tr>
-        <tr><td>Distribution</td><td>Internal restricted</td></tr>
-        <tr><td>Contact</td><td>hr@example.com</td></tr>
+        <tr><td>Public visé</td><td>Scientifique / expert</td></tr>
+        <tr><td>Document maître</td><td>METHODOLOGY_selection_V3.5</td></tr>
       </table>
     </div>
   </section>
 
-  <!-- ================================================================================
-       TABLE OF CONTENTS
-       Navigation with smooth scroll links.
-       ================================================================================ -->
   <nav class="toc-page" id="toc">
-    <h2>Table of Contents</h2>
+    <h2>Sommaire</h2>
     <ol>
-      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Context and Objectives</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Analysis</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2a"><span class="toc-title">2.1. Adoption and Usage</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2b"><span class="toc-title">2.2. Areas of Concern</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Recommendations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Action Plan</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Résumé</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Contexte et question de recherche</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Objectifs et design du projet</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Méthodologie : cohorte, pools témoins, stratification</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Algorithme de sélection — le score S_div</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s6"><span class="toc-title">6. Validation et analyses de sensibilité</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s7"><span class="toc-title">7. Ressources, impacts et conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
     </ol>
   </nav>
 
-  <!-- ================================================================================
-       MAIN CONTENT
-       Linear flow with automatic pagination via CSS.
-       ================================================================================ -->
   <main>
-    <!-- ====== SECTION 1: CONTEXT ====== -->
     <section id="s1">
-      <h2>1. Context and Objectives</h2>
+      <h2>1. Résumé</h2>
 
       <div class="stat-grid">
-        <div class="stat-card">
-          <div class="num">12</div>
-          <div class="label">Months of Remote Work</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">85%</div>
-          <div class="label">Workforce Adoption</div>
-        </div>
-        <div class="stat-card on-accent">
-          <div class="num">+42%</div>
-          <div class="label">Productivity Gain</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">€2.3M</div>
-          <div class="label">Infrastructure Savings</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">4/5 ⭐</div>
-          <div class="label">Employee Satisfaction</div>
-        </div>
+        <div class="stat-card on-accent"><div class="num">2 500</div><div class="label">Individus génotypés SNP (~1,9 M SNP)</div></div>
+        <div class="stat-card"><div class="num">350</div><div class="label">WGS optimisés (≈700 haplotypes)</div></div>
+        <div class="stat-card"><div class="num">100</div><div class="label">Familles nucléaires (phasage)</div></div>
+        <div class="stat-card"><div class="num">MAF ≥ 1 %</div><div class="label">Seuil interprétable 1ʳᵉ génération</div></div>
       </div>
 
-      <p>The remote work deployment began in March 2025 as a pilot program and has evolved into a permanent hybrid model across the organization. This report reviews the first year of operations, analyzing adoption rates, productivity metrics, and employee satisfaction while identifying areas for improvement.</p>
+      <p><strong>Constat.</strong> Les génomes de référence sont dominés par l'ascendance européenne ; la population réunionnaise, fortement admixée et marquée par des effets fondateurs, y est quasi absente, d'où faux positifs, excès de variants de signification incertaine (VUS) et posologies inadaptées. <strong>Réponse.</strong> Un référentiel réunionnais de première génération reposant sur trois couches — 2 500 individus génotypés SNP, 350 génomes complets sélectionnés de façon optimisée, et 100 familles nucléaires pour le phasage. <strong>Méthode.</strong> Une sélection hybride géo-ancestrale (secteur géographique × profils d'ascendance inférée), pilotée par un score composite <code>S_div</code> et un bras de découverte contrôlé, ancrée sur des pools témoins 1000G/EGA et validée empiriquement avant tout gel.</p>
 
       <aside class="callout">
-        <span class="label">Key Insight</span>
-        <p>Remote work has become a strategic advantage, improving retention by 15% and reducing real estate costs without sacrificing collaboration or company culture.</p>
+        <span class="label">Point clé</span>
+        <p>La complexité réunionnaise ne remet pas en cause les outils eux-mêmes, mais leur usage standardisé en l'absence d'une base de référence locale. L'enjeu est de recalibrer seuils de filtrage, scores de pathogénicité et critères d'interprétation sur des fréquences locales.</p>
       </aside>
     </section>
 
-    <!-- ====== SECTION 2: ANALYSIS ====== -->
     <section id="s2">
-      <h2>2. Analysis</h2>
+      <h2>2. Contexte et question de recherche</h2>
 
-      <article id="s2a">
-        <h3>2.1. Adoption and Usage</h3>
+      <p>En 2009, environ <strong>96 %</strong> des séquences génomiques disponibles provenaient d'individus d'ascendance européenne ; la part d'ascendance africaine dans les GWAS est tombée à <strong>1,1 % en 2022</strong>, alors que l'Afrique abrite la plus grande diversité génétique humaine. Les efforts de diversification (1000 Genomes, H3Africa, gnomAD, GenomeAsia) ont enrichi la variabilité décrite, mais aucune ressource n'inclut une combinaison ancestrale comparable à celle de La Réunion.</p>
 
-        <p>The adoption rate has exceeded initial expectations. Within the first three months, 78% of eligible employees transitioned to remote or hybrid arrangements. By month 12, the rate reached 85%, with sustained engagement.</p>
-
-        <div class="hbar">
-          <div class="row"><div>Adoption Rate (Month 1)</div><div class="track"><div class="fill" style="width:78%"></div></div><div class="val">78%</div></div>
-          <div class="row"><div>Adoption Rate (Month 6)</div><div class="track"><div class="fill" style="width:82%"></div></div><div class="val">82%</div></div>
-          <div class="row"><div>Adoption Rate (Month 12)</div><div class="track"><div class="fill g" style="width:85%"></div></div><div class="val">85%</div></div>
+      <figure>
+        <div class="compo-bar" role="img" aria-label="Composition ancestrale moyenne indicative de la population réunionnaise">
+          <span class="compo-afr" style="width:45%"></span>
+          <span class="compo-ind" style="width:25%"></span>
+          <span class="compo-eur" style="width:15%"></span>
+          <span class="compo-zar" style="width:8%"></span>
+          <span class="compo-chin" style="width:7%"></span>
         </div>
-        <p class="caption">Figure 1: Remote work adoption trajectory over 12 months.</p>
-      </article>
+        <div class="legend">
+          <span class="item"><span class="swatch legend-afr"></span>Afrique / Malgache ≈ 45 %</span>
+          <span class="item"><span class="swatch legend-ind"></span>Inde du Sud ≈ 25 %</span>
+          <span class="item"><span class="swatch legend-eur"></span>Européen ≈ 15 %</span>
+          <span class="item"><span class="swatch legend-zar"></span>Zarabe / Gujarati ≈ 8 %</span>
+          <span class="item"><span class="swatch legend-chin"></span>Chinois ≈ 7 %</span>
+        </div>
+        <figcaption class="caption">Figure 1 : Composition ancestrale moyenne indicative (valeurs illustratives, non issues de mesures sur la cohorte). Source : synthèse du projet §2.3.</figcaption>
+      </figure>
 
-      <article id="s2b">
-        <h3>2.2. Areas of Concern</h3>
-
-        <p>While overall results are positive, several areas require attention:</p>
-
-        <ul>
-          <li><strong>Communication delays:</strong> Asynchronous communication has occasionally slowed decision-making in time-sensitive situations.</li>
-          <li><strong>Onboarding challenges:</strong> New hires report longer ramp-up times without in-person mentoring.</li>
-          <li><strong>Work-life balance:</strong> 23% of respondents report difficulty "switching off" after work hours.</li>
-          <li><strong>Internet infrastructure:</strong> 5% of employees still experience bandwidth limitations at home.</li>
-        </ul>
-
-        <aside class="callout">
-          <span class="label">Recommendation</span>
-          <p>Implement structured "sync hours" for critical meetings and establish a mentorship program for remote onboarding to address communication and integration gaps.</p>
-        </aside>
-      </article>
+      <p>Peuplée exclusivement par migrations depuis le XVII<sup>e</sup> siècle, La Réunion combine des ascendances africaine, malgache, indienne, européenne, chinoise et comorienne, avec des effets fondateurs régionaux : régions d'homozygotie (ROH) étendues, fort déséquilibre de liaison, mutations récessives à fréquence disproportionnée (ex. Larsen-Bourbon, <em>B4GALT7</em> ; syndrome de Ravine). <strong>Question de recherche :</strong> comment sélectionner quelques centaines de génomes capturant au mieux cette structure admixée et fondatrice pour rendre les fréquences locales interprétables ?</p>
     </section>
 
-    <!-- ====== SECTION 3: RECOMMENDATIONS ====== -->
     <section id="s3">
-      <h2>3. Recommendations</h2>
+      <h2>3. Objectifs et design du projet</h2>
 
-      <p>Based on the analysis, we recommend a three-pillar approach:</p>
+      <p><strong>Objectif principal :</strong> constituer une base de variants propres à La Réunion et de fréquences alléliques locales par séquençage complet de plusieurs centaines d'habitants choisis pour représenter les composantes génétiques de l'île, intégrable aux ressources internationales (TOPMed, gnomAD).</p>
+      <ul>
+        <li><strong>Étude de l'admixture</strong> — caractériser les composantes ancestrales et leur distribution géographique.</li>
+        <li><strong>Pharmacogénétique × admixture</strong> — relier profils d'ascendance et métabolisme des médicaments (CYP2C19, CYP2D6, CYP3A4/5, SLCO1B1).</li>
+        <li><strong>Ancrage régional</strong> — positionner La Réunion comme référence génomique du sud-ouest de l'océan Indien.</li>
+      </ul>
 
       <table>
-        <thead>
-          <tr><th>Pillar</th><th>Action</th><th>Timeline</th></tr>
-        </thead>
+        <thead><tr><th>Ressource</th><th>Taille</th><th>Rôle principal</th></tr></thead>
         <tbody>
-          <tr><td><strong>Culture & Cohesion</strong></td><td>Quarterly in-person team gatherings + virtual coffee sessions</td><td>Q3 2026</td></tr>
-          <tr><td><strong>Technology</strong></td><td>Upgrade collaboration tools + provide home office stipends</td><td>Q2–Q3 2026</td></tr>
-          <tr><td><strong>Process</strong></td><td>Define "core hours" + async-first communication standards</td><td>Q2 2026</td></tr>
+          <tr><td><strong>Cohorte populationnelle SNP</strong></td><td>2 500 individus</td><td>Structure génétique, sélection WGS, recalibrage des fréquences</td></tr>
+          <tr><td><strong>Panel WGS optimisé</strong></td><td>350 (issus des 2 500)</td><td>Découverte de variants, panel d'imputation, référence locale</td></tr>
+          <tr><td><strong>Familles nucléaires</strong></td><td>100 familles (~300 individus)</td><td>Phasage par transmission, haplotypes réunionnais</td></tr>
         </tbody>
       </table>
-      <p class="caption">Table 1: Recommended actions organized by strategic pillar.</p>
+      <p class="caption">Tableau 1 : Les trois couches du référentiel. Les 100 familles ne sont pas comptées dans les 2 500. Source : METHODOLOGY_selection_V3.5 §2.1.</p>
     </section>
 
-    <!-- ====== SECTION 4: ACTION PLAN ====== -->
     <section id="s4">
-      <h2>4. Action Plan</h2>
+      <h2>4. Méthodologie : cohorte, pools témoins, stratification</h2>
 
-      <p>Implementation will occur in four phases:</p>
+      <p>La stratification purement géographique ne suffit pas : un secteur peut contenir plusieurs profils d'ascendance, et un même profil exister dans plusieurs secteurs. La méthode croise donc <code>secteur géographique × distribution des profils d'ascendance inférée</code> pour définir des <em>cellules géo-ancestrales</em>, puis attribue des quotas WGS. Des <strong>pools témoins</strong> externes ancrent les axes PCA et stabilisent les labels ADMIXTURE — sans jamais assigner d'identité ni déduire les fréquences réunionnaises (toujours recalibrées sur la cohorte locale).</p>
 
-      <div class="flow">
-        <div class="flow-step"><strong>Phase 1</strong><br/>Define policies<br/>(June – July)</div>
-        <div class="flow-step alt"><strong>Phase 2</strong><br/>Deploy tools<br/>(August)</div>
-        <div class="flow-step"><strong>Phase 3</strong><br/>Train staff<br/>(September)</div>
-        <div class="flow-step alt"><strong>Phase 4</strong><br/>Measure & iterate<br/>(October+)</div>
-      </div>
+      <table>
+        <thead><tr><th>Niveau</th><th>Panels témoins</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0 — Socle public</strong></td><td>1000 Genomes / IGSR (26 populations)</td><td>Socle multi-ancestral immédiat (PCA, ADMIXTURE, phasage, imputation)</td></tr>
+          <tr><td><strong>1 — Prioritaire (EGA)</strong></td><td>WGS malgaches, GenomeAsia 100K, WGS Angola/Mozambique</td><td>Ancrage malgache (critique), sud-/est-asiatique et bantou</td></tr>
+          <tr><td><strong>2 — Complémentaire</strong></td><td>AGVP, H3Africa WGS, Pacific WGS</td><td>Diversité africaine large, axe austronésien (prudent)</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Tableau 2 : Hiérarchie opérationnelle des pools témoins. Source : METHODOLOGY_selection_V3.5 §6.2–6.3.</p>
 
-      <p>Each phase includes stakeholder feedback loops and monthly reviews to ensure alignment with business objectives.</p>
+      <p>350 WGS diploïdes ≈ 700 haplotypes. Pour un variant de fréquence allélique <code>f</code>, la probabilité de l'observer au moins une fois est <code>P = 1 − (1 − f)<sup>700</sup></code> (ordre de grandeur, sous hypothèse d'homogénéité).</p>
+
+      <figure>
+        <div class="hbar">
+          <div class="row"><div>MAF 5 % (≈35 copies)</div><div class="track"><div class="fill g" style="width:99.9%"></div></div><div class="val">&gt;99,9 %</div></div>
+          <div class="row"><div>MAF 1 % (≈7 copies)</div><div class="track"><div class="fill g" style="width:99.9%"></div></div><div class="val">&gt;99,9 %</div></div>
+          <div class="row"><div>MAF 0,5 % (≈3,5 copies)</div><div class="track"><div class="fill o" style="width:97%"></div></div><div class="val">≈97 %</div></div>
+          <div class="row"><div>MAF 0,1 % (≈0,7 copie)</div><div class="track"><div class="fill o" style="width:50%"></div></div><div class="val">≈50 %</div></div>
+        </div>
+        <figcaption class="caption">Figure 2 : Probabilité de détection selon la MAF avec 700 haplotypes. Seuil opérationnel 1ʳᵉ génération : interprétable ≥ 1 % ; fragile 0,5–1 % ; non fiable &lt; 0,5 %. Source : METHODOLOGY_selection_V3.5 §4.</figcaption>
+      </figure>
     </section>
 
-    <!-- ====== SECTION 5: CONCLUSION ====== -->
     <section id="s5">
-      <h2>5. Conclusion</h2>
+      <h2>5. Algorithme de sélection — le score S_div</h2>
 
-      <p>Remote work deployment has been a resounding success from productivity, cost, and employee satisfaction perspectives. By addressing the identified concerns through the recommended actions, we can solidify remote work as a permanent, competitive advantage for the organization.</p>
+      <p>Le score <code>S_div_geoancestry</code> classe les individus <em>au sein de chaque cellule</em>. C'est une combinaison pondérée de quatre composantes ; ses valeurs absolues ne sont pas comparables entre cellules sans normalisation.</p>
 
-      <p>The first year has demonstrated that with proper infrastructure, clear communication guidelines, and team cohesion initiatives, remote work can drive both organizational success and employee wellbeing.</p>
+<pre>S_div_geoancestry(i) =
+    w1 × PCA_score_geoancestry(i)
+  + w2 × ADMIX_score_geoancestry(i)
+  + w3 × IBD_score_geoancestry(i)
+  + w4 × ROH_score_diversity(i)</pre>
+
+      <table>
+        <thead><tr><th>Composante</th><th>Poids</th><th>Mesure</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PCA</strong></td><td>0,30</td><td>Distance au centroïde dans un espace ancré sur références (marginalité génétique)</td></tr>
+          <tr><td><strong>ADMIX</strong></td><td>0,30</td><td>Entropie de Shannon des proportions <code>q</code>, rareté locale, distance aux références</td></tr>
+          <tr><td><strong>IBD</strong></td><td>0,25</td><td>Non-redondance ; parenté robuste KING, <code>IBD = 1 − max relatedness</code></td></tr>
+          <tr><td><strong>ROH</strong></td><td>0,15</td><td>Limite l'autozygotie excessive ; <code>max(0, 1 − ROH_total/100 Mb)</code></td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Tableau 3 : Composantes et poids de travail de S_div (pré-validation). Poids à tester par analyses de sensibilité. Source : METHODOLOGY_selection_V3.5 §7.1.</p>
+
+      <p>Un coefficient de parenté robuste KING est utilisé (seuil d'exclusion <code>kinship_KING ≥ 0,0625</code>). Comme <code>S_div</code> est normalisé localement, le bras de découverte (5–10 %) emploie un score global distinct en percentiles à l'échelle de l'île, stratifié en sous-bras (extrêmes globaux, ascendance rare/dominante, ROH/fondateur, utilité haplotypique) afin qu'aucune logique unique ne domine.</p>
+    </section>
+
+    <section id="s6">
+      <h2>6. Validation et analyses de sensibilité</h2>
+
+      <p>La validation démontre empiriquement que la sélection hybride géo-ancestrale est supérieure à des alternatives simples, sans dépendre d'une seule structure d'admixture. Elle est conduite par couches : (A) 1000G public ; (B) 1000G + EGA prioritaires (Madagascar, Asie, Afrique de l'océan Indien) ; (C) EGA complémentaires ; (D) simulation réunionnaise à 4–6 composantes. Dix stratégies sont comparées, dont random, PCA-only, maximin IBD, et la stratégie centrale <strong>géo-ancestrale distributionnelle + S_div + bras découverte</strong>.</p>
+
+      <table>
+        <thead><tr><th>Famille de métriques</th><th>Exemples</th></tr></thead>
+        <tbody>
+          <tr><td>Couverture allélique</td><td>Variants capturés ; variants rares (MAF &lt; 5 %, puis &lt; 1 %)</td></tr>
+          <tr><td>Représentativité</td><td>Couverture géo-ancestrale, divergence PCA/ADMIX, KS de la distribution S_div</td></tr>
+          <tr><td>Qualité haplotypique</td><td>Couverture des segments, performance d'imputation (R² / concordance par MAF)</td></tr>
+          <tr><td>Robustesse</td><td>Stabilité multi-seed / multi-ordre, sensibilité à la taille du bras découverte</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Tableau 4 : Métriques d'évaluation de la sélection. Source : METHODOLOGY_selection_V3.5 §13.5.</p>
+
+      <aside class="callout">
+        <span class="label">Points à valider avant gel</span>
+        <p>(1) statut du panel : strict 350 ou hybride 322+28 ; (2) métrique de parenté : KING avec seuil documenté ; (3) disponibilité du module familial (activation de <code>Haplotype_utility</code>) ; (4) seuil ROH : 100 Mb ou normalisation empirique.</p>
+      </aside>
+    </section>
+
+    <section id="s7">
+      <h2>7. Ressources, impacts et conclusion</h2>
+
+      <p>Le pipeline produit les rapports QC, les inventaires de pools témoins, les PCA/ADMIXTURE globales, les rapports ROH et IBD géo-ancestral, les rapports de phasage, les listes <code>selection_consensus</code>, les rapports de recalibrage des fréquences et d'imputation/LAI, et une surcouche d'IA clinique : pathogénicité des variants (GNN), pharmacogénétique × admixture, analyse d'admixture, et scores polygéniques recalibrés localement.</p>
+
+      <table>
+        <thead><tr><th>Domaine</th><th>Bénéfice attendu</th></tr></thead>
+        <tbody>
+          <tr><td>Diagnostic génétique</td><td>Meilleure interprétation des variants locaux, moins de faux positifs, reclassification de VUS</td></tr>
+          <tr><td>Médecine personnalisée</td><td>Posologies ajustées (warfarine/CYP2C9, clopidogrel/CYP2C19)</td></tr>
+          <tr><td>Recherche</td><td>Référentiel unique admixture/fondateur ; enrichissement de TOPMed, gnomAD</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">Tableau 5 : Impacts attendus par domaine (synthèse). Source : synthèse du projet.</p>
+
+      <p>Sa contribution méthodologique est de remplacer la stratification strictement géographique par une logique <strong>géo-ancestrale distributionnelle</strong>, pilotée par un score <code>S_div</code> explicite et un bras de découverte contrôlé, ancrée sur des pools 1000G/EGA et validée avant tout gel — une brique fondatrice reproductible, auditable et évolutive d'une santé génomique équitable.</p>
     </section>
   </main>
 
-  <!-- ================================================================================
-       FOOTER
-       Page numbering (updated by minimal JS).
-       ================================================================================ -->
   <footer class="page-footer">
-    <span>Réunion Génome — Rapport du comité scientifique · Example Company</span>
+    <span>Génome Réunion — Rapport du comité scientifique · CHU de La Réunion</span>
   </footer>
 
   <!-- ================================================================================
