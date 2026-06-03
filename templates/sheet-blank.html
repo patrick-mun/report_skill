@@ -3,11 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blank Sheet Template</title>
+  <title>Blank Sheet Template (DEPRECATED)</title>
   <style>
     /* Paste the contents of assets/report.css here */
   </style>
 </head>
+<!--
+  ⚠️  DEPRECATED: This template uses the legacy .sheet model (rigid 210×297mm boxes).
+
+  MIGRATION REQUIRED:
+  - Use templates/scientific-dossier.html or templates/professional.html instead
+  - These use the new linear flux model with CSS @page rules
+  - See STEP3-MIGRATION.md for migration details
+
+  BACKWARD COMPATIBILITY:
+  - If you still need the .sheet model, use assets/report.css
+  - But note: .sheet model is no longer maintained
+
+  PHASE 6 REFACTORING:
+  - Phase 6 migrated from rigid .sheet pagination to browser-native CSS @page
+  - Linear flux model is cleaner, more maintainable, and Word-like
+  - New templates/report-linear.css replaces old report.css
+-->
 <body class="paged">
 
   <!-- ============ FEUILLE X (page Y) — TITLE ============ -->
