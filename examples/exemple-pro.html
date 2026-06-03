@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Déploiement du télétravail — Review and Recommandations</title>
   <style>
-/* report-linear.css — inlined for standalone use */
-  </style>
-</head>
 /* ==============================================
    report-linear.css — Linear Flux Model + CSS @page Pagination
 
@@ -623,14 +620,124 @@ nav.toc ol {
 .bg-shade-mid { background: var(--shade-mid); }
 
 /* ========== SECTION 7: LAYOUT — SCREEN MODE ==========
-   Fluid reading width, centered, readable line length. */
+   Fluid reading width, centered, readable line length.
 
-main, article, section {
+   Only PAGE-LEVEL wrappers get the white "sheet" card on screen:
+   the cover, the TOC page, and <main>. Inner <section id="s*"> and
+   <article> flow inside <main> WITHOUT their own card (no nested boxes). */
+
+section.cover, nav.toc-page, main {
   max-width: var(--max-width);
   margin: 24px auto;
   background: #fff;
   padding: 48px 56px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ----- COVER PAGE ----- */
+section.cover {
+  display: flex;
+  flex-direction: column;
+  /* Fill an A4 page (height − top/bottom @page margins) */
+  min-height: calc(297mm - 40mm);
+  /* Cover is its own page; content starts on the next one */
+  page-break-after: always;
+  break-after: page;
+}
+
+.cover-logo { margin-bottom: auto; padding-bottom: 10mm; }
+.cover-logo svg { height: 58px; width: auto; }
+
+.cover-accent-band {
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-bottom: 10mm;
+}
+
+.cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cover-center h1 {
+  font-family: var(--font-head);
+  font-size: 2.1em;
+  color: var(--accent);
+  margin: 0 0 0.3em;
+  line-height: 1.2;
+  /* Don't let the cover h1 trigger the global "h2-like" page break */
+  page-break-before: avoid;
+  break-before: avoid;
+  border: none;
+}
+
+.cover-subtitle {
+  font-size: 1.15em;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 2mm;
+}
+
+.cover-meta {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 8mm;
+}
+.cover-meta table { font-size: 0.93em; width: 100%; margin: 0; }
+.cover-meta th, .cover-meta td {
+  padding: 4px 14px 4px 0;
+  border: none;
+  background: none;
+  vertical-align: top;
+}
+.cover-meta tr:nth-child(even) { background: none; }
+.cover-meta td:first-child { font-weight: 600; color: var(--accent); width: 130px; }
+
+/* ----- TABLE OF CONTENTS PAGE ----- */
+nav.toc-page {
+  /* TOC is its own page */
+  page-break-after: always;
+  break-after: page;
+}
+nav.toc-page h2 {
+  font-size: 1.5em;
+  margin: 0 0 8mm;
+  border: none;
+  /* TOC already sits on its own page — don't force an extra break */
+  page-break-before: avoid;
+  break-before: avoid;
+}
+nav.toc-page ol { list-style: none; padding: 0; margin: 0; }
+nav.toc-page li { margin-bottom: 1px; }
+nav.toc-page li.toc-sub { padding-left: 16px; }
+
+/* The clickable row: title … dotted leader … page number */
+a.toc-entry {
+  display: flex;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--text);
+  padding: 4px 2px;
+  border-radius: 3px;
+  gap: 0;
+}
+a.toc-entry:hover { background: var(--accent-soft); }
+a.toc-entry:hover .toc-title { color: var(--accent); }
+
+.toc-title { flex: none; font-size: 0.96em; }
+li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
+
+.toc-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+  margin: 0 8px 4px;
+  min-width: 20px;
+}
+
+.toc-page-num {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9em;
+  color: var(--muted);
+  min-width: 20px;
+  text-align: right;
 }
 
 /* Side table of contents (long dossiers, screen only) */
@@ -742,11 +849,16 @@ footer.page-footer .pageno {
   }
 
   /* Remove screen containers and shadows */
-  main, article, section {
+  section.cover, nav.toc-page, main {
     max-width: none;
     margin: 0;
     padding: 0;
     box-shadow: none;
+  }
+
+  /* Cover fills the printed page exactly; reset the screen min-height calc */
+  section.cover {
+    min-height: calc(297mm - 40mm);
   }
 
   .dossier {
@@ -795,6 +907,7 @@ footer.page-footer .pageno {
   .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar,
   .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin,
   .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin,
+  .cover-accent-band,
   h1, h2, h3, thead th {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
@@ -806,11 +919,12 @@ footer.page-footer .pageno {
     display: none !important;
   }
 
-  /* Simplify links in print */
+  /* Simplify links in print — but keep TOC entries legible (no underline) */
   a {
     color: #000;
     text-decoration: none;
   }
+  a.toc-entry { color: var(--text); background: none; }
 }
 
 /* ========== SECTION 11: UTILITY CLASSES — PAGE BREAKS ==========
@@ -840,11 +954,9 @@ footer.page-footer .pageno {
   break-after: avoid;
 }
   </style>
-  <!-- ================================================================================
-       COVER PAGE
-       Full-page title sheet with organization info.
-       ================================================================================ -->
-  <section class="cover" id="cover">
+</head>
+<body lang="fr">
+<section class="cover" id="cover">
     <div class="cover-logo">
       <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">DRH</span>
       <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Société Exemple</span>

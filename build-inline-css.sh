@@ -1,73 +1,87 @@
 #!/bin/bash
-# build-inline-css.sh — Sync CSS across all examples and templates
-# Usage: cd report-formatter && bash build-inline-css.sh
-# Reads the canonical CSS from assets/report.css and inlines it into all HTML files
-# that have a <style> block, ensuring they all use the same version.
+# build-inline-css.sh — Sync the canonical CSS into every standalone HTML file.
+#
+# Reads assets/report-linear.css (the Linear Flux Model stylesheet) and inlines
+# it into the <style> block of every template and example, guaranteeing a single
+# source of truth. It also REPAIRS structure: CSS always ends up inside
+# <style>…</style>, the <head> closes once, and a <body> wraps the content.
+#
+# Usage: cd report_skill && bash build-inline-css.sh
 
 set -e
 
-CSS_SOURCE="assets/report.css"
-TARGETS=(
-  "examples/exemple-pro.html"
-  "examples/exemple-genome-reunion-scientifique.html"
-  "examples/exemple-genome-reunion-financier.html"
-  "examples/example-professional.html"
-  "examples/example-genome-meeting-scientific.html"
-  "examples/example-genome-meeting-funder.html"
-  "templates/professionnel.html"
-  "templates/recherche.html"
-  "templates/dossier-scientifique.html"
-  "templates/professional.html"
-  "templates/research.html"
-  "templates/scientific-dossier.html"
-)
-
-echo "=== CSS Synchronization ==="
+CSS_SOURCE="assets/report-linear.css"
 
 if [ ! -f "$CSS_SOURCE" ]; then
-  echo "❌ Error: $CSS_SOURCE not found. Run from report-formatter/ directory."
+  echo "❌ Error: $CSS_SOURCE not found. Run from the report_skill/ directory."
   exit 1
 fi
 
-# Read and minify CSS: remove newlines, collapse multiple spaces to single space
-echo "Reading and minifying $CSS_SOURCE..."
-css_content=$(cat "$CSS_SOURCE" | tr '\n' ' ' | sed 's/  */ /g')
-css_len=${#css_content}
-echo "Minified CSS: $css_len characters"
+echo "=== CSS Synchronization (Linear Flux Model) ==="
+echo "Source: $CSS_SOURCE ($(wc -l < "$CSS_SOURCE") lines)"
 
-for target in "${TARGETS[@]}"; do
-  if [ ! -f "$target" ]; then
-    echo "⚠ Skipping $target (not found)"
-    continue
-  fi
+python3 - "$CSS_SOURCE" <<'PYTHON_SCRIPT'
+import sys, glob, re
 
-  echo -n "Processing $target... "
+css_source = sys.argv[1]
+with open(css_source, "r", encoding="utf-8") as f:
+    css = f.read().strip()
 
-  # Create temporary file
-  tmp_file="${target}.sync.tmp"
+# Files with bespoke CSS or the deprecated .sheet model are NOT synced here.
+EXCLUDE = {
+    "templates/sheet-blank.html",                 # deprecated .sheet model
+    "examples/demo-phase2-avant-apres.html",      # standalone demo with custom CSS
+}
 
-  # Use Python to safely replace CSS between <style> and </style> tags
-  python3 << PYTHON_SCRIPT
-import re
+targets = sorted(glob.glob("templates/*.html")) + sorted(glob.glob("examples/*.html"))
+targets = [t for t in targets if t not in EXCLUDE]
 
-css = """$css_content"""
+for path in targets:
+    with open(path, "r", encoding="utf-8") as f:
+        content = f.read()
 
-with open("$target", "r") as f:
-  content = f.read()
+    # 1) Everything up to & including the first <style> is the head prefix.
+    m_style = re.search(r"<style[^>]*>", content)
+    if not m_style:
+        print(f"  ⚠ Skipping {path} (no <style> block)")
+        continue
+    prefix = content[: m_style.end()]
 
-# Match <style>...any content...</style> and replace the content
-pattern = r'(<style>).*?(</style>)'
-replacement = r'\1\n' + css + r'\n\2'
-updated = re.sub(pattern, replacement, content, flags=re.DOTALL)
+    # 2) Find where the real HTML body begins.
+    m_body = re.search(r"<body[^>]*>", content)
+    if m_body:
+        body_tag = content[m_body.start(): m_body.end()]   # keep <body> attributes
+        body_inner = content[m_body.end():]
+    else:
+        # Broken file: no <body>. Body content starts at the cover section.
+        m_cover = re.search(r'<section class="cover"', content)
+        if not m_cover:
+            print(f"  ⚠ Skipping {path} (no <body> and no cover section)")
+            continue
+        m_lang = re.search(r'<html[^>]*\blang="([^"]+)"', content)
+        lang = m_lang.group(1) if m_lang else None
+        body_tag = f'<body lang="{lang}">' if lang else "<body>"
+        body_inner = content[m_cover.start():]
 
-with open("$tmp_file", "w") as f:
-  f.write(updated)
+    rebuilt = (
+        prefix + "\n"
+        + css + "\n"
+        + "  </style>\n"
+        + "</head>\n"
+        + body_tag + "\n"
+        + body_inner.lstrip("\n")
+    )
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(rebuilt)
+
+    so = rebuilt.count("<style")
+    sc = rebuilt.count("</style>")
+    bo = len(re.findall(r"<body", rebuilt))
+    flag = "OK" if (so == 1 and sc == 1 and bo == 1) else "FAIL"
+    print(f"  [{flag}] {path}  (<style>={so} </style>={sc} <body>={bo})")
+
+print("Done.")
 PYTHON_SCRIPT
 
-  mv "$tmp_file" "$target"
-  echo "✓"
-done
-
-echo ""
-echo "✓ Done. All files now use the canonical CSS from $CSS_SOURCE"
-echo "  Commit these changes to keep the skill in sync."
+echo "=== Synchronization complete ==="
