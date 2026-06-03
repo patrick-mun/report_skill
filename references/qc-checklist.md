@@ -46,18 +46,18 @@ This checklist is run **after consolidation and before the final HTML is sent to
 
 ## Phase 4: Visual layout
 
-- [ ] **No overflow flags (red boxes)** visible on-screen. If found: split the offending `.sheet` into two sheets.
-- [ ] **Orphaned headings**: no section heading (h2, h3) should appear alone at the bottom of a page without its body following.
-- [ ] **Lonely blocks**: no single line of text orphaned at the top of a new page.
-- [ ] **Tables and figures are whole**: no table or figure split across two pages (move it to the page where it fits, or give it its own page).
+- [ ] **No orphaned headings**: h2 headings should start on a new page (CSS `break-before: page`), not appear alone at the bottom of the previous page.
+- [ ] **Lonely blocks**: no single line of text orphaned at the top of a new page (CSS `orphans: 3` helps prevent this).
+- [ ] **Tables and figures are whole**: no table or figure split across two pages (CSS `break-inside: avoid` prevents this; if a single table is too large for one page, ensure it gets its own page).
 - [ ] **Callout boxes and stat cards** render with correct colors and don't overflow their container.
+- [ ] **Page breaks look natural**: Print preview shows clean breaks between sections, no awkward gaps or orphaned content.
 
 ## Phase 5: Metadata and footers
 
 - [ ] **Document title** in `<title>` tag matches the cover page title.
-- [ ] **Footers consistent**: every sheet has a `sheet__footer` with document identifier and (auto-filled) page number.
-- [ ] **Cover sheet** has all required metadata: date, version, responsible party, sources (GitHub URLs, etc.).
-- [ ] **Table of Contents** page numbers are correct after any content changes.
+- [ ] **Footers consistent**: a `<footer class="page-footer">` is present at the end of `<main>`. It will appear on all printed pages.
+- [ ] **Cover section** has all required metadata: title, date, version, responsible party, sources (GitHub URLs, etc.).
+- [ ] **Table of Contents** is present with links to all main sections (`href="#s1"`, `href="#s2"`, etc.). Page numbers will be auto-estimated by `paginate.js` if included.
 
 ## Phase 6: Sources and traceability
 
@@ -69,10 +69,10 @@ This checklist is run **after consolidation and before the final HTML is sent to
 ## Phase 7: Print readiness
 
 - [ ] **Print preview (`Ctrl/Cmd + P`) shows:**
-  - Margins set to **None**.
-  - **Background graphics** enabled.
-  - One page per sheet, no surprise breaks.
-  - Footers with page numbers visible at bottom-right.
+  - Margins set to **None** (CSS `@page` already defines 20mm margins).
+  - **Background graphics** enabled (so colored components print correctly).
+  - Clean page breaks at h2 headings, no surprise breaks in the middle of content.
+  - Footers with page numbers visible at the bottom of each page.
   
 - [ ] **Export to PDF:**
   - Use browser "Save as PDF" (Chrome/Firefox preferred).
@@ -107,8 +107,8 @@ If you process many reports, automate these checks:
 echo "Figures: $(grep -o 'Figure&#160;[0-9]\+\|Figure [0-9]\+' report.html | cut -d' ' -f2 | sort -u | wc -l)"
 echo "Tables: $(grep -o 'Table [0-9]\+' report.html | cut -d' ' -f2 | sort -u | wc -l)"
 
-# Find orphaned headings (h2/h3 at end of a sheet with no following content)
-grep -n '</h[23]>' report.html | tail -5
+# Find orphaned headings (h2/h3 with no following content on same page)
+grep -n '<h[23]' report.html | wc -l  # Total headings (compare against sections)
 
 # List all external links
 grep -o 'href="http[^"]*' report.html | sort -u
