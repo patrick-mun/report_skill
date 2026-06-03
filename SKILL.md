@@ -104,18 +104,23 @@ The user chooses, or you ask:
    (stat cards, composition bar, bar chart, flow diagram, gantt, timeline) where
    they clarify, not decorate.
 7. **Structure for A4 pagination.** Use the linear flux model in `assets/report-linear.css`:
-   content flows naturally, and CSS `@page` rules handle pagination automatically.
+   content flows naturally, and CSS `@page` rules + Paged.js handle pagination, the
+   per-page footer, and `Page n / total` numbering automatically.
    Structure: `<section class="cover">` (title) → `<nav class="toc-page">` (TOC) →
    `<main>` with numbered sections (`<section id="s1">`, `<section id="s2">`, etc.) →
-   single `<footer class="page-footer">` at the end. See `references/pagination.md`.
+   single `<footer class="page-footer">` (its text repeats on every page). See
+   `references/pagination.md`.
 8. **Fill the template.** Start from a template in `templates/` (e.g.,
-   `templates/scientific-dossier.html` or `templates/professional.html`), populate it with
-   the mapped content, and inline `assets/report-linear.css` (in `<style>` tag in `<head>`)
-   and optionally `assets/paginate.js` (in `<script>` tag at end of `<body>` for TOC linking
-   and page numbering) so the output is a single portable HTML file.
-9. **Generate the final HTML.** Test in browser (verify heading hierarchy, TOC links,
-   footer appearance), then deliver for print-to-PDF. Use print preview (`Ctrl+P`) to
-   check page breaks. See `references/pagination.md` for the print checklist.
+   `templates/scientific-dossier.html` or `templates/professional.html`) and populate it with
+   the mapped content. The templates already inline `assets/report-linear.css`,
+   `assets/paginate.js`, and the Paged.js polyfill — so footers and page numbers work
+   out of the box. If you edit the canonical assets, run `bash build-inline-css.sh` to
+   re-sync every template/example into a single self-contained file.
+9. **Generate the final HTML.** Open in a browser — Paged.js paginates on screen, so you
+   can verify heading hierarchy, TOC links, the cover/TOC (no footer) and the numbered
+   content pages directly. Then deliver for print-to-PDF (`Ctrl+P`). See
+   `references/pagination.md` for the print checklist (margins **Default**, background
+   graphics **on**).
 
 ## Procedure — simple formatting
 
@@ -125,9 +130,11 @@ The user chooses, or you ask:
 3. Apply consistent typography and spacing from `assets/report-linear.css`.
 4. Structure as semantic HTML: `<section class="cover">` for title, `<main>` with
    `<section id="s1">`, `<section id="s2">`, etc. for content, single `<footer class="page-footer">`
-   at the end. CSS `@page` rules handle A4 pagination automatically (no manual page breaks needed).
-5. Inline `assets/report-linear.css` in `<style>` tag and optionally `assets/paginate.js`
-   in `<script>` tag. Deliver as single self-contained HTML file.
+   (its text repeats on every page). CSS `@page` + Paged.js handle A4 pagination, footers
+   and page numbers automatically (no manual page breaks needed).
+5. Start from a template (or inline `assets/report-linear.css`, `assets/paginate.js`, and
+   the Paged.js polyfill via `bash build-inline-css.sh`). Deliver as a single
+   self-contained HTML file.
 
 ## Adding a new section to an existing document
 
@@ -149,7 +156,8 @@ When editing a document with the linear flux model, use this procedure to add or
 3. **Update the Table of Contents** (in `<nav class="toc-page">`):
    - Add a new `<li>` entry for your section
    - Link to your section ID: `<a href="#s5">Section 5: Your Title</a>`
-   - The page number will be estimated automatically by `paginate.js` on load
+   - Leave `<span class="toc-page-num"></span>` empty — `paginate.js` fills the real
+     page number from the page Paged.js lays the section on
 
 4. **Page breaks are automatic:** The CSS `@page` rule and `break-before: page` on `h2` headings
    handle pagination automatically. No manual page-break divs needed.
@@ -158,10 +166,11 @@ When editing a document with the linear flux model, use this procedure to add or
    the CSS `break-inside: avoid` rule will keep it together. If content is still too long for one page,
    split it manually into separate sections or reduce the content.
 
-6. **Test before printing:** Open in Chrome/Firefox, print preview (`Ctrl/Cmd + P`), and verify:
+6. **Test before printing:** Open in Chrome/Firefox (Paged.js paginates on screen),
+   print preview (`Ctrl/Cmd + P`), and verify:
    - Page breaks occur at h2 headings (not in the middle of tables/figures)
-   - Footers appear on every page with correct page numbers
-   - Colors print correctly (enable "Background graphics" if not automatic)
+   - Footer + `Page n / total` appear on every content page (cover and TOC excluded)
+   - Colors print correctly (enable "Background graphics"; keep margins **Default**)
    - No awkward orphaned text or headings at page boundaries
 
 ## Quality Assurance — before delivery
@@ -172,8 +181,8 @@ When editing a document with the linear flux model, use this procedure to add or
 - **Numbering consistency**: figures numbered 1–N continuously, tables similarly, all cross-references valid.
 - **Typography**: French accents correct, no orphaned hyphens, entity encoding consistent.
 - **Layout**: no orphaned headings at page boundaries, no awkward table/figure splits (CSS prevents them).
-- **Footers & metadata**: footer appears on every page with correct page numbers, document title in `<title>`.
-- **Print readiness**: test in Chrome/Firefox print preview, ensure "Background graphics" and "No margins" give clean output.
+- **Footers & metadata**: footer + `Page n / total` appear on every content page (cover/TOC excluded, automatic via Paged.js), document title in `<title>`.
+- **Print readiness**: test in Chrome/Firefox print preview; ensure "Background graphics" is on and margins are **Default** (the `@page` rule supplies them) for clean output.
 
 If any check fails, fix it before delivering. If you discover a source conflict or missing section, **ask the user** rather than guessing.
 
@@ -184,7 +193,7 @@ All guidance is in the `references/` directory:
 - `consolidation.md` — how to ingest & reconcile multiple sources
 - `audiences.md` — how to adapt a report per audience
 - `visuals.md` — reuse & propose charts/diagrams (no monotone text)
-- `pagination.md` — A4 pagination with CSS @page: linear flux model, cover, TOC, footers, page numbers
+- `pagination.md` — A4 pagination with CSS @page + Paged.js: automatic per-page footers, page numbers, cover/TOC
 - `style-guide.md` — 11 editorial rules for fast, clear reading (now with numbering consistency rules)
 - `qc-checklist.md` — **pre-delivery QA checklist** (typography, numbering, layout, print readiness)
 - `structure-research.md` — section plan: research / funding report

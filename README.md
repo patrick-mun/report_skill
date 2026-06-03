@@ -38,13 +38,15 @@ report-formatter/
 │   ├── consolidation.md        # how to ingest & reconcile multiple sources
 │   ├── audiences.md            # how to adapt a report per audience
 │   ├── visuals.md              # reuse & propose charts/diagrams (no monotone text)
-│   ├── pagination.md           # A4 pagination with CSS @page: cover, TOC, footers, page numbers
+│   ├── pagination.md           # A4 pagination with CSS @page + Paged.js: footers, page numbers, cover, TOC
 │   ├── style-guide.md          # editorial rules for fast, clear reading
 │   ├── structure-research.md   # section plan: research / funding report
 │   └── structure-professional.md # section plan: professional report
 ├── assets/
-│   ├── report-linear.css       # single stylesheet (visuals + Linear Flux Model)
-│   ├── paginate.js             # page numbering + TOC numbers
+│   ├── report-linear.css       # single stylesheet (visuals + Linear Flux Model + @page footer)
+│   ├── paginate.js             # PagedConfig (auto-paginate) + accurate TOC page numbers
+│   ├── vendor/
+│   │   └── paged.polyfill.min.js # Paged.js engine (per-page footers + page numbers in print)
 │   └── legacy/                 # archived .sheet-model assets (report.css, paginate-sheet.js)
 ├── templates/
 │   ├── professional.html
@@ -58,20 +60,26 @@ report-formatter/
 
 ## The linear flux model
 
-Content flows naturally in the browser, and **CSS `@page` rules handle A4
-pagination automatically** (no rigid page boxes to manage):
+Content is authored as a natural linear flow, and **CSS `@page` rules + the
+Paged.js polyfill handle A4 pagination, per-page footers, and page numbers
+automatically** (no rigid page boxes to manage):
 
-- `@page { size: A4; margin: 20mm; }` tells the browser each page is A4-sized.
-- `h2 { break-before: page; }` starts each major section on a new page.
-- `table, figure, aside { break-inside: avoid; }` keeps blocks whole.
+- `@page { size: A4; margin: 20mm; }` sizes each page; `h2 { break-before: page; }`
+  starts each major section on a new page; `break-inside: avoid` keeps blocks whole.
 - `<section class="cover">` — title page (subject, author, reviewer, date, version).
-- `<nav class="toc-page">` — clickable table of contents; `paginate.js` fills in
-  each entry's page number from the section it links to.
-- `<footer class="page-footer">` — `paginate.js` stamps `Page n / total`
-  bottom-right (cover and TOC excluded).
+- `<nav class="toc-page">` — clickable table of contents; `paginate.js` fills each
+  entry's page number from the page Paged.js lays it on.
+- `<footer class="page-footer">` — written once, repeated on every content page via
+  a CSS running element; `Page n / total` is stamped bottom-right by `counter(page)`
+  (cover and TOC excluded).
 
-Inline `assets/report-linear.css` (in `<style>`) and `assets/paginate.js` (in a
-`<script>` at the end of `<body>`) so the output stays a single portable file.
+**Why Paged.js:** Chrome's native print can't render `@page` margin-boxes, so
+per-page footers and page numbers don't work with CSS alone. Paged.js polyfills the
+full `@page` model — on screen *and* in print — so the document stays a single
+self-contained HTML file printed with plain `Ctrl/Cmd + P`.
+
+The templates already inline `report-linear.css`, `paginate.js`, and the Paged.js
+polyfill. To re-sync after editing the canonical assets, run `bash build-inline-css.sh`.
 See `references/pagination.md`.
 
 ## Visual components
