@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test: report-linear.css — Linear Flux Model</title>
+  <style>
+    /* Inline report-linear.css for testing */
+    /* FULL CSS WILL BE INLINED HERE BY BUILD SCRIPT */
+  </style>
+</head>
+<body>
+  <main>
+    <!-- Cover-like section -->
+    <section>
+      <h1>Test Report — Linear Flux Model</h1>
+      <p class="report-meta">
+        <span class="subtitle">Testing the new CSS @page + break-* pagination</span>
+      </p>
+      <p><strong>Date:</strong> June 3, 2026 | <strong>Status:</strong> Phase 6 Step 1</p>
+    </section>
+
+    <!-- Section with stat cards -->
+    <section>
+      <h2>Executive Summary</h2>
+
+      <div class="summary">
+        <h3>Key Metrics</h3>
+        <p>This test verifies that the linear flux model correctly handles pagination and color preservation.</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="num">37</div>
+          <div class="label">Pages (old model)</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">18</div>
+          <div class="label">Expected (new model)</div>
+        </div>
+        <div class="stat-card on-accent">
+          <div class="num">50%</div>
+          <div class="label">Reduction</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section with callout -->
+    <section>
+      <h2>What Changed</h2>
+
+      <aside class="callout">
+        <span class="label">Important</span>
+        <p>The new linear flux model abandons explicit <code>.sheet</code> boxes and uses CSS <code>@page</code> rules instead. This is more maintainable and Word-like.</p>
+      </aside>
+
+      <p>Before, documents were split into rigid 210×297mm containers. Now, content flows naturally and CSS handles page breaks.</p>
+    </section>
+
+    <!-- Section with flow diagram -->
+    <section>
+      <h2>Migration Steps</h2>
+
+      <div class="flow">
+        <div class="flow-step">Step 1<br>Design CSS</div>
+        <div class="flow-step alt">Step 2<br>Build Templates</div>
+        <div class="flow-step">Step 3<br>Simplify JS</div>
+        <div class="flow-step alt">Step 4<br>Test Output</div>
+      </div>
+    </section>
+
+    <!-- Section with table -->
+    <section>
+      <h2>CSS Features Comparison</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Old (.sheet)</th>
+            <th>New (linear)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>WYSIWYG on-screen</td>
+            <td>Good (see pages)</td>
+            <td>Fair (scroll view)</td>
+          </tr>
+          <tr>
+            <td>Editability</td>
+            <td>Manual (rigid)</td>
+            <td>Easy (flow)</td>
+          </tr>
+          <tr>
+            <td>CSS complexity</td>
+            <td>350 lines</td>
+            <td>~200 lines</td>
+          </tr>
+          <tr>
+            <td>JavaScript needed</td>
+            <td>Yes (120 lines)</td>
+            <td>No (or minimal)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section with composition bar and legend -->
+    <section>
+      <h2>Visual Components</h2>
+
+      <p>The new CSS preserves all visual components. Here's an example composition bar:</p>
+
+      <div class="compo-bar">
+        <span class="compo-eur" style="width: 45%;"></span>
+        <span class="compo-afr" style="width: 35%;"></span>
+        <span class="compo-ind" style="width: 15%;"></span>
+        <span class="compo-chin" style="width: 5%;"></span>
+      </div>
+
+      <div class="legend">
+        <div class="item"><span class="swatch legend-eur"></span> European</div>
+        <div class="item"><span class="swatch legend-afr"></span> African</div>
+        <div class="item"><span class="swatch legend-ind"></span> South Asian</div>
+        <div class="item"><span class="swatch legend-chin"></span> Chinese</div>
+      </div>
+
+      <p>Colors should be preserved both on screen and in PDF print.</p>
+    </section>
+
+    <!-- Section with figures -->
+    <section>
+      <h2>Figures and Captions</h2>
+
+      <figure>
+        <div style="
+          background: linear-gradient(135deg, var(--accent-soft) 0%, var(--accent) 100%);
+          width: 100%;
+          height: 200px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.5em;
+          font-weight: bold;
+        ">
+          Example Visualization
+        </div>
+        <figcaption>This figure should not split across pages (page-break-inside: avoid).</figcaption>
+      </figure>
+
+      <p>The CSS prevents figures, tables, and callouts from breaking mid-element, maintaining document integrity.</p>
+    </section>
+
+    <!-- Section with Gantt chart -->
+    <section>
+      <h2>Project Timeline</h2>
+
+      <div class="gantt">
+        <div class="row">
+          <div>Design CSS</div>
+          <div class="lane">
+            <div class="bar" style="left: 0%; width: 30%;"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div>Build Templates</div>
+          <div class="lane">
+            <div class="bar" style="left: 25%; width: 40%;"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div>Test Output</div>
+          <div class="lane">
+            <div class="bar" style="left: 60%; width: 35%;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page break test -->
+    <section>
+      <h2>Page Break Test</h2>
+
+      <p>This section demonstrates the <code>break-before: page</code> rule on h2 headings. Each h2 should start on a new page when printed.</p>
+
+      <ul>
+        <li>The previous section ended with a Gantt chart</li>
+        <li>This new h2 should trigger a page break</li>
+        <li>This helps organize documents naturally</li>
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <span>Test Report — Phase 6 Step 1</span>
+      <span class="pageno">Page X / Y</span>
+    </footer>
+  </main>
+
+  <!-- Inline report-linear.css will go here in production -->
+  <script>
+    // Placeholder for paginate.js (minimal version)
+    // In Step 3, we'll decide whether to keep or remove JS
+    console.log("Test HTML loaded. CSS validation needed:");
+    console.log("✓ Check headings (h1, h2, h3)");
+    console.log("✓ Check stat-cards with colors");
+    console.log("✓ Check tables don't split");
+    console.log("✓ Check page breaks on h2");
+    console.log("✓ Print to PDF: Ctrl+P or Cmd+P");
+  </script>
+</body>
+</html>

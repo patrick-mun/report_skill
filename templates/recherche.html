@@ -3,162 +3,894 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><!-- TITRE DU PROJET / RAPPORT --></title>
+  <title><!-- TITRE DU DOSSIER --></title>
   <style>
-/* report.css — single stylesheet for professional reports. Screen styles for reading + @media print rules for clean A4 PDF output. When producing a final document, inline this file into a <style> block. */ :root { --accent: #1f4e79; /* sober professional blue */ --accent-soft: #eaf0f6; --accent2: #2e5c94; /* darker blue for variants */ --accent3: #e85d38; /* warm orange */ --text: #1a1a1a; --muted: #555; --border: #d9d9d9; --callout-bg: #f4f7fb; --green: #10b981; /* emerald green */ --purple: #8b5cf6; /* violet */ --zar: #D97706; /* amber, for composition variants */ --on-dark: #ffffff; /* text on dark backgrounds */ --on-dark-muted: #cfe0ea; /* muted text on dark backgrounds */ --shade-light: #b9cad9; /* very light accent shade (e.g. gantt target) */ --shade-mid: #3a7ca5; /* mid accent shade (e.g. gantt actual) */ --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif; --font-head: Georgia, "Times New Roman", serif; --max-width: 800px; } * { box-sizing: border-box; } body { font-family: var(--font-body); color: var(--text); line-height: 1.6; font-size: 16px; margin: 0; background: #f0f0f0; } /* The page wrapper mimics an A4 sheet on screen */ .page { max-width: var(--max-width); margin: 24px auto; background: #fff; padding: 48px 56px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12); } /* ---------- Headings ---------- */ h1, h2, h3 { font-family: var(--font-head); color: var(--accent); line-height: 1.25; } h1 { font-size: 2em; margin: 0 0 0.2em; } h2 { font-size: 1.4em; margin: 1.8em 0 0.5em; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.2em; } h3 { font-size: 1.15em; margin: 1.4em 0 0.4em; color: var(--text); } /* ---------- Document meta (title block) ---------- */ .report-meta { color: var(--muted); font-size: 0.95em; margin-bottom: 1.5em; } .report-meta .subtitle { font-size: 1.1em; color: var(--text); font-style: italic; } /* ---------- Paragraphs & text ---------- */ p { margin: 0 0 1em; } strong { color: #000; } a { color: var(--accent); } /* Code & preformatted text */ pre { font-family: "Courier New", Courier, monospace; font-size: 0.8em; line-height: 1.5; background: #f4f4f4; border: 1px solid var(--border); border-radius: 4px; padding: 10px 13px; margin: 0.8em 0; overflow-x: auto; white-space: pre; word-break: normal; } pre code { font-family: inherit; font-size: inherit; background: none; padding: 0; border-radius: 0; } code { font-family: "Courier New", Courier, monospace; font-size: 0.88em; background: #f0f0f0; padding: 1px 4px; border-radius: 3px; } /* ---------- Executive summary ---------- */ .summary { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 1.5em 0; border-radius: 0 4px 4px 0; } .summary h2 { margin-top: 0; border: none; } /* ---------- Callouts ("À retenir", "Point clé") ---------- */ aside.callout { background: var(--callout-bg); border: 1px solid var(--border); border-left: 4px solid var(--accent); padding: 12px 16px; margin: 1.2em 0; border-radius: 0 4px 4px 0; } aside.callout .label { display: block; font-weight: 700; text-transform: uppercase; font-size: 0.78em; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 0.3em; } /* ---------- Lists ---------- */ ul, ol { margin: 0 0 1em; padding-left: 1.4em; } li { margin-bottom: 0.3em; } /* ---------- Tables ---------- */ table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.95em; } th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; word-break: break-word; overflow-wrap: break-word; } thead th { background: var(--accent); color: #fff; } tbody tr:nth-child(even) { background: #f7f9fb; } /* ---------- Figures & captions ---------- */ figure { margin: 1.2em 0; text-align: center; } figure img { max-width: 100%; height: auto; } figcaption, .caption { font-size: 0.88em; color: var(--muted); font-style: italic; margin-top: 0.4em; } /* ---------- Table of contents (inline) ---------- */ nav.toc { background: #fafafa; border: 1px solid var(--border); padding: 12px 20px; margin: 1.5em 0; } nav.toc h2 { margin-top: 0; font-size: 1.1em; border: none; } nav.toc ol { padding-left: 1.2em; } /* ---------- Side table of contents (long dossiers, screen only) ---------- */ .dossier { max-width: 1100px; margin: 24px auto; display: grid; grid-template-columns: 230px 1fr; gap: 0; background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.12); } .dossier > .page { max-width: none; margin: 0; box-shadow: none; } nav.toc-side { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 32px 20px; background: #fafafa; border-right: 1px solid var(--border); font-size: 0.88em; } nav.toc-side h2 { font-size: 1em; border: none; margin: 0 0 0.6em; } nav.toc-side ol { list-style: none; padding-left: 0; margin: 0; } nav.toc-side ol ol { padding-left: 0.9em; } nav.toc-side a { color: var(--muted); text-decoration: none; display: block; padding: 2px 0; } nav.toc-side a:hover { color: var(--accent); } @media (max-width: 820px) { .dossier { grid-template-columns: 1fr; } nav.toc-side { display: none; } } /* ---------- References ---------- */ .references ol { padding-left: 1.4em; } .references li { margin-bottom: 0.5em; font-size: 0.93em; } .refs-list { font-size: 0.82em; line-height: 1.5; color: var(--muted); padding-left: 1.4em; } .refs-list li { margin-bottom: 0.45em; } /* ---------- Footer ---------- */ .report-footer { margin-top: 2.5em; padding-top: 1em; border-top: 1px solid var(--border); font-size: 0.85em; color: var(--muted); } /* =================================================================== VISUAL COMPONENTS (see references/visuals.md) Inline SVG / pure CSS — self-contained and print-safe. =================================================================== */ /* Stat cards — headline figures */ .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 1.4em 0; } .stat-card { background: var(--accent-soft); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; text-align: center; } .stat-card .num { font-family: var(--font-head); font-size: clamp(1.1em, 3.5vw, 1.7em); font-weight: 700; color: var(--accent); line-height: 1.1; } .stat-card .label { font-size: 0.82em; color: var(--muted); margin-top: 4px; } /* Flow diagram — process / architecture */ .flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0; margin: 1.4em 0; } .flow-step { flex: 1 1 0; min-width: 80px; background: #fff; border: 1.5px solid var(--accent); border-radius: 6px; padding: 10px 12px; font-size: 0.86em; text-align: center; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; word-break: break-word; hyphens: auto; } .flow-step.alt { background: var(--accent-soft); } .flow-step:not(:last-child) { margin-right: 22px; } .flow-step:not(:last-child)::after { content: "A"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); font-size: 1.6em; color: var(--accent); } /* Dense flow modifier — use for 5-6 steps or multi-line text per box */ .flow--small .flow-step { min-width: 60px; font-size: 0.78em; padding: 7px 8px; } /* Composition bar — 100% stacked share (e.g. admixture) */ .compo-bar { display: flex; height: 30px; border-radius: 5px; overflow: hidden; margin: 1em 0 0.6em; border: 1px solid var(--border); } .compo-bar span { display: block; height: 100%; } /* Legend (shared by compo-bar, charts) */ .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0.4em 0 1em; font-size: 0.85em; color: var(--muted); } .legend .item { display: flex; align-items: center; gap: 6px; } .legend .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; } /* Horizontal bar chart rows (CSS, label + bar + value) */ .hbar { margin: 1em 0; } .hbar .row { display: grid; grid-template-columns: 225px 1fr auto; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 0.82em; } .hbar .track { background: #eef1f4; border-radius: 4px; height: 18px; overflow: hidden; } .hbar .fill { height: 100%; background: var(--accent); border-radius: 4px; } .hbar .fill.g { background: var(--green); } .hbar .fill.o { background: var(--accent3); } .hbar .val { font-variant-numeric: tabular-nums; color: var(--muted); } /* Gantt — phases over a timeline */ .gantt { margin: 1.2em 0; font-size: 0.84em; } .gantt .row { display: grid; grid-template-columns: 195px 1fr; align-items: center; gap: 10px; margin-bottom: 6px; } .gantt .lane { position: relative; height: 20px; background: #eef1f4; border-radius: 4px; } .gantt .bar { position: absolute; height: 100%; border-radius: 4px; background: var(--accent); } .gantt .bar.free { background: var(--green); } .gantt .bar.ia { background: var(--purple); } .gantt .scale { display: grid; grid-template-columns: 195px 1fr; gap: 10px; color: var(--muted); margin-top: 4px; } .gantt .ticks { display: flex; justify-content: space-between; } /* Timeline — historical / sequential markers */ .timeline { display: flex; gap: 0; margin: 1.2em 0; } .timeline .ev { flex: 1; position: relative; padding-top: 18px; text-align: center; font-size: 0.84em; } .timeline .ev::before { content: ""; position: absolute; top: 6px; left: 0; right: 0; height: 2px; background: var(--border); } .timeline .ev::after { content: ""; position: absolute; top: 1px; left: 50%; transform: translateX(-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--accent); } .timeline .ev .yr { font-weight: 700; color: var(--accent); display: block; } /* =================================================================== UTILITY CLASSES FOR PHASE 2 REFACTORING These classes support extracting inline styles to CSS. Use instead of style="..." for better maintainability. =================================================================== */ /* Pillar/conclusion grid — replaces inline style="display:grid;grid-template-columns:..." */ .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-top: 0.4em; font-size: 0.86em; } .pillar-grid .item { background: #fff; border: 1px solid #a7f3d0; border-radius: 4px; padding: 7px 9px; } /* Color classes for composition bars and legends (replaces inline style="background:#...") */ .compo-afr { background: var(--green); } /* African/Malagasy */ .compo-ind { background: var(--accent3); } /* South Asian */ .compo-eur { background: var(--accent); } /* European */ .compo-zar { background: var(--zar); } /* Zarabe/Gujarati */ .compo-chin { background: var(--purple); } /* Chinese/Asian */ /* Legend swatch colors */ .legend-afr { background: var(--green); } .legend-ind { background: var(--accent3); } .legend-eur { background: var(--accent); } .legend-zar { background: var(--zar); } .legend-chin { background: var(--purple); } /* Generic background utility classes (use for swatches, bars, or any colored block) */ .bg-accent { background: var(--accent); } .bg-accent2 { background: var(--accent2); } .bg-accent3 { background: var(--accent3); } .bg-green { background: var(--green); } .bg-purple { background: var(--purple); } .bg-zar { background: var(--zar); } .bg-shade-light { background: var(--shade-light); } .bg-shade-mid { background: var(--shade-mid); } /* Stat-card modifier: dark background with white text (use on top-line totals) */ .stat-card.on-accent { background: var(--accent); } .stat-card.on-accent .num { color: var(--on-dark); } .stat-card.on-accent .label { color: var(--on-dark-muted); } @media print { /* Preserve colors for all visual components */ .flow-step, .stat-card, .gantt .lane, .hbar .track, .hbar .fill, .gantt .bar, aside.callout, .summary, .compo-bar span, .timeline .ev::after, .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar, .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin, .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin, h1, h2, h3, thead th { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; } .stat-grid, .flow, .gantt, .hbar, .compo-bar, .timeline { break-inside: avoid; page-break-inside: avoid; } } /* =================================================================== A4 SHEET MODEL (paged layout) — see references/pagination.md The document is split into explicit .sheet elements of exactly 210x297mm. On screen they look like stacked sheets of paper (the grey gap marks the boundary to the next page); in print each .sheet is one physical A4 page. Each sheet carries a footer with a page number. Use this INSTEAD of the .page wrapper when print fidelity matters. =================================================================== */ body.paged { background: #e3e6ea; } .sheet { width: 210mm; min-height: 297mm; box-sizing: border-box; margin: 0 auto 12mm; /* the bottom gap marks the next page */ padding: 16mm 18mm 12mm; background: #fff; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18); display: flex; flex-direction: column; position: relative; } .sheet__body { flex: 1 1 auto; } .sheet__footer { flex: none; margin-top: 10px; padding-top: 6px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.78em; color: var(--muted); } .sheet__footer .pageno { margin-left: auto; font-variant-numeric: tabular-nums; } /* Screen-only overflow warning: flagged by paginate.js when content exceeds one A4 sheet, so the author knows to split the page. */ .sheet.is-overflowing { outline: 2px dashed #d4351c; } .sheet .overflow-flag { display: none; } .sheet.is-overflowing .overflow-flag { display: block; position: absolute; top: 4mm; right: 4mm; background: #d4351c; color: #fff; font-size: 0.7em; padding: 2px 7px; border-radius: 3px; font-family: var(--font-body); } /* =================================================================== COVER PAGE (.sheet--cover) Full-page title sheet. Not included in page numbering. =================================================================== */ .sheet--cover .sheet__body { display: flex; flex-direction: column; height: 100%; } .cover-logo { margin-bottom: auto; padding-bottom: 10mm; } .cover-logo svg { height: 58px; width: auto; } .cover-accent-band { height: 4px; background: var(--accent); border-radius: 2px; margin-bottom: 10mm; } .cover-center { flex: 1; display: flex; flex-direction: column; justify-content: center; } .cover-center h1 { font-family: var(--font-head); font-size: 2.1em; color: var(--accent); margin: 0 0 0.3em; line-height: 1.2; } .cover-center .cover-subtitle { font-size: 1.15em; color: var(--muted); font-style: italic; margin-bottom: 2mm; } .cover-meta { margin-top: auto; border-top: 1px solid var(--border); padding-top: 8mm; } .cover-meta table { font-size: 0.93em; width: 100%; } .cover-meta td { padding: 4px 14px 4px 0; border: none; background: none; vertical-align: top; } .cover-meta td:first-child { font-weight: 600; color: var(--accent); width: 110px; } /* =================================================================== TABLE OF CONTENTS PAGE (.sheet--toc) Clickable entries with dotted leaders and auto page numbers. paginate.js fills in .toc-page-num spans automatically. =================================================================== */ .sheet--toc h2 { font-size: 1.5em; margin-bottom: 8mm; border: none; } nav.toc-doc { margin-top: 4mm; } nav.toc-doc ol { list-style: none; padding: 0; margin: 0; } nav.toc-doc li { margin-bottom: 1px; } nav.toc-doc li.toc-sub { padding-left: 16px; } /* The clickable row: title … dots … page number */ a.toc-entry { display: flex; align-items: baseline; text-decoration: none; color: var(--text); padding: 4px 2px; border-radius: 3px; gap: 0; } a.toc-entry:hover { background: var(--accent-soft); } a.toc-entry:hover .toc-title { color: var(--accent); } .toc-title { flex: none; font-size: 0.96em; } li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); } .toc-dots { flex: 1; border-bottom: 1px dotted var(--border); margin: 0 8px 4px; min-width: 20px; } .toc-page-num { flex: none; font-variant-numeric: tabular-nums; font-size: 0.9em; color: var(--muted); min-width: 20px; text-align: right; } @media print { /* Cover and TOC: preserve colors and styling */ .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta, .sheet--cover, .sheet--toc { -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; } a.toc-entry { color: var(--text) !important; background: none !important; } } @page sheet { size: A4; margin: 0; } /* sheet supplies its own margins via padding */ @media print { body.paged { background: #fff; } .sheet { page: sheet; width: 210mm; min-height: 0; height: auto; margin: 0; padding: 16mm 18mm 12mm; box-shadow: none; page-break-after: always; break-after: page; } .sheet:last-child { page-break-after: auto; break-after: auto; } .sheet.is-overflowing { outline: none; } .sheet .overflow-flag { display: none !important; } } /* =================================================================== PRINT — A4, clean margins, sensible page breaks =================================================================== */ /* Default page box for the .page (non-paginated) reading model. The .sheet (paginated) model uses its own @page sheet { margin: 0 } above and supplies margins via padding, so this 2cm only applies to .page documents. */ @page { size: A4; margin: 2cm; } @media print { body { background: #fff; font-size: 11.5pt; } .page { max-width: none; margin: 0; padding: 0; box-shadow: none; } .dossier { display: block; max-width: none; margin: 0; box-shadow: none; } nav.toc-side { display: none !important; } /* Avoid breaking inside these blocks */ h1, h2, h3 { page-break-after: avoid; break-after: avoid; } table, figure, aside.callout, .summary { page-break-inside: avoid; break-inside: avoid; } p { orphans: 3; widows: 3; } pre { white-space: pre-wrap; overflow-x: visible; overflow-wrap: break-word; word-break: break-all; } /* Hide screen-only navigation helpers if any are added */ .no-print { display: none !important; } a { color: #000; text-decoration: none; } } 
-</style>
+/* report-linear.css — will be injected */
+  </style>
 </head>
-<body class="paged">
+/* ==============================================
+   report-linear.css — Linear Flux Model + CSS @page Pagination
 
-  <!-- ============ FEUILLE 0 — PAGE DE GARDE ============ -->
-  <section class="sheet sheet--cover">
-    <div class="sheet__body">
-      <div class="cover-logo">
-        <!-- Logo ou monogramme typographique -->
-        <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">LOGO</span>
-      </div>
-      <div class="cover-accent-band"></div>
-      <div class="cover-center">
-        <h1><!-- TITRE DU PROJET / RAPPORT --></h1>
-        <div class="cover-subtitle"><!-- Sous-titre / objectif scientifique ou de financement --></div>
-      </div>
-      <div class="cover-meta">
-        <table>
-          <tr><td>Responsable(s)</td><td><!-- Nom · Affiliation --></td></tr>
-          <tr><td>Relecteur</td><td><!-- Relecteur·rice(s) --></td></tr>
-          <tr><td>Date</td><td><!-- Date --></td></tr>
-          <tr><td>Version</td><td><!-- Version --></td></tr>
-        </table>
-      </div>
+   MIGRATION FROM .sheet MODEL:
+   - Removes explicit .sheet pagination boxes (210x297mm)
+   - Uses browser-native CSS @page + break-* rules
+   - Simpler, maintainable, Word-like editable flow
+
+   STRUCTURE:
+   1. CSS Custom Properties (color palette, fonts)
+   2. Base styles (*, body, typography)
+   3. Content components (callouts, lists, tables, figures)
+   4. Visual elements (stat-cards, charts, diagrams)
+   5. Footer & header utilities
+   6. Screen layout rules
+   7. @page rule (A4 pagination)
+   8. @media print rules (page breaks, spacing, colors)
+   ============================================== */
+
+/* ========== SECTION 1: CSS CUSTOM PROPERTIES ==========
+   All design tokens: colors, fonts, spacing.
+   Centralized for easy theming. */
+
+:root {
+  /* Color palette — professional, accessible */
+  --accent: #1f4e79;          /* sober professional blue */
+  --accent-soft: #eaf0f6;     /* light blue background */
+  --accent2: #2e5c94;         /* darker blue for variants */
+  --accent3: #e85d38;         /* warm orange */
+
+  /* Text colors */
+  --text: #1a1a1a;            /* body text, highest contrast */
+  --muted: #555;              /* secondary text, hints */
+  --border: #d9d9d9;          /* borders and dividers */
+
+  /* Component backgrounds */
+  --callout-bg: #f4f7fb;      /* callout/aside blocks */
+
+  /* Accent colors for composition and charts */
+  --green: #10b981;           /* emerald green */
+  --purple: #8b5cf6;          /* violet */
+  --zar: #D97706;             /* amber/zarabe */
+
+  /* Text on colored backgrounds */
+  --on-dark: #ffffff;         /* text on dark backgrounds */
+  --on-dark-muted: #cfe0ea;   /* secondary text on dark */
+
+  /* Chart-specific shades (gantt, hbar) */
+  --shade-light: #b9cad9;     /* light accent (e.g. gantt target) */
+  --shade-mid: #3a7ca5;       /* mid accent (e.g. gantt actual) */
+
+  /* Typography */
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-head: Georgia, "Times New Roman", serif;
+
+  /* Layout */
+  --max-width: 800px;         /* reading column width (screen) */
+  --margin-page: 20mm;        /* A4 page margin */
+}
+
+/* ========== SECTION 2: BASE STYLES ==========
+   Reset + foundational element styles. */
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  /* Screen: light grey background to show document boundary */
+  background: #f0f0f0;
+}
+
+/* ========== SECTION 3: TYPOGRAPHY ==========
+   Headings, paragraphs, inline elements. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  color: var(--accent);
+  line-height: 1.25;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4em;
+  margin-top: 1.8em;
+  border-bottom: 2px solid var(--accent-soft);
+  padding-bottom: 0.2em;
+  /* Page break before h2: each major section starts fresh on a new page */
+  page-break-before: always;
+  break-before: page;
+}
+
+h3 {
+  font-size: 1.15em;
+  margin-top: 1.4em;
+  color: var(--text);
+}
+
+/* Document meta (title block, subtitle, byline) */
+.report-meta {
+  color: var(--muted);
+  font-size: 0.95em;
+  margin-bottom: 1.5em;
+}
+
+.report-meta .subtitle {
+  font-size: 1.1em;
+  color: var(--text);
+  font-style: italic;
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 1em;
+}
+
+/* Emphasis */
+strong { color: #000; }
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Code & preformatted text */
+pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8em;
+  line-height: 1.5;
+  background: #f4f4f4;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 13px;
+  margin: 0.8em 0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: normal;
+  /* Prevent code blocks from splitting across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+pre code {
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.88em;
+  background: #f0f0f0;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ========== SECTION 4: CONTENT BLOCKS ==========
+   Summary, callouts, lists, tables, figures. */
+
+/* Executive summary / highlight box */
+.summary {
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent);
+  padding: 16px 20px;
+  margin: 1.5em 0;
+  border-radius: 0 4px 4px 0;
+  /* Keep summary together on one page */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.summary h2 {
+  margin-top: 0;
+  border: none;
+  page-break-before: avoid;
+}
+
+/* Callouts ("À retenir", "Point clé") */
+aside.callout {
+  background: var(--callout-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 12px 16px;
+  margin: 1.2em 0;
+  border-radius: 0 4px 4px 0;
+  /* Callouts should not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+aside.callout .label {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78em;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 0.3em;
+}
+
+/* Lists */
+ul, ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* Tables — critical for avoiding splits */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.95em;
+  /* Tables must not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+thead th {
+  background: var(--accent);
+  color: #fff;
+}
+
+tbody tr:nth-child(even) {
+  background: #f7f9fb;
+}
+
+/* Figures & captions */
+figure {
+  margin: 1.2em 0;
+  text-align: center;
+  /* Figures should not split across pages */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption, .caption {
+  font-size: 0.88em;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.4em;
+}
+
+/* Table of contents (inline, for small dossiers) */
+nav.toc {
+  background: #fafafa;
+  border: 1px solid var(--border);
+  padding: 12px 20px;
+  margin: 1.5em 0;
+}
+
+nav.toc h2 {
+  margin-top: 0;
+  font-size: 1.1em;
+  border: none;
+  page-break-before: avoid;
+}
+
+nav.toc ol {
+  padding-left: 1.2em;
+}
+
+/* ========== SECTION 5: VISUAL COMPONENTS ==========
+   Self-contained, print-safe elements.
+   See references/visuals.md for detailed specs. */
+
+/* Stat cards — headline figures with values */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 1.4em 0;
+  /* Stat grids should stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.stat-card {
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.stat-card .num {
+  font-family: var(--font-head);
+  font-size: clamp(1.1em, 3.5vw, 1.7em);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.stat-card .label {
+  font-size: 0.82em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Stat-card variant: dark background with white text */
+.stat-card.on-accent {
+  background: var(--accent);
+}
+
+.stat-card.on-accent .num {
+  color: var(--on-dark);
+}
+
+.stat-card.on-accent .label {
+  color: var(--on-dark-muted);
+}
+
+/* Flow diagram — process steps / architecture */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+  margin: 1.4em 0;
+  /* Flow diagrams stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.flow-step {
+  flex: 1 1 0;
+  min-width: 80px;
+  background: #fff;
+  border: 1.5px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 0.86em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.flow-step.alt {
+  background: var(--accent-soft);
+}
+
+.flow-step:not(:last-child) {
+  margin-right: 22px;
+}
+
+.flow-step:not(:last-child)::after {
+  content: "\203A";
+  position: absolute;
+  right: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6em;
+  color: var(--accent);
+}
+
+/* Dense flow modifier for 5-6 steps or multiline text */
+.flow--small .flow-step {
+  min-width: 60px;
+  font-size: 0.78em;
+  padding: 7px 8px;
+}
+
+/* Composition bar — 100% stacked bar chart (e.g. admixture) */
+.compo-bar {
+  display: flex;
+  height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 1em 0 0.6em;
+  border: 1px solid var(--border);
+  /* Bars stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.compo-bar span {
+  display: block;
+  height: 100%;
+}
+
+/* Legend for composition bars and charts */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 0.4em 0 1em;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.legend .item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend .swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* Horizontal bar chart (label + bar + value) */
+.hbar {
+  margin: 1em 0;
+  /* Bar charts stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.hbar .row {
+  display: grid;
+  grid-template-columns: 225px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+  font-size: 0.82em;
+}
+
+.hbar .track {
+  background: #eef1f4;
+  border-radius: 4px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.hbar .fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.hbar .fill.g { background: var(--green); }
+.hbar .fill.o { background: var(--accent3); }
+
+.hbar .val {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* Gantt chart — phases over timeline */
+.gantt {
+  margin: 1.2em 0;
+  font-size: 0.84em;
+  /* Gantt charts stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.gantt .row {
+  display: grid;
+  grid-template-columns: 195px 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.gantt .lane {
+  position: relative;
+  height: 20px;
+  background: #eef1f4;
+  border-radius: 4px;
+}
+
+.gantt .bar {
+  position: absolute;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.gantt .bar.free { background: var(--green); }
+.gantt .bar.ia { background: var(--purple); }
+
+.gantt .scale {
+  display: grid;
+  grid-template-columns: 195px 1fr;
+  gap: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.gantt .ticks {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Timeline — historical or sequential markers */
+.timeline {
+  display: flex;
+  gap: 0;
+  margin: 1.2em 0;
+  /* Timelines stay together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.timeline .ev {
+  flex: 1;
+  position: relative;
+  padding-top: 18px;
+  text-align: center;
+  font-size: 0.84em;
+}
+
+.timeline .ev::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+}
+
+.timeline .ev::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline .ev .yr {
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+/* ========== SECTION 6: UTILITY CLASSES ==========
+   Color swatches, background utilities, grid helpers.
+   Use instead of inline style="..." for maintainability. */
+
+/* Pillar/conclusion grid (3-column) */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 0.4em;
+  font-size: 0.86em;
+  /* Keep together */
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.pillar-grid .item {
+  background: #fff;
+  border: 1px solid #a7f3d0;
+  border-radius: 4px;
+  padding: 7px 9px;
+}
+
+/* Composition bar color utilities */
+.compo-afr { background: var(--green); }           /* African/Malagasy */
+.compo-ind { background: var(--accent3); }         /* South Asian */
+.compo-eur { background: var(--accent); }          /* European */
+.compo-zar { background: var(--zar); }             /* Zarabe/Gujarati */
+.compo-chin { background: var(--purple); }         /* Chinese/Asian */
+
+/* Legend swatch colors */
+.legend-afr { background: var(--green); }
+.legend-ind { background: var(--accent3); }
+.legend-eur { background: var(--accent); }
+.legend-zar { background: var(--zar); }
+.legend-chin { background: var(--purple); }
+
+/* Generic background utilities (swatches, bars, blocks) */
+.bg-accent { background: var(--accent); }
+.bg-accent2 { background: var(--accent2); }
+.bg-accent3 { background: var(--accent3); }
+.bg-green { background: var(--green); }
+.bg-purple { background: var(--purple); }
+.bg-zar { background: var(--zar); }
+.bg-shade-light { background: var(--shade-light); }
+.bg-shade-mid { background: var(--shade-mid); }
+
+/* ========== SECTION 7: LAYOUT — SCREEN MODE ==========
+   Fluid reading width, centered, readable line length. */
+
+main, article, section {
+  max-width: var(--max-width);
+  margin: 24px auto;
+  background: #fff;
+  padding: 48px 56px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Side table of contents (long dossiers, screen only) */
+.dossier {
+  max-width: 1100px;
+  margin: 24px auto;
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 0;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.12);
+}
+
+.dossier > main, .dossier > article {
+  max-width: none;
+  margin: 0;
+  box-shadow: none;
+  padding: 48px 56px;
+}
+
+nav.toc-side {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 32px 20px;
+  background: #fafafa;
+  border-right: 1px solid var(--border);
+  font-size: 0.88em;
+}
+
+nav.toc-side h2 {
+  font-size: 1em;
+  border: none;
+  margin: 0 0 0.6em;
+  page-break-before: avoid;
+}
+
+nav.toc-side ol {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+nav.toc-side ol ol {
+  padding-left: 0.9em;
+}
+
+nav.toc-side a {
+  color: var(--muted);
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+}
+
+nav.toc-side a:hover {
+  color: var(--accent);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 820px) {
+  .dossier {
+    grid-template-columns: 1fr;
+  }
+  nav.toc-side {
+    display: none;
+  }
+}
+
+/* ========== SECTION 8: FOOTER ==========
+   Sticky or standard footer with page metadata. */
+
+footer.page-footer {
+  margin-top: 2.5em;
+  padding-top: 1em;
+  border-top: 1px solid var(--border);
+  font-size: 0.85em;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+footer.page-footer .pageno {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ========== SECTION 9: @page RULE — A4 PAGINATION ==========
+   Browser-native CSS page formatting for A4 output.
+   CRITICAL: This enables proper page breaks in print/PDF. */
+
+@page {
+  size: A4;                     /* Paper size: 210×297mm */
+  margin: 20mm;                 /* Minimum margins on all sides */
+}
+
+/* ========== SECTION 10: @media print — CLEAN PDF OUTPUT ==========
+   Print-specific styles: page breaks, spacing, visibility, colors.
+   This is where we ensure PDFs look professional. */
+
+@media print {
+  /* Force white background, readable size */
+  body {
+    background: #fff;
+    font-size: 11.5pt;
+  }
+
+  /* Remove screen containers and shadows */
+  main, article, section {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .dossier {
+    display: block;
+    max-width: none;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  nav.toc-side {
+    display: none !important;
+  }
+
+  /* Smart page breaks: avoid breaking inside these elements */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  h2 {
+    page-break-before: auto;  /* h2 already has page-break-before: page in base styles */
+  }
+
+  table, figure, aside.callout, .summary, pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Widows & orphans: keep at least 3 lines at page boundaries */
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* Prevent code overflow */
+  pre {
+    white-space: pre-wrap;
+    overflow-x: visible;
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+
+  /* Preserve colors for all visual components during printing */
+  .flow-step, .stat-card, .gantt .lane, .hbar .track, .hbar .fill, .gantt .bar,
+  aside.callout, .summary, .compo-bar span, .timeline .ev::after,
+  .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar,
+  .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin,
+  .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin,
+  h1, h2, h3, thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  /* Hide interactive elements in print */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Simplify links in print */
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+/* ========== SECTION 11: UTILITY CLASSES — PAGE BREAKS ==========
+   Fine-grained control over where pages break. */
+
+/* Force a page break before this element */
+.break-before-page {
+  page-break-before: always;
+  break-before: page;
+}
+
+/* Force a page break after this element */
+.break-after-page {
+  page-break-after: always;
+  break-after: page;
+}
+
+/* Prevent breaking inside this element (avoid orphaning content) */
+.no-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Avoid breaking after this element (keep with next) */
+.avoid-break-after {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+  </style>
+  <section class="cover" id="cover">
+    <div class="cover-logo"><span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">LOGO</span></div>
+    <div class="cover-accent-band"></div>
+    <div class="cover-center">
+      <h1><!-- TITRE DU DOSSIER --></h1>
+      <div class="cover-subtitle"><!-- Sous-titre scientifique --></div>
     </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
+    <div class="cover-meta">
+      <table>
+        <tr><td>Responsable(s)</td><td><!-- Nom · Affiliation --></td></tr>
+        <tr><td>Relecteur(s)</td><td><!-- Nom(s) --></td></tr>
+        <tr><td>Date</td><td><!-- Date --></td></tr>
+        <tr><td>Version</td><td><!-- Version --></td></tr>
+      </table>
+    </div>
   </section>
 
-  <!-- ============ FEUILLE 1 — SOMMAIRE ============ -->
-  <section class="sheet sheet--toc">
-    <div class="sheet__body">
-      <h2>Sommaire</h2>
-      <nav class="toc-doc">
-        <ol>
-          <li><a class="toc-entry" href="#p1"><span class="toc-title">1. Contexte et enjeux</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p2"><span class="toc-title">2. État de l'art</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p3"><span class="toc-title">3. Hypothèses et objectifs</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p4"><span class="toc-title">4. Méthodologie</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li class="toc-sub"><a class="toc-entry" href="#p4"><span class="toc-title">4.1. Approche et design expérimental</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li class="toc-sub"><a class="toc-entry" href="#p4"><span class="toc-title">4.2. Collecte et analyse des données</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p5"><span class="toc-title">5. Ressources et délais</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p6"><span class="toc-title">6. Budget et financement</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p7"><span class="toc-title">7. Retombées attendues</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p8"><span class="toc-title">8. Références</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-          <li><a class="toc-entry" href="#p9"><span class="toc-title">Annexes</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-        </ol>
-      </nav>
-    </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
-  </section>
+  <nav class="toc-page" id="toc">
+    <h2>Aperçu de recherche</h2>
+    <ol>
+      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Résumé exécutif</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Contexte et problématique</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Objectifs</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Conception générale</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Méthodologie</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s6"><span class="toc-title">6. Validation et résultats</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s7"><span class="toc-title">7. Ressources produites</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s8"><span class="toc-title">8. Budget et infrastructure</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s9"><span class="toc-title">9. Impacts attendus</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s10"><span class="toc-title">10. Risques et limitations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s11"><span class="toc-title">11. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+      <li><a class="toc-entry" href="#s12"><span class="toc-title">Annexes</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
+    </ol>
+  </nav>
 
-  <!-- ============ FEUILLE 2 (page 1) — CONTEXTE + ÉTAT DE L'ART ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="p1">
-        <h2>1. Contexte et enjeux</h2>
-        <p><!-- Cadre scientifique, sociétal ou applicatif ; importance du problème ; gap actuel --></p>
-      </section>
+  <main>
+    <section id="s1"><div class="summary"><h2>1. Résumé exécutif</h2><ul><li><!-- --></li></ul></div></section>
+    <section id="s2"><h2>2. Contexte et problématique</h2><p><!-- --></p></section>
+    <section id="s3"><h2>3. Objectifs</h2><p><!-- --></p></section>
+    <section id="s4"><h2>4. Conception générale</h2><p><!-- --></p></section>
+    <section id="s5"><h2>5. Méthodologie</h2><p><!-- --></p></section>
+    <section id="s6"><h2>6. Validation et résultats</h2><p><!-- --></p><div class="hbar"><div class="row"><div>Métrique</div><div class="track"><div class="fill" style="width:75%"></div></div><div class="val">75 %</div></div></div></section>
+    <section id="s7"><h2>7. Ressources produites</h2><p><!-- --></p></section>
+    <section id="s8"><h2>8. Budget et infrastructure</h2><p><!-- --></p><table><thead><tr><th>Poste</th><th>Description</th><th>Montant (€)</th></tr></thead><tbody><tr><td><!-- --></td><td><!-- --></td><td><!-- --></td></tr></tbody></table></section>
+    <section id="s9"><h2>9. Impacts attendus</h2><p><!-- --></p></section>
+    <section id="s10"><h2>10. Risques et limitations</h2><p><!-- --></p></section>
+    <section id="s11"><h2>11. Conclusion</h2><p><!-- --></p></section>
+    <section id="s12"><h2>Annexes</h2><h3>Bibliographie</h3><ol><li><!-- --></li></ol></section>
+  </main>
 
-      <section id="p2">
-        <h2>2. État de l'art</h2>
-        <p><!-- Synthèse des travaux antérieurs et des approches existantes ; positionnement par rapport aux connaissances --></p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
-  </section>
-
-  <!-- ============ FEUILLE 3 (page 2) — HYPOTHÈSES + MÉTHODOLOGIE ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="p3">
-        <h2>3. Hypothèses et objectifs</h2>
-        <p><!-- Hypothèses et objectifs primaires/secondaires ; logique de test --></p>
-      </section>
-
-      <section id="p4">
-        <h2>4. Méthodologie</h2>
-        <h3>4.1. Approche et design expérimental</h3>
-        <p><!-- Approche globale (expérimentale, observationnelle, modélisation, etc.) ; description du design --></p>
-
-        <!-- Visuel optionnel : flow diagram ou gantt -->
-        <div class="flow">
-          <div class="flow-step"><div class="content"><p><strong>Étape 1 :</strong> Description courte.</p></div></div>
-          <div class="flow-step"><div class="content"><p><strong>Étape 2 :</strong> Description courte.</p></div></div>
-        </div>
-
-        <h3>4.2. Collecte et analyse des données</h3>
-        <p><!-- Population/échantillon, variables, critères d'inclusion, instruments, analyse statistique ou qualitative --></p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
-  </section>
-
-  <!-- ============ FEUILLE 4 (page 3) — RESSOURCES + BUDGET ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="p5">
-        <h2>5. Ressources et délais</h2>
-        <p><!-- Équipe, partenariats, ressources matérielles et logicielles --></p>
-
-        <div class="gantt">
-          <div class="row"><div class="label">Phase 1 (mois 1–4)</div><div class="track"><div class="bar" style="left:0%;width:40%"></div></div></div>
-          <div class="row"><div class="label">Phase 2 (mois 5–9)</div><div class="track"><div class="bar" style="left:40%;width:50%"></div></div></div>
-          <div class="row"><div class="label">Phase 3 (mois 10–12)</div><div class="track"><div class="bar" style="left:90%;width:10%"></div></div></div>
-        </div>
-        <p class="caption">Figure 1 : Calendrier de mise en œuvre.</p>
-      </section>
-
-      <section id="p6">
-        <h2>6. Budget et financement</h2>
-        <p><!-- Estimation globale et détail des postes (personnel, équipement, forfaits, indirects) ; sources de financement --></p>
-
-        <table>
-          <thead><tr><th>Poste</th><th>Description</th><th>Montant (€)</th></tr></thead>
-          <tbody>
-            <tr><td><!-- --></td><td><!-- --></td><td style="text-align:right;"><!-- --></td></tr>
-          </tbody>
-          <tfoot><tr><td colspan="2" style="font-weight:600;">Total</td><td style="text-align:right;font-weight:600;"><!-- --></td></tr></tfoot>
-        </table>
-        <p class="caption">Tableau 1 : Budget de projet.</p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
-  </section>
-
-  <!-- ============ FEUILLE 5 (page 4) — RETOMBÉES + RÉFÉRENCES ============ -->
-  <section class="sheet">
-    <div class="sheet__body">
-      <section id="p7">
-        <h2>7. Retombées attendues</h2>
-        <p><!-- Impact scientifique, applicatif, sociétal, économique ; dissémination (publications, conférences, brevets, transferts) --></p>
-      </section>
-
-      <section id="p8">
-        <h2>8. Références</h2>
-        <ol style="font-size:.9em;line-height:1.4;">
-          <li><!-- Référence 1 --></li>
-          <li><!-- Référence 2 --></li>
-          <li><!-- Référence 3 --></li>
-        </ol>
-      </section>
-
-      <section id="p9">
-        <h2>Annexes</h2>
-        <p><!-- Matériel supplémentaire : figures, tableaux détaillés, données brutes, questionnaires, curriculum, etc. --></p>
-      </section>
-    </div>
-    <footer class="sheet__footer"><span><!-- Titre court · Affiliation --></span></footer>
-  </section>
-
-  <script>
-(function(){"use strict";function paginate(){var sheets=Array.prototype.slice.call(document.querySelectorAll(".sheet"));var contentSheets=sheets.filter(function(s){return!s.classList.contains("sheet--cover")&&!s.classList.contains("sheet--toc")});sheets.forEach(function(sheet){var flag=sheet.querySelector(".overflow-flag");if(!flag){flag=document.createElement("div");flag.className="overflow-flag";flag.textContent="Contenu trop long pour une page A4 — à scinder";sheet.appendChild(flag);}sheet.classList.toggle("is-overflowing",sheet.scrollHeight>sheet.clientHeight+2);var footer=sheet.querySelector(".sheet__footer");if(!footer)return;var no=footer.querySelector(".pageno");if(!no){no=document.createElement("span");no.className="pageno";footer.appendChild(no);}if(sheet.classList.contains("sheet--cover")||sheet.classList.contains("sheet--toc")){no.textContent="";}else{var idx=contentSheets.indexOf(sheet);no.textContent="Page "+(idx+1)+" / "+contentSheets.length;}});var tocEntries=document.querySelectorAll("a.toc-entry[href]");tocEntries.forEach(function(link){var href=link.getAttribute("href");if(!href||href.charAt(0)!="#")return;var target=document.getElementById(href.slice(1));if(!target)return;var targetSheet=target.closest?target.closest(".sheet"):function(){var el=target;while(el&&el!==document.body){if(el.classList&&el.classList.contains("sheet"))return el;el=el.parentNode;}return null;}();if(!targetSheet)return;var contentIdx=contentSheets.indexOf(targetSheet);var numEl=link.querySelector(".toc-page-num");if(numEl){numEl.textContent=contentIdx>=0?String(contentIdx+1):"—";}});}function bindTocLinks(){document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){link.addEventListener("click",function(e){var id=this.getAttribute("href").slice(1);var target=document.getElementById(id);if(!target)return;e.preventDefault();target.scrollIntoView({behavior:"smooth",block:"start"});});});}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){paginate();bindTocLinks();});}else{paginate();bindTocLinks();}window.addEventListener("load",paginate);window.addEventListener("beforeprint",paginate);})();
-  </script>
-
+  <footer class="page-footer"><span><!-- --></span><span class="pageno">Page X / Y</span></footer>
+  <script>(function(){"use strict";function numberPages(){var contentSections=document.querySelectorAll('main > section[id^="s"]');var pageCount=Math.max(1,Math.ceil(contentSections.length/1.5));var pagenoEl=document.querySelector('.pageno');if(pagenoEl){pagenoEl.textContent='Page X / ~'+pageCount;}var tocEntries=document.querySelectorAll('a.toc-entry[href^="#"]');tocEntries.forEach(function(link,idx){var numEl=link.querySelector('.toc-page-num');if(numEl){numEl.textContent=String(idx+2);}});}function bindTocLinks(){document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link){link.addEventListener('click',function(e){var id=this.getAttribute('href').slice(1);var target=document.getElementById(id);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}});});}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){numberPages();bindTocLinks();});}else{numberPages();bindTocLinks();}window.addEventListener('beforeprint',numberPages);})();</script>
 </body>
 </html>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Réunion Génome — Rapport du comité scientifique — Review and Recommendations</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test: report-linear.css — Linear Flux Model</title>
   <style>
-/* report-linear.css — inlined for standalone use */
-  </style>
-</head>
 /* ==============================================
    report-linear.css — Linear Flux Model + CSS @page Pagination
 
@@ -840,236 +837,243 @@ footer.page-footer .pageno {
   break-after: avoid;
 }
   </style>
-  <!-- ================================================================================
-       COVER PAGE
-       Full-page title sheet with organization info.
-       ================================================================================ -->
-  <section class="cover" id="cover">
-    <div class="cover-logo">
-      <span style="font-family:Georgia,serif;font-size:1.6em;font-weight:700;color:var(--accent);letter-spacing:.1em;">GENOME</span>
-      <span style="font-size:.9em;color:var(--muted);margin-left:10px;letter-spacing:.15em;text-transform:uppercase;">Example Company</span>
-    </div>
-    <div class="cover-accent-band"></div>
-    <div class="cover-center">
-      <h1>Réunion Génome — Rapport du comité scientifique</h1>
-      <div class="cover-subtitle">Synthèse 2026 et constats</div>
-    </div>
-    <div class="cover-meta">
-      <table>
-        <tr><td>Author</td><td>Human Resources Department</td></tr>
-        <tr><td>Reviewer</td><td>General Management · IT Department</td></tr>
-        <tr><td>Date</td><td>June 1, 2026</td></tr>
-        <tr><td>Version</td><td>1.0</td></tr>
-        <tr><td>Distribution</td><td>Internal restricted</td></tr>
-        <tr><td>Contact</td><td>hr@example.com</td></tr>
-      </table>
-    </div>
-  </section>
-
-  <!-- ================================================================================
-       TABLE OF CONTENTS
-       Navigation with smooth scroll links.
-       ================================================================================ -->
-  <nav class="toc-page" id="toc">
-    <h2>Table of Contents</h2>
-    <ol>
-      <li><a class="toc-entry" href="#s1"><span class="toc-title">1. Context and Objectives</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s2"><span class="toc-title">2. Analysis</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2a"><span class="toc-title">2.1. Adoption and Usage</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li class="toc-sub"><a class="toc-entry" href="#s2b"><span class="toc-title">2.2. Areas of Concern</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s3"><span class="toc-title">3. Recommendations</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s4"><span class="toc-title">4. Action Plan</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-      <li><a class="toc-entry" href="#s5"><span class="toc-title">5. Conclusion</span><span class="toc-dots"></span><span class="toc-page-num">—</span></a></li>
-    </ol>
-  </nav>
-
-  <!-- ================================================================================
-       MAIN CONTENT
-       Linear flow with automatic pagination via CSS.
-       ================================================================================ -->
+</head>
+<body>
   <main>
-    <!-- ====== SECTION 1: CONTEXT ====== -->
-    <section id="s1">
-      <h2>1. Context and Objectives</h2>
+    <!-- Cover-like section -->
+    <section>
+      <h1>Test Report — Linear Flux Model</h1>
+      <p class="report-meta">
+        <span class="subtitle">Testing the new CSS @page + break-* pagination</span>
+      </p>
+      <p><strong>Date:</strong> June 3, 2026 | <strong>Status:</strong> Phase 6 Step 1</p>
+    </section>
+
+    <!-- Section with stat cards -->
+    <section>
+      <h2>Executive Summary</h2>
+
+      <div class="summary">
+        <h3>Key Metrics</h3>
+        <p>This test verifies that the linear flux model correctly handles pagination and color preservation.</p>
+      </div>
 
       <div class="stat-grid">
         <div class="stat-card">
-          <div class="num">12</div>
-          <div class="label">Months of Remote Work</div>
+          <div class="num">37</div>
+          <div class="label">Pages (old model)</div>
         </div>
         <div class="stat-card">
-          <div class="num">85%</div>
-          <div class="label">Workforce Adoption</div>
+          <div class="num">18</div>
+          <div class="label">Expected (new model)</div>
         </div>
         <div class="stat-card on-accent">
-          <div class="num">+42%</div>
-          <div class="label">Productivity Gain</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">€2.3M</div>
-          <div class="label">Infrastructure Savings</div>
-        </div>
-        <div class="stat-card">
-          <div class="num">4/5 ⭐</div>
-          <div class="label">Employee Satisfaction</div>
+          <div class="num">50%</div>
+          <div class="label">Reduction</div>
         </div>
       </div>
+    </section>
 
-      <p>The remote work deployment began in March 2025 as a pilot program and has evolved into a permanent hybrid model across the organization. This report reviews the first year of operations, analyzing adoption rates, productivity metrics, and employee satisfaction while identifying areas for improvement.</p>
+    <!-- Section with callout -->
+    <section>
+      <h2>What Changed</h2>
 
       <aside class="callout">
-        <span class="label">Key Insight</span>
-        <p>Remote work has become a strategic advantage, improving retention by 15% and reducing real estate costs without sacrificing collaboration or company culture.</p>
+        <span class="label">Important</span>
+        <p>The new linear flux model abandons explicit <code>.sheet</code> boxes and uses CSS <code>@page</code> rules instead. This is more maintainable and Word-like.</p>
       </aside>
+
+      <p>Before, documents were split into rigid 210×297mm containers. Now, content flows naturally and CSS handles page breaks.</p>
     </section>
 
-    <!-- ====== SECTION 2: ANALYSIS ====== -->
-    <section id="s2">
-      <h2>2. Analysis</h2>
+    <!-- Section with flow diagram -->
+    <section>
+      <h2>Migration Steps</h2>
 
-      <article id="s2a">
-        <h3>2.1. Adoption and Usage</h3>
-
-        <p>The adoption rate has exceeded initial expectations. Within the first three months, 78% of eligible employees transitioned to remote or hybrid arrangements. By month 12, the rate reached 85%, with sustained engagement.</p>
-
-        <div class="hbar">
-          <div class="row"><div>Adoption Rate (Month 1)</div><div class="track"><div class="fill" style="width:78%"></div></div><div class="val">78%</div></div>
-          <div class="row"><div>Adoption Rate (Month 6)</div><div class="track"><div class="fill" style="width:82%"></div></div><div class="val">82%</div></div>
-          <div class="row"><div>Adoption Rate (Month 12)</div><div class="track"><div class="fill g" style="width:85%"></div></div><div class="val">85%</div></div>
-        </div>
-        <p class="caption">Figure 1: Remote work adoption trajectory over 12 months.</p>
-      </article>
-
-      <article id="s2b">
-        <h3>2.2. Areas of Concern</h3>
-
-        <p>While overall results are positive, several areas require attention:</p>
-
-        <ul>
-          <li><strong>Communication delays:</strong> Asynchronous communication has occasionally slowed decision-making in time-sensitive situations.</li>
-          <li><strong>Onboarding challenges:</strong> New hires report longer ramp-up times without in-person mentoring.</li>
-          <li><strong>Work-life balance:</strong> 23% of respondents report difficulty "switching off" after work hours.</li>
-          <li><strong>Internet infrastructure:</strong> 5% of employees still experience bandwidth limitations at home.</li>
-        </ul>
-
-        <aside class="callout">
-          <span class="label">Recommendation</span>
-          <p>Implement structured "sync hours" for critical meetings and establish a mentorship program for remote onboarding to address communication and integration gaps.</p>
-        </aside>
-      </article>
+      <div class="flow">
+        <div class="flow-step">Step 1<br>Design CSS</div>
+        <div class="flow-step alt">Step 2<br>Build Templates</div>
+        <div class="flow-step">Step 3<br>Simplify JS</div>
+        <div class="flow-step alt">Step 4<br>Test Output</div>
+      </div>
     </section>
 
-    <!-- ====== SECTION 3: RECOMMENDATIONS ====== -->
-    <section id="s3">
-      <h2>3. Recommendations</h2>
-
-      <p>Based on the analysis, we recommend a three-pillar approach:</p>
+    <!-- Section with table -->
+    <section>
+      <h2>CSS Features Comparison</h2>
 
       <table>
         <thead>
-          <tr><th>Pillar</th><th>Action</th><th>Timeline</th></tr>
+          <tr>
+            <th>Feature</th>
+            <th>Old (.sheet)</th>
+            <th>New (linear)</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td><strong>Culture & Cohesion</strong></td><td>Quarterly in-person team gatherings + virtual coffee sessions</td><td>Q3 2026</td></tr>
-          <tr><td><strong>Technology</strong></td><td>Upgrade collaboration tools + provide home office stipends</td><td>Q2–Q3 2026</td></tr>
-          <tr><td><strong>Process</strong></td><td>Define "core hours" + async-first communication standards</td><td>Q2 2026</td></tr>
+          <tr>
+            <td>WYSIWYG on-screen</td>
+            <td>Good (see pages)</td>
+            <td>Fair (scroll view)</td>
+          </tr>
+          <tr>
+            <td>Editability</td>
+            <td>Manual (rigid)</td>
+            <td>Easy (flow)</td>
+          </tr>
+          <tr>
+            <td>CSS complexity</td>
+            <td>350 lines</td>
+            <td>~200 lines</td>
+          </tr>
+          <tr>
+            <td>JavaScript needed</td>
+            <td>Yes (120 lines)</td>
+            <td>No (or minimal)</td>
+          </tr>
         </tbody>
       </table>
-      <p class="caption">Table 1: Recommended actions organized by strategic pillar.</p>
     </section>
 
-    <!-- ====== SECTION 4: ACTION PLAN ====== -->
-    <section id="s4">
-      <h2>4. Action Plan</h2>
+    <!-- Section with composition bar and legend -->
+    <section>
+      <h2>Visual Components</h2>
 
-      <p>Implementation will occur in four phases:</p>
+      <p>The new CSS preserves all visual components. Here's an example composition bar:</p>
 
-      <div class="flow">
-        <div class="flow-step"><strong>Phase 1</strong><br/>Define policies<br/>(June – July)</div>
-        <div class="flow-step alt"><strong>Phase 2</strong><br/>Deploy tools<br/>(August)</div>
-        <div class="flow-step"><strong>Phase 3</strong><br/>Train staff<br/>(September)</div>
-        <div class="flow-step alt"><strong>Phase 4</strong><br/>Measure & iterate<br/>(October+)</div>
+      <div class="compo-bar">
+        <span class="compo-eur" style="width: 45%;"></span>
+        <span class="compo-afr" style="width: 35%;"></span>
+        <span class="compo-ind" style="width: 15%;"></span>
+        <span class="compo-chin" style="width: 5%;"></span>
       </div>
 
-      <p>Each phase includes stakeholder feedback loops and monthly reviews to ensure alignment with business objectives.</p>
+      <div class="legend">
+        <div class="item"><span class="swatch legend-eur"></span> European</div>
+        <div class="item"><span class="swatch legend-afr"></span> African</div>
+        <div class="item"><span class="swatch legend-ind"></span> South Asian</div>
+        <div class="item"><span class="swatch legend-chin"></span> Chinese</div>
+      </div>
+
+      <p>Colors should be preserved both on screen and in PDF print.</p>
     </section>
 
-    <!-- ====== SECTION 5: CONCLUSION ====== -->
-    <section id="s5">
-      <h2>5. Conclusion</h2>
+    <!-- Section with hbar (horizontal bar chart) -->
+    <section>
+      <h2>Horizontal Bar Chart</h2>
 
-      <p>Remote work deployment has been a resounding success from productivity, cost, and employee satisfaction perspectives. By addressing the identified concerns through the recommended actions, we can solidify remote work as a permanent, competitive advantage for the organization.</p>
-
-      <p>The first year has demonstrated that with proper infrastructure, clear communication guidelines, and team cohesion initiatives, remote work can drive both organizational success and employee wellbeing.</p>
+      <div class="hbar">
+        <div class="row">
+          <div>Component A</div>
+          <div class="track"><div class="fill" style="width: 75%;"></div></div>
+          <div class="val">75%</div>
+        </div>
+        <div class="row">
+          <div>Component B</div>
+          <div class="track"><div class="fill g" style="width: 60%;"></div></div>
+          <div class="val">60%</div>
+        </div>
+        <div class="row">
+          <div>Component C</div>
+          <div class="track"><div class="fill o" style="width: 45%;"></div></div>
+          <div class="val">45%</div>
+        </div>
+      </div>
     </section>
+
+    <!-- Section with figures -->
+    <section>
+      <h2>Figures and Captions</h2>
+
+      <figure>
+        <div style="
+          background: linear-gradient(135deg, #eaf0f6 0%, #1f4e79 100%);
+          width: 100%;
+          height: 200px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.5em;
+          font-weight: bold;
+        ">
+          Example Visualization
+        </div>
+        <figcaption>This figure should not split across pages (page-break-inside: avoid).</figcaption>
+      </figure>
+
+      <p>The CSS prevents figures, tables, and callouts from breaking mid-element, maintaining document integrity.</p>
+    </section>
+
+    <!-- Section with Gantt chart -->
+    <section>
+      <h2>Project Timeline</h2>
+
+      <div class="gantt">
+        <div class="row">
+          <div>Design CSS</div>
+          <div class="lane">
+            <div class="bar" style="left: 0%; width: 30%;"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div>Build Templates</div>
+          <div class="lane">
+            <div class="bar" style="left: 25%; width: 40%;"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div>Test Output</div>
+          <div class="lane">
+            <div class="bar" style="left: 60%; width: 35%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <p>Page breaks should occur naturally after headings and before large content blocks.</p>
+    </section>
+
+    <!-- Page break test -->
+    <section>
+      <h2>Page Break Test</h2>
+
+      <p>This section demonstrates the <code>break-before: page</code> rule on h2 headings. Each h2 should start on a new page when printed.</p>
+
+      <ul>
+        <li>The previous section ended with a Gantt chart</li>
+        <li>This new h2 should trigger a page break</li>
+        <li>This helps organize documents naturally</li>
+      </ul>
+    </section>
+
+    <!-- Another section to test multiple pages -->
+    <section>
+      <h2>Additional Section</h2>
+
+      <p>This section is here to fill space and demonstrate that the CSS properly handles multiple pages. In the old model, we'd need to manually split content into .sheet blocks. Now, CSS handles it.</p>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <span>Test Report — Phase 6 Step 1</span>
+      <span class="pageno">Page X / Y</span>
+    </footer>
   </main>
 
-  <!-- ================================================================================
-       FOOTER
-       Page numbering (updated by minimal JS).
-       ================================================================================ -->
-  <footer class="page-footer">
-    <span>Réunion Génome — Rapport du comité scientifique · Example Company</span>
-    <span class="pageno">Page X / Y</span>
-  </footer>
-
-  <!-- ================================================================================
-       MINIMAL JAVASCRIPT
-       Simple page numbering and TOC linking (same as templates).
-       ================================================================================ -->
   <script>
-  (function() {
-    "use strict";
-
-    /* Count sections and estimate page count */
-    function numberPages() {
-      var contentSections = document.querySelectorAll('main > section[id^="s"]');
-      var pageCount = Math.max(1, Math.ceil(contentSections.length / 1.5));
-
-      var pagenoEl = document.querySelector('.pageno');
-      if (pagenoEl) {
-        pagenoEl.textContent = 'Page X / ~' + pageCount;
-      }
-
-      /* Update TOC page numbers */
-      var tocEntries = document.querySelectorAll('a.toc-entry[href^="#"]');
-      tocEntries.forEach(function(link, idx) {
-        var numEl = link.querySelector('.toc-page-num');
-        if (numEl) {
-          numEl.textContent = String(idx + 2);
-        }
-      });
-    }
-
-    /* Smooth scroll to section */
-    function bindTocLinks() {
-      document.querySelectorAll('a.toc-entry[href^="#"]').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          var id = this.getAttribute('href').slice(1);
-          var target = document.getElementById(id);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-    }
-
-    /* Run on load */
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function() {
-        numberPages();
-        bindTocLinks();
-      });
-    } else {
-      numberPages();
-      bindTocLinks();
-    }
-
-    /* Re-run on print */
-    window.addEventListener('beforeprint', numberPages);
-  })();
+    console.log("✓ report-linear.css loaded successfully");
+    console.log("Test checklist:");
+    console.log("  1. Headings (h1, h2, h3) display with correct colors");
+    console.log("  2. Stat-cards show colors (blue, accent)");
+    console.log("  3. Tables, figures, callouts render properly");
+    console.log("  4. Composition bar shows colored segments");
+    console.log("  5. Print preview (Ctrl+P): Verify page breaks at h2");
+    console.log("  6. PDF export: Colors should be preserved");
   </script>
-
 </body>
 </html>
