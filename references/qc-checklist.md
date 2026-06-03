@@ -55,9 +55,10 @@ This checklist is run **after consolidation and before the final HTML is sent to
 ## Phase 5: Metadata and footers
 
 - [ ] **Document title** in `<title>` tag matches the cover page title.
-- [ ] **Footers consistent**: a `<footer class="page-footer">` is present at the end of `<main>`. It will appear on all printed pages.
+- [ ] **Footer present**: a single `<footer class="page-footer">` with a short title · affiliation. Paged.js repeats it on every content page; the `Page n / total` number is added by CSS (cover and TOC excluded).
 - [ ] **Cover section** has all required metadata: title, date, version, responsible party, sources (GitHub URLs, etc.).
-- [ ] **Table of Contents** is present with links to all main sections (`href="#s1"`, `href="#s2"`, etc.). Page numbers will be auto-estimated by `paginate.js` if included.
+- [ ] **Table of Contents** is present with `a.toc-entry` links to all main sections (`href="#s1"`, etc.), each with an empty `<span class="toc-page-num"></span>` that `paginate.js` fills with the real page number.
+- [ ] **Pagination assets inlined**: `paginate.js` (sets `window.PagedConfig`) appears **before** the Paged.js polyfill in `<head>`. (Re-run `bash build-inline-css.sh` if unsure.)
 
 ## Phase 6: Sources and traceability
 
@@ -69,10 +70,11 @@ This checklist is run **after consolidation and before the final HTML is sent to
 ## Phase 7: Print readiness
 
 - [ ] **Print preview (`Ctrl/Cmd + P`) shows:**
-  - Margins set to **None** (CSS `@page` already defines 20mm margins).
+  - Margins set to **Default** (the CSS `@page` rule supplies the 20mm margin;
+    "None" clips the footer margin-boxes).
   - **Background graphics** enabled (so colored components print correctly).
   - Clean page breaks at h2 headings, no surprise breaks in the middle of content.
-  - Footers with page numbers visible at the bottom of each page.
+  - Footer text + `Page n / total` on every content page; **cover and TOC carry no footer**.
   
 - [ ] **Export to PDF:**
   - Use browser "Save as PDF" (Chrome/Firefox preferred).

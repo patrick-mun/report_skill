@@ -1,17 +1,25 @@
 # Maintenance Guide
 
-## CSS Synchronization
+## Asset Synchronization
 
-**Source of truth:** `assets/report-linear.css` — the Linear Flux Model stylesheet (CSS @page, semantic HTML).
+`build-inline-css.sh` makes every template/example a single self-contained file.
+It inlines **three** canonical sources (single source of truth each):
 
-**✅ COMPLETED** (June 2026): All templates and examples use the same inlined CSS sourced from `assets/report-linear.css`. The old divergences between `.sheet`-era files are resolved.
+| Source | Role |
+|--------|------|
+| `assets/report-linear.css` | Linear Flux Model stylesheet (CSS @page, `@page` footer margin-boxes, visuals) |
+| `assets/paginate.js` | Sets `window.PagedConfig` (auto-paginate) + fills accurate TOC page numbers |
+| `assets/vendor/paged.polyfill.min.js` | Paged.js engine — per-page footers + page numbers in print |
 
-### When to re-sync CSS
+**✅ COMPLETED** (June 2026): All templates/examples are synced and paginate with
+Paged.js (per-page footer + `Page n / total`, cover/TOC excluded).
+
+### When to re-sync
 
 Re-sync whenever you:
-- Fix a bug in `assets/report-linear.css`
-- Update colors, fonts, or spacing
-- Add new visual components (`.stat-grid`, `.flow`, etc.)
+- Fix a bug or change colors/fonts/spacing in `assets/report-linear.css`
+- Change the config/TOC behavior in `assets/paginate.js`
+- Update the vendored Paged.js engine (see below)
 
 ### How to re-sync (automated)
 
@@ -19,10 +27,21 @@ Re-sync whenever you:
 cd report_skill
 bash build-inline-css.sh
 git add templates/ examples/
-git commit -m "Sync CSS from report-linear.css"
+git commit -m "Re-sync templates/examples (CSS + Paged.js)"
 ```
 
-`build-inline-css.sh` reads `assets/report-linear.css`, inlines it into all templates and examples (excluding `assets/legacy/` files and the demo file), and repairs HTML structure if needed.
+The script inlines the CSS + config + polyfill, normalizes the footer (removes any
+legacy `pageno` span and the old end-of-body script), and repairs HTML structure.
+It excludes `assets/legacy/` files and the demo file. A finished report is ~528 KB
+(~105 KB gzipped) — the inlined Paged.js engine is the bulk, the cost of a true
+single-file with reliable print pagination.
+
+### Updating Paged.js
+
+The engine is vendored at `assets/vendor/paged.polyfill.min.js` (Paged.js v0.4.3).
+To update: take `dist/paged.polyfill.min.js` from the npm `pagedjs` package, replace
+the vendored file, run `bash build-inline-css.sh`, and re-verify a PDF (footers +
+page numbers on content pages, cover/TOC excluded).
 
 ### Legacy files
 
