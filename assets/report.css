@@ -274,7 +274,17 @@ nav.toc-side a:hover { color: var(--accent); }
 .stat-card.on-accent .label { color: var(--on-dark-muted); }
 
 @media print {
-  .flow-step, .stat-card, .gantt .lane, .hbar .track { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Preserve colors for all visual components */
+  .flow-step, .stat-card, .gantt .lane, .hbar .track, .hbar .fill, .gantt .bar,
+  aside.callout, .summary, .compo-bar span, .timeline .ev::after,
+  .pillar-grid .item, .bg-accent, .bg-accent2, .bg-accent3, .bg-green, .bg-purple, .bg-zar,
+  .bg-shade-light, .bg-shade-mid, .compo-afr, .compo-ind, .compo-eur, .compo-zar, .compo-chin,
+  .legend-afr, .legend-ind, .legend-eur, .legend-zar, .legend-chin,
+  h1, h2, h3, thead th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
   .stat-grid, .flow, .gantt, .hbar, .compo-bar, .timeline { break-inside: avoid; page-break-inside: avoid; }
 }
 
@@ -408,8 +418,12 @@ li.toc-sub .toc-title { font-size: 0.9em; color: var(--muted); }
 }
 
 @media print {
-  /* Cover and TOC: no page-break logic needed (handled by .sheet) */
-  .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Cover and TOC: preserve colors and styling */
+  .cover-logo svg, .cover-accent-band, .cover-center, .cover-meta, .sheet--cover, .sheet--toc {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
   a.toc-entry { color: var(--text) !important; background: none !important; }
 }
 
