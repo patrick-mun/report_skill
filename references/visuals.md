@@ -13,17 +13,17 @@ A wall of text — even well structured — slows reading. The whole point of HT
 
 Output must stay a **single self-contained file that prints cleanly to PDF**. JS chart libraries (Chart.js, D3) need a runtime and often render blank in print. Build visuals as **inline SVG** or **pure CSS** instead — portable, crisp at any zoom, and print-safe.
 
-### Marges internes des SVG inline
+### SVG inline margins
 
-Toujours laisser une marge de **8px minimum** entre le bord du `viewBox` et le premier élément visuel (titre ou axe). En pratique :
-- Premier `<text>` de titre : `y` ≥ `18`
-- Premier élément graphique (barre, axe) : `y` ≥ `30`
+Always leave a minimum **8px margin** between the `viewBox` edge and the first visual element (title or axis):
+- First `<text>` title element: `y` ≥ `18`
+- First graphical element (bar, axis): `y` ≥ `30`
 
-Exemple :
+Example:
 ```svg
 <svg viewBox="0 0 480 140">
-  <text x="8" y="18" font-size="11" font-weight="600">Titre du graphique</text>
-  <!-- graphique à partir de y=30 -->
+  <text x="8" y="18" font-size="11" font-weight="600">Chart title</text>
+  <!-- content from y=30 -->
   <line x1="50" y1="30" x2="50" y2="120" />
 </svg>
 ```
@@ -42,20 +42,20 @@ Exemple :
 | A few qualitative components | **Labeled cards** (e.g. S_div) | CSS grid |
 | One key takeaway | **Callout box** | `.callout` |
 
-## Règle de bascule : `.flow` CSS vs SVG inline
+## Switching rule: `.flow` CSS vs inline SVG
 
-Utiliser **`.flow` CSS** si et seulement si toutes ces conditions sont vraies :
-- Le diagramme a **4 étapes au maximum**
-- Chaque boîte contient **une seule ligne de texte** (pas de `<br>`, pas de `<small>`)
-- Aucun élément inline (`<code>`, `<strong>`) dans les boîtes
+Use **`.flow` CSS** only when all of these are true:
+- The diagram has **at most 4 steps**
+- Each box contains **a single line of text** (no `<br>`, no `<small>`)
+- No inline elements (`<code>`, `<strong>`) inside boxes
 
-Utiliser **SVG inline** dès qu'une de ces conditions est vraie :
-- 5 étapes ou plus
-- Contenu multi-lignes dans au moins une boîte
-- Disposition non-linéaire (2 rangées intentionnelles, bifurcation, boucle)
-- Nécessité de dimensionner précisément pour A4 (ex. intégration dans une figure numérotée)
+Use **inline SVG** as soon as any of these is true:
+- 5 or more steps
+- Multi-line content in at least one box
+- Non-linear layout (2 intentional rows, branching, loop)
+- Precise A4 sizing required (e.g. integration in a numbered figure)
 
-Pour construire le SVG inline : `viewBox="0 0 680 90"` pour 6 boîtes, réduire proportionnellement pour moins. Boîtes en `<rect>`, texte en `<text>` + `<tspan>`, flèches en `<polyline>`. Envelopper dans `<figure role="img">` avec `<figcaption>`.
+To build inline SVG: `viewBox="0 0 680 90"` for 6 boxes, scale down proportionally for fewer. Boxes as `<rect>`, text as `<text>` + `<tspan>`, arrows as `<polyline>`. Wrap in `<figure role="img">` with `<figcaption>`.
 
 ## Rules
 
@@ -68,60 +68,60 @@ Pour construire le SVG inline : `viewBox="0 0 680 90"` pour 6 boîtes, réduire 
 
 ## Reusable components
 
-`assets/report.css` ships ready-made classes: `.stat-grid`/`.stat-card`, `.flow`/`.flow-step`, `.gantt`, `.hbar`, `.legend`, `.compo-bar`, `.timeline`. Use them so visuals stay consistent across reports.
+`assets/report-linear.css` ships ready-made classes: `.stat-grid`/`.stat-card`, `.flow`/`.flow-step`, `.gantt`, `.hbar`, `.legend`, `.compo-bar`, `.timeline`. Use them so visuals stay consistent across reports.
 
-### Stat cards — limites de contenu
+### Stat cards — content limits
 
-`.stat-card .num` est rendu à `font-size: 1.7em`. À cette taille, la valeur affichable sans débordement sur une grille de 4 cartes est de **12 caractères maximum** (ex. `~1 474 000 €` = 12 chars ✓).
+`.stat-card .num` uses `font-size: clamp(1.1em, 3.5vw, 1.7em)` and scales automatically. On a 4-card grid the maximum legible value is **12 characters** (e.g. `~1 474 000 €` = 12 chars ✓).
 
-Si la grille contient des valeurs plus longues ou si les cartes sont nombreuses, utiliser la classe modificatrice `.stat-grid--compact` et définir dans les overrides document :
+If values are consistently long or the grid has many cards, override in the document:
 
 ```css
 .stat-grid--compact .stat-card .num { font-size: 1.25em; }
 .stat-grid--compact .stat-card .label { font-size: 0.78em; }
 ```
 
-Alternativement, remplacer les stat-cards par une `.hbar` comparative lorsque les valeurs représentent des montants à comparer — la `.hbar` est plus lisible pour ce type de donnée.
+Alternatively, replace stat-cards with a comparative `.hbar` when values represent amounts to compare — `.hbar` is more readable for that kind of data.
 
-## Blocs de code `<pre>`
+## Code blocks `<pre>`
 
-Les blocs `<pre>` sont réservés aux commandes, formules et extraits techniques reproductibles. Ils ne constituent pas un « visuel » au sens des graphiques, mais ils obéissent aux mêmes contraintes print-safe.
+`<pre>` blocks are reserved for commands, formulas, and reproducible technical snippets. They are not "visuals" in the chart sense, but obey the same print-safe constraints.
 
-### Seuil de largeur acceptable
+### Acceptable line width
 
-Seuil : **72 caractères par ligne** (convention bash/shell standard).
-Au-delà, la ligne déborde sur A4 à `font-size: 0.8em` (la valeur prescrite dans `assets/report.css`) et est coupée à l'impression.
+Threshold: **72 characters per line** (standard bash/shell convention).
+Beyond this, lines overflow on A4 at `font-size: 0.8em` (the value prescribed in `assets/report-linear.css`) and get clipped in print.
 
-### Règle de détection
+### Detection rule
 
-Avant d'insérer un bloc `<pre>`, mesurer la ligne la plus longue :
-- ≤ 72 chars → insérer tel quel
-- > 72 chars → **reformater avec continuation shell `\`**
+Before inserting a `<pre>` block, measure the longest line:
+- ≤ 72 chars → insert as-is
+- > 72 chars → **reformat with shell continuation `\`**
 
-### Convention de reformatage — continuation shell
+### Reformatting convention — shell continuation
 
-Couper les longues commandes shell avec `\` + indentation de 2 espaces :
+Break long shell commands with `\` + 2-space indent:
 
 ```bash
-# Avant
+# Before
 plink2 --pfile data --geno 0.05 --mind 0.05 --maf 0.01 --make-pgen --out out
 
-# Après
+# After
 plink2 --pfile data \
   --geno 0.05 --mind 0.05 --maf 0.01 \
   --make-pgen --out out
 ```
 
-Pour les formules mathématiques sur plusieurs termes, aligner les opérateurs :
+For multi-term mathematical formulas, align operators:
 
 ```
 score(i) =
-    w1 × composante1(i)
-  + w2 × composante2(i)
-  + w3 × composante3(i)
+    w1 × component1(i)
+  + w2 × component2(i)
+  + w3 × component3(i)
 ```
 
-Règles de coupure : couper avant un argument `--flag` ou un opérateur (`+`, `|`). Ne jamais couper au milieu d'un chemin, d'un nom de fichier ou d'une valeur.
+Break before a `--flag` argument or an operator (`+`, `|`). Never break in the middle of a path, filename, or value.
 
 ## Usage patterns et modifieurs adaptatifs
 

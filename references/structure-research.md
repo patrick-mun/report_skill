@@ -18,3 +18,5 @@ Default section plan for a research report or a funding application. If the user
 14. **Annexes** — detailed bibliography, statistical methodology, detailed budget, governance/GDPR/HDS.
 
 Each numbered section may carry sub-sections; keep the heading hierarchy to three levels (see `style-guide.md`).
+
+> **French variant:** see `structure-recherche.md`

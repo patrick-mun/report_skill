@@ -1,11 +1,9 @@
-# Structure — professional / business report
+# Structure — rapport professionnel / business
 
-Default section plan for a professional report, briefing, or memo. If the user
-supplies their own outline, **their outline wins** — follow it exactly.
+Plan de sections par défaut pour un rapport professionnel, un briefing ou un mémo. Si l'utilisateur fournit son propre plan, **son plan prévaut** — suivre exactement.
 
 1. **Page de titre** — titre, objet, auteur·rice(s)/organisation, date, version.
-2. **Synthèse exécutive** — objet, constats, recommandation principale (3–5
-   points).
+2. **Synthèse exécutive** — objet, constats, recommandation principale (3–5 points).
 3. **Contexte et objectifs** — pourquoi ce rapport, périmètre.
 4. **Analyse** — constats, données, interprétation (sous-sections thématiques).
 5. **Recommandations** — liste hiérarchisée d'actions.
@@ -13,5 +11,6 @@ supplies their own outline, **their outline wins** — follow it exactly.
 7. **Conclusion** — synthèse et prochaines étapes.
 8. **Annexes** — données détaillées, sources, méthodologie.
 
-Keep the heading hierarchy to three levels (see `style-guide.md`). Use callouts
-for the one or two takeaways that matter most per section.
+Garder la hiérarchie de titres à trois niveaux maximum (voir `style-guide.md`). Utiliser les callouts pour les un ou deux points clés les plus importants par section.
+
+> **English variant:** see `structure-professional.md`
