@@ -1,5 +1,9 @@
 # report_skill
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/v/release/patrick-mun/report_skill)](https://github.com/patrick-mun/report_skill/releases)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://code.claude.com)
+
 A Claude Code **skill** that consolidates the scattered pieces of a project —
 slide decks, methodology documents, budget/financing dossiers, draft documents,
 bibliographies — into clean, audience-tailored reports published as
