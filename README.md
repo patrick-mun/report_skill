@@ -96,9 +96,130 @@ automatic font scaling in stat cards).
 
 ## Installation
 
-Copy the `report-formater/` directory into your skills folder
-(`~/.claude/skills/` for personal use, or `.claude/skills/` in a project).
-Claude loads it automatically when a request matches its triggers.
+### Option 1: Claude Code Web (Recommended)
+
+1. **Download the skill**
+   - Go to https://github.com/patrick-mun/report_skill/releases/latest
+   - Click **"Code"** → **"Download ZIP"** (or use `git clone`)
+   - Extract the ZIP to a folder
+
+2. **Open Claude Code**
+   - Go to https://claude.ai/code
+   - Or open the desktop app
+
+3. **Add the skill folder**
+   - Click **⚙️ Settings** (bottom left)
+   - Go to **Skills**
+   - Click **"Add skill"** → **"Upload folder"**
+   - Select the extracted `report_skill/` folder
+   - Claude loads it automatically
+
+4. **Verify installation**
+   - Type `/report` and hit Enter
+   - You should see the skill's help text
+
+### Option 2: Claude Code CLI
+
+1. **Install Claude Code CLI** (if not already done)
+   ```bash
+   npm install -g @anthropic-ai/claude-code
+   ```
+
+2. **Clone the repository**
+   ```bash
+   git clone https://github.com/patrick-mun/report_skill.git
+   cd report_skill
+   ```
+
+3. **Add to your project skills folder**
+   ```bash
+   # For personal use:
+   cp -r . ~/.claude/skills/report_formater/
+   
+   # Or for a specific project:
+   cp -r . ./.claude/skills/report_formater/
+   ```
+
+4. **Launch Claude Code**
+   ```bash
+   claude code
+   ```
+   The skill is now available in your session.
+
+### Option 3: Manual Installation (Git)
+
+1. **Navigate to your skills folder**
+   ```bash
+   # Personal skills (macOS/Linux):
+   mkdir -p ~/.claude/skills
+   cd ~/.claude/skills
+   
+   # Personal skills (Windows):
+   mkdir %APPDATA%\.claude\skills
+   cd %APPDATA%\.claude\skills
+   
+   # Project skills:
+   mkdir -p .claude/skills
+   cd .claude/skills
+   ```
+
+2. **Clone directly into skills folder**
+   ```bash
+   git clone https://github.com/patrick-mun/report_skill.git report_formater
+   ```
+
+3. **Relaunch Claude Code**
+   - Close and reopen Claude Code
+   - The skill loads automatically
+
+### ✅ Verify Installation
+
+After installing, test the skill:
+
+1. **In Claude Code, type:**
+   ```
+   /report
+   ```
+   
+2. **You should see:**
+   - Help text for the `/report` command
+   - Available options (`--audience`, `--mode`, `--language`)
+   - Command examples
+
+3. **Try a simple test:**
+   ```
+   /report --help
+   ```
+   
+   Or paste some sample content and ask: *"Consolidate this into a professional report"*
+
+### 📁 Folder Structure After Installation
+
+After installing, your skills folder should look like:
+```
+~/.claude/skills/                    # or .claude/skills/ in a project
+└── report_formater/
+    ├── SKILL.md
+    ├── skill.json
+    ├── README.md
+    ├── LICENSE
+    ├── assets/
+    │   ├── report-linear.css
+    │   ├── paginate.js
+    │   └── vendor/
+    ├── templates/
+    │   ├── professional.html
+    │   ├── research.html
+    │   └── scientific-dossier.html
+    ├── references/
+    │   ├── consolidation.md
+    │   ├── audiences.md
+    │   ├── visuals.md
+    │   └── (7 more guides)
+    └── examples/
+        ├── example-professional.html
+        └── (2 more demos)
+```
 
 ## Usage
 
