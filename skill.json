@@ -1,5 +1,5 @@
 {
-  "id": "report-formatter",
+  "id": "report-formater",
   "name": "Report Formatter",
   "description": "Consolidate multi-source scientific documents into clean, print-to-PDF HTML reports",
   "version": "1.0.0",

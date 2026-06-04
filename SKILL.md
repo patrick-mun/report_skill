@@ -1,5 +1,5 @@
 ---
-name: report-formatter
+name: report-formater
 description: >-
   Consolidate the heterogeneous pieces of a project (slides, methodology
   documents, budget/financing dossier, draft Word/Markdown, bibliography) into

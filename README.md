@@ -32,7 +32,7 @@ Output is a single HTML file with inlined CSS/JS, ready for
 ## Structure
 
 ```
-report-formatter/
+report-formater/
 ├── SKILL.md                    # trigger + procedures (simple + consolidation)
 ├── references/
 │   ├── consolidation.md        # how to ingest & reconcile multiple sources
@@ -92,7 +92,7 @@ automatic font scaling in stat cards).
 
 ## Installation
 
-Copy the `report-formatter/` directory into your skills folder
+Copy the `report-formater/` directory into your skills folder
 (`~/.claude/skills/` for personal use, or `.claude/skills/` in a project).
 Claude loads it automatically when a request matches its triggers.
 
